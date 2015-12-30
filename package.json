@@ -17,9 +17,16 @@
     "ejs": "~2.3.1",
     "express": "~4.12.4",
     "express-session": "^1.11.3",
+    "history": "^1.17.0",
     "lodash": "^3.10.1",
     "mongodb": "^2.0.43",
     "morgan": "~1.5.3",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5",
+    "react-redux": "^4.0.6",
+    "react-router": "^1.0.3",
+    "redux": "^3.0.5",
+    "redux-thunk": "^1.0.3",
     "serve-favicon": "~2.2.1"
   },
   "devDependencies": {
