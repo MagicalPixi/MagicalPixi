@@ -1,3 +1,5 @@
+require('./style');
+
 let React = require('react');
 
 class SpritePreview extends React.Component {
