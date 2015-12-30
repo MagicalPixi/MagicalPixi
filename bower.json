@@ -1,0 +1,19 @@
+{
+  "name": "vooote",
+  "version": "0.0.0",
+  "authors": [
+    "zhou-yg <zhou.y.g890@gmail.com>"
+  ],
+  "description": "vooote",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "pixi.js": "pixi#~3.0.8"
+  }
+}
