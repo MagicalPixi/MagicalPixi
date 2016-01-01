@@ -1,0 +1,44 @@
+@import "../../styles/core/variables";
+
+$previewWidth:320px;
+$previewHeight:504px;
+
+#spritePreviewBox{
+  background-color: #F0F0F0;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  padding: $padding10;
+  width: $previewWidth * 2 + $padding10 * 2 + 10px;
+
+  .container{
+    overflow: hidden;
+  }
+  .preview-container{
+    background-color: #999999;
+    width: $previewWidth;
+    height: $previewHeight;
+    float: left;
+  }
+  .properties-setting{
+    background-color: #999999;
+    margin-left: $margin10;
+    width: $previewWidth;
+    height: 530px;
+    float: right;
+  }
+  .operation{
+    margin-top: $margin10;
+    overflow: hidden;
+    button{
+      margin-left: $margin10;
+      min-width: 80px;
+
+      float: right;
+    }
+  }
+}
+
+

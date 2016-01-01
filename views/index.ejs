@@ -7,10 +7,21 @@
   <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <link rel="stylesheet" href="/styles/normalize.css"/>
+
 </head>
 <body>
+<div id="topContainer">
 
+</div>
 </body>
+
+<% if(env==='product'){%>
+<script src="/bower_components/pixi.js/bin/pixi.js"></script>
+<% }else{ %>
+<script src="/bower_components/pixi.js/bin/pixi.min.js"></script>
+<% } %>
 
 <% if(env==='product'){%>
   <script src="/dist/index.js"></script>

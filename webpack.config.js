@@ -33,10 +33,10 @@ module.exports = {
     extensions: ['', '.js','.jsx','.scss'],
   },
   externals:{
-
+    pixi:'PIXI'
   },
   entry: {
-    index: path.resolve(__dirname, './public/js/main.js'),
+    index: path.resolve(__dirname, './public/js/main.jsx'),
   },
   output: {
     path: path.resolve(__dirname, './public/dist/'),
@@ -49,11 +49,6 @@ module.exports = {
         test:/\.jsx|\.js$/,
         exclude: /node_modules|bower_components/,
         loader:'babel'
-      },
-      {
-        test: /\.ejs$/,
-        exclude: /node_modules|bower_components/,
-        loader: 'ejs-loader?variable=data'
       },
       {
         test:/\.scss$/,
