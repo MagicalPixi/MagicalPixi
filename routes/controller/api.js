@@ -20,7 +20,7 @@ module.exports = {
       imgUrl = imgDir + imgPath;
 
       res.json({
-        imgUrl:imgUrl
+        url:imgUrl
       })
 
     }).catch(function (e) {

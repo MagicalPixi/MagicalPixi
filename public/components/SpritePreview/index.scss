@@ -1,7 +1,4 @@
-@import "../../styles/core/variables";
-
-$previewWidth:320px;
-$previewHeight:504px;
+@import "../../styles/core/variables.scss";
 
 #spritePreviewBox{
   background-color: #F0F0F0;
@@ -40,5 +37,3 @@ $previewHeight:504px;
     }
   }
 }
-
-

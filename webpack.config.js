@@ -30,10 +30,11 @@ if(NodeENV === 'product'){
 module.exports = {
   webpackDevPort: webpackDevPort,
   resolve: {
-    extensions: ['', '.js','.jsx','.scss'],
+    extensions: ['', '.js','.jsx'],
   },
   externals:{
-    pixi:'PIXI'
+    pixi:'PIXI',
+    PIXI:'PIXI',
   },
   entry: {
     index: path.resolve(__dirname, './public/js/main.jsx'),

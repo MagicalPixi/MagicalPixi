@@ -4,10 +4,10 @@
 let ReactDOM = require('react-dom');
 let React = require('react');
 
-let SpritePreView = React.createFactory(require('../components/SpritePreview'));
-
+let SpritePreview = require('../components/SpritePreview');
+let SpritePreViewF = React.createFactory(SpritePreview);
 
 ReactDOM.render(
-  SpritePreView(),
+  SpritePreViewF({spriteType:SpritePreview.SPRITE_IM}),
   document.querySelector('#topContainer')
 )

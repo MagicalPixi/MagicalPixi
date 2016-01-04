@@ -1,0 +1,14 @@
+@import "../../styles/core/variables";
+
+
+#spritePreviewBox{
+
+  .properties-setting{
+    background-color: #999999;
+    margin-left: $margin10;
+      width: $previewWidth;
+    height: 530px;
+    float: right;
+  }
+
+}

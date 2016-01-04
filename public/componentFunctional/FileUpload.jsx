@@ -18,10 +18,10 @@ class FileUpload extends React.Component {
       let fd = new FormData();
       fd.append('files',fileList[0]);
 
-
-
       ajax('/api/fileUpload').post(fd).then((r)=>{
-        console.log(r);
+        let {url} = r;
+
+        this.props.uploadDone(url);
       })
     });
     inputEle.click();
