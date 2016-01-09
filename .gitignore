@@ -53,3 +53,5 @@ node_modules/
 public/bower_components
 
 public/images/
+
+public/dist/
