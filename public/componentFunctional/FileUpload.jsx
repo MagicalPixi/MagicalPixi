@@ -1,12 +1,33 @@
 let React = require('react');
+let _ = require('lodash');
 
 let ajax = require('../libs/ajax');
+
+let getUploadKeyByExt = function (names) {
+  let regs = [{
+    reg:/\.png$/,
+    key:'png'
+  },{
+    reg:/\.json$/,
+    key:'json'
+  }];
+
+  return _.map([].concat(names).slice(0,2),name=>{
+    return _.map(regs,reg=>{
+      return reg.reg.test(name) ? reg.key:null;
+    }).filter(key=>{
+      return key !== null;
+    })[0];
+  });
+};
 
 class FileUpload extends React.Component {
 
   click(){
     var inputEle = document.createElement('input');
     inputEle.type = 'file';
+    inputEle.multiple = true;
+    console.log('display');
     inputEle.addEventListener('change',(e)=>{
       console.log(e);
       console.log(inputEle.files);
@@ -16,7 +37,16 @@ class FileUpload extends React.Component {
       window.fileList = fileList;
       //ajax上传...
       let fd = new FormData();
-      fd.append('files',fileList[0]);
+
+      let keys = getUploadKeyByExt(_.map(fileList,file=>{
+        return file.name;
+      }));
+
+      _.forEach(fileList,(file,i)=>{
+        if(keys[i]){
+          fd.append(keys[i],file);
+        }
+      });
 
       ajax('/api/fileUpload').post(fd).then((r)=>{
         let {url} = r;

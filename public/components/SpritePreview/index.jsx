@@ -22,6 +22,15 @@ let typeFnMap = {
   [SPRITE_MC]:sprite.getMc
 };
 
+let getSpriteTpeByUrl  = (url)=>{
+
+  let im = /\.png$/;
+  let mc =  /\.json/;
+
+  return mc.test(url)?SPRITE_MC:
+    im.test(url)?SPRITE_IM:null;
+};
+
 let settingListConfigMap = {
   [SPRITE_IM]:[{
     name:'name',
@@ -40,7 +49,30 @@ let settingListConfigMap = {
     describe:'for scale.x'
   }],
   [SPRITE_MC]:[{
-
+    name:'name',
+    key:'name'
+  },{
+    name:'x',
+    key:'x',
+    describe:'for x'
+  },{
+    name:'y',
+    key:'y',
+    describe:'for y'
+  },{
+    name:'scale.y',
+    key:'scale.y',
+    describe:'for scale.y'
+  },{
+    name:'animateSpeed',
+    key:'animateSpeed',
+    describe:'animateSpeed'
+  },{
+    name:'play and Stop',
+    checkbox:{
+      true:'play',
+      false:'stop'
+    },
   }]
 };
 
@@ -51,8 +83,7 @@ class SpritePreview extends React.Component {
 
     this.state = {
       period:PERIOD_INIT,
-      spriteType:props.spriteType,
-      spriteBuildFn:typeFnMap[props.spriteType],
+      spriteType:'',
       spriteDisplayObjProperties:{
       }
     };
@@ -88,27 +119,47 @@ class SpritePreview extends React.Component {
       renderer.render(stage);
 
       this.rafFlag = requestAnimationFrame(animate);
-    }
+    };
     animate();
   };
 
 
   uploadDone(uploadResult){
-    let { spriteType ,spriteDisplayObjProperties} = this.state;
+    let { spriteDisplayObjProperties} = this.state;
 
     let resourceKey = 'img' + Date.now();
+
+    let spriteType = getSpriteTpeByUrl(uploadResult);
 
     PIXI.loader.add(resourceKey,uploadResult)
       .load((loader,resources)=>{
 
         //同时兼容到im和mc
-        spriteDisplayObjProperties.textures = resources[resourceKey].texture || resources.img.textures;
+        spriteDisplayObjProperties.textures = resources[resourceKey].texture || resources[resourceKey].textures;
 
         this.spriteDisplayObj = typeFnMap[spriteType](spriteDisplayObjProperties);
 
         this.stage.removeChildren();
         this.stage.addChild(this.spriteDisplayObj);
+
+        this.setState({
+          spriteType
+        })
       });
+  }
+
+  fixProperties(properties,newProperties){
+
+    if(properties.play !== undefined){
+      delete newProperties.stop;
+    }
+    if(properties.stop !== undefined){
+      delete newProperties.play;
+    }
+
+    console.log(newProperties);
+
+    return newProperties;
   }
 
   setPropertyTo(properties={}){
@@ -116,6 +167,7 @@ class SpritePreview extends React.Component {
 
     let newProperties = Object.assign(oldProperties,properties);
 
+    newProperties = this.fixProperties(properties,newProperties);
 
     setConfig(this.spriteDisplayObj,newProperties);
 

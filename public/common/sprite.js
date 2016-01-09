@@ -10,11 +10,12 @@ module.exports = {
         delete config.textures;
 
         var texturesArr = [];
-        for(var texture of textures){
-            texturesArr.push(texture);
+        for(var key in textures){
+            texturesArr.push(textures[key]);
         }
 
         var mc = new PIXI.extras.MovieClip(texturesArr);
+        //var mc = new PIXI.extras.MovieClip(textures);
         return setConfig(mc,config);
     },
     getIm:function(config){

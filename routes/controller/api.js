@@ -7,20 +7,32 @@ var express = require('express');
 
 var saveImg = require('../../services/saveImg');
 
-var imgDir = '/images/';
+var _ = require('lodash');
+
 
 module.exports = {
   fileUpload:[multipart(),function(req,res){
-    var files = req.files.files;
+    var image = req.files.png;
+    var json = req.files.json;
 
-    var fileId = 'id_' + Date.now();
+    var dir = (req.userFlag || saveImg.userDirDefault) + '/';
 
-    saveImg(fileId, req.files.files).then(function (imgPath) {
+    var allP = _.filter([
+      json,
+      image,
+    ], function (uploadObj) {
+      return !!uploadObj;
+    }).map(function (uploadObj) {
 
-      imgUrl = imgDir + imgPath;
+      return saveImg(dir,uploadObj)
+    });
+
+    Promise.all(allP).then(function (result) {
+
+      console.log('result',result);
 
       res.json({
-        url:imgUrl
+        url:saveImg.publicImageDir + dir + result[0]
       })
 
     }).catch(function (e) {
@@ -31,6 +43,7 @@ module.exports = {
         message: '文件存取错误'
       })
     });
+
 
   }]
 };

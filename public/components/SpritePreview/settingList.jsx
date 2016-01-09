@@ -11,21 +11,52 @@ class SettingList extends React.Component {
     let inputDom = this.refs[refKey];
     let value = inputDom.value;
 
-    console.log(refKey,inputDom.value);
+    console.log(settingKey,inputDom.value);
 
     this.props.changeSetting({
       [settingKey]:value
     });
   }
 
+
+  checkboxSetting(refKey,checkBox){
+    let inputDom = this.refs[refKey];
+    let checked = inputDom.checked;
+
+    console.log(checkBox,checkBox[checked],checked);
+
+    this.props.changeSetting({
+      [checkBox[checked]]:null
+    });
+  }
+
+
+  inputBuild(settingOne,i){
+    let {name,key,checkbox,describe} = settingOne;
+
+    let refKey = 'setting'+i;
+
+    let inputType = 'text';
+    let onChange = this.setting.bind(this,refKey,key);
+
+    if(checkbox){
+      inputType = 'checkbox';
+      onChange = this.checkboxSetting.bind(this,refKey,checkbox);
+    }
+
+    return (
+      <input ref={refKey} onChange={onChange} id="name" type={inputType} placeholder={describe} />
+    )
+  }
+
   render(){
     let settingList = this.props.settingListConfig.map((settingOne,i)=>{
-      let {name,key,describe} = settingOne;
+      let {name,key,checkbox,describe} = settingOne;
 
       return (
         <p className="setting-item-one" key={'keySetting'+i}>
           <label htmlFor="name">{name}:</label>
-          <input ref={'setting'+i} onChange={this.setting.bind(this,'setting'+i,key)} id="name" idtype="text" placeholder={describe} />
+          {this.inputBuild(settingOne,i)}
         </p>
       )
     });

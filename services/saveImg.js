@@ -7,31 +7,67 @@
 var path = require('path');
 var fs = require('fs');
 
-var imagesDir = '../public/images/';
+var imagesDir = 'images/';
+var userDirDefault = 'admin';
+var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
 
-module.exports = function(id,file){
+var dirExists = function (dir,cb) {
+  fs.exists(dir, function (exists) {
+    if(!exists){
+      fs.mkdir(dir, function () {
+        cb && cb();
+      });
+    }
+    cb && cb();
+  });
+};
+
+var saveImg = function saveImg(dir,file){
+
+  if(typeof file === 'undefined'){
+    file = dir;
+    dir = userDirDefault;
+  }
+
+  dir = dir || userDirDefault;
+
+  console.log(dir,file);
 
   var uploadFileName = file.name;
   var format = uploadFileName.substr(uploadFileName.lastIndexOf('.'));
-  var finalFileName = id+format;
 
-  var targetFilePath = path.resolve(__dirname,imagesDir,finalFileName);
+  var finalFileName = uploadFileName;//id+format;
+
+  var finalDir = path.resolve(projectImagesDir,dir);
+
+  var targetFilePath = path.resolve(finalDir,finalFileName);
 
   return new Promise(function(resolve){
-    var writeStream = fs.createWriteStream(targetFilePath);
-    var readStream = fs.createReadStream(file.path);
 
-    readStream.pipe(writeStream);
+    dirExists(finalDir, function () {
 
-    var st = +new Date();
+      var writeStream = fs.createWriteStream(targetFilePath);
+      var readStream = fs.createReadStream(file.path);
+      var st = +new Date();
 
-    readStream.on('error',function(err){
-      throw err;
-    });
+      readStream.on('error',function(err){
+        throw err;
+      });
 
-    readStream.on('end',function(err){
-      console.log('file 处理完成,耗时:',(+new Date()) - st);
-      resolve(finalFileName);
+      readStream.on('end',function(err){
+        console.log('file 处理完成,耗时:',(+new Date()) - st);
+        resolve(finalFileName);
+      });
+
+      readStream.pipe(writeStream);
     });
   });
 };
+
+saveImg.userDirDefault = userDirDefault;
+saveImg.publicImageDir = '/'+imagesDir;
+
+//自动生成images文件夹，防止error
+dirExists(projectImagesDir);
+
+module.exports = saveImg;
