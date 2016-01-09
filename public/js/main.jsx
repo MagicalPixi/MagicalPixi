@@ -8,6 +8,6 @@ let SpritePreview = require('../components/SpritePreview');
 let SpritePreViewF = React.createFactory(SpritePreview);
 
 ReactDOM.render(
-  SpritePreViewF({spriteType:SpritePreview.SPRITE_IM}),
+  SpritePreViewF(),
   document.querySelector('#topContainer')
 )

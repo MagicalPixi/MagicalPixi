@@ -3,6 +3,7 @@ require('./settingList.scss');
 let PIXI = require('pixi');
 let React = require('react');
 
+let {settingListConfigMap} = require('./previewConfig');
 
 class SettingList extends React.Component {
 
@@ -50,7 +51,9 @@ class SettingList extends React.Component {
   }
 
   render(){
-    let settingList = this.props.settingListConfig.map((settingOne,i)=>{
+    let settingListConfig = settingListConfigMap(this.props.spriteType);
+
+    let settingList = settingListConfig.map((settingOne,i)=>{
       let {name,key,checkbox,describe} = settingOne;
 
       return (

@@ -7,20 +7,10 @@ let FileUpload = require('../../componentFunctional/FileUpload');
 let SettingList = require('./SettingList');
 
 let setConfig = require('../../common/setConfig');
-let sprite = require('../../common/sprite');
 let renderer = require('../../common/getRenderer');
 
-const PERIOD_INIT = 0;
-const PERIOD_MC = 1;
-const PERIOD_IM = 2;
+let {SPRITE_IM,SPRITE_MC,spriteFnMap,} = require('./previewConfig');
 
-const SPRITE_MC = 'movieClip';
-const SPRITE_IM = 'image';
-
-let typeFnMap = {
-  [SPRITE_IM]:sprite.getIm,
-  [SPRITE_MC]:sprite.getMc
-};
 
 let getSpriteTpeByUrl  = (url)=>{
 
@@ -31,58 +21,12 @@ let getSpriteTpeByUrl  = (url)=>{
     im.test(url)?SPRITE_IM:null;
 };
 
-let settingListConfigMap = {
-  [SPRITE_IM]:[{
-    name:'name',
-    key:'name'
-  },{
-    name:'x',
-    key:'x',
-    describe:'for x'
-  },{
-    name:'y',
-    key:'y',
-    describe:'for y'
-  },{
-    name:'scale.x',
-    key:'scale.x',
-    describe:'for scale.x'
-  }],
-  [SPRITE_MC]:[{
-    name:'name',
-    key:'name'
-  },{
-    name:'x',
-    key:'x',
-    describe:'for x'
-  },{
-    name:'y',
-    key:'y',
-    describe:'for y'
-  },{
-    name:'scale.y',
-    key:'scale.y',
-    describe:'for scale.y'
-  },{
-    name:'animateSpeed',
-    key:'animateSpeed',
-    describe:'animateSpeed'
-  },{
-    name:'play and Stop',
-    checkbox:{
-      true:'play',
-      false:'stop'
-    },
-  }]
-};
-
 class SpritePreview extends React.Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      period:PERIOD_INIT,
       spriteType:'',
       spriteDisplayObjProperties:{
       }
@@ -137,7 +81,7 @@ class SpritePreview extends React.Component {
         //同时兼容到im和mc
         spriteDisplayObjProperties.textures = resources[resourceKey].texture || resources[resourceKey].textures;
 
-        this.spriteDisplayObj = typeFnMap[spriteType](spriteDisplayObjProperties);
+        this.spriteDisplayObj = spriteFnMap(spriteType)(spriteDisplayObjProperties);
 
         this.stage.removeChildren();
         this.stage.addChild(this.spriteDisplayObj);
@@ -178,7 +122,6 @@ class SpritePreview extends React.Component {
 
   render(){
     let {spriteType} = this.state;
-    let settingListConfig = settingListConfigMap[spriteType] || [];
 
     return (
       <div id="spritePreviewBox">
@@ -191,7 +134,7 @@ class SpritePreview extends React.Component {
             </div>
           </FileUpload>
 
-          <SettingList settingListConfig={settingListConfig}
+          <SettingList spriteType={spriteType}
                        changeSetting={this.setPropertyTo.bind(this)} />
 
         </div>
@@ -204,8 +147,5 @@ class SpritePreview extends React.Component {
     )
   }
 }
-
-SpritePreview.SPRITE_MC = SPRITE_MC;
-SpritePreview.SPRITE_IM = SPRITE_IM;
 
 module.exports = SpritePreview;
