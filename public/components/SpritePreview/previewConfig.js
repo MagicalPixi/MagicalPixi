@@ -54,7 +54,8 @@ let settingListConfigMap = (spriteType)=>{
     }]
   }
 
-  return config[spriteType] || config[SPRITE_MC];
+//  return config[spriteType] || config[SPRITE_MC];
+  return config[spriteType] || [];
 };
 
 

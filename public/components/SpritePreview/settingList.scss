@@ -5,8 +5,10 @@
   .properties-setting{
     margin-left: $margin2;
     width: $previewWidth;
-    height: 530px;
-    float: right;
+
+    position: absolute;
+    top:0;
+    right: 0;
   }
 
   .setting-item-one{
@@ -34,5 +36,11 @@
       vertical-align: super;
 
     }
+  }
+}
+
+#spritePreviewBox[data-init=false]{
+  .properties-setting{
+    display: block;
   }
 }

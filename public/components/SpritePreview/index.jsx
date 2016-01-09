@@ -29,6 +29,7 @@ class SpritePreview extends React.Component {
     super(props);
 
     this.state = {
+      init:true,
       spriteType:'',
       spriteDisplayObjProperties:{
       }
@@ -89,7 +90,8 @@ class SpritePreview extends React.Component {
         this.stage.addChild(this.spriteDisplayObj);
 
         this.setState({
-          spriteType
+          spriteType,
+          init:false
         })
       });
   }
@@ -115,7 +117,9 @@ class SpritePreview extends React.Component {
 
     newProperties = this.fixProperties(properties,newProperties);
 
-    setConfig(this.spriteDisplayObj,newProperties);
+    if(this.spriteDisplayObj){
+      setConfig(this.spriteDisplayObj,newProperties);
+    }
 
     this.setState({
       spriteDisplayObjProperties:newProperties
@@ -123,10 +127,10 @@ class SpritePreview extends React.Component {
   }
 
   render(){
-    let {spriteType} = this.state;
+    let {init,spriteType} = this.state;
 
     return (
-      <div id="spritePreviewBox">
+      <div id="spritePreviewBox" data-init={init}>
         <h3>预览</h3>
 
         <div className="container">
@@ -142,8 +146,8 @@ class SpritePreview extends React.Component {
         </div>
 
         <footer className="operation">
-          <button className="weui_btn weui_btn_mini weui_btn_primary">submit</button>
-          <button className="weui_btn weui_btn_mini weui_btn_default">reset</button>
+          <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
+          <button className="weui_btn weui_btn_mini weui_btn_default">取消</button>
         </footer>
       </div>
     )
