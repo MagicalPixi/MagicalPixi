@@ -1,5 +1,7 @@
 /**
  * Created by zyg on 16/1/9.
+ *
+ * 常量，设置集合
  */
 let sprite = require('../../common/sprite');
 
@@ -52,7 +54,7 @@ let settingListConfigMap = (spriteType)=>{
     }]
   }
 
-  return config[spriteType] || [];
+  return config[spriteType] || config[SPRITE_MC];
 };
 
 

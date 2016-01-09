@@ -1,4 +1,6 @@
 require('./index.scss');
+require("../../styles/wedget/button.css");
+
 
 let PIXI = require('pixi');
 let React = require('react');
@@ -140,8 +142,8 @@ class SpritePreview extends React.Component {
         </div>
 
         <footer className="operation">
-          <button>submit</button>
-          <button>reset</button>
+          <button className="weui_btn weui_btn_mini weui_btn_primary">submit</button>
+          <button className="weui_btn weui_btn_mini weui_btn_default">reset</button>
         </footer>
       </div>
     )

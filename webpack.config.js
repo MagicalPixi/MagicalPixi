@@ -55,6 +55,10 @@ module.exports = {
         test:/\.scss$/,
         exclude: /node_modules|bower_components/,
         loaders:['style','css','sass-loader']
+      },{
+        test:/\.css$/,
+        exclude: /node_modules|bower_components/,
+        loaders:['style','css']
       }
     ]
   },

@@ -1,14 +1,38 @@
 @import "../../styles/core/variables";
 
-
 #spritePreviewBox{
 
   .properties-setting{
-    background-color: #999999;
-    margin-left: $margin10;
-      width: $previewWidth;
+    margin-left: $margin2;
+    width: $previewWidth;
     height: 530px;
     float: right;
   }
 
+  .setting-item-one{
+
+    > label{
+      padding-right: $padding2;
+      width: 130px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: right;
+      color: $grayDeep;
+
+      display: inline-block;
+    }
+
+    > input{
+      border:none;
+      border-bottom: 1px solid $grayDeep;
+      border-radius: 0 0 2px 2px;
+      padding: 0 0 $padding1 $padding1;
+      width: 130px;
+      outline: none;
+      vertical-align: super;
+
+    }
+  }
 }

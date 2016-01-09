@@ -1,13 +1,25 @@
-$linkColor: #4cb9fc;
-$linkHoverColor: darken(#4cb9fc, 10%);
+//主题色,微信绿
+$linkColor:#04BE02;
+$linkActiveColor:#039702;
+$linkHoverColor:lighten($linkColor,10%);
 
-$padding5:5px;
-$padding10:10px;
-$padding15:15px;
 
-$margin5:5px;
-$margin10:10px;
-$margin15:15px;
+//其它层次灰色
+$grayDeep:#333;
+$gray:#666;
+$grayLight:#dedede;
+
+$padding1:5px;
+$padding2:10px;
+$padding3:15px;
+$padding4:20px;
+$padding5:25px;
+
+$margin1:5px;
+$margin2:10px;
+$margin3:15px;
+$margin4:20px;
+$margin5:25px;
 
 //预览
 $previewWidth:320px;
