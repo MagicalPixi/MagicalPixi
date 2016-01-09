@@ -146,8 +146,8 @@ class SpritePreview extends React.Component {
         </div>
 
         <footer className="operation">
-          <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
-          <button className="weui_btn weui_btn_mini weui_btn_default">取消</button>
+          <button className="weui_btn weui_btn_mini weui_btn_primary">确定（没效果）</button>
+          <button className="weui_btn weui_btn_mini weui_btn_default">取消（没效果）</button>
         </footer>
       </div>
     )
