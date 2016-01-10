@@ -7,7 +7,7 @@
 var path = require('path');
 var fs = require('fs');
 
-var imagesDir = 'images/';
+var imagesDir = 'materials/';
 var userDirDefault = 'admin';
 var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
 

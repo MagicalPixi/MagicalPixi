@@ -13,5 +13,3 @@ npm start
   - p0 MovieClip预览,并收入‘素材库’
   - p0 Sprite预览，并收入‘素材库’
   - p3 Stage新建-切换
-
-  
