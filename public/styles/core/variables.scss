@@ -1,8 +1,10 @@
 //主题色,微信绿
-$linkColor:#04BE02;
-$linkActiveColor:#039702;
-$linkHoverColor:lighten($linkColor,10%);
+$themeColor:#04BE02;
+$themeActiveColor:#039702;
+$themeHoverColor:lighten($themeColor,10%);
 
+//链接色
+$linkColor:#459AE9;
 
 //其它层次灰色
 $grayDeep:#333;
@@ -14,12 +16,19 @@ $padding2:10px;
 $padding3:15px;
 $padding4:20px;
 $padding5:25px;
+$padding6:30px;
 
 $margin1:5px;
 $margin2:10px;
 $margin3:15px;
 $margin4:20px;
 $margin5:25px;
+$margin6:30px;
+
+//整体
+$topWidth:1200px;
+$leftWidth:200px;
+$rightWidth:1000px;
 
 //预览
 $previewWidth:320px;
