@@ -1,0 +1,55 @@
+@import "../../styles/core/variables";
+
+#asideBoard{
+
+  border: 1px solid $grayLight;
+
+  .function-one{
+
+    border-bottom: 1px solid $grayLight;
+
+    padding: $padding3 $padding6;
+
+    font-size: 16px;
+
+    $iconWidth:18px;
+
+    .title{
+      line-height: 34px;
+      color: $gray;
+      font-size: 16px;
+
+      .icon{
+        background-repeat: no-repeat;
+        margin-right: $margin2;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+      }
+
+      > * {
+        vertical-align: middle;
+      }
+    }
+
+    .child-list{
+
+      li {
+
+        padding-left: $iconWidth + $margin2;
+
+      }
+    }
+  }
+  .function-one:last-child{
+    border-bottom: none;
+  }
+
+  .function-one.material{
+    .title{
+      .icon{
+        background-image: url(/images/icon/menu_management.png);
+      }
+    }
+  }
+}

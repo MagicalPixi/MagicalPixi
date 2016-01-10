@@ -1,6 +1,6 @@
 @import "../../styles/core/variables";
 
-#spritePreviewBox{
+#mpSpritePreviewBox{
 
   .properties-setting{
     margin-left: $margin2;
@@ -39,7 +39,7 @@
   }
 }
 
-#spritePreviewBox[data-init=false]{
+#mpSpritePreviewBox[data-init=false]{
   .properties-setting{
     display: block;
   }

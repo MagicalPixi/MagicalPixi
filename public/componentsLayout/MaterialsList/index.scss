@@ -1,0 +1,25 @@
+@import "../../styles/core/variables";
+
+#mpMaterialsList{
+
+  .material-title{
+    background-color: $grayLight;
+    padding: $padding2;
+  }
+
+  .material-one{
+    padding: $padding2;
+    height: 30px;
+    line-height: 30px;
+
+    border-bottom: 1px solid $grayLight;
+
+    .operation{
+      margin-right: $margin2;
+      float: right;
+    }
+  }
+  .material-one:last-child{
+    border: none;
+  }
+}
