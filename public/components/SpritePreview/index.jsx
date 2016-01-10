@@ -5,6 +5,8 @@ require("../../styles/wedget/button.css");
 let PIXI = require('pixi');
 let React = require('react');
 
+let Popup = require('../Popup');
+
 let FileUpload = require('../../componentFunctional/FileUpload');
 let SettingList = require('./SettingList');
 
@@ -23,6 +25,7 @@ let getSpriteTpeByUrl  = (url)=>{
     im.test(url)?SPRITE_IM:null;
 };
 
+
 class SpritePreview extends React.Component {
 
   constructor(props){
@@ -32,6 +35,7 @@ class SpritePreview extends React.Component {
       init:true,
       spriteType:'',
       spriteDisplayObjProperties:{
+        name:props.name
       }
     };
 
@@ -40,7 +44,7 @@ class SpritePreview extends React.Component {
   }
 
   componentDidMount(){
-    let previewContainer = document.querySelector('#spritePreviewBox .preview-container');
+    let previewContainer = this.refs.previewContainer;
 
     previewContainer.appendChild(renderer.view);
 
@@ -130,12 +134,12 @@ class SpritePreview extends React.Component {
     let {init,spriteType} = this.state;
 
     return (
-      <div id="spritePreviewBox" data-init={init}>
-        <h3>预览</h3>
+      <div id="mpSpritePreviewBox" data-init={init}>
+        <h3>精灵</h3>
 
         <div className="container">
           <FileUpload uploadDone={this.uploadDone.bind(this)}>
-            <div className="preview-container">
+            <div ref="previewContainer" className="preview-container">
 
             </div>
           </FileUpload>
@@ -154,4 +158,11 @@ class SpritePreview extends React.Component {
   }
 }
 
-module.exports = SpritePreview;
+let SpritePreviewFn = React.createFactory(SpritePreview);
+
+module.exports = (props) => {
+
+  return Popup(SpritePreviewFn(props),{
+    width:'650px'
+  });
+};
