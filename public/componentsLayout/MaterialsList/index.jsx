@@ -1,6 +1,7 @@
 
 require('./index.scss');
-let React =require('react');
+
+let React = require('react');
 
 let List = require('../List/index');
 

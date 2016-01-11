@@ -16,6 +16,9 @@
 
   box-shadow: 0px 0px 4px $grayDeep;
 
+  position: relative;
+  left: $previewWidth / 2;
+
   > h3{
     margin-bottom: $margin3;
     color: $grayDeep;
@@ -63,6 +66,7 @@
   .operation{
     margin-top: $margin3;
     overflow: hidden;
+
     button{
       margin-left: $margin2;
       min-width: 80px;
@@ -74,6 +78,7 @@
 
 #mpSpritePreviewBox[data-init=false]{
   width: $previewWidth * 2 + $padding3 * 2 + 2px + 10px;
+  left: 0;
 
   .preview-container{
     canvas{
