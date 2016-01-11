@@ -1,49 +1,26 @@
 /**
  * Created by zyg on 16/1/1.
  */
-var multipart = require('connect-multiparty');
 
-var express = require('express');
-
-var saveImg = require('../../services/saveImg');
+var fs = require('fs');
+var path = require('path');
 
 var _ = require('lodash');
 
+var apiDir = '../../api/';
 
-module.exports = {
-  fileUpload:[multipart(),function(req,res){
-    var image = req.files.png;
-    var json = req.files.json;
+var apiList = fs.readdirSync(path.resolve(__dirname,apiDir));
 
-    var dir = (req.userFlag || saveImg.userDirDefault) + '/';
+var outputs = _.map(apiList, function (apiOne) {
 
-    var allP = _.filter([
-      json,
-      image,
-    ], function (uploadObj) {
-      return !!uploadObj;
-    }).map(function (uploadObj) {
+  return [
+    apiOne.replace('.js',''),
+    require(path.resolve(__dirname,apiDir,apiOne))
+  ]
+}).reduce(function (initial,next) {
+  initial[next[0]] = next[1];
 
-      return saveImg(dir,uploadObj)
-    });
+  return initial
+},{});
 
-    Promise.all(allP).then(function (result) {
-
-      console.log('result',result);
-
-      res.json({
-        url:saveImg.publicImageDir + dir + result[0]
-      })
-
-    }).catch(function (e) {
-      console.log('文件存取错误');
-      console.log(e);
-      res.json({
-        result: false,
-        message: '文件存取错误'
-      })
-    });
-
-
-  }]
-};
+module.exports = outputs;

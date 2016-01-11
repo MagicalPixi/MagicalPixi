@@ -13,7 +13,7 @@ let SettingList = require('./SettingList');
 let setConfig = require('../../common/setConfig');
 let renderer = require('../../common/getRenderer');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap,} = require('./previewConfig');
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
 
 
 let getSpriteTpeByUrl  = (url)=>{
@@ -127,7 +127,7 @@ class SpritePreview extends React.Component {
 
     this.setState({
       spriteDisplayObjProperties:newProperties
-    })
+    });
   }
 
   render(){

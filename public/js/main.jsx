@@ -24,8 +24,8 @@ class Main extends React.Component {
         <Navbar></Navbar>
 
         <ContentsBox>
-          <AsideBoard></AsideBoard>
-          <MaterialsList></MaterialsList>
+          <AsideBoard />
+          <MaterialsList />
         </ContentsBox>
       </div>
     )
