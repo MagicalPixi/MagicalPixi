@@ -2,7 +2,7 @@
 
 var MongoClient = require('mongodb').MongoClient;
 
-var url = 'mongodb://localhost:27017/MagicPixi';
+var url = 'mongodb://localhost:27017/MagicalPixi';
 
 var connectedDb = null;
 

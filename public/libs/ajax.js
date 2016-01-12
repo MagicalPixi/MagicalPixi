@@ -31,10 +31,13 @@
     var methods = createMethods();
 
     var xhr = new XMLHttpRequest();
-    //var contentType = 'application/x-www-form-urlencoded';
 
     xhr.open(type, url || '', true);
-    //xhr.setRequestHeader('Content-Type', contentType);
+
+    if(!(data instanceof FormData)){
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    }
+
     xhr.addEventListener('readystatechange', $private.ready(methods), false);
     xhr.send($private.objectToQueryString(data));
 
@@ -78,16 +81,20 @@
   };
 
   $private.objectToQueryString = function objectToQueryString(data) {
-    console.log(data,typeof data,data instanceof FormData);
-    return $private.isObject(data) && (data instanceof FormData) ?
-      $private.getQueryString(data)
-      : data;
+    //console.log(data,typeof data,$private.isObject(data),data instanceof FormData);
+    return (data instanceof FormData) ? data:
+      $private.isObject(data) ? $private.getQueryString(data):data;
   };
 
   $private.getQueryString = function getQueryString(object) {
     return Object.keys(object).map(function (item) {
+      var value = object[item];
+      if($private.isObject(value)){
+        value = JSON.stringify(value);
+      }
+
       return encodeURIComponent(item)
-        + '=' + encodeURIComponent(object[item]);
+        + '=' + encodeURIComponent(value);
     }).join('&');
   };
 
@@ -100,7 +107,8 @@
     var $public = {};
 
     $public.get = function get(data) {
-      return $private.XHRConnection('GET', url, data);
+
+      return $private.XHRConnection('GET', url + '?' + $private.objectToQueryString(data));
     };
 
     $public.post = function post(data) {
@@ -117,6 +125,8 @@
 
     return $public;
   }
+
+  window.ajax = Ajax;
 
   return Ajax;
 });

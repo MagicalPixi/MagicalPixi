@@ -28,6 +28,14 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(function (req,res,next) {
+  if(process.env.NODE_ENV !== 'product'){
+    req.session.userFlag = 'admin';
+  }
+
+  next();
+});
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler

@@ -9,6 +9,7 @@ let Popup = require('../Popup');
 
 let FileUpload = require('../../componentFunctional/FileUpload');
 let SettingList = require('./SettingList');
+let SaveProperties = require('../../componentFunctional/SaveProperties');
 
 let setConfig = require('../../common/setConfig');
 let renderer = require('../../common/getRenderer');
@@ -75,7 +76,7 @@ class SpritePreview extends React.Component {
   };
 
 
-  uploadDone(uploadResult){
+  onUploadCompleted(uploadResult){
     let { spriteDisplayObjProperties} = this.state;
 
     let resourceKey = 'img' + Date.now();
@@ -130,6 +131,22 @@ class SpritePreview extends React.Component {
     });
   }
 
+  buildPostParam(){
+
+    let {spriteType,spriteDisplayObjProperties } = this.state;
+
+    return Object.assign({
+      spriteType,
+      spriteName:spriteDisplayObjProperties.name
+    },spriteDisplayObjProperties)
+  }
+
+  onSavePropertiesCompleted(r){
+
+  }
+
+
+
   render(){
     let {init,spriteType} = this.state;
 
@@ -138,7 +155,7 @@ class SpritePreview extends React.Component {
         <h3>精灵</h3>
 
         <div className="container">
-          <FileUpload uploadDone={this.uploadDone.bind(this)}>
+          <FileUpload onUploadCompleted={this.onUploadCompleted.bind(this)}>
             <div ref="previewContainer" className="preview-container">
 
             </div>
@@ -150,7 +167,9 @@ class SpritePreview extends React.Component {
         </div>
 
         <footer className="operation">
-          <button className="weui_btn weui_btn_mini weui_btn_primary">确定（没效果）</button>
+          <SaveProperties getParam={this.buildPostParam.bind(this)} onSavePropertiesCompleted={this.onSavePropertiesCompleted.bind(this)} >
+            <button className="weui_btn weui_btn_mini weui_btn_primary">确定（没效果）</button>
+          </SaveProperties>
           <button className="weui_btn weui_btn_mini weui_btn_default">取消（没效果）</button>
         </footer>
       </div>

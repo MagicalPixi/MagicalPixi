@@ -21,6 +21,8 @@ let getUploadKeyByExt = function (names) {
   });
 };
 
+let apiUrl = '/api/fileUpload';
+
 class FileUpload extends React.Component {
 
   click(){
@@ -48,10 +50,10 @@ class FileUpload extends React.Component {
         }
       });
 
-      ajax('/api/fileUpload').post(fd).then((r)=>{
+      ajax(apiUrl).post(fd).then((r)=>{
         let {url} = r;
 
-        this.props.uploadDone(url);
+        this.props.onUploadCompleted(url);
       })
     });
     inputEle.click();

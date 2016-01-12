@@ -8,19 +8,50 @@ var Model = require('./Model');
 
 var collectionName = 'sprites';
 
-var db = function(cb) {
-  return Model.db(function(db) {
-    return cb(db.collection(collectionName));
+var db = Model.db(collectionName);
+
+var saveObjBuild = function (args) {
+
+  var isLostArg = ['userFlag','type','name','properties'].some(function (key) {
+    return !args[key];
   });
+
+  if(isLostArg){
+    return false;
+  }
+
+  return args;
 };
 
 module.exports = {
 
-  save:function(){
+  /**
+   *
+   * @param args
+   * args.userFlag 谁
+   * args.type 精灵类型
+   * args.name 素材名字
+   * args.properties 属性
+   * @returns {Promise}
+   */
+  save:function(args){
+
     return new Promise(function (resolve) {
+
+      args = saveObjBuild(args);
+      if(!args){
+        throw new Error('lost arg');
+      }
 
       db(function (collection) {
 
+        collection.insertOne(args, function (err,result) {
+          if(err){
+            throw err;
+          }
+
+          resolve(result.result);
+        });
       });
     })
   }
