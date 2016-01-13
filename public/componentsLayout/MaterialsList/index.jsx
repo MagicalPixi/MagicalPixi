@@ -6,6 +6,7 @@ let React = require('react');
 let List = require('../List/index');
 
 let SpritePreview = require('../../components/SpritePreview');
+let Download = require('../../componentFunctional/Download');
 
 class MaterialsList extends React.Component {
 
@@ -14,6 +15,10 @@ class MaterialsList extends React.Component {
     SpritePreview({
       name:'测试'
     });
+
+  }
+
+  download(){
 
   }
 
@@ -29,7 +34,11 @@ class MaterialsList extends React.Component {
               测试素材名字
             </span>
 
-            <a className="operation" href="javascript:void 0">下载</a>
+            <span className="operation" onClick={this.download.bind(this)} href="javascript:void 0">
+              <Download materialName="背景色" >
+              下载
+              </Download>
+            </span>
             <a className="operation" onClick={this.edit.bind(this)} href="javascript:void 0">编辑</a>
           </p>
         </List>
@@ -37,5 +46,6 @@ class MaterialsList extends React.Component {
     )
   }
 }
+//            <a className="operation" onClick={this.download.bind(this)} href="javascript:void 0">下载</a>
 
 module.exports = MaterialsList;

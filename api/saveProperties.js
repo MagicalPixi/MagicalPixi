@@ -9,11 +9,13 @@ module.exports = function (req, res) {
 
   var type = req.body.spriteType;
   var name = req.body.spriteName;
+  var resourceUrl = req.body.resourceUrl;
   var properties = req.body.properties;
 
   var userFlag = req.session.userFlag;
 
   Sprite.save({
+    resourceUrl,
     userFlag,
     type,
     name,

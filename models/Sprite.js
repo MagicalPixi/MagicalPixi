@@ -12,7 +12,7 @@ var db = Model.db(collectionName);
 
 var saveObjBuild = function (args) {
 
-  var isLostArg = ['userFlag','type','name','properties'].some(function (key) {
+  var isLostArg = ['userFlag','type','name','properties','resourceUrl'].some(function (key) {
     return !args[key];
   });
 
@@ -32,6 +32,7 @@ module.exports = {
    * args.type 精灵类型
    * args.name 素材名字
    * args.properties 属性
+   * args.resourceUrl 资源所在位置
    * @returns {Promise}
    */
   save:function(args){
