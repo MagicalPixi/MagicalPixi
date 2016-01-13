@@ -12,8 +12,6 @@ class SettingList extends React.Component {
     let inputDom = this.refs[refKey];
     let value = inputDom.value;
 
-    console.log(settingKey,inputDom.value);
-
     this.props.changeSetting({
       [settingKey]:value
     });

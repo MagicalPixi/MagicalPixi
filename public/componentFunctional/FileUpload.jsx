@@ -29,10 +29,9 @@ class FileUpload extends React.Component {
     var inputEle = document.createElement('input');
     inputEle.type = 'file';
     inputEle.multiple = true;
-    console.log('display');
+
     inputEle.addEventListener('change',(e)=>{
-      console.log(e);
-      console.log(inputEle.files);
+      console.log('add files:',inputEle.files);
 
       let fileList = inputEle.files;
 

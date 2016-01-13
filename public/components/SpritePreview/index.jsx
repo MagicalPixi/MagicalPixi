@@ -1,9 +1,10 @@
 require('./index.scss');
 require("../../styles/wedget/button.css");
 
-
 let PIXI = require('pixi');
 let React = require('react');
+
+let utils = require('../../common/utils');
 
 let Popup = require('../Popup');
 
@@ -42,6 +43,8 @@ class SpritePreview extends React.Component {
 
 
     this.spriteDisplayObj = {};
+
+    this.resourceUrl = '';
   }
 
   componentDidMount(){
@@ -83,6 +86,8 @@ class SpritePreview extends React.Component {
 
     let spriteType = getSpriteTpeByUrl(uploadResult);
 
+    this.resourceUrl = uploadResult;
+
     PIXI.loader.add(resourceKey,uploadResult)
       .load((loader,resources)=>{
 
@@ -110,8 +115,6 @@ class SpritePreview extends React.Component {
       delete newProperties.play;
     }
 
-    console.log(newProperties);
-
     return newProperties;
   }
 
@@ -135,7 +138,10 @@ class SpritePreview extends React.Component {
 
     let {spriteType,spriteDisplayObjProperties } = this.state;
 
+    let resourceUrl = this.resourceUrl;
+
     return Object.assign({
+      resourceUrl,
       spriteType,
       spriteName:spriteDisplayObjProperties.name
     },spriteDisplayObjProperties)

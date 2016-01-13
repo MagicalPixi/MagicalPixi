@@ -10,17 +10,22 @@ class SaveProperties extends React.Component {
   save(){
     let sendData = this.props.getParam();
 
-    let {name:spriteName,spriteType} = sendData;
+    let {name:spriteName,spriteType,resourceUrl} = sendData;
 
+    delete sendData.resourceUrl;
     delete sendData.name;
     delete sendData.spriteType;
 
     ajax(apiUrl).post({
+      resourceUrl,
       spriteType,
       spriteName,
       properties:sendData
     }).then((r)=>{
-      console.log('r',r);
+
+      this.props.onSavePropertiesCompleted({
+        result:r.ok
+      });
     });
   }
 

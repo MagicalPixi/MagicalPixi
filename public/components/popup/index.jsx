@@ -56,7 +56,6 @@ class Popup extends React.Component {
   }
 
   close(e){
-    console.log(e.target.className);
     if(e.target.className === 'black-bg'){
       this.props.close();
     }
