@@ -35,7 +35,7 @@ module.exports = {
    * args.resourceUrl 资源所在位置
    * @returns {Promise}
    */
-  save:function(args){
+  save(args){
 
     return new Promise(function (resolve) {
 
@@ -54,6 +54,25 @@ module.exports = {
           resolve(result.result);
         });
       });
+    })
+  },
+
+  /**
+   * @param findObj
+   * findObj.name 查找的素材的名字
+   */
+  findOne(findObj){
+
+    console.log(findObj);
+
+    return new Promise(function (resolve) {
+
+      db(function (collection) {
+        collection.findOne(findObj, function (err, result) {
+          if( err) { throw err}
+          resolve(result);
+        });
+      })
     })
   }
 };
