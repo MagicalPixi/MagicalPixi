@@ -15,7 +15,7 @@ class Download extends React.Component {
     //  console.log(d);
     //})
 
-    window.open('/download/materials');
+    window.open('/download/materials?name='+encodeURIComponent('背景色'));
   }
 
   download(){

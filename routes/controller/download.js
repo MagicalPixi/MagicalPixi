@@ -3,14 +3,9 @@
  */
 var path = require('path');
 
+var downloadMaterial = require('../../api/downloadMaterial');
+
 module.exports = {
 
-  materials:function(req,res){
-
-    //res.json({ name })
-    res.download(
-      path.resolve(__dirname,'../../public/materials/admin/deer.png'),
-      'deer.png'
-    );
-  }
+  materials:downloadMaterial
 };
