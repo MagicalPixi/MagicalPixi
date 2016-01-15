@@ -10,6 +10,10 @@ let Download = require('../../componentFunctional/Download');
 
 class MaterialsList extends React.Component {
 
+  newMaterial(){
+    SpritePreview();
+  }
+
   edit(){
 
     SpritePreview({
@@ -30,7 +34,7 @@ class MaterialsList extends React.Component {
           精灵列表
           </h3>
 
-          <button className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建素材</button>
+          <button onClick={this.newMaterial.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建素材</button>
 
         </header>
 
