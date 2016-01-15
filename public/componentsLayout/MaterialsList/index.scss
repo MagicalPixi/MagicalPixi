@@ -2,24 +2,38 @@
 
 #mpMaterialsList{
 
+  .top-container{
+    margin: 0 $margin2 $margin3 $margin2;
+
+  }
   .material-title{
-    background-color: $grayLight;
-    padding: $padding2;
+
+    display: inline-block;
+  }
+
+  .add-new{
+    margin-top: 3px;
+    border-radius: 2px;
+
+    float: right;
   }
 
   .material-one{
-    padding: $padding2;
+
+    margin: $margin2;
+    border-top: 1px solid $grayLight;
+    padding: $padding1;
     height: 30px;
     line-height: 30px;
+    font-size: 14px;
 
-    border-bottom: 1px solid $grayLight;
+    &:before{
+
+    }
 
     .operation{
       margin-right: $margin2;
       float: right;
     }
-  }
-  .material-one:last-child{
-    border: none;
   }
 }

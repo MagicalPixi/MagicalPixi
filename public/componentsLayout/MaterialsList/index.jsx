@@ -3,7 +3,7 @@ require('./index.scss');
 
 let React = require('react');
 
-let List = require('../List/index');
+let List = require('../../componentFunctional/List');
 
 let SpritePreview = require('../../components/SpritePreview');
 let Download = require('../../componentFunctional/Download');
@@ -15,7 +15,6 @@ class MaterialsList extends React.Component {
     SpritePreview({
       name:'测试'
     });
-
   }
 
   download(){
@@ -25,11 +24,18 @@ class MaterialsList extends React.Component {
   render(){
     return (
       <div id="mpMaterialsList" >
-        <h3 className="material-title" >
+        <header className="top-container">
+
+          <h3 className="material-title" >
           精灵列表
-        </h3>
+          </h3>
+
+          <button className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建素材</button>
+
+        </header>
+
         <List>
-          <p className="material-one" >
+          <li className="material-one" >
             <span className="name">
               测试素材名字
             </span>
@@ -40,7 +46,19 @@ class MaterialsList extends React.Component {
               </Download>
             </span>
             <a className="operation" onClick={this.edit.bind(this)} href="javascript:void 0">编辑</a>
-          </p>
+          </li>
+          <li className="material-one" >
+            <span className="name">
+            测试素材名字
+            </span>
+
+            <span className="operation" onClick={this.download.bind(this)} href="javascript:void 0">
+              <Download materialName="背景色" >
+              下载
+              </Download>
+            </span>
+            <a className="operation" onClick={this.edit.bind(this)} href="javascript:void 0">编辑</a>
+          </li>
         </List>
       </div>
     )

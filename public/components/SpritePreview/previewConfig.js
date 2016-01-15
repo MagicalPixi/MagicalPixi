@@ -4,13 +4,14 @@
  * 常量，设置集合
  */
 let sprite = require('../../common/sprite');
+let _ = require('lodash');
 
 const SPRITE_MC = 'movieClip';
 const SPRITE_IM = 'image';
 
-let settingListConfigMap = (spriteType)=>{
-  let config = {
-    [SPRITE_IM]: [{
+let settingListConfigMap = ((spriteType)=>{
+
+  let basic =[{
       name: 'name',
       key: 'name'
     }, {
@@ -25,23 +26,11 @@ let settingListConfigMap = (spriteType)=>{
       name: 'scale.x',
       key: 'scale.x',
       describe: 'for scale.x'
-    }],
+  }];
+
+  let config = {
+    [SPRITE_IM]: [],
     [SPRITE_MC]: [{
-      name: 'name',
-      key: 'name'
-    }, {
-      name: 'x',
-      key: 'x',
-      describe: 'for x'
-    }, {
-      name: 'y',
-      key: 'y',
-      describe: 'for y'
-    }, {
-      name: 'scale.y',
-      key: 'scale.y',
-      describe: 'for scale.y'
-    }, {
       name: 'animateSpeed',
       key: 'animateSpeed',
       describe: 'animateSpeed'
@@ -50,13 +39,22 @@ let settingListConfigMap = (spriteType)=>{
       checkbox: {
         true: 'play',
         false: 'stop'
-      },
+      }
     }]
-  }
+  };
 
-//  return config[spriteType] || config[SPRITE_MC];
-  return config[spriteType] || [];
-};
+  config = _.map(config,(v,k)=>{
+    return {
+      [k]:[].concat(v).concat(basic)
+    }
+  }).reduce((init,next)=>{
+    return Object.assign(init,next);
+  },{});
+
+  return (spriteType)=>{
+    return config[spriteType] || [];
+  }
+})();
 
 
 let spriteFnMap = (spriteType)=>{

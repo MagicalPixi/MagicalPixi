@@ -3,6 +3,12 @@
  */
 var  _ = require('lodash');
 
+window.log = (_)=>_;
+
+if(env.isDevelopment){
+  window.log = console.log.bind(console);
+}
+
 module.expors = {
 
   /**

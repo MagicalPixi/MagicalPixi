@@ -7,7 +7,7 @@ var Sprite = require('../models/Sprite');
 
 var spriteScriptsTemplate = require('../services/spriteScriptsTemplate');
 
-var archiverZip = require('../services/archiverZip');
+var archiverZip = require('../services/archiverDownloadZip');
 
 var resourceObjBuild = function (resourceUrl) {
   var resourceArr = [resourceUrl];
