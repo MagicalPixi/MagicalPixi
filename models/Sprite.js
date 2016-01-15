@@ -2,8 +2,6 @@
  * Created by zyg on 16/1/12.
  */
 
-var path = require('path');
-
 var Model = require('./Model');
 
 var collectionName = 'sprites';
@@ -62,8 +60,6 @@ module.exports = {
    * findObj.name 查找的素材的名字
    */
   findOne(findObj){
-
-    console.log(findObj);
 
     return new Promise(function (resolve) {
 

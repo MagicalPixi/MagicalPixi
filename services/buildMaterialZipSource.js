@@ -73,25 +73,14 @@ module.exports = function (materialObj) {
     console.log('isAllRequired:',isAllRequired);
 
     if(isAllRequired){
-      try{
-
-        result = build(materialObj);
-      }catch(e){
-        console.log('build e',e);
-      }
-
-      console.log('result:',result);
+      result = build(materialObj);
 
       resolve(result);
     }else{
       Sprite.findOne(materialObj).then(function (r) {
 
-        console.log('r:',r);
-
         if(r){
           result = build(r);
-
-          console.log('result:',result);
 
           resolve(result)
         }
