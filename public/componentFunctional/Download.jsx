@@ -1,13 +1,13 @@
 let React = require('react');
 let _ = require('lodash');
 
-let ajax = require('../libs/ajax');
+let API = require('../js/API');
 
 class Download extends React.Component {
 
   downloadMaterial(materialName){
 
-    window.open('/download/materials?name='+encodeURIComponent(materialName));
+    window.open(API.downloadMaterial+'?name='+encodeURIComponent(materialName));
   }
 
   download(){

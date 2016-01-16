@@ -3,7 +3,7 @@ let _ = require('lodash');
 
 let ajax = require('../libs/ajax');
 
-let apiUrl = '/api/saveProperties';
+let API = require('../js/API');
 
 class SaveProperties extends React.Component {
 
@@ -14,7 +14,7 @@ class SaveProperties extends React.Component {
 
     properties = Object.assign({},properties);
 
-    ajax(apiUrl).post({
+    ajax(API.saveProperties).post({
       id,
       resourceUrl,
       spriteType,
