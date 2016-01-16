@@ -127,5 +127,27 @@ module.exports = {
         })
       })
     })
+  },
+  /**
+   *
+   */
+  deleteOne(arg){
+    var id = arg.id;
+
+    return new Promise(function(resolve){
+
+      db(function(collection){
+        try{
+          collection.deleteOne({
+            _id:ObjectId(id)
+          }, function (err, result) {
+            if(err){ throw err}
+            resolve(result)
+          })
+        }catch(e){
+          throw e;
+        }
+      })
+    })
   }
 };
