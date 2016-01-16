@@ -7,6 +7,7 @@ let List = require('../../componentFunctional/List');
 
 let SpritePreview = require('../../components/SpritePreview');
 let Download = require('../../componentFunctional/Download');
+let DeleteSprite = require('../../componentFunctional/DeleteSprite');
 
 class MaterialsList extends React.Component {
 
@@ -47,12 +48,20 @@ class MaterialsList extends React.Component {
                   {sprite.name}
                 </span>
 
+                <span className="operation delete">
+                  <DeleteSprite data={{id:_id}}>
+                    删除
+                  </DeleteSprite>
+                </span>
+
+                <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
+
                 <span className="operation" href="javascript:void 0">
                   <Download materialName={name} >
                   下载
                   </Download>
                 </span>
-                <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
+
               </li>
             )
           })}
