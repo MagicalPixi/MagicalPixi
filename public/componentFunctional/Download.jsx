@@ -1,4 +1,6 @@
 let React = require('react');
+let T = React.PropTypes;
+
 let _ = require('lodash');
 
 let API = require('../js/API');
@@ -25,6 +27,10 @@ class Download extends React.Component {
       </a>
     )
   }
+}
+
+Download.propTypes = {
+  materialName:T.string.isRequired
 }
 
 

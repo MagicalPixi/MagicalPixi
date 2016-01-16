@@ -1,4 +1,6 @@
 let React = require('react');
+let T = React.PropTypes;
+
 let _ = require('lodash');
 
 let ajax = require('../libs/ajax');
@@ -72,5 +74,8 @@ class FileUpload extends React.Component {
   }
 }
 
+FileUpload.propTypes = {
+  onUploadCompleted:T.func.isRequired
+};
 
 module.exports = FileUpload;
