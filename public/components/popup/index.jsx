@@ -99,7 +99,9 @@ module.exports = (reactElements,style={}) => {
 
   ReactDOM.render(
     <Popup style={style} close={close}>
-      {reactElements}
+      {React.cloneElement(reactElements,{
+        close:close
+      })}
     </Popup>,
     div
   );

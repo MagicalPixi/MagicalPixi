@@ -7,24 +7,15 @@ class Download extends React.Component {
 
   downloadMaterial(materialName){
 
-    //let url = '/api/downloadMaterial';
-    //
-    //ajax(url).get({
-    //  name:materialName
-    //}).then(function (d) {
-    //  console.log(d);
-    //})
-
-    window.open('/download/materials?name='+encodeURIComponent('背景色'));
+    window.open('/download/materials?name='+encodeURIComponent(materialName));
   }
 
   download(){
     let {materialName} = this.props;
 
-    if(this.props.materialName){
+    if(materialName){
       this.downloadMaterial(materialName)
     }
-
   }
 
   render(){

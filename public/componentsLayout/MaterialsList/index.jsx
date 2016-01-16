@@ -14,15 +14,13 @@ class MaterialsList extends React.Component {
     SpritePreview();
   }
 
-  edit(){
-
+  edit(_id,resourceUrl,type,properties){
     SpritePreview({
-      name:'测试'
+      id:_id,
+      resourceUrl,
+      type,
+      properties
     });
-  }
-
-  download(){
-
   }
 
   render(){
@@ -39,35 +37,29 @@ class MaterialsList extends React.Component {
         </header>
 
         <List>
-          <li className="material-one" >
-            <span className="name">
-              测试素材名字
-            </span>
+          {this.props.data.map((sprite,i)=>{
 
-            <span className="operation" onClick={this.download.bind(this)} href="javascript:void 0">
-              <Download materialName="背景色" >
-              下载
-              </Download>
-            </span>
-            <a className="operation" onClick={this.edit.bind(this)} href="javascript:void 0">编辑</a>
-          </li>
-          <li className="material-one" >
-            <span className="name">
-            测试素材名字
-            </span>
+            let {_id,name,resourceUrl,type,properties} = sprite;
 
-            <span className="operation" onClick={this.download.bind(this)} href="javascript:void 0">
-              <Download materialName="背景色" >
-              下载
-              </Download>
-            </span>
-            <a className="operation" onClick={this.edit.bind(this)} href="javascript:void 0">编辑</a>
-          </li>
+            return (
+              <li key={"material"+i} className="material-one" >
+                <span className="name">
+                  {sprite.name}
+                </span>
+
+                <span className="operation" href="javascript:void 0">
+                  <Download materialName={name} >
+                  下载
+                  </Download>
+                </span>
+                <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
+              </li>
+            )
+          })}
         </List>
       </div>
     )
   }
 }
-//            <a className="operation" onClick={this.download.bind(this)} href="javascript:void 0">下载</a>
 
 module.exports = MaterialsList;

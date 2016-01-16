@@ -11,6 +11,7 @@ var MaterialZip = require('../models/MaterialZip');
 
 module.exports = function (req, res) {
 
+  var id = req.body.id;
   var type = req.body.spriteType;
   var name = req.body.spriteName;
   var resourceUrl = req.body.resourceUrl;
@@ -18,7 +19,10 @@ module.exports = function (req, res) {
 
   var userFlag = req.session.userFlag;
 
+  //console.log(typeof properties,properties);
+
   var materialObj = {
+    id,
     resourceUrl,
     userFlag,
     type,
@@ -34,6 +38,7 @@ module.exports = function (req, res) {
     res.json({result});
 
   }).catch(function (err) {
+    console.log('err',err);
     res.json({err})
   });
 
@@ -42,8 +47,6 @@ module.exports = function (req, res) {
   console.log('生成sourceObj');
   //同时，生成一个zip包
   buildMaterialZipSource(materialObj).then(function (sourceObj) {
-
-    console.log('sourceObj:',sourceObj);
 
     archiverZip(name+'.zip',sourceObj).then(function (zipPath) {
 

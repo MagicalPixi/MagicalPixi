@@ -17,7 +17,6 @@ class SettingList extends React.Component {
     });
   }
 
-
   checkboxSetting(refKey,checkBox){
     let inputDom = this.refs[refKey];
     let checked = inputDom.checked;
@@ -31,7 +30,7 @@ class SettingList extends React.Component {
 
 
   inputBuild(settingOne,i){
-    let {name,key,checkbox,describe} = settingOne;
+    let {name,key,checkbox,describe,value} = settingOne;
 
     let refKey = 'setting'+i;
 
@@ -44,12 +43,15 @@ class SettingList extends React.Component {
     }
 
     return (
-      <input ref={refKey} onChange={onChange} id="name" type={inputType} placeholder={describe} />
+      <input ref={refKey} defaultValue={value} onChange={onChange}
+        type={inputType} placeholder={describe} />
     )
   }
 
   render(){
-    let settingListConfig = settingListConfigMap(this.props.spriteType);
+    let {spriteType,spriteProperties } = this.props;
+
+    let settingListConfig = settingListConfigMap(spriteType,spriteProperties);
 
     let settingList = settingListConfig.map((settingOne,i)=>{
       let {name,key,checkbox,describe} = settingOne;

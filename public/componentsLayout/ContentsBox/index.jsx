@@ -6,8 +6,6 @@ class ContentsBox extends React.Component {
 
   render() {
 
-    console.log(this.props.children);
-
     return (
       <div className="contents-box" >
         <div className="left-part">

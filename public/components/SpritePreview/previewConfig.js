@@ -12,8 +12,8 @@ const SPRITE_IM = 'image';
 let settingListConfigMap = ((spriteType)=>{
 
   let basic =[{
-      name: 'name',
-      key: 'name'
+      name: '素材名字',
+      key: 'spriteName'
     }, {
       name: 'x',
       key: 'x',
@@ -51,8 +51,32 @@ let settingListConfigMap = ((spriteType)=>{
     return Object.assign(init,next);
   },{});
 
-  return (spriteType)=>{
-    return config[spriteType] || [];
+
+  return (spriteType,spriteProperties)=>{
+
+    let properties = config[spriteType];
+
+    if(properties) {
+
+      properties = properties.slice();
+
+      log(spriteProperties);
+
+      _.map(Object.keys(spriteProperties), (key)=> {
+        let defaultPropertyValue = spriteProperties[key];
+
+        properties = properties.map((propertyObj)=> {
+          if (propertyObj.key === key) {
+            propertyObj.value = defaultPropertyValue;
+          }
+          return propertyObj;
+        });
+
+      });
+    }
+
+
+    return  properties || [];
   }
 })();
 

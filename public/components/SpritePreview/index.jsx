@@ -33,18 +33,24 @@ class SpritePreview extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      init:true,
-      spriteType:'',
-      spriteDisplayObjProperties:{
-        name:props.name
-      }
-    };
+    let {id,resourceUrl='',type,properties={}} = props;
 
+    if(typeof properties === 'string'){
+      properties = JSON.parse(properties);
+    }
+
+    this.state = {
+      init:!resourceUrl,
+      spriteType:type,
+      spriteDisplayObjProperties:Object.assign({
+      },properties)
+    };
 
     this.spriteDisplayObj = {};
 
-    this.resourceUrl = '';
+    this.resourceUrl = resourceUrl;
+
+    this.id = id;
   }
 
   componentDidMount(){
@@ -55,6 +61,10 @@ class SpritePreview extends React.Component {
     this.stage = new PIXI.Container();
 
     this.runRender(this.stage);
+
+    if(this.resourceUrl){
+      this.loadSprite();
+    }
   }
 
   componentWillUnmount(){
@@ -78,17 +88,15 @@ class SpritePreview extends React.Component {
     animate();
   };
 
-
-  onUploadCompleted(uploadResult){
+  loadSprite(){
     let { spriteDisplayObjProperties} = this.state;
+    let resourceUrl = this.resourceUrl;
 
     let resourceKey = 'img' + Date.now();
 
-    let spriteType = getSpriteTpeByUrl(uploadResult);
+    let spriteType = getSpriteTpeByUrl(resourceUrl);
 
-    this.resourceUrl = uploadResult;
-
-    PIXI.loader.add(resourceKey,uploadResult)
+    PIXI.loader.add(resourceKey,resourceUrl)
       .load((loader,resources)=>{
 
         //同时兼容到im和mc
@@ -106,6 +114,11 @@ class SpritePreview extends React.Component {
       });
   }
 
+  onUploadCompleted(uploadResult){
+    this.resourceUrl = uploadResult;
+    this.loadSprite();
+  }
+
   fixProperties(properties,newProperties){
 
     if(properties.play !== undefined){
@@ -119,6 +132,9 @@ class SpritePreview extends React.Component {
   }
 
   setPropertyTo(properties={}){
+
+    log('properties:',properties);
+
     let { spriteDisplayObjProperties:oldProperties} = this.state;
 
     let newProperties = Object.assign(oldProperties,properties);
@@ -140,21 +156,28 @@ class SpritePreview extends React.Component {
 
     let resourceUrl = this.resourceUrl;
 
-    return Object.assign({
+    let postParam = false;
+
+    postParam = Object.assign({
+      id: this.id,
       resourceUrl,
       spriteType,
-      spriteName:spriteDisplayObjProperties.name
-    },spriteDisplayObjProperties)
+      spriteName: spriteDisplayObjProperties.spriteName,
+      properties: spriteDisplayObjProperties
+    });
+
+    return postParam;
   }
 
   onSavePropertiesCompleted(r){
-
+    if(r){
+      location.reload();
+      //this.props.close();
+    }
   }
 
-
-
   render(){
-    let {init,spriteType} = this.state;
+    let {init,spriteType,spriteDisplayObjProperties} = this.state;
 
     return (
       <div id="mpSpritePreviewBox" data-init={init}>
@@ -167,14 +190,14 @@ class SpritePreview extends React.Component {
             </div>
           </FileUpload>
 
-          <SettingList spriteType={spriteType}
+          <SettingList spriteType={spriteType} spriteProperties={spriteDisplayObjProperties}
                        changeSetting={this.setPropertyTo.bind(this)} />
 
         </div>
 
         <footer className="operation">
           <SaveProperties getParam={this.buildPostParam.bind(this)} onSavePropertiesCompleted={this.onSavePropertiesCompleted.bind(this)} >
-            <button className="weui_btn weui_btn_mini weui_btn_primary">确定（没效果）</button>
+            <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
           </SaveProperties>
           <button className="weui_btn weui_btn_mini weui_btn_default">取消（没效果）</button>
         </footer>
