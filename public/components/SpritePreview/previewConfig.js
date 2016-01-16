@@ -45,7 +45,7 @@ let settingListConfigMap = ((spriteType)=>{
 
   config = _.map(config,(v,k)=>{
     return {
-      [k]:[].concat(v).concat(basic)
+      [k]:basic.concat(v)
     }
   }).reduce((init,next)=>{
     return Object.assign(init,next);
