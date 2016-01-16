@@ -17,15 +17,40 @@ let AsideBoard = require('../componentsLayout/AsideBoard');
 let MaterialsList = require('../componentsLayout/MaterialsList');
 
 
+let API = require('./API');
+
 class Main extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      materialsList:[]
+    }
+  }
+
+  componentDidMount(){
+
+    ajax(API.materialsList).get().then((r)=>{
+
+      log('r:',r);
+
+      this.setState({
+        materialsList: r.result
+      })
+    })
+  }
+
   render(){
+
+    let {materialsList} = this.state;
+
     return (
       <div>
         <Navbar></Navbar>
 
         <ContentsBox>
           <AsideBoard />
-          <MaterialsList />
+          <MaterialsList data={materialsList} />
         </ContentsBox>
       </div>
     )
