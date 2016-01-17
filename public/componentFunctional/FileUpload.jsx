@@ -25,19 +25,24 @@ let getUploadKeyByExt = function (names) {
 
 let API = require('../js/API');
 
+let body = document.querySelector('body');
+
 class FileUpload extends React.Component {
 
   click(){
-    var inputEle = document.createElement('input');
+    let inputEle = document.createElement('input');
     inputEle.type = 'file';
     inputEle.multiple = true;
+    inputEle.style.display = 'none';
+
+    body.appendChild(inputEle);
 
     inputEle.addEventListener('change',(e)=>{
-      console.log('add files:',inputEle.files);
 
       let fileList = inputEle.files;
 
-      window.fileList = fileList;
+      inputEle.remove();
+
       //ajax上传...
       let fd = new FormData();
 
@@ -57,7 +62,11 @@ class FileUpload extends React.Component {
         this.props.onUploadCompleted(url);
       })
     });
-    inputEle.click();
+
+    //inputEle.click();
+    setTimeout(function () {
+      inputEle.click();
+    },100);
   }
 
   //拖动上传
