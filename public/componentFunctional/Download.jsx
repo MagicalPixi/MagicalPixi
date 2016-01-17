@@ -1,30 +1,23 @@
 let React = require('react');
+let T = React.PropTypes;
+
 let _ = require('lodash');
 
-let ajax = require('../libs/ajax');
+let API = require('../js/API');
 
 class Download extends React.Component {
 
   downloadMaterial(materialName){
 
-    //let url = '/api/downloadMaterial';
-    //
-    //ajax(url).get({
-    //  name:materialName
-    //}).then(function (d) {
-    //  console.log(d);
-    //})
-
-    window.open('/download/materials');
+    window.open(API.downloadMaterial+'?name='+encodeURIComponent(materialName));
   }
 
   download(){
     let {materialName} = this.props;
 
-    if(this.props.materialName){
+    if(materialName){
       this.downloadMaterial(materialName)
     }
-
   }
 
   render(){
@@ -34,6 +27,10 @@ class Download extends React.Component {
       </a>
     )
   }
+}
+
+Download.propTypes = {
+  materialName:T.string.isRequired
 }
 
 

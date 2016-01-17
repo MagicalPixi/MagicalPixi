@@ -1,5 +1,4 @@
 
-require('./index.scss');
 let React = require('react');
 
 class List extends React.Component {

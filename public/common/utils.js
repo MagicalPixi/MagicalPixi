@@ -1,7 +1,13 @@
 /**
  * Created by zyg on 16/1/13.
  */
-let _ = require('lodash');
+var  _ = require('lodash');
+
+window.log = (_)=>_;
+
+if(env.isDevelopment){
+  window.log = console.log.bind(console);
+}
 
 module.expors = {
 
@@ -11,14 +17,24 @@ module.expors = {
    * @param url
    */
   getNameFromUrl(url){
-    let r = '';
+    var  r = '';
     if(url) {
-      let lastDotI = url.lastIndexOf('.');
-      let lastDashI = url.lastIndexOf('/');
+      var  lastDotI = url.lastIndexOf('.');
+      var  lastDashI = url.lastIndexOf('/');
 
       if (lastDashI < lastDotI) {
         r = url.substring(lastDashI + 1, lastDotI);
       }
+    }
+    return r;
+  },
+  
+  getFullNameFromUrl(url){
+    var  r = '';
+    if(url) {
+      var  lastDashI = url.lastIndexOf('/');
+
+      r = url.substr(lastDashI + 1);
     }
     return r;
   }

@@ -87,7 +87,9 @@
   };
 
   $private.getQueryString = function getQueryString(object) {
-    return Object.keys(object).map(function (item) {
+    return Object.keys(object).filter(function (key) {
+      return !!object[key]
+    }).map(function (item) {
       var value = object[item];
       if($private.isObject(value)){
         value = JSON.stringify(value);

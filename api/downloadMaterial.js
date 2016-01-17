@@ -3,15 +3,30 @@
  */
 var path = require('path');
 
-//GET
-module.exports = function (req, res) {
+var MaterialZip = require('../models/MaterialZip');
+
+//GET0
+module.exports = function (req, res,next) {
   var name = req.query.name;
 
-  console.log(name);
+  MaterialZip.findOne({
+    name
+  }).then(function (result) {
 
-  //res.json({ name })
-  res.download(
-    path.resolve(__dirname,'../public/materials/admin/deer.png'),
-    'deer.png'
-  );
+    if(result){
+      res.download(
+        result.zipPath,
+        name+'.zip'
+      );
+    }else{
+      res.json({
+        error:`${name} not found`
+      });
+    }
+  }).catch(function (err) {
+
+    console.log('materialZip findOne error:',err);
+
+    next(err);
+  });
 };

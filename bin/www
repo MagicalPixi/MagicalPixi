@@ -100,6 +100,7 @@ function onListening() {
 
 function runGulp(){
   var env = app.get('env');
+  gulpfile.start('syncAPI');
   if( env === 'development'){
     gulpfile.start('development');
   }

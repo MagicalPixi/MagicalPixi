@@ -2,8 +2,6 @@ require('./index.scss');
 
 let React = require('react');
 
-let List = require('../List');
-
 class AsideBoard extends React.Component {
 
   render(){

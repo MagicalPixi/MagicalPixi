@@ -1,4 +1,6 @@
 let React = require('react');
+let T = React.PropTypes;
+
 let _ = require('lodash');
 
 let ajax = require('../libs/ajax');
@@ -21,7 +23,7 @@ let getUploadKeyByExt = function (names) {
   });
 };
 
-let apiUrl = '/api/fileUpload';
+let API = require('../js/API');
 
 class FileUpload extends React.Component {
 
@@ -49,7 +51,7 @@ class FileUpload extends React.Component {
         }
       });
 
-      ajax(apiUrl).post(fd).then((r)=>{
+      ajax(API.fileUpload).post(fd).then((r)=>{
         let {url} = r;
 
         this.props.onUploadCompleted(url);
@@ -72,5 +74,8 @@ class FileUpload extends React.Component {
   }
 }
 
+FileUpload.propTypes = {
+  onUploadCompleted:T.func.isRequired
+};
 
 module.exports = FileUpload;

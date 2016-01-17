@@ -1,26 +1,27 @@
 let React = require('react');
+let T = React.PropTypes;
+
 let _ = require('lodash');
 
 let ajax = require('../libs/ajax');
 
-let apiUrl = '/api/saveProperties';
+let API = require('../js/API');
 
 class SaveProperties extends React.Component {
 
   save(){
     let sendData = this.props.getParam();
 
-    let {name:spriteName,spriteType,resourceUrl} = sendData;
+    let {id,spriteName,spriteType,resourceUrl,properties} = sendData;
 
-    delete sendData.resourceUrl;
-    delete sendData.name;
-    delete sendData.spriteType;
+    properties = Object.assign({},properties);
 
-    ajax(apiUrl).post({
+    ajax(API.saveProperties).post({
+      id,
       resourceUrl,
       spriteType,
       spriteName,
-      properties:sendData
+      properties
     }).then((r)=>{
 
       this.props.onSavePropertiesCompleted({
@@ -38,5 +39,9 @@ class SaveProperties extends React.Component {
   }
 }
 
+SaveProperties.propTypes = {
+  getParam:T.func.isRequired,
+  onSavePropertiesCompleted:T.func.isRequired,
+}
 
 module.exports = SaveProperties;
