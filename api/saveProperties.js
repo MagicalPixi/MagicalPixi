@@ -55,7 +55,7 @@ module.exports = function (req, res) {
         zipPath,
         name
       }).then(function (result) {
-        console.log(result.result);
+        console.log('MaterialZip.insertOne:',result.result);
       })
     });
   });

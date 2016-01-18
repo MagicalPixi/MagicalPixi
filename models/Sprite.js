@@ -56,6 +56,8 @@ module.exports = {
       db((collection)=>{
 
         console.log('args.id:',args.id);
+        console.log('save find :',r);
+        console.log('buildArgs :',buildArgs);
 
         if(args.id){
 
@@ -63,8 +65,6 @@ module.exports = {
             _id:ObjectId(args.id)
           }).then(r=>{
 
-            console.log('save find :',r);
-            console.log('buildArgs :',buildArgs);
 
             if(r){
 
