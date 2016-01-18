@@ -19,7 +19,8 @@ var saveObjBuild = function (args) {
   }
 
   var buildArgs = Object.assign({},args);
-  delete  buildArgs.id;
+  delete buildArgs.id;
+  delete buildArgs._id;
   return buildArgs;
 };
 
@@ -49,14 +50,13 @@ module.exports = {
     return new Promise((resolve)=>{
 
       var buildArgs = saveObjBuild(args);
-      if(!args){
+      if(!buildArgs){
         throw new Error('lost arg');
       }
 
       db((collection)=>{
 
         console.log('args.id:',args.id);
-        console.log('save find :',r);
         console.log('buildArgs :',buildArgs);
 
         if(args.id){
@@ -65,6 +65,7 @@ module.exports = {
             _id:ObjectId(args.id)
           }).then(r=>{
 
+            console.log('save find :',r);
 
             if(r){
 

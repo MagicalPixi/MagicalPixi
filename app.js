@@ -33,6 +33,9 @@ app.use(function (req,res,next) {
     req.session.userFlag = 'admin';
   }
 
+  //@TODO 测试用
+  req.session.userFlag = 'admin';
+
   next();
 });
 
