@@ -11,21 +11,11 @@ var plugins = [];
 
 var definePlugin = new webpack.DefinePlugin({
   env:{
-    isDevelopment:process.env.NODE_ENV !== 'product'
-  }
-});
-
-var uglify = new webpack.optimize.UglifyJsPlugin({
-  compress:{
-    warning:false
+    isDevelopment:true
   }
 });
 
 plugins.push(definePlugin);
-
-if(NodeENV === 'product'){
-  plugins.push(uglify);
-}
 
 module.exports = {
   webpackDevPort: webpackDevPort,
