@@ -17,7 +17,7 @@ base.plugins = [
   }),
   new webpack.optimize.UglifyJsPlugin({
     compress:{
-      warning:false
+      warnings:false
     }
   })
 ];
