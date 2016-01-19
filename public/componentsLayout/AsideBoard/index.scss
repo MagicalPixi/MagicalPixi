@@ -48,6 +48,10 @@
 
       li {
         padding-left: $iconWidth + $margin2;
+
+        a{
+          color: inherit;
+        }
       }
     }
   }
