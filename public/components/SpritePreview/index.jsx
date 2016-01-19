@@ -199,7 +199,7 @@ class SpritePreview extends React.Component {
           <SaveProperties getParam={this.buildPostParam.bind(this)} onSavePropertiesCompleted={this.onSavePropertiesCompleted.bind(this)} >
             <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
           </SaveProperties>
-          <button className="weui_btn weui_btn_mini weui_btn_default">取消（没效果）</button>
+          <button onClick={this.props.close} className="weui_btn weui_btn_mini weui_btn_default">取消</button>
         </footer>
       </div>
     )

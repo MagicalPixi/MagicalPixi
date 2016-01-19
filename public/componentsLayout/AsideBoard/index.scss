@@ -6,13 +6,25 @@
 
   .function-one{
 
-    border-bottom: 1px solid $grayLight;
+    //border-bottom: 1px solid $grayLight;
 
     padding: $padding3 $padding6;
 
     font-size: 16px;
 
     $iconWidth:18px;
+
+    &:after{
+      content: '';
+      background-color: $grayLight;
+      border: none;
+      width: 110%;
+      height: 0.5px;
+      position: relative;
+      left: -5%;
+      top: $padding3;
+      display: block;
+    }
 
     .title{
       line-height: 34px;
@@ -35,20 +47,29 @@
     .child-list{
 
       li {
-
         padding-left: $iconWidth + $margin2;
-
       }
     }
   }
   .function-one:last-child{
     border-bottom: none;
+
+    &:after{
+      display: none;
+    }
   }
 
   .function-one.material{
     .title{
       .icon{
         background-image: url(/images/icon/menu_management.png);
+      }
+    }
+  }
+  .function-one.scene{
+    .title{
+      .icon{
+        background-image: url(/images/icon/scene_menu.png);
       }
     }
   }
