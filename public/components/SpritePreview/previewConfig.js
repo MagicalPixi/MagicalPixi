@@ -9,11 +9,22 @@ let _ = require('lodash');
 const SPRITE_MC = 'movieClip';
 const SPRITE_IM = 'image';
 
-let settingListConfigMap = ((spriteType)=>{
+let settingListConfigMap = ((spriteType)=> {
 
-  let basic =[{
+  let basic = [
+    {
       name: '素材名字',
       key: 'spriteName'
+    }, {
+      name: '原点X',
+      key: 'anchor.x',
+      value:'0',
+      describe: '原点X'
+    }, {
+      name: '原点Y',
+      key: 'anchor.y',
+      value:'0',
+      describe: '原点Y'
     }, {
       name: 'x',
       key: 'x',
@@ -26,7 +37,16 @@ let settingListConfigMap = ((spriteType)=>{
       name: 'scale.x',
       key: 'scale.x',
       describe: 'for scale.x'
-  }];
+    }, {
+      name: 'scale.y',
+      key: 'scale.y',
+      describe: 'for scale.y'
+    }, {
+      name: 'rotation',
+      key: 'rotation',
+      describe: 'rotation'
+    }
+  ];
 
   let config = {
     [SPRITE_IM]: [],
@@ -43,20 +63,20 @@ let settingListConfigMap = ((spriteType)=>{
     }]
   };
 
-  config = _.map(config,(v,k)=>{
+  config = _.map(config, (v, k)=> {
     return {
-      [k]:basic.concat(v)
+      [k]: basic.concat(v)
     }
-  }).reduce((init,next)=>{
-    return Object.assign(init,next);
-  },{});
+  }).reduce((init, next)=> {
+    return Object.assign(init, next);
+  }, {});
 
 
-  return (spriteType,spriteProperties)=>{
+  return (spriteType, spriteProperties)=> {
 
     let properties = config[spriteType];
 
-    if(properties) {
+    if (properties) {
 
       properties = properties.slice();
 
@@ -76,19 +96,19 @@ let settingListConfigMap = ((spriteType)=>{
     }
 
 
-    return  properties || [];
+    return properties || [];
   }
 })();
 
 
-let spriteFnMap = (spriteType)=>{
+let spriteFnMap = (spriteType)=> {
 
   let config = {
-    [SPRITE_IM]:sprite.getIm,
-    [SPRITE_MC]:sprite.getMc
+    [SPRITE_IM]: sprite.getIm,
+    [SPRITE_MC]: sprite.getMc
   };
 
-  if(!spriteType){
+  if (!spriteType) {
     console.error('sprite fn null');
   }
 
