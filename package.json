@@ -41,6 +41,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-ejs": "^1.2.1",
     "gulp-qiniu": "0.0.9",
@@ -50,6 +51,7 @@
     "sass-loader": "^3.1.2",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.10.1"
   }

@@ -49,6 +49,9 @@ module.exports = {
         test:/\.css$/,
         exclude: /node_modules|bower_components/,
         loaders:['style','css']
+      },{
+        test:/\.ttf|otf$/,
+        loaders:['file']
       }
     ]
   },
