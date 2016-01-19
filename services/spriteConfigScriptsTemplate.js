@@ -3,6 +3,8 @@
  */
 var _ = require('lodash');
 
+var filename = 'sprite.js';
+
 var spriteTypeFn  = function (type) {
   var map = {
     'image':'sprite.getIm',
@@ -20,14 +22,13 @@ var temp = function (fnStr,propertiesStr) {
     "preFix:null, \n" +
     propertiesStr +
     "}); \n" +
-    "mySprite.render = function () { }\n" +
     "module.exports = mySprite; \n";
 
   return tempScripts;
 };
 
 
-module.exports = function (spriteType,properties) {
+function build(spriteType,properties) {
   var propertiesStr = _.map(Object.keys(properties), function (key) {
     return "'" + key + "':" + properties[key] + ', \n';
   }).join('');
@@ -37,5 +38,12 @@ module.exports = function (spriteType,properties) {
     propertiesStr
   );
 
-  return spriteScriptsString;
+  return {
+    filename,
+    text:spriteScriptsString
+  };
 };
+
+build.filename = filename;
+
+module.exports = build

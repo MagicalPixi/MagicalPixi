@@ -3,7 +3,9 @@
  */
 var path = require('path');
 var Sprite = require('../models/Sprite');
-var spriteScriptsTemplate = require('./spriteScriptsTemplate');
+
+var cocnfigScriptsTemplate = require('./spriteConfigScriptsTemplate');
+var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
 
 var resourceObjBuild = function (resourceUrl) {
   var resourceArr = [resourceUrl];
@@ -35,15 +37,18 @@ var build = function (materialObj) {
 
   var properties = JSON.parse(materialObj.properties);
 
-  var scripts = spriteScriptsTemplate(
+  var scripts = cocnfigScriptsTemplate(
     materialObj.type,
     properties
   );
 
+  var indexScripts = indexScriptsTemplate();
+
   var resourceObj = resourceObjBuild(materialObj.resourceUrl);
 
   resourceObj = Object.assign(resourceObj,{
-    [name+'.js']:new Buffer(scripts),
+    [cocnfigScriptsTemplate.filename]:new Buffer(scripts.text),
+    [indexScriptsTemplate.filename]:new Buffer(indexScripts.text)
   });
 
   return resourceObj;
