@@ -3,11 +3,9 @@ var path = require('path');
 
 var webpack = require('webpack');
 
-var webpackDevPort = 7301;
-
-var NodeENV = process.env.NODE_ENV;
-
 var base = require('./webpack.config');
+
+base.output.publicPath = '';
 
 base.plugins = [
   new webpack.DefinePlugin({

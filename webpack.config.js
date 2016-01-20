@@ -51,7 +51,7 @@ module.exports = {
         loaders:['style','css']
       },{
         test:/\.ttf|otf$/,
-        loaders:['file']
+        loaders:['file?name=/fonts//[name].[ext]']
       }
     ]
   },

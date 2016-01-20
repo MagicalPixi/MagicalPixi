@@ -1,0 +1,25 @@
+@import "../../styles/core/variables";
+
+#itemList{
+
+  .item-list {
+    > li {
+
+      margin: $margin2;
+      border-top: 1px solid $grayLight;
+      padding: $padding1;
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+
+      &:before {
+
+      }
+
+      .operation {
+        margin-right: $margin2;
+        float: right;
+      }
+    }
+  }
+}
