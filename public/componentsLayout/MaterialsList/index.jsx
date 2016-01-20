@@ -3,7 +3,7 @@ require('./index.scss');
 
 let React = require('react');
 
-let List = require('../../componentFunctional/List');
+let ItemList = require('../ItemList');
 
 let SpritePreview = require('../../components/SpritePreview');
 let Download = require('../../componentFunctional/Download');
@@ -29,7 +29,7 @@ class MaterialsList extends React.Component {
       <div id="mpMaterialsList" >
         <header className="top-container">
 
-          <h3 className="material-title" >
+          <h3 className="title" >
           精灵列表
           </h3>
 
@@ -37,14 +37,14 @@ class MaterialsList extends React.Component {
 
         </header>
 
-        <List>
+        <ItemList>
           {this.props.data.map((sprite,i)=>{
 
             let {_id,name,resourceUrl,type,properties} = sprite;
 
             return (
-              <li key={"material"+i} className="material-one" >
-                <span className="name">
+              <li key={"material"+i} >
+                <span>
                   {sprite.name}
                 </span>
 
@@ -65,7 +65,7 @@ class MaterialsList extends React.Component {
               </li>
             )
           })}
-        </List>
+        </ItemList>
       </div>
     )
   }

@@ -9,9 +9,7 @@ let SpritePreViewF = React.createFactory(SpritePreview);
 
 let MaterialsList = require('../../componentsLayout/MaterialsList');
 
-
 let API = require('../API');
-
 
 class Sprite extends React.Component {
   constructor(props){
