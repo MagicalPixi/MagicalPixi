@@ -31,14 +31,13 @@ class Popup extends React.Component {
 
     let top = (parseInt(windowHeight) - parseInt(childStyle.height)) /2;
 
-    console.log(parseInt(windowHeight),parseInt(childStyle.height));
-
     if(top < 0){
       top = 10;
     }
 
-    let marginLeft = -parseInt(oldStyle.width) / 2;
+    let oldStyleWidth = oldStyle.width || childStyle.width;
 
+    let marginLeft = -parseInt(oldStyleWidth) / 2;
 
     top += 'px';
     marginLeft += 'px';
@@ -47,8 +46,6 @@ class Popup extends React.Component {
       top,
       marginLeft
     });
-
-
 
     this.setState({
       style:newStyle
@@ -105,8 +102,6 @@ module.exports = (reactElements,style={}) => {
     </Popup>,
     div
   );
-
-
 
   return close;
 };

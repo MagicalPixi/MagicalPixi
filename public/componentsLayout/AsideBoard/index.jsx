@@ -31,6 +31,11 @@ class AsideBoard extends React.Component {
               精灵
               </a>
             </li>
+            <li>
+              <a href="#picture" >
+                图片
+              </a>
+            </li>
           </ul>
         </div>
       </div>

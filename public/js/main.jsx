@@ -35,3 +35,9 @@ ReactDOM.render(
   React.createElement(Main),
   document.querySelector('#topContainer')
 );
+
+
+let Popup = require('../components/Popup');
+let ImageUpload = require('../components/ImageUpload');
+
+Popup(<ImageUpload></ImageUpload>);
