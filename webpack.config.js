@@ -28,6 +28,7 @@ module.exports = {
   },
   entry: {
     index: path.resolve(__dirname, './public/js/main.jsx'),
+    edit: path.resolve(__dirname, './public/js/edit.jsx'),
   },
   output: {
     path: path.resolve(__dirname, './public/dist/'),

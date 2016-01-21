@@ -11,5 +11,11 @@ module.exports = {
       env:env,
       webpackDevPort:webpackDevPort
     });
+  },
+  edit:function(req,res){
+    res.render('edit',{
+      env:env,
+      webpackDevPort:webpackDevPort
+    });
   }
 };
