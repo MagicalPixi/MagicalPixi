@@ -1,9 +1,9 @@
 @import "../../styles/core/variables";
 
 #mpNavbar{
-
+  background-color: #F0F0F0;
   border-top: 5px solid $themeColor;
-  border-bottom: 1px solid $grayLight;
+  border-bottom: 1px solid $macGray;
 
   .top-line{
     background-color: $themeColor;
@@ -12,6 +12,8 @@
   }
 
   > nav{
+
+
     margin: 0 auto;
     padding: 10px 0;
     width: $topWidth;

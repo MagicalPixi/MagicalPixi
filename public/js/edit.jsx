@@ -6,7 +6,7 @@ let React = require('react');
 
 let Navbar = require('../componentsLayout/Navbar');
 
-let GameContainer = require('../componentsLayout/GameContainer');
+let GameContainer = require('../components/GameContainer');
 let ConsolePanel = require('../components/ConsolePanel');
 
 let GameView = require('../components/GameView');
@@ -23,7 +23,7 @@ class Edit extends React.Component {
       <div>
         <Navbar mode="left"/>
 
-        <FixedBox top="60">
+        <FixedBox top="66">
           <FlexBox childrenWidth={[undefined,600]}>
             <GameContainer>
               <GameView />

@@ -6,7 +6,7 @@ let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
 
-let GameView = require('../../components/GameView');
+let GameView = require('../GameView/index');
 
 class GameContainer extends React.Component {
 
@@ -14,8 +14,6 @@ class GameContainer extends React.Component {
     super(props);
 
   }
-
-
 
   render(){
     return (
