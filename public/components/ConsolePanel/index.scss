@@ -7,7 +7,7 @@
   width: 600px;
 
   $headerHeight:40px;
-  header{
+  > header{
     background-color: #ffffff;
     height: $headerHeight;
 
@@ -57,5 +57,9 @@
         @include active;
       }
     }
+  }
+
+  .contents{
+    padding: $padding4 0 $padding4 $padding4;
   }
 }

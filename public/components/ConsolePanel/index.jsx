@@ -7,14 +7,36 @@ let _ = require('lodash');
 
 let headerStates = ['material','action','music'];
 
+let FloatItems = require('../FloatItems');
+
+let API = require('../../js/API');
+
+let ajax = require('../../libs/ajax');
+
 class ConsolePanel extends React.Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      headerState:'material' //action,music
+      headerState:'material', //action,music
+      list:[]
     }
+  }
+
+  componentDidMount(){
+    ajax(API.materialsList).get().then((r)=>{
+
+      log('r,',r);
+
+      this.setState({
+        list:r.result.map(function (obj) {
+          return Object.assign(obj,{
+            thumbnail:obj.resourceUrl
+          })
+        })
+      })
+    });
   }
 
   changeHeader(headerState){
@@ -23,8 +45,11 @@ class ConsolePanel extends React.Component {
     })
   }
 
+
   render(){
     let {headerState} = this.state;
+
+    let items = this.state.list;
 
     return (
       <div id="consolePanel">
@@ -36,7 +61,10 @@ class ConsolePanel extends React.Component {
           </ul>
         </header>
         <div className="contents">
-
+          <FloatItems
+            title="精灵"
+            data={items}
+          />
         </div>
       </div>
     )
