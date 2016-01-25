@@ -1,7 +1,8 @@
 @import "../../styles/core/variables.scss";
 
 #gameView{
-  background-color: $bgGray;
+  //background-color: $bgGray;
+  background-color: lighten(blue,30%);
   margin: auto;
   width: 320px;
   height: 502px;

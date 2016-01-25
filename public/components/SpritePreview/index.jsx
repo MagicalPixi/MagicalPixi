@@ -12,10 +12,13 @@ let FileUpload = require('../../componentFunctional/FileUpload');
 let SettingList = require('./SettingList');
 let SaveProperties = require('../../componentFunctional/SaveProperties');
 
-let setConfig = require('../../common/setConfig');
-let renderer = require('../../common/getRenderer');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
+let setConfig = require('../../common/setConfig');
+
+let appendPixiContainer = require('../../common/appendPixiContainer');
+let loadResource = require('../../common/loadResource');
+
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
 
 
 let getSpriteTpeByUrl  = (url)=>{
@@ -56,11 +59,7 @@ class SpritePreview extends React.Component {
   componentDidMount(){
     let previewContainer = this.refs.previewContainer;
 
-    previewContainer.appendChild(renderer.view);
-
-    this.stage = new PIXI.Container();
-
-    this.runRender(this.stage);
+    this.stage = appendPixiContainer(previewContainer);
 
     if(this.resourceUrl){
       this.loadSprite();
@@ -68,50 +67,29 @@ class SpritePreview extends React.Component {
   }
 
   componentWillUnmount(){
-    cancelAnimationFrame(this.rafFlag);
+    this.stage.clearRender();
   }
-
-  runRender(stage){
-
-    let animate = () => {
-
-      stage.children.forEach((function(child){
-        if(child.render){
-          child.render();
-        }
-      }));
-      // render the stage container
-      renderer.render(stage);
-
-      this.rafFlag = requestAnimationFrame(animate);
-    };
-    animate();
-  };
 
   loadSprite(){
     let { spriteDisplayObjProperties} = this.state;
     let resourceUrl = this.resourceUrl;
 
-    let resourceKey = 'img' + Date.now();
-
     let spriteType = getSpriteTpeByUrl(resourceUrl);
 
-    PIXI.loader.add(resourceKey,resourceUrl)
-      .load((loader,resources)=>{
+    loadResource(resourceUrl,  (resource) => {
+      //同时兼容到im和mc
+      spriteDisplayObjProperties.textures = resource.texture || resource.textures;
 
-        //同时兼容到im和mc
-        spriteDisplayObjProperties.textures = resources[resourceKey].texture || resources[resourceKey].textures;
+      this.spriteDisplayObj = spriteFnMap(spriteType)(spriteDisplayObjProperties);
 
-        this.spriteDisplayObj = spriteFnMap(spriteType)(spriteDisplayObjProperties);
+      this.stage.removeChildren();
+      this.stage.addChild(this.spriteDisplayObj);
 
-        this.stage.removeChildren();
-        this.stage.addChild(this.spriteDisplayObj);
-
-        this.setState({
-          spriteType,
-          init:false
-        })
-      });
+      this.setState({
+        spriteType,
+        init:false
+      })
+    });
   }
 
   onUploadCompleted(uploadResult){
