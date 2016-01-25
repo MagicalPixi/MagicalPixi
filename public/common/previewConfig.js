@@ -3,7 +3,7 @@
  *
  * 常量，设置集合
  */
-let sprite = require('../../common/sprite');
+let sprite = require('./sprite');
 let _ = require('lodash');
 
 const SPRITE_MC = 'movieClip';
