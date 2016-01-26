@@ -55,7 +55,7 @@ class ConsolePanel extends React.Component {
       <div id="consolePanel">
         <header>
           <ul data-state={headerState} className="operations " >
-            <li onClick={this.changeHeader.bind(this,'material') } >素材</li>
+            <li onClick={this.changeHeader.bind(this,'material') } >精灵</li>
             <li onClick={this.changeHeader.bind(this,'action') } >动作</li>
             <li onClick={this.changeHeader.bind(this,'music') } >音乐</li>
           </ul>

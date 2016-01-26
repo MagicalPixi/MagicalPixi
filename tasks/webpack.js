@@ -22,6 +22,7 @@ module.exports = function (gulp) {
     });
 
   });
+  //@Deprecated
   gulp.task('webpackDevServer', function(callback) {
     // Start a webpack-dev-server
     exec('webpack-dev-server --hot --inline --display-error-details --port '+webpackConfig.webpackDevPort,function(){

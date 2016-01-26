@@ -5,18 +5,6 @@ var webpack = require('webpack');
 
 var webpackDevPort = 7301;
 
-var NodeENV = process.env.NODE_ENV;
-
-var plugins = [];
-
-var definePlugin = new webpack.DefinePlugin({
-  env:{
-    isDevelopment:true
-  }
-});
-
-plugins.push(definePlugin);
-
 module.exports = {
   webpackDevPort: webpackDevPort,
   resolve: {
@@ -27,12 +15,18 @@ module.exports = {
     PIXI:'PIXI',
   },
   entry: {
-    index: path.resolve(__dirname, './public/js/main.jsx'),
-    edit: path.resolve(__dirname, './public/js/edit.jsx'),
+    index: [
+      'webpack-hot-middleware/client',
+      path.resolve(__dirname, './public/js/main.jsx')
+    ],
+    edit: [
+      'webpack-hot-middleware/client',
+      path.resolve(__dirname, './public/js/edit.jsx'),
+    ]
   },
   output: {
     path: path.resolve(__dirname, './public/dist/'),
-    publicPath: "http://localhost:" + webpackDevPort + "/public/dist",
+    publicPath: "/dist/",
     filename: '[name].js'
   },
   module: {
@@ -52,11 +46,18 @@ module.exports = {
         loaders:['style','css']
       },{
         test:/\.ttf|otf$/,
-        loaders:['file?name=/fonts//[name].[ext]']
+        loaders:['file?name=[name].[ext]']
       }
     ]
   },
-  plugins:plugins,
+  plugins:[
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      env:{
+        isDevelopment:true
+      }
+    })
+  ],
   devtool: 'source-map'
 };
 

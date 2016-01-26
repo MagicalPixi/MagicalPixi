@@ -23,9 +23,5 @@
 <script src="/bower_components/pixi.js/bin/pixi.min.js"></script>
 <% } %>
 
-<% if(env==='product'){%>
-  <script src="/dist/index.js"></script>
-<% }else{ %>
-  <script src="http://localhost:<%= webpackDevPort %>/public/dist/index.js"></script>
-<% } %>
+<script src="/dist/index.js"></script>
 </html>
