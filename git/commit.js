@@ -38,7 +38,4 @@ var commit = function(dir) {
       console.log("New Commit: ", commitId);
     });
 }
-
-commit('./')
-
 module.expors = commit
