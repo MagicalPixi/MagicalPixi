@@ -8,6 +8,8 @@ let _ = require('lodash');
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
 
+let materialsPublish = require('../../js/data/materialsPublish');
+
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
 
 class GameView extends React.Component {
@@ -34,13 +36,15 @@ class GameView extends React.Component {
 
     let properties = JSON.parse(materialOne.properties);
 
+    publish('materialsList',materialOne);
+
     loadResource(materialOne.resourceUrl,(resource)=>{
 
       properties.textures = resource.texture || resource.textures;
 
-      let spriteDisplay = spriteFnMap(materialOne.type)(properties);
+      let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
 
-      this.stage.addChild(spriteDisplay);
+      this.stage.addChild(spriteDisplayObj);
     });
   }
 

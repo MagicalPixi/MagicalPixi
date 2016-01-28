@@ -33,8 +33,10 @@ module.exports = {
     loaders: [
       {
         test:/\.jsx|\.js$/,
-        exclude: /node_modules|bower_components/,
-        loader:'babel'
+        loader:'babel',
+        query:{
+          compact:false
+        }
       },
       {
         test:/\.scss$/,

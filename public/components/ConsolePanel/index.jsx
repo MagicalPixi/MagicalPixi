@@ -45,7 +45,6 @@ class ConsolePanel extends React.Component {
     })
   }
 
-
   render(){
     let {headerState} = this.state;
 

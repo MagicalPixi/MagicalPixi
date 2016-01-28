@@ -15,6 +15,8 @@ let AsideBoard = require('../componentsLayout/AsideBoard');
 
 let routerList = require('./router');
 
+
+
 class Main extends React.Component {
 
   render(){
@@ -35,3 +37,5 @@ ReactDOM.render(
   React.createElement(Main),
   document.querySelector('#topContainer')
 );
+
+

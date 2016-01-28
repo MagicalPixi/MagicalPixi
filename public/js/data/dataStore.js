@@ -1,12 +1,11 @@
 /**
- * Created by zyg on 16/1/26.
+ * Created by zyg on 16/1/28.
  */
-let PubSub = require('pubsub-js');
 
+let {storeConfigure} = requrie('re-pubsub');
 
-module.exports = function createDataStore() {
+let store = storeConfigure({
 
-  let store = {};
+});
 
-
-};
+module.exports = store;
