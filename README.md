@@ -14,7 +14,8 @@ npm start
   - Stage新建-切换
 
 
-##Has been add GitTool 
+##Has been add GitTool
+
 ###Thanks for [nodegit](http://www.nodegit.org/)
 ####Done
 
@@ -27,3 +28,10 @@ npm start
 - Make a real tool module for easy using
 - so on 
 
+####Notice
+
+- For the Error `Cannot find module '../build/Debug/nodegit'`
+
+it's Maybe a error for missing `openssl`
+
+So try `brew install openssl` && `brew link openssl --force`

@@ -24,7 +24,7 @@
     "lodash": "^3.10.1",
     "mongodb": "^2.1.4",
     "morgan": "~1.5.3",
-    "nodegit": "^0.8.0",
+    "nodegit": "^0.9.0",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
