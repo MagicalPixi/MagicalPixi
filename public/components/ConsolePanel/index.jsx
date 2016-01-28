@@ -27,8 +27,6 @@ class ConsolePanel extends React.Component {
   componentDidMount(){
     ajax(API.materialsList).get().then((r)=>{
 
-      log('r,',r);
-
       this.setState({
         list:r.result.map(function (obj) {
           return Object.assign(obj,{

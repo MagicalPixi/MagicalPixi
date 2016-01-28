@@ -2,7 +2,7 @@
  * Created by zyg on 16/1/28.
  */
 
-let {storeConfigure} = requrie('re-pubsub');
+let {subscribe,storeConfigure} = require('re-pubsub');
 
 let store = storeConfigure({
 

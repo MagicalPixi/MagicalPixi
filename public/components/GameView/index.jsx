@@ -12,11 +12,15 @@ let materialsPublish = require('../../js/data/materialsPublish');
 
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
 
+let dataStore = require('../../js/data/dataStore');
+
+
 class GameView extends React.Component {
 
   constructor(props){
     super(props);
 
+    this.sprites = [];
   }
 
   componentDidMount(){
@@ -29,20 +33,25 @@ class GameView extends React.Component {
     this.stage.clearRender();
   }
 
+  addSpriteToData(spriteDisplayObj){
+
+    this.sprites.push(spriteDisplayObj);
+
+    materialsPublish(this.sprites);
+  }
+
   addSprite(e){
     let materialOne = JSON.parse(e.nativeEvent.dataTransfer.getData('text/plain'));
 
-    log('parse:',materialOne);
-
     let properties = JSON.parse(materialOne.properties);
-
-    publish('materialsList',materialOne);
 
     loadResource(materialOne.resourceUrl,(resource)=>{
 
       properties.textures = resource.texture || resource.textures;
 
       let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
+
+      this.addSpriteToData(spriteDisplayObj);
 
       this.stage.addChild(spriteDisplayObj);
     });
