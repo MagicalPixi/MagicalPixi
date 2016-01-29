@@ -33,7 +33,6 @@
     "react-router": "^1.0.3",
     "react-router-redux": "^2.1.0",
     "redux": "^3.0.5",
-    "redux-react-router": "^1.0.0-beta3",
     "redux-thunk": "^1.0.3",
     "serve-favicon": "~2.2.1"
   },

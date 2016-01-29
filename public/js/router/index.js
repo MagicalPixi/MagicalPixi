@@ -3,6 +3,7 @@ import ReactRouter,{Router,Route,browserHistory} from 'react-router'
 import * as _ from 'lodash'
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
@@ -26,10 +27,6 @@ let routerList = _.filter(routersLoad.keys(),(key)=>{
   )
 });
 
-
-
-
-
 let history  = createHistory();
 
 let reducer = combineReducers(Object.assign({}, reducers, {
@@ -39,15 +36,15 @@ let reducer = combineReducers(Object.assign({}, reducers, {
 // Sync dispatched route actions to the history
 let reduxRouterMiddleware = syncHistory(history);
 
-let createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStore)
+let createStoreWithMiddleware = applyMiddleware(
+  thunk,
+  reduxRouterMiddleware
+)(createStore)
 
 let store = createStoreWithMiddleware(reducer);
 
 // Required for replaying actions from devtools to work
 reduxRouterMiddleware.listenForReplays(store)
-
-
-
 
 module.exports = (
   <Provider store={store} >
