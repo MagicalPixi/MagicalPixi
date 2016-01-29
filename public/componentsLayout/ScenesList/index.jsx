@@ -28,7 +28,9 @@ class ScenesList extends React.Component {
           场景列表
           </h3>
 
-          <button onClick={this.newAdd.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建场景</button>
+          <a href="edit" >
+            <button onClick={this.newAdd.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建场景</button>
+          </a>
 
         </header>
 

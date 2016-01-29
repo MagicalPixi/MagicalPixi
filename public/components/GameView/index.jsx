@@ -8,12 +8,7 @@ let _ = require('lodash');
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
 
-let materialsPublish = require('../../js/data/materialsPublish');
-
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
-
-let dataStore = require('../../js/data/dataStore');
-
 
 class GameView extends React.Component {
 
@@ -37,7 +32,6 @@ class GameView extends React.Component {
 
     this.sprites.push(spriteDisplayObj);
 
-    materialsPublish(this.sprites);
   }
 
   addSprite(e){

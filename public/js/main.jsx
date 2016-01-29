@@ -16,7 +16,6 @@ let AsideBoard = require('../componentsLayout/AsideBoard');
 let routerList = require('./router');
 
 
-
 class Main extends React.Component {
 
   render(){
