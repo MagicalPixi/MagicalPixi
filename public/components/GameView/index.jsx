@@ -16,6 +16,8 @@ class GameView extends React.Component {
     super(props);
 
     this.sprites = [];
+
+    log(props);
   }
 
   componentDidMount(){

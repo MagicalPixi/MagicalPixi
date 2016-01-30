@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
-import reducers from '../reducers'
+import {rootReducer} from '../reducers'
 import routerBuild from '../../common/routerBuild'
 //
 //log(ReactRouter);

@@ -14,11 +14,17 @@ let GameView = require('../components/GameView');
 let FixedBox = require('../componentsLayout/FixedBox');
 let FlexBox = require('../componentsLayout/FlexBox');
 
-window.R = React;
+import { createStore, combineReducers,bindActionCreators, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider,connect } from 'react-redux'
+
+import {editReducer} from './reducers'
 
 class Edit extends React.Component {
 
   render(){
+    log('EDIT:',this.props);
+
     return (
       <div>
         <Navbar mode="left"/>
@@ -37,7 +43,27 @@ class Edit extends React.Component {
   }
 }
 
+
+function mapStateToProps(state) {
+  return {
+    gamViewSprites: state.gamViewSprites
+  }
+}
+
+let configureCreateStore = applyMiddleware(
+  thunk
+)(createStore);
+
+let store = configureCreateStore(editReducer);
+
+let ConnectedApp = connect(
+  mapStateToProps
+)(Edit);
+
+
 ReactDOM.render(
-  React.createElement(Edit),
+  <Provider store={store} >
+    <ConnectedApp />
+  </Provider>,
   document.querySelector('#topContainer')
 );
