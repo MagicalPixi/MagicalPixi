@@ -36,7 +36,6 @@ class FlexBox extends React.Component {
       <div className="flex-box" >
       {React.Children.map(this.props.children,(child,i)=>{
         if(width[i]){
-          log(child.style)
           child = React.cloneElement(child,{
             ref:`${i}c`,
           })
