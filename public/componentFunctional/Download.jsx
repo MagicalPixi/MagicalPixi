@@ -13,7 +13,7 @@ class Download extends React.Component {
 
     let queryStr = buildQueryStr(query);
 
-    window.open(API.downloadMaterial+`?${queryStr}`);
+    window.open(API.buildDownloadZip+`?${queryStr}`);
   }
 
   download(){
