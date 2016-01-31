@@ -5,9 +5,7 @@ var _ = require('lodash');
 
 var filename = 'index.js';
 
-
 var configFilename = require('./spriteConfigScriptsTemplate').configFilename;
-
 
 var temp = function (spriteFilename) {
 
