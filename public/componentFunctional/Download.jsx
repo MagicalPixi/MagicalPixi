@@ -3,7 +3,7 @@ let T = React.PropTypes;
 
 let _ = require('lodash');
 
-let buildQueryStr = require('../public/common/buildQueryStr');
+let buildQueryStr = require('../common/buildQueryStr');
 
 let API = require('../js/API');
 
