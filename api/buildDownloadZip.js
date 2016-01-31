@@ -35,15 +35,20 @@ module.exports = function (req, res,next) {
 
   Sprite.findOne(condition).then(function (result) {
 
-    buildMaterialZipSource(result).then(function (sourceObj) {
-      archiverZip(result.name+'.zip',sourceObj).then(function (zipPath) {
+    if(result){
 
-        res.download(
-          zipPath,
-          result.name+'.zip'
-        )
+      buildMaterialZipSource(result).then(function (sourceObj) {
+        archiverZip(result.name+'.zip',sourceObj).then(function (zipPath) {
+
+          res.download(
+            zipPath,
+            result.name+'.zip'
+          )
+        })
       })
-    })
+    }else{
+      next(new Error('not found by condition:'+JSON.stringify(condition)))
+    }
   })
 
 
