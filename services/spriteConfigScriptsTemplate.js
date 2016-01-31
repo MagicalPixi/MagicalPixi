@@ -3,6 +3,8 @@
  */
 var _ = require('lodash');
 
+var pixiLibName = 'pixi-lib';
+
 var filename = 'sprite.js';
 
 var spriteTypeFn  = function (type) {
@@ -16,7 +18,7 @@ var spriteTypeFn  = function (type) {
 
 var temp = function (fnStr,propertiesStr) {
 
-  var tempScripts = "var sprite = require('pixi-sprite'); \n" +
+  var tempScripts = "var sprite = require('"+pixiLibName+"'); \n" +
     "var mySprite = " + fnStr + "({\n" +
     "maxFrame:null,\n" +
     "preFix:null, \n" +
