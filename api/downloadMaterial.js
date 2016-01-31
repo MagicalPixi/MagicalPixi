@@ -2,15 +2,17 @@
  * Created by zyg on 16/1/13.
  */
 var path = require('path');
+var ObjectId = require('mongodb').ObjectID;
 
 var MaterialZip = require('../models/MaterialZip');
 
 //GET0
 module.exports = function (req, res,next) {
   var name = req.query.name;
+  var id = req.query.id;
 
   MaterialZip.findOne({
-    name
+    _id:ObjectId(id)
   }).then(function (result) {
 
     if(result){
