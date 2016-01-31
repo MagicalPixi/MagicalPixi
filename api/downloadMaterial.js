@@ -12,7 +12,7 @@ module.exports = function (req, res,next) {
   var id = req.query.id;
 
   MaterialZip.findOne({
-    _id:ObjectId(id)
+    name
   }).then(function (result) {
 
     if(result){

@@ -3,7 +3,7 @@
  */
 
 module.exports = function (query) {
-  return Object.keys(query).map(query, function (k) {
+  return Object.keys(query).map(function (k) {
     let v = query[k];
     if(typeof v === 'object'){
       v = JSON.stringify(v)
@@ -11,5 +11,4 @@ module.exports = function (query) {
 
     return `${k}=${v}`;
   }).join('&');
-
 };
