@@ -44,6 +44,6 @@ function build(spriteType,properties) {
   };
 };
 
-build.configFilename = filename;
+build.filename = filename;
 
 module.exports = build
