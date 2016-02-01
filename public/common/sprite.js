@@ -18,7 +18,9 @@ module.exports = {
         //var mc = new PIXI.extras.MovieClip(textures);
         return setConfig(mc,config);
     },
-    getIm:function(config){        var textures = config.textures;
+    getIm:function(config){
+        
+        var textures = config.textures;
 
         delete config.textures;
 

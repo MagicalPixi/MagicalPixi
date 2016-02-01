@@ -9,9 +9,10 @@ var configFilename = require('./spriteConfigScriptsTemplate').filename;
 
 var temp = function (spriteFilename) {
 
-  var tempScripts = "var mySprite = require('./"+spriteFilename+"'); \n" +
-    "mySprite.render = function () { }\n" +
-    "module.exports = mySprite; \n";
+  var tempScripts = `var mySprite = require('./${spriteFilename}'); \n` +
+    `mySprite.render = function () {  \n` +
+    `} \n` +
+    `module.exports = mySprite; \n`;
 
   return tempScripts;
 };

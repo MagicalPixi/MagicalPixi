@@ -38,6 +38,7 @@ var build = function (materialObj) {
   var properties = JSON.parse(materialObj.properties);
 
   var scripts = cocnfigScriptsTemplate(
+    materialObj.name,
     materialObj.type,
     properties
   );
