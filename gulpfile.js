@@ -11,4 +11,15 @@ var taskList = fs.readdirSync(tasksPath).forEach(function(taskName){
         taskFn(gulp);
     });
 
+//默认任务
+gulp.task('development', function(){
+  //gulp.start('webpack');
+  gulp.start('webpackDevServer');
+  //gulp.start(['webpack','webpackDevServer']);
+});
+
+gulp.task('product',function(){
+  gulp.start('webpack');
+});
+
 module.exports = gulp;

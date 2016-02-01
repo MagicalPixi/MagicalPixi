@@ -1,0 +1,14 @@
+var <%= referenceName %> = require('<%=  pixiLibName %>');
+
+var mySprite = <%=  referenceName %>.<%=  fnStr %>({
+
+    textures:<%=  referenceName %>.getTextures('<%=  name %>'),
+
+    <% for(var k in properties){  %>
+
+        <%= k %> : <% if(isNaN(Number(properties[k]))){  %> "<%= properties[k] %>" <% }else{ %> <%= properties[k] %> <% } %>,
+
+    <% } %>
+});
+
+module.exports = mySprite;

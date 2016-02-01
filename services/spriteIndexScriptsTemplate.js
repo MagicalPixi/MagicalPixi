@@ -1,20 +1,27 @@
 /**
  * Created by zyg on 16/1/14.
  */
+var fs = require('fs');
+var ejs = require('ejs');
+var path = require('path');
+
 var _ = require('lodash');
 
 var filename = 'index.js';
 
 var configFilename = require('./spriteConfigScriptsTemplate').filename;
 
+var tempEjsPath = path.resolve(__dirname,'./files/tempIndexScript.ejs');
+
+var tempIndex = ejs.compile(fs.readFileSync(tempEjsPath).toString());
+
 var temp = function (spriteFilename) {
 
-  var tempScripts = `var mySprite = require('./${spriteFilename}'); \n` +
-    `mySprite.render = function () {  \n` +
-    `} \n` +
-    `module.exports = mySprite; \n`;
+  var tempIndexStr = tempIndex({
+    spriteFilename
+  })
 
-  return tempScripts;
+  return tempIndexStr;
 };
 
 
