@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 var _  = require('lodash');
 
-var archiver = require('archiver')('zip');
+var archiverType = require('archiver');
 
 var downloadDir = path.resolve(__dirname,'../public/download');
 
@@ -25,6 +25,8 @@ fs.exists(downloadDir, function (isExists) {
 module.exports = function (targetZip,source) {
   var outputPath = path.resolve(downloadDir,targetZip);
   var output = fs.createWriteStream(outputPath);
+
+  var archiver = archiverType('zip');
 
   return new Promise(function (resolve) {
 
