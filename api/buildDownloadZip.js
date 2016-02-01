@@ -40,6 +40,8 @@ module.exports = function (req, res,next) {
       buildMaterialZipSource(result).then(function (sourceObj) {
         archiverZip(result.name+'.zip',sourceObj).then(function (zipPath) {
 
+          console.log('archiveZip done:',zipPath);
+
           res.download(
             zipPath,
             result.name+'.zip'
