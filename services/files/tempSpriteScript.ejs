@@ -6,7 +6,7 @@ var mySprite = <%=  referenceName %>.<%=  fnStr %>({
 
     <% for(var k in properties){  %>
 
-        <% if(properties[k] !== undefined || properties[k] !== null){ %>
+        <% if(properties[k] || properties[k] === 0){ %>
 
         "<%= k %>" : <% if(isNaN(Number(properties[k]))){  %> "<%= properties[k] %>" <% }else{ %> <%= properties[k] %> <% } %>,
 
