@@ -57,7 +57,11 @@ let settingListConfigMap = ((spriteType)=> {
     }, {
       name: 'loop',
       key: 'loop',
-      describe: 'loop'
+      checkbox: {
+        'true': true,
+        'false': false,
+        'default':true
+      }
     },{
       name: 'play and Stop',
       checkbox: {

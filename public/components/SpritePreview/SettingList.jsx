@@ -24,12 +24,14 @@ class SettingList extends React.Component {
     console.log(checkBox,checkBox[checked],checked);
 
     this.props.changeSetting({
-      [checkBox[checked]]:null
+      [checkBox[checked]]:checked
     });
   }
 
 
   inputBuild(settingOne,i){
+    let checked = false;
+
     let {name,key,checkbox,describe,value} = settingOne;
 
     let refKey = 'setting'+i;
@@ -38,12 +40,13 @@ class SettingList extends React.Component {
     let onChange = this.setting.bind(this,refKey,key);
 
     if(checkbox){
+      checked = checkbox.default;
       inputType = 'checkbox';
       onChange = this.checkboxSetting.bind(this,refKey,checkbox);
     }
 
     return (
-      <input ref={refKey} defaultValue={value} onChange={onChange}
+      <input ref={refKey} checked={checked} defaultValue={value} onChange={onChange}
         type={inputType} placeholder={describe} />
     )
   }
