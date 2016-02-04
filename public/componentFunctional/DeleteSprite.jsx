@@ -10,7 +10,11 @@ class DeleteSprite extends React.Component {
 
 
   deleteSprite(){
-    log(this.props.data);
+
+    if(!confirm('确认删除')){
+      return;
+    }
+
     ajax(API.deleteSprite).get(this.props.data).then(function (r) {
       console.log(r);
       setTimeout(function () {
