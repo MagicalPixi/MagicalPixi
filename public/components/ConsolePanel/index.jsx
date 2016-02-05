@@ -30,7 +30,7 @@ class ConsolePanel extends React.Component {
       this.setState({
         list:r.result.map(function (obj) {
           return Object.assign(obj,{
-            thumbnail:obj.resourceUrl
+            thumbnail:obj.resourceUrl.replace('json','png')
           })
         })
       })
