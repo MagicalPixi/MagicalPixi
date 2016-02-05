@@ -11,7 +11,7 @@
     border: none;
   }
 
-  > nav{
+  nav{
 
 
     margin: 0 auto;
@@ -29,6 +29,8 @@
       margin-left: $margin2;
       height: 40px;
       line-height: 40px;
+
+      color: #000;
 
       vertical-align: 10px;
       font-size: 34px;

@@ -25,12 +25,14 @@ class Navbar extends React.Component {
 
     return (
       <header id="mpNavbar">
-        <nav style={style} >
-          <img src="/images/mp_logo.png" height="100%" />
-          <h1>
-            MagicalPixi
-          </h1>
-        </nav>
+        <a href="/index/index#scene">
+          <nav style={style} >
+            <img src="/images/mp_logo.png" height="100%" />
+            <h1>
+              MagicalPixi
+            </h1>
+          </nav>
+        </a>
       </header>
     )
   }
