@@ -2,6 +2,7 @@ require('./index.scss');
 require("../../styles/wedget/button.css");
 
 let PIXI = require('pixi');
+let pixiLib = require('pixi-lib');
 let React = require('react');
 
 let utils = require('../../common/utils');
@@ -11,9 +12,6 @@ let Popup = require('../Popup');
 let FileUpload = require('../../componentFunctional/FileUpload');
 let SettingList = require('./SettingList');
 let SaveProperties = require('../../componentFunctional/SaveProperties');
-
-
-let setConfig = require('../../common/setConfig');
 
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
@@ -120,7 +118,7 @@ class SpritePreview extends React.Component {
     newProperties = this.fixProperties(properties,newProperties);
 
     if(this.spriteDisplayObj){
-      setConfig(this.spriteDisplayObj,newProperties);
+      pixiLib.setConfig(this.spriteDisplayObj,newProperties);
     }
 
     this.setState({
