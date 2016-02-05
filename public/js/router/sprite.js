@@ -23,8 +23,6 @@ class Sprite extends React.Component {
 
     ajax(API.materialsList).get().then((r)=>{
 
-      log('r:',r);
-
       this.setState({
         materialsList: r.result
       })

@@ -7,18 +7,14 @@ let React = require('react');
 let Navbar = require('../componentsLayout/Navbar');
 
 let GameContainer = require('../components/GameContainer');
-let ConsolePanel = require('../components/ConsolePanel');
 
 let GameView = require('../components/GameView');
 
 let FixedBox = require('../componentsLayout/FixedBox');
 let FlexBox = require('../componentsLayout/FlexBox');
 
-import { createStore, combineReducers,bindActionCreators, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { Provider,connect } from 'react-redux'
+let routerList = require('./routerEdit');
 
-import {editReducer} from './reducers'
 
 class Edit extends React.Component {
 
@@ -30,12 +26,13 @@ class Edit extends React.Component {
         <Navbar mode="left"/>
 
         <FixedBox top="66">
+
           <FlexBox childrenWidth={[undefined,600]}>
             <GameContainer>
               <GameView />
             </GameContainer>
 
-            <ConsolePanel />
+            {routerList}
           </FlexBox>
         </FixedBox>
       </div>
@@ -44,26 +41,7 @@ class Edit extends React.Component {
 }
 
 
-function mapStateToProps(state) {
-  return {
-    gamViewSprites: state.gamViewSprites
-  }
-}
-
-let configureCreateStore = applyMiddleware(
-  thunk
-)(createStore);
-
-let store = configureCreateStore(editReducer);
-
-let ConnectedApp = connect(
-  mapStateToProps
-)(Edit);
-
-
 ReactDOM.render(
-  <Provider store={store} >
-    <ConnectedApp />
-  </Provider>,
+  <Edit></Edit>,
   document.querySelector('#topContainer')
 );

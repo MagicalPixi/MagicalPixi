@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
-import {rootReducer} from '../reducers'
+import {editReducer} from '../reducers'
 import routerBuild from '../../common/routerBuild'
 //
 //log(ReactRouter);
@@ -19,6 +19,7 @@ let routersLoad = require.context('./',false,/\.js|\.jsx$/);
 let routerList = _.filter(routersLoad.keys(),(key)=>{
   return !/index\.js$/.test(key);
 }).map((key,i)=>{
+
   return {
     path:key.replace('./','').replace(/\.js|\.jsx$/,''),
     component:routersLoad(key)
@@ -60,4 +61,4 @@ let routerList = _.filter(routersLoad.keys(),(key)=>{
 
 //let RouterElement = routerBuild(routerList,reducers);
 
-module.exports = routerBuild(routerList,rootReducer);
+module.exports = routerBuild(routerList,editReducer);
