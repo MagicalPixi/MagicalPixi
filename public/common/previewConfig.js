@@ -3,7 +3,7 @@
  *
  * 常量，设置集合
  */
-let sprite = require('./sprite');
+let pixiLib = require('pixi-lib');
 let _ = require('lodash');
 
 const SPRITE_MC = 'movieClip';
@@ -104,8 +104,8 @@ let settingListConfigMap = ((spriteType)=> {
 let spriteFnMap = (spriteType)=> {
 
   let config = {
-    [SPRITE_IM]: sprite.getIm,
-    [SPRITE_MC]: sprite.getMc
+    [SPRITE_IM]: pixiLib.getIm,
+    [SPRITE_MC]: pixiLib.getMc
   };
 
   if (!spriteType) {
