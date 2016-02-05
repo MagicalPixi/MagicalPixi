@@ -29,7 +29,8 @@ class ScenesList extends React.Component {
           </h3>
 
           <a href="edit" >
-            <button onClick={this.newAdd.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建场景</button>
+            <button onClick={this.newAdd.bind(this)}
+              className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建场景</button>
           </a>
 
         </header>
@@ -45,7 +46,9 @@ class ScenesList extends React.Component {
                   {sprite.name}
                 </span>
 
-                <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
+                <a className="operation"
+                  onClick={this.edit.bind(this,_id,resourceUrl,type,properties)}
+                  href="/index/edit">编辑</a>
 
               </li>
             )
@@ -56,7 +59,7 @@ class ScenesList extends React.Component {
             1
             </span>
 
-            <a className="operation" href="javascript:void 0">编辑</a>
+            <a className="operation" href="/index/edit" >编辑</a>
 
           </li>
         </ItemList>
