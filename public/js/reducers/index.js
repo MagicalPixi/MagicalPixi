@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
+import example from './example'
 import materials from './materials'
 import gameViewSprites from './gameViewSprites'
 
 export const rootReducer = combineReducers({
-  todos,
+  example,
   materials,
 })
 
