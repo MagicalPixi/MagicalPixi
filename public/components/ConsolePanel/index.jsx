@@ -5,13 +5,7 @@ let T = React.PropTypes;
 let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
-let headerStates = ['material','action','music'];
-
 let FloatItems = require('../FloatItems');
-
-let API = require('../../js/API');
-
-let ajax = require('../../libs/ajax');
 
 class ConsolePanel extends React.Component {
 
@@ -19,9 +13,10 @@ class ConsolePanel extends React.Component {
     super(props);
 
     this.state = {
-      headerState:'material', //action,music
       list:[]
     }
+
+    log('Console Panel:',props);
   }
 
   componentDidMount(){
@@ -38,20 +33,18 @@ class ConsolePanel extends React.Component {
   }
 
   changeHeader(headerState){
-    this.setState({
-      headerState
-    })
+    this.props.actions.switchTab(headerState);
   }
 
   render(){
-    let {headerState} = this.state;
+    let {consoleTab} = this.props;
 
     let items = this.state.list;
 
     return (
       <div id="consolePanel">
         <header>
-          <ul data-state={headerState} className="operations " >
+          <ul data-state={consoleTab} className="operations " >
             <li onClick={this.changeHeader.bind(this,'material') } >精灵</li>
             <li onClick={this.changeHeader.bind(this,'action') } >动作</li>
             <li onClick={this.changeHeader.bind(this,'music') } >音乐</li>

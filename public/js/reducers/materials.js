@@ -3,7 +3,6 @@
  */
 import {} from '../constants/MaterialTypes.js'
 
-
 export default function materials(state,action) {
 
   return state;

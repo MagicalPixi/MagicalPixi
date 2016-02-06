@@ -1,14 +1,19 @@
 import { combineReducers } from 'redux'
 import example from './example'
 import materials from './materials'
-import gameViewSprites from './gameViewSprites'
+import viewData from './viewData'
+import consoleTab from './consoleTab'
+
+export const editReducers = {
+  viewData,
+  consoleTab
+};
 
 export const rootReducer = combineReducers({
   example,
   materials,
 })
 
-export const editReducer = combineReducers({
-  gameViewSprites
-})
+export const editReducer = combineReducers(editReducers);
+
 

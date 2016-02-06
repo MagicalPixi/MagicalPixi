@@ -39,7 +39,6 @@ class FlexBox extends React.Component {
           child = React.cloneElement(child,{
             ref:`${i}c`,
           })
-          log(child);
         }
         return child;
       })}
