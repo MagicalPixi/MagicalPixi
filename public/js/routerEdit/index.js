@@ -9,7 +9,7 @@ import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
 import {editReducer} from '../reducers'
-import routerBuild from '../../common/routerBuild'
+import {routerBuild} from '../../common/routerBuild'
 //
 //log(ReactRouter);
 //log(ReactRouter.browserHistory,browserHistory);
@@ -61,4 +61,7 @@ let routerList = _.filter(routersLoad.keys(),(key)=>{
 
 //let RouterElement = routerBuild(routerList,reducers);
 
-module.exports = routerBuild(routerList,editReducer);
+export function createRouterList(store){
+
+  return routerBuild(routerList,store);
+}

@@ -8,27 +8,51 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
+export function createMyStore(reducers,{withRouter,initialState}){
+  let reduxRouterMiddleware;
 
-export default function routerBuild(routerList,reducers){
+  let middlewares = [
+    thunk
+  ];
 
-  let history  = createHistory();
+  if(withRouter){
+    let history  = createHistory();
 
-  let reducer = combineReducers(Object.assign({}, reducers, {
-    routing: routeReducer
-  }));
+    reduxRouterMiddleware = syncHistory(history);
 
-  // Sync dispatched route actions to the history
-  let reduxRouterMiddleware = syncHistory(history);
+    reducers = combineReducers(Object.assign({}, reducers, {
+      routing: routeReducer
+    }));
 
-  let createStoreWithMiddleware = applyMiddleware(
-    thunk,
-    reduxRouterMiddleware
-  )(createStore);
+    middlewares.push(reduxRouterMiddleware);
+  }
 
-  let store = createStoreWithMiddleware(reducer);
+  let createStoreWithMiddleware = applyMiddleware
+    .apply(null, middlewares)(createStore);
 
-// Required for replaying actions from devtools to work
-  reduxRouterMiddleware.listenForReplays(store)
+  let store = createStoreWithMiddleware(reducers,initialState);
+
+  //if (module.hot) {
+  //  // Enable Webpack hot module replacement for reducers
+  //  module.hot.accept('../reducers', () => {
+  //    const nextReducer = require('../reducers/index')
+  //    store.replaceReducer(nextReducer)
+  //  })
+  //}
+
+  if(withRouter){
+    reduxRouterMiddleware.listenForReplays(store)
+  }
+
+  return store;
+}
+
+export function routerBuild(routerList,store){
+
+
+  //Required for replaying actions from devtools to work
+  //reduxRouterMiddleware.listenForReplays(store)
+
 
   return (
     <Provider store={store} >

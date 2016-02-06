@@ -16,8 +16,11 @@ let ConsolePanel = require('../../components/ConsolePanel');
 class App extends Component {
 
   render(){
+
+    let {consoleTab,actions} = this.props;
+
     return (
-      <ConsolePanel />
+      <ConsolePanel consoleTab={consoleTab} actions={actions} />
     )
   }
 }

@@ -3,23 +3,42 @@ require('../common/utils');
 
 let ReactDOM = require('react-dom');
 let React = require('react');
+let { bindActionCreators } = require('redux')
+
+let { Provider,connect } = require('react-redux')
 
 let Navbar = require('../componentsLayout/Navbar');
 
 let GameContainer = require('../components/GameContainer');
 
 let GameView = require('../components/GameView');
+let GameViewActions = require('./actions/gameView');
+
+let ConsolePanel = require('../components/ConsolePanel');
 
 let FixedBox = require('../componentsLayout/FixedBox');
 let FlexBox = require('../componentsLayout/FlexBox');
 
-let routerList = require('./routerEdit');
+let {createMyStore} = require('../common/routerBuild');
+let {editReducers} = require('./reducers');
 
+let {createRouterList} = require('./routerEdit');
+
+let editStore = createMyStore(editReducers,{
+  withRouter:true,
+  initialState:{
+    viewData:[],
+    consoleTab:'material'
+  }
+});
+
+let routerList = createRouterList(editStore);
 
 class Edit extends React.Component {
-
   render(){
     log('EDIT:',this.props);
+
+    let {viewData} = this.props;
 
     return (
       <div>
@@ -29,7 +48,7 @@ class Edit extends React.Component {
 
           <FlexBox childrenWidth={[undefined,600]}>
             <GameContainer>
-              <GameView />
+              <GameView data={viewData}/>
             </GameContainer>
 
             {routerList}
@@ -41,7 +60,26 @@ class Edit extends React.Component {
 }
 
 
+function mapStateToProps(state) {
+  return {
+    viewData: state.viewData,
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(GameViewActions, dispatch)
+  }
+}
+
+let ConnectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Edit);
+
 ReactDOM.render(
-  <Edit></Edit>,
+  <Provider store={editStore}>
+    <ConnectedApp />
+  </Provider>,
   document.querySelector('#topContainer')
 );
