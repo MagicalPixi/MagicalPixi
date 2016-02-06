@@ -26,7 +26,7 @@ class Sprite extends React.Component {
       log('r:',r);
 
       this.setState({
-        materialsList: r.result
+        materialsList: r.result.reverse()
       })
     })
   }
