@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux'
-import example from './example'
 import materials from './materials'
 import viewData from './viewData'
 import consoleTab from './consoleTab'
+import consoleData from './consoleData'
 
 export const editReducers = {
   viewData,
-  consoleTab
+  consoleTab,
+  consoleData
 };
 
 export const rootReducer = combineReducers({
-  example,
   materials,
 })
 

@@ -15,12 +15,16 @@ let ConsolePanel = require('../../components/ConsolePanel');
 
 class App extends Component {
 
+  componentDidMount(){
+    ConsoleActions.queryData();
+  }
+
   render(){
 
-    let {consoleTab,actions} = this.props;
+    let {consoleTab,consoleData,actions} = this.props;
 
     return (
-      <ConsolePanel consoleTab={consoleTab} actions={actions} />
+      <ConsolePanel consoleTab={consoleTab} consoleData={consoleData} actions={actions} />
     )
   }
 }

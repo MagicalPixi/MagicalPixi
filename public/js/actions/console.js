@@ -1,7 +1,10 @@
 /**
  * Created by zyg on 16/2/5.
  */
-import {SWITCH_TAB} from '../constants/consoleTypes'
+import {SWITCH_TAB,CONSOLE_DATA} from '../constants/consoleTypes'
+
+import * as API from '../API'
+import ajax from '../../libs/ajax'
 
 export function switchTab(switchTo){
   return {
@@ -10,9 +13,6 @@ export function switchTab(switchTo){
   }
 }
 
-let API = require('../js/API');
-
-let ajax = require('../../libs/ajax');
 
 export function queryData(tab){
 
@@ -25,7 +25,10 @@ export function queryData(tab){
           })
         })
 
-      dispatch(dataList);
+      dispatch({
+        type:CONSOLE_DATA,
+        dataList:dataList
+      });
     });
 
   }
