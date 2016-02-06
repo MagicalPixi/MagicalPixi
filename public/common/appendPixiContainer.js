@@ -28,6 +28,8 @@ module.exports = function (container) {
 
   stage.clearRender = function () {
     cancelAnimationFrame(raf);
+
+    renderer.view.remove();
   };
 
   return stage;

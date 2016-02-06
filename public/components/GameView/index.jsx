@@ -28,6 +28,7 @@ class GameView extends React.Component {
 
   componentWillUnmount(){
     this.stage.clearRender();
+
   }
 
   addSpriteToData(spriteDisplayObj){
@@ -59,7 +60,18 @@ class GameView extends React.Component {
 
   render(){
     return (
-      <div id="gameView" ref="gameView" onDragOver={this.dragOver.bind(this)} onDrop={this.addSprite.bind(this)} >
+      <div id="gameView" ref="gameView"
+        onDrop={this.addSprite.bind(this)}
+        onDragOver={this.dragOver.bind(this)} >
+
+        <div className="layouts-box">
+          <ul className="layouts">
+            <li>图层1</li>
+            <li>图层2</li>
+            <li>图层2</li>
+          </ul>
+          <button className="add-layout">+</button>
+        </div>
       </div>
     )
   }

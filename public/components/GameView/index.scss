@@ -1,12 +1,32 @@
 @import "../../styles/core/variables.scss";
 
+$viewWidth:320px;
+
 #gameView{
   //background-color: $bgGray;
   background-color: #fff;
   margin: auto;
   border: 1px solid #000000;
-  width: 320px;
+  width: $viewWidth;
   height: 502px;
 
+  position: relative;
 
+  .layouts-box {
+    background-color: gray;
+    width: 100px;
+    padding: 0 0 5px 5px;
+
+    position: absolute;
+    left: $viewWidth + 1px;
+    top: -1px;
+
+    .layouts{
+
+      > li{
+        padding: 5px;
+        padding-left: 0;
+      }
+    }
+  }
 }
