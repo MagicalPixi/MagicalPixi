@@ -1,17 +1,16 @@
 /**
  * Created by zyg on 16/1/29.
  */
-import * as types from '../constants/MaterialTypes'
+import {ADD_MATERIAL,DEL_MATERIAL } from '../constants/materialsTypes'
 
 export function addScene(){
   return {
-    type:types.Add_SCENE
+    type:ADD_MATERIAL
   }
 }
 
 export function editScene(){
   return {
-    type:types.EDIT_SCENE
-
+    type:DEL_MATERIAL
   }
 }
