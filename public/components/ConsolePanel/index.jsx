@@ -20,16 +20,9 @@ class ConsolePanel extends React.Component {
   }
 
   componentDidMount(){
-    ajax(API.materialsList).get().then((r)=>{
+    let {consoleTab} = this.props;
 
-      this.setState({
-        list:r.result.map(function (obj) {
-          return Object.assign(obj,{
-            thumbnail:obj.resourceUrl.replace('json','png')
-          })
-        })
-      })
-    });
+    this.props.actions.queryData(consoleTab);
   }
 
   changeHeader(headerState){
@@ -37,9 +30,9 @@ class ConsolePanel extends React.Component {
   }
 
   render(){
-    let {consoleTab} = this.props;
+    let {consoleTab,consoleData} = this.props;
 
-    let items = this.state.list;
+    log(this.props);
 
     return (
       <div id="consolePanel">
@@ -53,7 +46,7 @@ class ConsolePanel extends React.Component {
         <div className="contents">
           <FloatItems
             title="精灵"
-            data={items}
+            data={consoleData}
           />
         </div>
       </div>
