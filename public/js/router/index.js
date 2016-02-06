@@ -60,6 +60,9 @@ let routerList = _.filter(routersLoad.keys(),(key)=>{
 
 //let RouterElement = routerBuild(routerList,reducers);
 
-let myStore = createMyStore(rootReducer,true);
+let myStore = createMyStore(rootReducer,{
+  withRouter:true,
+
+});
 
 module.exports = routerBuild(routerList,myStore);
