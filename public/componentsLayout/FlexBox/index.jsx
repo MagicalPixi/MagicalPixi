@@ -20,9 +20,16 @@ class FlexBox extends React.Component {
     let {width} = this.state;
 
     _.map(Object.keys(this.refs),  (refName) => {
+
+      log(refName);
+      log(this.refs);
+
       let refI = parseInt(refName);
-      ReactDOM.findDOMNode(this.refs[refName])
-        .style.width = width[refI] + 'px';
+      let theDOM = ReactDOM.findDOMNode(this.refs[refName]);
+
+      if(theDOM){
+        theDOM.style.width = width[refI] + 'px';
+      }
     })
   }
 

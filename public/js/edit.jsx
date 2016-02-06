@@ -28,7 +28,8 @@ let editStore = createMyStore(editReducers,{
   withRouter:true,
   initialState:{
     viewData:[],
-    consoleTab:'material'
+    consoleTab:'material',
+    consoleData:[]
   }
 });
 

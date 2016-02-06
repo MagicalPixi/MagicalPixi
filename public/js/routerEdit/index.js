@@ -1,6 +1,8 @@
 import React from 'react'
-import ReactRouter,{Router,Route,browserHistory} from 'react-router'
+import ReactRouter,{Router,IndexRoute,Route,browserHistory} from 'react-router'
 import * as _ from 'lodash'
+
+//<IndexRoute component={DefaultComponent} />
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
@@ -10,25 +12,32 @@ import { syncHistory, routeReducer } from 'react-router-redux'
 
 import {editReducer} from '../reducers'
 import {routerBuild} from '../../common/routerBuild'
-//
+
+import defaultRouterComponent from './console'
+
 //log(ReactRouter);
 //log(ReactRouter.browserHistory,browserHistory);
 //
 let routersLoad = require.context('./',false,/\.js|\.jsx$/);
 
-let routerList = _.filter(routersLoad.keys(),(key)=>{
+let routerList = [
+  <IndexRoute component={defaultRouterComponent} />
+];
+
+routerList = routerList.concat(_.filter(routersLoad.keys(),(key)=>{
   return !/index\.js$/.test(key);
 }).map((key,i)=>{
-
   return {
     path:key.replace('./','').replace(/\.js|\.jsx$/,''),
     component:routersLoad(key)
   }
 }).map(({path,component},i)=>{
+  i += 1;
   return (
     <Route key={'route'+i} path={path} component={component} />
   )
-});
+}));
+
 //
 //let history  = createHistory();
 //

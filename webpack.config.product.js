@@ -7,6 +7,16 @@ var base = require('./webpack.config');
 
 base.output.publicPath = '';
 
+base.entry = {
+  index: [
+    path.resolve(__dirname, './public/js/main.jsx')
+  ],
+    edit: [
+    path.resolve(__dirname, './public/js/edit.jsx'),
+  ]
+},
+
+
 base.plugins = [
   new webpack.DefinePlugin({
     env: {
