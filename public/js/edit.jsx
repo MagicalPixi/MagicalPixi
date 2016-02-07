@@ -39,7 +39,7 @@ class Edit extends React.Component {
   render(){
     log('EDIT:',this.props);
 
-    let {viewData} = this.props;
+    let {viewData,actions} = this.props;
 
     return (
       <div>
@@ -49,7 +49,7 @@ class Edit extends React.Component {
 
           <FlexBox childrenWidth={[undefined,600]}>
             <GameContainer>
-              <GameView data={viewData}/>
+              <GameView actions={actions} data={viewData}/>
             </GameContainer>
 
             {routerList}

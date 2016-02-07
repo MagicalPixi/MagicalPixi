@@ -17,13 +17,23 @@ class GameView extends React.Component {
 
     this.sprites = [];
 
-    log(props);
+    this.state = {
+      currentLayoutIndex:0,
+      layouts:[
+        new PIXI.Container()
+      ]
+    };
+
+    log('GameView:',props);
   }
 
   componentDidMount(){
+    let {layouts} = this.state;
     let gameView = this.refs.gameView;
 
     this.stage = appendPixiContainer(gameView);
+
+    this.stage.addChild(layouts[0]);
   }
 
   componentWillUnmount(){
@@ -31,9 +41,7 @@ class GameView extends React.Component {
 
   }
 
-  addSpriteToData(spriteDisplayObj){
-
-    this.sprites.push(spriteDisplayObj);
+  addLayout(){
 
   }
 
@@ -42,15 +50,20 @@ class GameView extends React.Component {
 
     let properties = JSON.parse(materialOne.properties);
 
+    let {currentLayoutIndex,layouts} = this.state;
+
     loadResource(materialOne.resourceUrl,(resource)=>{
 
       properties.textures = resource.texture || resource.textures;
 
       let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
 
-      this.addSpriteToData(spriteDisplayObj);
+      this.props.actions.addSpriteToScene(
+        spriteDisplayObj,
+        currentLayoutIndex
+      );
 
-      this.stage.addChild(spriteDisplayObj);
+      layouts[currentLayoutIndex].addChild(spriteDisplayObj);
     });
   }
 
@@ -70,7 +83,7 @@ class GameView extends React.Component {
             <li>图层2</li>
             <li>图层2</li>
           </ul>
-          <button className="add-layout">+</button>
+          <button onclick={this.addLayout.bind(this)} className="add-layout">+</button>
         </div>
       </div>
     )
