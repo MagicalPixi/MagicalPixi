@@ -1,4 +1,5 @@
 require('./index.scss');
+require("../../styles/wedget/button.css");
 
 let PIXI = require('PIXI');
 let React = require('react');
@@ -8,6 +9,8 @@ let _ = require('lodash');
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
 
+let CascadeList = require('./CascadeList');
+
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
 
 class GameView extends React.Component {
@@ -15,12 +18,17 @@ class GameView extends React.Component {
   constructor(props){
     super(props);
 
-    this.sprites = [];
+    let initialLayout = new PIXI.Container();
+    initialLayout.name = '初始';
+    initialLayout.children = [{},{}];
+    let initialLayout2 = new PIXI.Container();
+    initialLayout2.name = '初始2';
 
     this.state = {
       currentLayoutIndex:0,
       layouts:[
-        new PIXI.Container()
+        initialLayout,
+        initialLayout2
       ]
     };
 
@@ -72,18 +80,19 @@ class GameView extends React.Component {
   }
 
   render(){
+    let { layouts } = this.state;
+
     return (
       <div id="gameView" ref="gameView"
         onDrop={this.addSprite.bind(this)}
         onDragOver={this.dragOver.bind(this)} >
 
         <div className="layouts-box">
-          <ul className="layouts">
-            <li>图层1</li>
-            <li>图层2</li>
-            <li>图层2</li>
-          </ul>
-          <button onclick={this.addLayout.bind(this)} className="add-layout">+</button>
+          <CascadeList data={layouts} />
+          <button onclick={this.addLayout.bind(this)}
+            className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
+            +
+          </button>
         </div>
       </div>
     )

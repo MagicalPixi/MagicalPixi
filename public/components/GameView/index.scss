@@ -2,31 +2,32 @@
 
 $viewWidth:320px;
 
+$layoutWidth:100px;
+
 #gameView{
   //background-color: $bgGray;
   background-color: #fff;
   margin: auto;
-  border: 1px solid #000000;
-  width: $viewWidth;
+  width: $viewWidth + $layoutWidth + $padding2;
   height: 502px;
 
   position: relative;
 
+  > canvas {
+    border: 1px solid #000000;
+  }
+
   .layouts-box {
-    background-color: gray;
-    width: 100px;
-    padding: 0 0 5px 5px;
+    width: $layoutWidth;
+    padding: 0 0 5px $padding2;
 
     position: absolute;
     left: $viewWidth + 1px;
     top: -1px;
 
-    .layouts{
 
-      > li{
-        padding: 5px;
-        padding-left: 0;
-      }
+    .add-layout{
+      width: 100%;
     }
   }
 }

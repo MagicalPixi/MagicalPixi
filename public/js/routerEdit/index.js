@@ -21,7 +21,7 @@ import defaultRouterComponent from './console'
 let routersLoad = require.context('./',false,/\.js|\.jsx$/);
 
 let routerList = [
-  <IndexRoute component={defaultRouterComponent} />
+  <IndexRoute key="route0" component={defaultRouterComponent} />
 ];
 
 routerList = routerList.concat(_.filter(routersLoad.keys(),(key)=>{

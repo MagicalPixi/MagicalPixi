@@ -1,0 +1,26 @@
+@import "../../styles/core/variables.scss";
+
+.cascade-list{
+
+  .layouts{
+
+    > li{
+      padding: 5px 5px 5px 0;
+
+      .layout-name{
+        border-bottom: 1px solid $gray;
+      }
+
+      .children {
+        padding-left: $padding2;
+      }
+    }
+    > li:last-child{
+      border: none;
+    }
+  }
+
+  .add-layout{
+    width: 100%;
+  }
+}
