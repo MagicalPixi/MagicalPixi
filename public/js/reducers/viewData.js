@@ -1,18 +1,29 @@
-import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE } from '../constants/gameViewTypes'
+import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,ADD_CONTAINER } from '../constants/gameViewTypes'
 
+import containersManager from '../../common/pixiContainersManager'
 
 let handler = {
-  [ADD_SPRITE]: function (state,action) {
+  [ADD_SPRITE](state,action) {
 
-    state = state.slice().push(action.spriteObj);
+    state = state.slice();
+
+    state[action.containerIndex].addChild(action.spriteObj);
 
     return state;
   },
 
-  [EDIT_SPRITE]: function (state,action) {
+  [EDIT_SPRITE] (state,action) {
 
 
     return state;
+  },
+  [ADD_CONTAINER] (state,action) {
+
+    let newState = containersManager(state.slice())
+      .containerAdd(action.container)
+      .getContainers();
+
+    return newState;
   }
 };
 

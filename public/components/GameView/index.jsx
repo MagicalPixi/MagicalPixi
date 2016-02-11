@@ -18,30 +18,19 @@ class GameView extends React.Component {
   constructor(props){
     super(props);
 
-    let initialLayout = new PIXI.Container();
-    initialLayout.name = '初始';
-    initialLayout.children = [{},{}];
-    let initialLayout2 = new PIXI.Container();
-    initialLayout2.name = '初始2';
-
     this.state = {
       currentLayoutIndex:0,
-      layouts:[
-        initialLayout,
-        initialLayout2
-      ]
     };
 
     log('GameView:',props);
   }
 
   componentDidMount(){
-    let {layouts} = this.state;
     let gameView = this.refs.gameView;
 
     this.stage = appendPixiContainer(gameView);
 
-    this.stage.addChild(layouts[0]);
+    this.refreshStage()
   }
 
   componentWillUnmount(){
@@ -49,7 +38,27 @@ class GameView extends React.Component {
 
   }
 
+  componentWillUpdate(){
+    this.refreshStage();
+  }
+
+  refreshStage(){
+
+    let {data} = this.props;
+
+    this.stage.removeChild();
+
+    data.forEach(container=>{
+      this.stage.addChild(container);
+    })
+  }
+
   addLayout(){
+
+    this.props.actions.addContainer();
+  }
+
+  removeLayout(){
 
   }
 
@@ -58,7 +67,8 @@ class GameView extends React.Component {
 
     let properties = JSON.parse(materialOne.properties);
 
-    let {currentLayoutIndex,layouts} = this.state;
+    let {currentLayoutIndex} = this.state;
+    let {data} = this.props;
 
     loadResource(materialOne.resourceUrl,(resource)=>{
 
@@ -71,7 +81,7 @@ class GameView extends React.Component {
         currentLayoutIndex
       );
 
-      layouts[currentLayoutIndex].addChild(spriteDisplayObj);
+      this.forceUpdate();
     });
   }
 
@@ -80,7 +90,7 @@ class GameView extends React.Component {
   }
 
   render(){
-    let { layouts } = this.state;
+    let { data } = this.props;
 
     return (
       <div id="gameView" ref="gameView"
@@ -88,8 +98,8 @@ class GameView extends React.Component {
         onDragOver={this.dragOver.bind(this)} >
 
         <div className="layouts-box">
-          <CascadeList data={layouts} />
-          <button onclick={this.addLayout.bind(this)}
+          <CascadeList data={data}  />
+          <button onClick={this.addLayout.bind(this)}
             className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
             +
           </button>

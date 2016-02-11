@@ -6,3 +6,5 @@ export const ADD_SPRITE = 'ADD_SPRITE';
 export const REMOVE_SPRITE = 'REMOVE_SPRITE';
 
 export const EDIT_SPRITE = 'EDIT_SPRITE';
+
+export const ADD_CONTAINER = 'ADD_CONTAINER';
