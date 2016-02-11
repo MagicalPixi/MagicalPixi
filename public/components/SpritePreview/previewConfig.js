@@ -51,10 +51,18 @@ let settingListConfigMap = ((spriteType)=> {
   let config = {
     [SPRITE_IM]: [],
     [SPRITE_MC]: [{
-      name: 'animateSpeed',
-      key: 'animateSpeed',
-      describe: 'animateSpeed'
+      name: 'animationSpeed',
+      key: 'animationSpeed',
+      describe: 'animationSpeed'
     }, {
+      name: 'loop',
+      key: 'loop',
+      checkbox: {
+        'true': true,
+        'false': false,
+        'default':true
+      }
+    },{
       name: 'play and Stop',
       checkbox: {
         true: 'play',

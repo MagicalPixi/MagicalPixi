@@ -8,6 +8,7 @@ var MaterialZip = require('../models/MaterialZip');
 //GET0
 module.exports = function (req, res,next) {
   var name = req.query.name;
+  var id = req.query.id;
 
   MaterialZip.findOne({
     name

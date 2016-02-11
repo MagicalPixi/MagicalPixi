@@ -4,7 +4,7 @@
 var path = require('path');
 var Sprite = require('../models/Sprite');
 
-var cocnfigScriptsTemplate = require('./spriteConfigScriptsTemplate');
+var configScriptsTemplate = require('./spriteConfigScriptsTemplate');
 var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
 
 var resourceObjBuild = function (resourceUrl) {
@@ -37,7 +37,8 @@ var build = function (materialObj) {
 
   var properties = JSON.parse(materialObj.properties);
 
-  var scripts = cocnfigScriptsTemplate(
+  var scripts = configScriptsTemplate(
+    materialObj.name,
     materialObj.type,
     properties
   );
@@ -47,7 +48,7 @@ var build = function (materialObj) {
   var resourceObj = resourceObjBuild(materialObj.resourceUrl);
 
   resourceObj = Object.assign(resourceObj,{
-    [cocnfigScriptsTemplate.filename]:new Buffer(scripts.text),
+    [configScriptsTemplate.filename]:new Buffer(scripts.text),
     [indexScriptsTemplate.filename]:new Buffer(indexScripts.text)
   });
 

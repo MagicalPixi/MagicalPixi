@@ -44,19 +44,20 @@ module.exports = function (req, res) {
 
 
   //@TODO 生成zip的逻辑，待优化
-  console.log('生成sourceObj');
-  //同时，生成一个zip包
-  buildMaterialZipSource(materialObj).then(function (sourceObj) {
-
-    archiverZip(name+'.zip',sourceObj).then(function (zipPath) {
-
-      //存储zip包和素材名字至数据库
-      MaterialZip.insertOne({
-        zipPath,
-        name
-      }).then(function (result) {
-        console.log('MaterialZip.insertOne:',result.result);
-      })
-    });
-  });
+  //@TODO 已经优化 =》下载时触发zip压缩
+  //console.log('生成sourceObj');
+  ////同时，生成一个zip包
+  //buildMaterialZipSource(materialObj).then(function (sourceObj) {
+  //
+  //  archiverZip(name+'.zip',sourceObj).then(function (zipPath) {
+  //
+  //    //存储zip包和素材名字至数据库
+  //    MaterialZip.insertOne({
+  //      zipPath,
+  //      name
+  //    }).then(function (result) {
+  //      console.log('MaterialZip.insertOne:',result.result);
+  //    })
+  //  });
+  //});
 };

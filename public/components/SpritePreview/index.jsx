@@ -37,6 +37,13 @@ class SpritePreview extends React.Component {
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
+      properties = _.map(properties, function (v, k) {
+        return {
+          [k]:isNaN(Number(v)) ? v : Number(v)
+        }
+      }).reduce(function (init, next) {
+        return Object.assign(init,next)
+      },{})
     }
 
     this.state = {

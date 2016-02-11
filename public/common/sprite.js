@@ -19,6 +19,7 @@ module.exports = {
         return setConfig(mc,config);
     },
     getIm:function(config){
+        
         var textures = config.textures;
 
         delete config.textures;
@@ -26,5 +27,6 @@ module.exports = {
         var sp = new PIXI.Sprite(textures);
 
         return setConfig(sp,config);
+
     }
 };

@@ -42,6 +42,11 @@ class MaterialsList extends React.Component {
 
             let {_id,name,resourceUrl,type,properties} = sprite;
 
+            let queryForm = {
+              name,
+              id:_id
+            };
+
             return (
               <li key={"material"+i} >
                 <span>
@@ -57,7 +62,7 @@ class MaterialsList extends React.Component {
                 <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
 
                 <span className="operation" href="javascript:void 0">
-                  <Download materialName={name} >
+                  <Download query={queryForm} >
                   下载
                   </Download>
                 </span>

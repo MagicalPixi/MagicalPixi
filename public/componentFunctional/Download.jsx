@@ -3,20 +3,24 @@ let T = React.PropTypes;
 
 let _ = require('lodash');
 
+let buildQueryStr = require('../common/buildQueryStr');
+
 let API = require('../js/API');
 
 class Download extends React.Component {
 
-  downloadMaterial(materialName){
+  downloadMaterial(query){
 
-    window.open(API.downloadMaterial+'?name='+encodeURIComponent(materialName));
+    let queryStr = buildQueryStr(query);
+
+    window.open(API.buildDownloadZip+`?${queryStr}`);
   }
 
   download(){
-    let {materialName} = this.props;
+    let {query} = this.props;
 
-    if(materialName){
-      this.downloadMaterial(materialName)
+    if(query){
+      this.downloadMaterial(query)
     }
   }
 
@@ -30,7 +34,7 @@ class Download extends React.Component {
 }
 
 Download.propTypes = {
-  materialName:T.string.isRequired
+  query:T.object.isRequired
 }
 
 
