@@ -1,4 +1,4 @@
-require('./cascadeList.scss');
+require('./CascadeList.scss');
 
 import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
