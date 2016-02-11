@@ -7,7 +7,7 @@ let { bindActionCreators } = require('redux')
 
 let { Provider,connect } = require('react-redux')
 
-let Navbar = require('../componentsLayout/Navbar');
+let Navbar = require('../components/Navbar');
 
 let GameContainer = require('../components/GameContainer');
 
@@ -24,10 +24,15 @@ let {editReducers} = require('./reducers');
 
 let {createRouterList} = require('./routerEdit');
 
+let initialContainer = new PIXI.Container();
+initialContainer.name = '初始';
+
 let editStore = createMyStore(editReducers,{
   withRouter:true,
   initialState:{
-    viewData:[],
+    viewData:[
+      initialContainer
+    ],
     consoleTab:'material',
     consoleData:[]
   }
@@ -43,8 +48,7 @@ class Edit extends React.Component {
 
     return (
       <div>
-        <Navbar mode="left"/>
-
+        <Navbar mode="left" />
         <FixedBox top="66">
 
           <FlexBox childrenWidth={[undefined,600]}>

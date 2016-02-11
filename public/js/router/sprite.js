@@ -7,7 +7,7 @@ let React = require('react');
 let SpritePreview = require('../../components/SpritePreview');
 let SpritePreViewF = React.createFactory(SpritePreview);
 
-let MaterialsList = require('../../componentsLayout/MaterialsList');
+let MaterialsList = require('../../components/MaterialsList');
 
 let API = require('../API');
 

@@ -8,7 +8,7 @@ import * as SceneActions from '../actions/scene'
 
 const T = React.PropTypes;
 
-let SceneList = require('../../componentsLayout/ScenesList');
+let SceneList = require('../../components/ScenesList');
 
 class App extends Component {
 

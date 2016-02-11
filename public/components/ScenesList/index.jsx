@@ -3,9 +3,9 @@ require('./index.scss');
 
 let React = require('react');
 
-let ItemList = require('../ItemList');
+let ItemList = require('../../componentsLayout/ItemList');
 
-let SpritePreview = require('../../components/SpritePreview');
+let SpritePreview = require('../SpritePreview/index');
 let Download = require('../../componentFunctional/Download');
 let DeleteSprite = require('../../componentFunctional/DeleteSprite');
 
