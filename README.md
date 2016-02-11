@@ -13,8 +13,16 @@ npm start
   - Sprite预览，并收入‘素材库’
   - Stage新建-切换
 
+问题：
 
-##Has been add GitTool
+- 项目的结构
+- 关于精灵的Actions
+- 关于精灵的运动
+- 一个精灵多个动作的管理
+- 一个精灵多种样式纹理的管理
+
+
+##Has been add GitTool(Maybe deprecated)
 
 ###Thanks for [nodegit](http://www.nodegit.org/)
 ####Done
