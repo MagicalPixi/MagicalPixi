@@ -6,7 +6,7 @@ let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
 
-let GameView = require('../GameView/index');
+let GameView = require('./index');
 
 class GameContainer extends React.Component {
 

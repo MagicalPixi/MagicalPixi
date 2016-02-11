@@ -9,9 +9,9 @@ let utils = require('../../common/utils');
 
 let Popup = require('../Popup');
 
-let FileUpload = require('../../componentFunctional/FileUpload');
+let FileUpload = require('../../componentsFunctional/FileUpload');
 let SettingList = require('./SettingList');
-let SaveProperties = require('../../componentFunctional/SaveProperties');
+let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
