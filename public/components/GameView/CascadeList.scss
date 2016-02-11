@@ -8,12 +8,26 @@
       padding: 5px 5px 5px 0;
 
       .layout-name{
-        border-bottom: 1px solid $gray;
+        cursor: pointer;
       }
 
       .children {
         padding-left: $padding2;
       }
+
+      &:hover{
+        color: $themeHoverColor;
+      }
+
+      .children {
+
+        > li {
+          color: $grayDeep;
+        }
+      }
+    }
+    > li[data-selected="true"]{
+      color: $themeColor;
     }
     > li:last-child{
       border: none;

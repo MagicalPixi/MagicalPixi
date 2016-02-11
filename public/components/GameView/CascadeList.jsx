@@ -12,11 +12,19 @@ class CascadeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      currentIndex:0
     }
   }
 
+  selectContainer(index,layoutOne){
+    this.props.onSelectContainer(index,layoutOne);
+    this.setState({
+      currentIndex:index
+    })
+  }
+
   render() {
+    let {currentIndex} = this.state;
     let { data } = this.props;
 
     return (
@@ -27,9 +35,11 @@ class CascadeList extends Component {
             let { name,children=[] } = layoutOne;
             let key = `layout${i}`;
 
+            let selected = currentIndex === i;
+
             return (
-              <li key={key}>
-                <p className="layout-name" >{name}</p>
+              <li data-selected={selected} key={key}>
+                <p onClick={this.selectContainer.bind(this,i,layoutOne)} className="layout-name" >{name}</p>
                 <ol className="children">
                   {children.map(function (sprite,ii) {
                     let {spriteName } =  sprite;
@@ -49,5 +59,9 @@ class CascadeList extends Component {
     )
   }
 }
+
+CascadeList.propTypes = {
+  onSelectContainer:T.func.isRequired
+};
 
 module.exports = CascadeList;
