@@ -6,6 +6,8 @@ import * as _ from 'lodash'
 
 const T = React.PropTypes;
 
+
+
 class CascadeList extends Component {
   constructor(props) {
     super(props);
@@ -30,11 +32,12 @@ class CascadeList extends Component {
                 <p className="layout-name" >{name}</p>
                 <ol className="children">
                   {children.map(function (sprite,ii) {
+                    let {spriteName } =  sprite;
 
                     let childKey = `children${ii}`;
 
                     return (
-                      <li key={childKey} >精灵1</li>
+                      <li key={childKey} >{spriteName}</li>
                     )
                   })}
                 </ol>
