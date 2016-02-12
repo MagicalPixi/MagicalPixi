@@ -15,7 +15,7 @@ class EditText extends Component {
 
     return (
       <p style={style} >
-
+        <input />
       </p>
     )
   }
