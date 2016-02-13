@@ -2,7 +2,8 @@ require('./CascadeList.scss');
 
 import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
-import * as _ from 'lodash'
+
+import EditText from '../../componentsBasic/EditText'
 
 const T = React.PropTypes;
 
@@ -39,7 +40,10 @@ class CascadeList extends Component {
 
             return (
               <li data-selected={selected} key={key}>
-                <p onClick={this.selectContainer.bind(this,i,layoutOne)} className="layout-name" >{name}</p>
+                <EditText
+                  onClick={this.selectContainer.bind(this,i,layoutOne)}
+                  value={name}
+                />
                 <ol className="children">
                   {children.map(function (sprite,ii) {
                     let {spriteName } =  sprite;

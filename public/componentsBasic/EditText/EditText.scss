@@ -1,1 +1,56 @@
 @import "../../styles/core/variables.scss";
+
+.edit-text {
+  cursor: pointer;
+
+  position: relative;
+
+  .operations{
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .edit{
+      background-image: url(/images/icon/edit_pen.png);
+      background-size: cover;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+    }
+  }
+
+  .edit-box {
+    background-color: #fff;
+    border: 1px solid $gray;
+    padding: $padding1;
+
+    position: absolute;
+    top: 0px;
+
+    display: none;
+
+    .name {
+      box-sizing: border-box;
+      padding: $padding1;
+      width: 100%;
+
+      outline: none;
+    }
+
+    .action-buttons{
+      padding: $padding1 0;
+
+      button:first-child{
+        float: right;
+      }
+    }
+  }
+}
+.edit-text[data-state="normal"]{
+}
+.edit-text[data-state="edit"]{
+  min-height: 77px;
+  .edit-box{
+    display: block;
+  }
+}
