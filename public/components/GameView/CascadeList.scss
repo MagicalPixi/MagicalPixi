@@ -16,6 +16,28 @@
           color: $gray;
           cursor: default;
           -webkit-user-select: none;
+
+          position: relative;
+
+          .operations{
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            display: none;
+            .delete{
+              background-image: url(/images/icon/delete.png);
+              background-size: cover;
+              width: 14px;
+              height: 14px;
+              display: inline-block;
+            }
+          }
+        }
+        > li:hover{
+          .operations{
+            display: block;
+          }
         }
 
         > li[data-selected="true"]{

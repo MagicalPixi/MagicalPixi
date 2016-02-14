@@ -61,7 +61,13 @@ class CascadeList extends Component {
                     let childKey = `children${ii}`;
 
                     return (
-                      <li key={childKey} >{spriteName}</li>
+                      <li key={childKey} >
+                        {spriteName}
+                        <p className="operations">
+                          <span className="delete">
+                          </span>
+                        </p>
+                      </li>
                     )
                   })}
                 </ol>
