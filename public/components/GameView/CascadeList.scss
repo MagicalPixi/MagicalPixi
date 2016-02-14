@@ -6,28 +6,35 @@
 
     > li{
       padding: 5px 5px 5px 0;
-
+      position: relative;
 
       .children {
         padding-left: $padding2;
+        display: none;
+        > li {
+          color: $gray;
+        }
       }
-
+    }
+    > li{
       &:hover{
         color: $themeHoverColor;
       }
 
-      .children {
+      &[data-selected="false"]{
+      }
 
-        > li {
-          color: $grayDeep;
+      &[data-selected="true"]{
+        color: $themeColor;
+        .children{
+          display: block;
         }
       }
-    }
-    > li[data-selected="true"]{
-      color: $themeColor;
-    }
-    > li:last-child{
-      border: none;
+
+      &:last-child{
+        border: none;
+      }
+      
     }
   }
 

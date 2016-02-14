@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom'
 
 import EditText from '../../componentsBasic/EditText'
 
+let Sortable = require('../../libs/sortable');
+
 const T = React.PropTypes;
-
-
 
 class CascadeList extends Component {
   constructor(props) {
@@ -15,6 +15,9 @@ class CascadeList extends Component {
     this.state = {
       currentIndex:0
     }
+  }
+  componentDidMount(){
+    new Sortable(this.refs.containers)
   }
 
   selectContainer(index,layoutOne){
@@ -24,13 +27,17 @@ class CascadeList extends Component {
     })
   }
 
+  changeContainerName(index,containerName){
+    this.props.onChangeContainerName(index,containerName);
+  }
+
   render() {
     let {currentIndex} = this.state;
     let { data } = this.props;
 
     return (
       <div className="cascade-list">
-        <ul className="layouts">
+        <ul ref="containers" className="layouts">
           {data.map((layoutOne,i)=>{
 
             let { name,children=[] } = layoutOne;
@@ -38,12 +45,15 @@ class CascadeList extends Component {
 
             let selected = currentIndex === i;
 
+            name = `${name}(${children.length})`;
+
             return (
               <li data-selected={selected} key={key}>
                 <EditText
                   onClick={this.selectContainer.bind(this,i,layoutOne)}
-                  value={name}
-                />
+                  onSubmit={this.changeContainerName.bind(this,i)}
+                  value={name} />
+
                 <ol className="children">
                   {children.map(function (sprite,ii) {
                     let {spriteName } =  sprite;
@@ -65,7 +75,7 @@ class CascadeList extends Component {
 }
 
 CascadeList.propTypes = {
-  onSelectContainer:T.func.isRequired
+  onSelectContainer:T.func.isRequired,
 };
 
 module.exports = CascadeList;
