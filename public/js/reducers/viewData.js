@@ -1,4 +1,4 @@
-import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,ADD_CONTAINER } from '../constants/gameViewTypes'
+import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP } from '../constants/gameViewTypes'
 
 import containersManager from '../../common/pixiContainersManager'
 
@@ -17,13 +17,28 @@ let handler = {
 
     return state;
   },
-  [ADD_CONTAINER] (state,action) {
+  [CONTAINER_ADD] (state,action) {
 
     let newState = containersManager(state.slice())
       .containerAdd(action.container)
       .getContainers();
 
     return newState;
+  },
+  [CONTAINER_RENAME](state,action){
+    let container = state[action.index];
+
+    container.name = action.newName;
+
+    return state.slice();
+  },
+  [CONTAINER_TOP](state,action){
+
+    let topContainer = state[action.topIndex];
+
+    let otherContainers = state.splice(action.topIndex,1);
+
+    return [topContainer].concat(otherContainers);
   }
 };
 

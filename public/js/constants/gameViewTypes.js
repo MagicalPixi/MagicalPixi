@@ -7,4 +7,8 @@ export const REMOVE_SPRITE = 'REMOVE_SPRITE';
 
 export const EDIT_SPRITE = 'EDIT_SPRITE';
 
-export const ADD_CONTAINER = 'ADD_CONTAINER';
+export const CONTAINER_ADD = 'CONTAINER_ADD';
+
+export const CONTAINER_RENAME = 'CONTAINER_RENAME';
+
+export const CONTAINER_TOP = 'CONTAINER_TOP';

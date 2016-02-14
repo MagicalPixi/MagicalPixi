@@ -1,7 +1,7 @@
 /**
  * Created by zyg on 16/1/29.
  */
-import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,ADD_CONTAINER } from '../constants/gameViewTypes'
+import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP } from '../constants/gameViewTypes'
 
 export function addSpriteToScene(spriteObj,containerIndex = 0){
 
@@ -30,13 +30,30 @@ export function editSpriteToScene(spriteObj,containerIndex = 0){
   }
 }
 
-export function addContainer(){
+export function containerAdd(){
 
   let container = new PIXI.Container();
   container.name = '未命名';
 
   return {
-    type:ADD_CONTAINER,
+    type:CONTAINER_ADD,
     container
+  }
+}
+
+export function containerRename(index,newName){
+
+  return {
+    type:CONTAINER_RENAME,
+    index,
+    newName
+  }
+}
+
+export function containerTop(topIndex = 0){
+
+  return {
+    type:CONTAINER_TOP,
+    topIndex
   }
 }
