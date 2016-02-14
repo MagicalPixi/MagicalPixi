@@ -55,7 +55,7 @@ class GameView extends React.Component {
 
   addLayout(){
 
-    this.props.actions.addContainer();
+    this.props.actions.containerAdd();
   }
 
   removeLayout(){
@@ -94,6 +94,7 @@ class GameView extends React.Component {
      currentLayoutIndex:newLayoutIndex
    })
   }
+
   render(){
     let { data } = this.props;
 
@@ -103,7 +104,11 @@ class GameView extends React.Component {
         onDragOver={this.dragOver.bind(this)} >
 
         <div className="layouts-box">
-          <CascadeList data={data} onSelectContainer={this.selectContainer.bind(this)} />
+          <CascadeList
+            data={data}
+            onSelectContainer={this.selectContainer.bind(this)}
+            onChangeContainerName={this.props.actions.containerRename}
+          />
           <button onClick={this.addLayout.bind(this)}
             className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
             +
