@@ -63,6 +63,11 @@ class GameView extends React.Component {
   }
 
   addSprite(e){
+    //来自sortable.js
+    if(e.nativeEvent.dataTransfer.effectAllowed === 'move'){
+      return;
+    }
+
     let materialOne = JSON.parse(e.nativeEvent.dataTransfer.getData('text/plain'));
 
     let properties = JSON.parse(materialOne.properties);
@@ -108,7 +113,8 @@ class GameView extends React.Component {
             data={data}
             onSelectContainer={this.selectContainer.bind(this)}
             onChangeContainerName={this.props.actions.containerRename}
-          />
+            onChildRemove={this.props.actions.childRemove} />
+
           <button onClick={this.addLayout.bind(this)}
             className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
             +

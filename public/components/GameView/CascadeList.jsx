@@ -17,7 +17,12 @@ class CascadeList extends Component {
     }
   }
   componentDidMount(){
-    new Sortable(this.refs.containers)
+    new Sortable(this.refs.containers,{
+      onEnd(evt){
+        log('onEnd:',evt);
+        evt.stopPropagation();
+      }
+    })
   }
 
   selectContainer(index,layoutOne){
@@ -29,6 +34,10 @@ class CascadeList extends Component {
 
   changeContainerName(index,containerName){
     this.props.onChangeContainerName(index,containerName);
+  }
+
+  removeChild(containerIndex,childIndex){
+    this.props.onRemoveChild(containerIndex,childIndex);
   }
 
   render() {
@@ -55,7 +64,8 @@ class CascadeList extends Component {
                   value={name} />
 
                 <ol className="children">
-                  {children.map(function (sprite,ii) {
+                  {children.map((sprite,ii)=>{
+
                     let {spriteName } =  sprite;
 
                     let childKey = `children${ii}`;
@@ -64,7 +74,7 @@ class CascadeList extends Component {
                       <li key={childKey} >
                         {spriteName}
                         <p className="operations">
-                          <span className="delete">
+                          <span onClick={this.props.onChildRemove.bind(null,i,ii)} className="delete">
                           </span>
                         </p>
                       </li>
@@ -82,6 +92,7 @@ class CascadeList extends Component {
 
 CascadeList.propTypes = {
   onSelectContainer:T.func.isRequired,
+  onChildRemove:T.func.isRequired,
 };
 
 module.exports = CascadeList;

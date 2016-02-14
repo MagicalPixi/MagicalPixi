@@ -1,7 +1,9 @@
 /**
  * Created by zyg on 16/1/29.
  */
-import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP } from '../constants/gameViewTypes'
+import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
+  CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
+  CHILD_REMOVE} from '../constants/gameViewTypes'
 
 export function addSpriteToScene(spriteObj,containerIndex = 0){
 
@@ -55,5 +57,13 @@ export function containerTop(topIndex = 0){
   return {
     type:CONTAINER_TOP,
     topIndex
+  }
+}
+
+export function childRemove(containerIndex,childIndex){
+  return {
+    type:CHILD_REMOVE,
+    containerIndex,
+    childIndex
   }
 }
