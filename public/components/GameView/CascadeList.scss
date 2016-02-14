@@ -9,10 +9,17 @@
       position: relative;
 
       .children {
-        padding-left: $padding2;
         display: none;
+
         > li {
+          padding-left: $padding2;
           color: $gray;
+          cursor: default;
+          -webkit-user-select: none;
+        }
+
+        > li[data-selected="true"]{
+          background-color: $bgGray;
         }
       }
     }
@@ -21,11 +28,15 @@
         color: $themeHoverColor;
       }
 
-      &[data-selected="false"]{
-      }
-
       &[data-selected="true"]{
         color: $themeColor;
+//        background-color: $themeColor;
+//        padding-left: $padding1;
+//        color: #ffffff;
+//
+//        position: relative;
+//        left: -$padding1;
+
         .children{
           display: block;
         }
