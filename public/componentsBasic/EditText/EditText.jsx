@@ -34,7 +34,7 @@ class EditText extends Component {
   }
   submit(e){
 
-    this.props.onSubmit(this.state.value);
+    this.props.onSubmit(this.state.value.replace(/\([\d]+\)/g,''));
 
     this.setState({
       editState:'normal'
@@ -72,7 +72,7 @@ class EditText extends Component {
 
     let {style} = this.props;
 
-    let inputValue = value.replace(/\([\d]+\)/,'');
+    let inputValue = value.replace(/\([\d]+\)/g,'');
 
     return (
       <div data-state={editState} onClick={this.props.onClick} style={style} className="edit-text">
