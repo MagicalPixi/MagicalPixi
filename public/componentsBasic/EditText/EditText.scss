@@ -9,6 +9,7 @@
     position: absolute;
     right: 0;
     top: 0;
+    display: none;
 
     .edit{
       background-image: url(/images/icon/edit_pen.png);
@@ -39,11 +40,19 @@
 
     .action-buttons{
       padding: $padding1 0;
-
+      button{
+        font-size: 12px;
+        float: left;
+      }
       button:first-child{
         float: right;
       }
     }
+  }
+}
+.edit-text:hover{
+  .operations{
+    display: block;
   }
 }
 .edit-text[data-state="normal"]{

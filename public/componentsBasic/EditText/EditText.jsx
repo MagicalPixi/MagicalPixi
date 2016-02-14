@@ -9,45 +9,81 @@ class EditText extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editState:'normal'
+      editState:'normal',
+      value:props.value
     }
+  }
+
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      value:nextProps.value
+    })
   }
 
   intoEditState(e){
 
     this.setState({
       editState:'edit'
-    })
+    });
+
+    e.stopPropagation();
+
+
+    this.bindKeyDownFn = this.enterKeyDown.bind(this);
+    document.addEventListener('keydown',this.bindKeyDownFn);
   }
-  submit(){
+  submit(e){
+
+    this.props.onSubmit(this.state.value);
+
+    this.setState({
+      editState:'normal'
+    });
+
+    e && e.stopPropagation();
+
+    document.removeEventListener('keydown',this.bindKeyDownFn);
   }
 
   cancel(e){
     this.setState({
       editState:'normal'
-    })
+    });
 
-    e.preventDefault();
+    e.stopPropagation();
+
+    document.removeEventListener('keydown',this.bindKeyDownFn);
+  }
+
+  enterKeyDown(e){
+    if(e.keyCode === 13){
+      this.submit();
+    }
   }
 
   onChange(){
-
+    this.setState({
+      value:this.refs.input.value
+    })
   }
 
   render() {
-    let {editState} = this.state;
+    let {editState,value} = this.state;
+
     let {style} = this.props;
+
+    let inputValue = value.replace(/\([\d]+\)/,'');
 
     return (
       <div data-state={editState} onClick={this.props.onClick} style={style} className="edit-text">
-        {this.props.value}
+        {this.state.value}
 
         <p className="operations">
           <span onClick={this.intoEditState.bind(this)} className="edit"></span>
         </p>
 
         <div className="edit-box">
-          <input className="name" value={this.props.value} />
+          <input ref="input" onChange={this.onChange.bind(this)} className="name" value={inputValue} />
 
           <p className="action-buttons" >
             <button onClick={this.submit.bind(this)}
@@ -64,5 +100,11 @@ class EditText extends Component {
     )
   }
 }
+
+EditText.propTypes = {
+  onSubmit:T.func.isRequired,
+  onClick:T.func.isRequired,
+  value:T.string.isRequired
+};
 
 module.exports = EditText;
