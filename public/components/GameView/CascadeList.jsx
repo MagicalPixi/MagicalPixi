@@ -66,13 +66,13 @@ class CascadeList extends Component {
                 <ol className="children">
                   {children.map((sprite,ii)=>{
 
-                    let {spriteName } =  sprite;
+                    let { name } =  sprite;
 
                     let childKey = `children${ii}`;
 
                     return (
                       <li key={childKey} >
-                        {spriteName}
+                        {name}
                         <p className="operations">
                           <span onClick={this.props.onChildRemove.bind(null,i,ii)} className="delete">
                           </span>

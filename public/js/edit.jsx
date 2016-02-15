@@ -14,6 +14,7 @@ let GameContainer = require('../components/GameContainer');
 let GameView = require('../components/GameView');
 let GameViewActions = require('./actions/gameView');
 
+let EditOperations = require('../components/EditOperations');
 let ConsolePanel = require('../components/ConsolePanel');
 
 let FixedBox = require('../componentsLayout/FixedBox');
@@ -24,14 +25,17 @@ let {editReducers} = require('./reducers');
 
 let {createRouterList} = require('./routerEdit');
 
-let initialContainer = new PIXI.Container();
-initialContainer.name = '初始';
+//let initialContainer = new PIXI.Container();
+//initialContainer.name = '初始';
 
 let editStore = createMyStore(editReducers,{
   withRouter:true,
   initialState:{
     viewData:[
-      initialContainer
+      {
+        name:'初始',
+        children:[]
+      }
     ],
     consoleTab:'material',
     consoleData:[]
@@ -48,7 +52,11 @@ class Edit extends React.Component {
 
     return (
       <div>
-        <Navbar mode="left" />
+        <Navbar mode="left" >
+
+          <EditOperations store={editStore} />
+
+        </Navbar>
         <FixedBox top="66">
 
           <FlexBox childrenWidth={[undefined,600]}>

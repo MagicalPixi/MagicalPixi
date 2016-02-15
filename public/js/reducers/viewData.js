@@ -9,7 +9,7 @@ let handler = {
 
     state = state.slice();
 
-    state[action.containerIndex].addChild(action.spriteObj);
+    state[action.containerIndex].children.push(action.spriteObj);
 
     return state;
   },

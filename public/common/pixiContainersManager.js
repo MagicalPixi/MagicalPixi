@@ -2,6 +2,9 @@
  * Created by zyg on 16/2/11.
  */
 let PIXI = require('pixi');
+let loadResource = require('./loadResource');
+
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
 
 let removeByIndex = function (array,index) {
   return array.splice(index,1);
@@ -12,6 +15,38 @@ module.exports = function containersManager(containers) {
   return {
     getContainers(){
       return containers;
+    },
+    //翻译成pixiContainers
+    getPixiContainers(){
+
+      let pixiContainers = containers.map(function ({name,children}) {
+        let container = new PIXI.Container();
+        container.name = name;
+
+        return {
+          container,
+          children
+        }
+      }).map(function ({container,children}) {
+
+        children.map(function (materialOne) {
+
+          let properties = JSON.parse(materialOne.properties);
+
+          loadResource(materialOne.resourceUrl, function (resource) {
+
+            properties.textures = resource.texture || resource.textures;
+
+            let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
+
+            container.addChild(spriteDisplayObj);
+          })
+        });
+
+        return container;
+      });
+
+      return pixiContainers;
     },
     containerDel(index){
       if(containers[index] !== undefined){
@@ -24,7 +59,9 @@ module.exports = function containersManager(containers) {
         index = containers.length;
       }
       if(!newLayout){
-        newLayout = new PIXI.Container();
+        newLayout ={
+          children:[]
+        };
       }
 
       containers.splice(index,0,newLayout);
@@ -32,7 +69,7 @@ module.exports = function containersManager(containers) {
       return this;
     },
     containerTop(index){
-      var topContainer = containers.splice(index,1);
+      let topContainer = containers.splice(index,1);
 
       containers = topContainer.concat(containers);
 

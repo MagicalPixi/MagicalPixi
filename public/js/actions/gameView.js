@@ -34,8 +34,10 @@ export function editSpriteToScene(spriteObj,containerIndex = 0){
 
 export function containerAdd(){
 
-  let container = new PIXI.Container();
-  container.name = '未命名';
+  let container = {
+    name:'未命名',
+    children:[]
+  };
 
   return {
     type:CONTAINER_ADD,

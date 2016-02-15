@@ -8,6 +8,7 @@ let _ = require('lodash');
 
 let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
+let pixiContainersManager = require('../../common/pixiContainersManager');
 
 let CascadeList = require('./CascadeList');
 
@@ -46,9 +47,14 @@ class GameView extends React.Component {
 
     let {data} = this.props;
 
-    this.stage.removeChild();
+    this.stage.removeChildren();
 
-    data.forEach(container=>{
+    log('data:',data);
+
+    let pixiContainers = pixiContainersManager(data).getPixiContainers();
+
+    pixiContainers.forEach((container) => {
+
       this.stage.addChild(container);
     })
   }
@@ -70,24 +76,30 @@ class GameView extends React.Component {
 
     let materialOne = JSON.parse(e.nativeEvent.dataTransfer.getData('text/plain'));
 
-    let properties = JSON.parse(materialOne.properties);
+    //let properties = JSON.parse(materialOne.properties);
 
     let {currentLayoutIndex} = this.state;
-    let {data} = this.props;
 
-    loadResource(materialOne.resourceUrl,(resource)=>{
+    this.props.actions.addSpriteToScene(
+      materialOne,
+      currentLayoutIndex
+    );
 
-      properties.textures = resource.texture || resource.textures;
+    //loadResource(materialOne.resourceUrl,(resource)=>{
+    //
+    //  properties.textures = resource.texture || resource.textures;
+    //
+    //  //let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
+    //
+    //  this.props.actions.addSpriteToScene(
+    //    materialOne,
+    //    currentLayoutIndex
+    //  );
+    //
+    //  //this.forceUpdate();
+    //  this.refreshStage();
+    //});
 
-      let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
-
-      this.props.actions.addSpriteToScene(
-        spriteDisplayObj,
-        currentLayoutIndex
-      );
-
-      this.forceUpdate();
-    });
   }
 
   dragOver(e){

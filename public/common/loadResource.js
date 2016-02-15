@@ -1,10 +1,10 @@
-/**
- * Created by zyg on 16/1/25.
- */
+
 let PIXI = require('PIXI');
 
+let count = 0;
+
 module.exports = function (resourceUrl, cb) {
-  let resourceKey = 'img' + Date.now();
+  let resourceKey = 'img' + Date.now() + '' + (count++);
 
   PIXI.loader.add(resourceKey,resourceUrl)
     .load((loader,resources)=>{
