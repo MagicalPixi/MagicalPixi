@@ -21,9 +21,6 @@ class FlexBox extends React.Component {
 
     _.map(Object.keys(this.refs),  (refName) => {
 
-      log(refName);
-      log(this.refs);
-
       let refI = parseInt(refName);
       let theDOM = ReactDOM.findDOMNode(this.refs[refName]);
 
