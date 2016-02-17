@@ -2,7 +2,7 @@
  * Created by zyg on 16/1/12.
  */
 var ObjectId = require('mongodb').ObjectID;
-var Model = require('./Model');
+var Model = require('./bin/Model');
 
 var collectionName = 'sprites';
 
@@ -11,7 +11,7 @@ var db = Model.db(collectionName);
 var saveObjBuild = function (args) {
 
   var isLostArg = ['userFlag','type','name','properties','resourceUrl'].some(function (key) {
-    return !args[key];
+    return args[key] !== undefined;
   });
 
   if(isLostArg){
@@ -21,6 +21,7 @@ var saveObjBuild = function (args) {
   var buildArgs = Object.assign({},args);
   delete buildArgs.id;
   delete buildArgs._id;
+
   return buildArgs;
 };
 
@@ -31,7 +32,7 @@ var insertOne = function (collection,args,resolve) {
 
     resolve(result.result);
   });
-}
+};
 
 module.exports = {
 
@@ -65,8 +66,6 @@ module.exports = {
             _id:ObjectId(args.id)
           }).then(r=>{
 
-            console.log('save find :',r);
-
             if(r){
 
               try{
@@ -82,8 +81,10 @@ module.exports = {
 
                   resolve(result.result);
                 })
+
               }catch(e){
                 console.log("e:",e);
+
                 resolve(false);
               }
 
