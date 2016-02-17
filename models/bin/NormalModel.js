@@ -7,57 +7,71 @@
 var ObjectId = require('mongodb').ObjectID;
 var Model = require('./Model');
 
-var insertOne = (collection,args,resolve) => {
-  collection.insertOne(args, function (err,result) {
+var insertOne = (collection,arg,resolve) => {
+
+  delete arg.id;
+  delete arg._id;
+
+  collection.insertOne(arg, function (err,result) {
     if(err){throw err;}
 
     resolve(result.result);
   });
 };
 
-var saveFn = (db) => (arg) => {
+var saveFn = (db) => {
 
-  return new Promise(function (resolve) {
+  return function (arg) {
 
-    db((collection)=>{
+    var id = arg.id;
 
-      if(args.id){
+    delete arg.id;
+    delete arg._id;
 
-        this.findOne({
-          _id:ObjectId(args.id)
-        }).then(r=>{
+    return new Promise((resolve) => {
 
-          if(r){
+      db((collection)=> {
 
-            try{
-              collection.updateOne({
-                _id:ObjectId(args.id)
-              },{
-                $set:arg
-              },(err,result)=>{
-                if(err){
-                  throw err;}
+        if (id) {
 
-                resolve(result.result);
-              })
+          this.findOne({
+            _id: ObjectId(id)
+          }).then(r=> {
 
-            }catch(e){
+            if (r) {
 
-              resolve(false);
+              try {
+                collection.updateOne({
+                  _id: ObjectId(id)
+                }, {
+                  $set: arg
+                }, (err, result)=> {
+                  if (err) {
+                    throw err;
+                  }
+
+                  resolve(result.result);
+                })
+
+              } catch (e) {
+
+                console.log('save e:',e);
+
+                resolve(false);
+              }
+
+            } else {
+              insertOne(collection, arg, resolve)
             }
+          });
+        } else {
+          insertOne(collection, arg, resolve)
+        }
+      });
 
-          }else{
-            delete arg.id;
-            insertOne(collection,arg,resolve)
-          }
-        });
-      }else{
-        insertOne(collection,arg,resolve)
-      }
     });
-
-  });
-};
+  };
+}
 
 module.exports = function (collectionName) {
   var db = Model.db(collectionName);
@@ -65,11 +79,11 @@ module.exports = function (collectionName) {
   var model = ['insertOne','findOne'].map(function (funName) {
 
     return {
-      [funName]:function (args) {
-        return new Promise(function (resolve) {
-          db(function (collection) {
+      [funName]:function (arg) {
+        return new Promise((resolve)=>{
+          db((collection)=>{
 
-            collection[funName](args, function (err, result) {
+            collection[funName](arg, function (err, result) {
               if(err){ throw err }
               resolve(result);
             })
