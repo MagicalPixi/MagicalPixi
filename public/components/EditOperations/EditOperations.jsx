@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom'
 
 const T = React.PropTypes;
 
+import { saveViewData } from '../../js/actions/gameView'
+
 class EditOperations extends Component {
   constructor(props) {
     super(props)
@@ -14,7 +16,7 @@ class EditOperations extends Component {
   saveScene(){
     let currentState = this.props.store.getState();
 
-    log('currentState:',currentState);
+    saveViewData()(null,this.props.store.getState);
   }
 
   render() {

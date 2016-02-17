@@ -5,6 +5,11 @@ import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
   CHILD_REMOVE} from '../constants/gameViewTypes'
 
+
+import API from '../API'
+import ajax from '../../libs/ajax'
+
+
 export function addSpriteToScene(spriteObj,containerIndex = 0){
 
   return {
@@ -67,5 +72,21 @@ export function childRemove(containerIndex,childIndex){
     type:CHILD_REMOVE,
     containerIndex,
     childIndex
+  }
+}
+
+export function saveViewData(){
+
+  return (dispatch,getState) => {
+
+    var viewData = getState().viewData;
+
+
+    ajax(API.sceneSave).post({
+      id:'56c49025fd582e3823061a92',
+      viewData:JSON.stringify(viewData)
+    }).then(r=>{
+      log('save r:',r);
+    })
   }
 }
