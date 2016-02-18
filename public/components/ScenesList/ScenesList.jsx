@@ -11,6 +11,11 @@ let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
 
 class ScenesList extends React.Component {
 
+  componentDidMount(){
+
+    this.props.actions.initSceneData();
+  }
+
   newAdd(){
 
   }
@@ -20,6 +25,7 @@ class ScenesList extends React.Component {
   }
 
   render(){
+
     return (
       <div id="mpScenesList" >
         <header className="top-container">
@@ -36,32 +42,28 @@ class ScenesList extends React.Component {
         </header>
 
         <ItemList>
-          {this.props.data.map((sprite,i)=>{
+          {this.props.data.map((scene,i)=>{
 
-            let {_id,name,resourceUrl,type,properties} = sprite;
+            log(scene)
+
+            let {_id,name} = scene;
+
+            let editHref = `/index/edit?id=${_id}`;
 
             return (
               <li key={"scene"+i} className="material-one" >
                 <span className="name">
-                  {sprite.name}
+                  {name}
                 </span>
 
                 <a className="operation"
-                  onClick={this.edit.bind(this,_id,resourceUrl,type,properties)}
-                  href="/index/edit">编辑</a>
+                  onClick={this.edit.bind(this)}
+                  href={editHref} >编辑</a>
 
               </li>
             )
           })}
 
-          <li >
-            <span>
-            1
-            </span>
-
-            <a className="operation" href="/index/edit" >编辑</a>
-
-          </li>
         </ItemList>
       </div>
     )
