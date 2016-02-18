@@ -39,7 +39,7 @@ class GameView extends React.Component {
 
   }
 
-  componentWillUpdate(){
+  componentDidUpdate(){
     this.refreshStage();
   }
 
