@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
 import { syncHistory, routeReducer } from 'react-router-redux'
 
-import {rootReducer} from '../reducers'
+import {mainReducers} from '../reducers'
 import {routerBuild,createMyStore} from '../../common/routerBuild'
 //
 //log(ReactRouter);
@@ -60,9 +60,12 @@ let routerList = _.filter(routersLoad.keys(),(key)=>{
 
 //let RouterElement = routerBuild(routerList,reducers);
 
-let myStore = createMyStore(rootReducer,{
+let myStore = createMyStore(mainReducers,{
   withRouter:true,
 
+  initialState:{
+    scenes:[],
+  }
 });
 
 module.exports = routerBuild(routerList,myStore);

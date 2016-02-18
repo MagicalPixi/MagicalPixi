@@ -4,6 +4,8 @@ import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
 
 import containersManager from '../../common/pixiContainersManager'
 
+import reducerHandlerBuild from '../../common/reducerHandlerBuild'
+
 let handler = {
   [ADD_SPRITE](state,action) {
 
@@ -57,11 +59,5 @@ let handler = {
   }
 };
 
-export default function viewData(state = [],action){
 
-  if(handler[action.type]){
-    return handler[action.type](state,action)
-  }
-
-  return state;
-}
+export default reducerHandlerBuild(handler,[])

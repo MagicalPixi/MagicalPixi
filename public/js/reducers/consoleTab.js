@@ -1,5 +1,6 @@
 import { SWITCH_TAB } from '../constants/consoleTypes'
 
+import reducerHandlerBuild from '../../common/reducerHandlerBuild'
 
 let handler = {
   [SWITCH_TAB]: function (state = 'material', action) {
@@ -13,11 +14,4 @@ let handler = {
   }
 };
 
-export default function consoleTab(state = 'material', action) {
-
-  if (handler[action.type]) {
-    return handler[action.type](state, action)
-  }
-
-  return state;
-}
+export default reducerHandlerBuild(handler,'material')

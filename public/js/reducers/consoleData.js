@@ -1,5 +1,6 @@
 import { CONSOLE_DATA } from '../constants/consoleTypes'
 
+import reducerHandlerBuild from '../../common/reducerHandlerBuild'
 
 let handler = {
   [CONSOLE_DATA]: function (state, action) {
@@ -10,11 +11,4 @@ let handler = {
   }
 };
 
-export default function consoleData(state = [], action) {
-
-  if (handler[action.type]) {
-    return handler[action.type](state, action)
-  }
-
-  return state;
-}
+export default reducerHandlerBuild(handler,[]);

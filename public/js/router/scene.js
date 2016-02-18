@@ -13,15 +13,20 @@ let SceneList = require('../../components/ScenesList');
 class App extends Component {
 
   render(){
+
+    let {scenes,actions} = this.props;
+
+    log('scenes:',scenes);
+
     return (
-      <SceneList></SceneList>
+      <SceneList data={scenes} actions={actions} />
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    materials: state.materials
+    scenes: state.scenes
   }
 }
 
