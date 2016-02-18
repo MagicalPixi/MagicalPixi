@@ -6,26 +6,50 @@ var Scene = require('../models/Scene');
 
 module.exports = function find(req, res) {
 
-  var id = req.query.id;
+  var id = Number(req.query.id);
 
   var result = false;
 
-  if (id) {
+  if (!isNaN(id)) {
 
-    Scene.findOne({
-      _id: ObjectId(id)
-    }).then(function (r) {
-      result = r;
+    //获取全部
+    if(id === 0){
 
-      res.json({
-        result
+      Scene.find({}).then(function (findCursor) {
+
+        findCursor.toArray(function (err,scenes) {
+
+          if(err){
+            res.json({
+              err
+            })
+          }else{
+
+            res.json({
+              result:scenes
+            })
+          }
+        })
       })
-    }).catch(function (err) {
-      console.log(err)
-      res.json({
-        err
+
+    }else{
+
+      Scene.findOne({
+        _id: ObjectId(id)
+      }).then(function (r) {
+        result = r;
+
+        res.json({
+          result
+        })
+      }).catch(function (err) {
+        console.log(err)
+
+        res.json({
+          err
+        })
       })
-    })
+    }
   } else {
     res.json({
       result

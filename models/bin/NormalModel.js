@@ -68,9 +68,17 @@ var saveFn = (db) => {
           insertOne(collection, arg, resolve)
         }
       });
-
     });
   };
+}
+
+var findFn = (db) => (arg) => {
+  return new Promise((resolve)=>{
+    db(collection=>{
+
+      resolve(collection.find(arg))
+    })
+  })
 }
 
 module.exports = function (collectionName) {
@@ -96,6 +104,7 @@ module.exports = function (collectionName) {
   },{});
 
 
+  model.find = findFn(db);
   model.save = saveFn(db);
 
   return model;
