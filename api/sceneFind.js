@@ -11,13 +11,19 @@ module.exports = function find(req, res) {
   var result = false;
 
   if (id) {
+
     Scene.findOne({
-      id: ObjectId(id)
+      _id: ObjectId(id)
     }).then(function (r) {
       result = r;
 
       res.json({
         result
+      })
+    }).catch(function (err) {
+      console.log(err)
+      res.json({
+        err
       })
     })
   } else {
