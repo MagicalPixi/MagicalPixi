@@ -1,0 +1,47 @@
+@import "../../styles/core/variables.scss";
+
+#floatItems{
+
+  header{
+
+    h4{
+      margin-bottom: $margin2;
+    }
+  }
+
+  .items{
+
+    $liWidth:50px;
+    > li{
+      margin-right: $margin2;
+      margin-bottom: $margin2;
+      width: $liWidth;
+
+      float: left;
+
+      .box{
+        border-radius: 2px;
+        width: $liWidth;
+        height: $liWidth;
+        overflow: hidden;
+
+        .thumbnail{
+          height: 100%;
+        }
+      }
+
+      .name{
+        margin-top: $margin1;
+        width: 100%;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+
+    &:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+}

@@ -1,19 +1,54 @@
-/**
- * Created by zyg on 16/1/20.
- */
-let React = require('react');
+import React,{Component} from 'react'
+import ReactDOM from 'react-dom'
+import * as _ from 'lodash'
 
-let SceneList = require('../../componentsLayout/ScenesList');
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as SceneActions from '../actions/scene'
 
-class Scene extends React.Component {
+const T = React.PropTypes;
+
+let SceneList = require('../../components/ScenesList');
+
+class App extends Component {
 
   render(){
     return (
-      <div>
-        <SceneList></SceneList>
-      </div>
+      <SceneList></SceneList>
     )
   }
 }
 
-module.exports = Scene;
+function mapStateToProps(state) {
+  return {
+    materials: state.materials
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(SceneActions, dispatch)
+  }
+}
+
+let ConnectApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
+
+//class Scene extends Component {
+//  constructor(props) {
+//    super(props)
+//    this.state = {}
+//  }
+//
+//  render() {
+//    return (
+//      <Provider store={store}>
+//        <ConnectApp />
+//      </Provider>
+//    )
+//  }
+//}
+
+module.exports = ConnectApp;

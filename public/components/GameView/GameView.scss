@@ -1,0 +1,33 @@
+@import "../../styles/core/variables.scss";
+
+$viewWidth:320px;
+
+$layoutWidth:120px;
+
+#gameView{
+  //background-color: $bgGray;
+  background-color: #fff;
+  margin: auto;
+  width: $viewWidth + $layoutWidth + $padding2;
+  height: 502px;
+
+  position: relative;
+
+  > canvas {
+    border: 1px solid #000000;
+  }
+
+  .layouts-box {
+    width: $layoutWidth;
+    padding: 0 0 5px $padding2;
+
+    position: absolute;
+    left: $viewWidth + 1px;
+    top: -1px;
+
+
+    .add-layout{
+      width: 100%;
+    }
+  }
+}

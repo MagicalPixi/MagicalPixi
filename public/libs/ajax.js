@@ -88,7 +88,7 @@
 
   $private.getQueryString = function getQueryString(object) {
     return Object.keys(object).filter(function (key) {
-      return !!object[key]
+      return object[key] !== undefined && object[key] !== null;
     }).map(function (item) {
       var value = object[item];
       if($private.isObject(value)){

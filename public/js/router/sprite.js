@@ -7,7 +7,7 @@ let React = require('react');
 let SpritePreview = require('../../components/SpritePreview');
 let SpritePreViewF = React.createFactory(SpritePreview);
 
-let MaterialsList = require('../../componentsLayout/MaterialsList');
+let MaterialsList = require('../../components/MaterialsList');
 
 let API = require('../API');
 
@@ -22,8 +22,6 @@ class Sprite extends React.Component {
   componentDidMount(){
 
     ajax(API.materialsList).get().then((r)=>{
-
-      log('r:',r);
 
       this.setState({
         materialsList: r.result.reverse()

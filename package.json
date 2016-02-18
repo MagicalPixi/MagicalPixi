@@ -24,11 +24,15 @@
     "lodash": "^3.10.1",
     "mongodb": "^2.1.4",
     "morgan": "~1.5.3",
-    "nodegit": "^0.7.0",
+    "nodegit": "^0.8.0",
+    "pixi-lib": "^1.5.8",
+    "pubsub-js": "^1.5.3",
+    "re-pubsub": "^1.3.2",
     "react": "^0.14.5",
     "react-dom": "^0.14.5",
     "react-redux": "^4.0.6",
     "react-router": "^1.0.3",
+    "react-router-redux": "^2.1.0",
     "redux": "^3.0.5",
     "redux-thunk": "^1.0.3",
     "serve-favicon": "~2.2.1"
@@ -36,9 +40,11 @@
   "devDependencies": {
     "babel-core": "^6.3.26",
     "babel-loader": "^6.2.0",
+    "babel-plugin-react-transform": "^2.0.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.1",
     "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
@@ -48,11 +54,14 @@
     "gulp-tinypng": "^1.0.2",
     "gulp-util": "^3.0.7",
     "node-sass": "^3.4.2",
+    "react-transform-hmr": "^1.0.1",
     "sass-loader": "^3.1.2",
     "scss-loader": "0.0.1",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-dev-server": "^1.10.1",
+    "webpack-hot-middleware": "^2.6.4"
   }
 }

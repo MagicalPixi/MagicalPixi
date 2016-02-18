@@ -103,7 +103,6 @@ function runGulp(){
   gulpfile.start('syncAPI');
 
   if( env === 'development'){
-    gulpfile.start('development');
   }
   if( env === 'product'){
     //gulpfile.start('product');
