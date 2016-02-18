@@ -83,6 +83,7 @@ export function saveViewData(){
 
     ajax(API.sceneSave).post({
       id:'56c49025fd582e3823061a92',
+      name:'默认的场景名',
       viewData:JSON.stringify(viewData)
     }).then(r=>{
       log('save r:',r);
