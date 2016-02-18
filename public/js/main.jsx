@@ -32,7 +32,7 @@ class Main extends React.Component {
 }
 
 ReactDOM.render(
-  React.createElement(Main),
+  <Main />,
   document.querySelector('#topContainer')
 );
 
