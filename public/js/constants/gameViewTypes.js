@@ -14,3 +14,5 @@ export const CONTAINER_RENAME = 'CONTAINER_RENAME';
 export const CONTAINER_TOP = 'CONTAINER_TOP';
 
 export const CHILD_REMOVE = 'CHILD_REMOVE';
+
+export const INIT_SCENE = 'INIT_SCENE';

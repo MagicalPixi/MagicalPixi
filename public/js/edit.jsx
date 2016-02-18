@@ -21,6 +21,7 @@ let FixedBox = require('../componentsLayout/FixedBox');
 let FlexBox = require('../componentsLayout/FlexBox');
 
 let {createMyStore} = require('../common/routerBuild');
+let getParamsFromUrl = require('../common/getParamFromUrl');
 let {editReducers} = require('./reducers');
 
 let {createRouterList} = require('./routerEdit');
@@ -45,6 +46,16 @@ let editStore = createMyStore(editReducers,{
 let routerList = createRouterList(editStore);
 
 class Edit extends React.Component {
+
+  componentDidMount(){
+
+    var sceneId = getParamsFromUrl().id;
+
+    if(sceneId){
+      this.props.actions.initViewData(sceneId);
+    }
+  }
+
   render(){
     log('EDIT:',this.props);
 

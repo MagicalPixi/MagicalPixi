@@ -1,6 +1,6 @@
 import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
-  CHILD_REMOVE} from '../constants/gameViewTypes'
+  CHILD_REMOVE,INIT_SCENE} from '../constants/gameViewTypes'
 
 import containersManager from '../../common/pixiContainersManager'
 
@@ -50,6 +50,10 @@ let handler = {
     state[containerIndex].children.splice(childIndex,1);
 
     return state;
+  },
+  [INIT_SCENE](state,action){
+
+    return action.viewData;
   }
 };
 

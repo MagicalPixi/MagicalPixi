@@ -3,7 +3,7 @@
  */
 import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
-  CHILD_REMOVE} from '../constants/gameViewTypes'
+  CHILD_REMOVE,INIT_SCENE} from '../constants/gameViewTypes'
 
 
 import API from '../API'
@@ -81,12 +81,29 @@ export function saveViewData(){
 
     var viewData = getState().viewData;
 
-
     ajax(API.sceneSave).post({
       id:'56c49025fd582e3823061a92',
       viewData:JSON.stringify(viewData)
     }).then(r=>{
       log('save r:',r);
+    })
+  }
+}
+
+export function initViewData(id){
+
+  return (dispatch,getState)=>{
+
+    ajax(API.sceneFind).get({
+      id
+    }).then(data=>{
+
+      let viewData = JSON.parse(data.result.viewData);
+
+      dispatch({
+        type:INIT_SCENE,
+        viewData
+      })
     })
   }
 }
