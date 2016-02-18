@@ -6,14 +6,16 @@ var Scene = require('../models/Scene');
 
 module.exports = function find(req, res) {
 
-  var id = Number(req.query.id);
+  var id = req.query.id;
 
   var result = false;
 
-  if (!isNaN(id)) {
+  console.log('id:',id);
+
+  if (id || id === 0) {
 
     //获取全部
-    if(id === 0){
+    if(Number(id) === 0){
 
       Scene.find({}).then(function (findCursor) {
 
