@@ -9,6 +9,7 @@ import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
 import API from '../API'
 import ajax from '../../libs/ajax'
 
+import getParamFromUrl from '../../common/getParamFromUrl';
 
 export function addSpriteToScene(spriteObj,containerIndex = 0){
 
@@ -82,8 +83,8 @@ export function saveViewData(){
     var viewData = getState().viewData;
 
     ajax(API.sceneSave).post({
-      id:'56c49025fd582e3823061a92',
-      name:'默认的场景名',
+      id:getParamFromUrl().id,
+      name:'默认的场景',
       viewData:JSON.stringify(viewData)
     }).then(r=>{
       log('save r:',r);
