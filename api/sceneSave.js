@@ -10,7 +10,7 @@ module.exports = function (req,res) {
   var name = req.body.name;
   var viewData = req.body.viewData;
 
-  console.log(id,viewData);
+  console.log(id,name,viewData);
 
   Scene.save({
     id,
