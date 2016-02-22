@@ -2,8 +2,12 @@
 
 .edit-text {
   cursor: pointer;
+  width: 100%;
+  min-width: 4em;
 
   position: relative;
+  display: inline-block;
+
 
   .operations{
     position: absolute;
@@ -27,6 +31,8 @@
 
     position: absolute;
     top: 0px;
+
+    z-index: 1;
 
     display: none;
 

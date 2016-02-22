@@ -34,7 +34,7 @@ class EditText extends Component {
   }
   submit(e){
 
-    this.props.onSubmit(this.state.value.replace(/\([\d]+\)/g,''));
+    this.props.onSubmit(this.state.value);
 
     this.setState({
       editState:'normal'
@@ -76,7 +76,8 @@ class EditText extends Component {
 
     return (
       <div data-state={editState} onClick={this.props.onClick} style={style} className="edit-text">
-        {this.state.value}
+
+        <span className="text">{this.state.value}</span>
 
         <p className="operations">
           <span onClick={this.intoEditState.bind(this)} className="edit"></span>
@@ -103,7 +104,7 @@ class EditText extends Component {
 
 EditText.propTypes = {
   onSubmit:T.func.isRequired,
-  onClick:T.func.isRequired,
+  onClick:T.func,
   value:T.string.isRequired
 };
 
