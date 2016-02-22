@@ -12,4 +12,4 @@ module.exports = function (handler,defaultState) {
 
     return state;
   }
-}
+};
