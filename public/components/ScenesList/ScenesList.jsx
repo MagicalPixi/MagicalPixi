@@ -44,16 +44,14 @@ class ScenesList extends React.Component {
         <ItemList>
           {this.props.data.map((scene,i)=>{
 
-            log(scene)
-
-            let {_id,name} = scene;
+            let {_id,sceneTitle} = scene;
 
             let editHref = `/index/edit?id=${_id}`;
 
             return (
               <li key={"scene"+i} className="material-one" >
                 <span className="name">
-                  {name}
+                  {sceneTitle}
                 </span>
 
                 <a className="operation"
