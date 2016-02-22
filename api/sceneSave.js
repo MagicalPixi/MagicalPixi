@@ -7,14 +7,14 @@ var Scene = require('../models/Scene');
 module.exports = function (req,res) {
 
   var id = req.body.id;
-  var name = req.body.name;
+  var sceneTitle = req.body.sceneTitle;
   var viewData = req.body.viewData;
 
-  console.log(id,name,viewData);
+  console.log(id,sceneTitle,viewData);
 
   Scene.save({
     id,
-    name,
+    sceneTitle,
     viewData
   }).then(function (result) {
 
