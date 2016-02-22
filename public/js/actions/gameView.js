@@ -53,6 +53,8 @@ export function containerAdd(){
 
 export function containerRename(index,newName){
 
+  newName = newName.replace(this.state.value.replace(/\([\d]+\)/g,''),'')
+
   return {
     type:CONTAINER_RENAME,
     index,
@@ -80,11 +82,11 @@ export function saveViewData(){
 
   return (dispatch,getState) => {
 
-    var viewData = getState().viewData;
+    var {viewData,sceneTitle} = getState();
 
     ajax(API.sceneSave).post({
       id:getParamFromUrl().id,
-      name:'默认的场景',
+      sceneTitle,
       viewData:JSON.stringify(viewData)
     }).then(r=>{
       log('save r:',r);

@@ -32,7 +32,8 @@ class CascadeList extends Component {
     })
   }
 
-  changeContainerName(index,containerName){
+  changeContainerName(index,containerName=''){
+
     this.props.onChangeContainerName(index,containerName);
   }
 
@@ -93,6 +94,7 @@ class CascadeList extends Component {
 CascadeList.propTypes = {
   onSelectContainer:T.func.isRequired,
   onChildRemove:T.func.isRequired,
+  onChangeContainerName:T.func.isRequired
 };
 
 module.exports = CascadeList;
