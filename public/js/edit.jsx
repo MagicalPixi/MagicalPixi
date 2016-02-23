@@ -13,9 +13,11 @@ let GameContainer = require('../components/GameContainer');
 
 let GameView = require('../components/GameView');
 let GameViewActions = require('./actions/gameView');
+let SceneActions = require('./actions/scene');
 
 let EditOperations = require('../components/EditOperations');
 let ConsolePanel = require('../components/ConsolePanel');
+let SceneTitle = require('../components/SceneTitle');
 
 let FixedBox = require('../componentsLayout/FixedBox');
 let FlexBox = require('../componentsLayout/FlexBox');
@@ -38,6 +40,7 @@ let editStore = createMyStore(editReducers,{
         children:[]
       }
     ],
+    sceneTitle:'新建场景名',
     consoleTab:'material',
     consoleData:[]
   }
@@ -59,13 +62,18 @@ class Edit extends React.Component {
   render(){
     log('EDIT:',this.props);
 
-    let {viewData,actions} = this.props;
+    let {viewData,sceneTitle,actions} = this.props;
 
     return (
       <div>
         <Navbar mode="left" >
 
+
+          <SceneTitle actions={actions} title={sceneTitle} />
+
           <EditOperations store={editStore} />
+
+
 
         </Navbar>
         <FixedBox top="66">
@@ -87,12 +95,13 @@ class Edit extends React.Component {
 function mapStateToProps(state) {
   return {
     viewData: state.viewData,
+    sceneTitle: state.sceneTitle
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(GameViewActions, dispatch)
+    actions: bindActionCreators(Object.assign({},GameViewActions,SceneActions), dispatch)
   }
 }
 

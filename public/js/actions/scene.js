@@ -1,7 +1,7 @@
 /**
  * Created by zyg on 16/1/29.
  */
-import {INIT_SCENES,SCENE_NEW } from '../constants/sceneTypes'
+import {INIT_SCENES,SCENE_NEW,SCENE_TITLE } from '../constants/sceneTypes'
 
 import API from '../API'
 import ajax from '../../libs/ajax'
@@ -27,5 +27,15 @@ export function initSceneData(){
 export function sceneNew(){
   return {
     type:SCENE_NEW
+  }
+}
+
+export function sceneTitle(title){
+
+  title = title.replace('%','')
+
+  return {
+    type:SCENE_TITLE,
+    title
   }
 }
