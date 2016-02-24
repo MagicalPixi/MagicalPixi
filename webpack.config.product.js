@@ -11,7 +11,7 @@ base.entry = {
   index: [
     path.resolve(__dirname, './public/js/main.jsx')
   ],
-    edit: [
+  edit: [
     path.resolve(__dirname, './public/js/edit.jsx'),
   ]
 },

@@ -83,7 +83,7 @@ module.exports = {
                 })
 
               }catch(e){
-                console.log("e:",e);
+                console.log('e:',e);
 
                 resolve(false);
               }

@@ -22,15 +22,15 @@ module.exports = function (req, res,next) {
   if(id){
     condition = {
       _id:ObjectId(id)
-    }
+    };
   }else if(name){
-    condition = { name }
+    condition = { name };
   }
 
   console.log('condition:',condition);
 
   if(!condition){
-    return next(new Error('no id or name'))
+    return next(new Error('no id or name'));
   }
 
   Sprite.findOne(condition).then(function (result) {
@@ -48,13 +48,12 @@ module.exports = function (req, res,next) {
           res.download(
             zipPath,
             result.name+'.zip'
-          )
-        })
-      })
+          );
+        });
+      });
     }else{
-      next(new Error('not found by condition:'+JSON.stringify(condition)))
+      next(new Error('not found by condition:'+JSON.stringify(condition)));
     }
-  })
-
+  });
 
 };

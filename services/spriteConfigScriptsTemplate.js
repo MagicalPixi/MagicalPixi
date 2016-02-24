@@ -65,7 +65,7 @@ function build(name,spriteType,properties) {
     filename,
     text:spriteScriptsString
   };
-};
+}
 
 build.filename = filename;
 

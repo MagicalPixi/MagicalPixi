@@ -7,9 +7,9 @@ var gutil = require('gulp-util');
 
 var tasksPath = path.resolve(__dirname,'./tasks/');
 var taskList = fs.readdirSync(tasksPath).forEach(function(taskName){
-        var taskFn = require(path.resolve(tasksPath,taskName));
-        taskFn(gulp);
-    });
+  var taskFn = require(path.resolve(tasksPath,taskName));
+  taskFn(gulp);
+});
 
 //默认任务
 gulp.task('development', function(){

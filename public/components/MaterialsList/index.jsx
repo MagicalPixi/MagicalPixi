@@ -1,1 +1,1 @@
-module.exports = require("./MaterialsList.jsx");
+module.exports = require('./MaterialsList.jsx');

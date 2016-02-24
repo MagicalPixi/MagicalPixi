@@ -31,7 +31,7 @@ function build() {
     filename,
     text:temp(configFilename)
   }
-};
+}
 
 build.filename = filename;
 
