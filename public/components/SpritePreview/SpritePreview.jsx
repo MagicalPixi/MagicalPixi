@@ -13,7 +13,6 @@ let FileUpload = require('../../componentsFunctional/FileUpload');
 let SettingList = require('./SettingList');
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
-let appendPixiContainer = require('../../common/appendPixiContainer');
 let loadResource = require('../../common/loadResource');
 
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../common/previewConfig');
@@ -57,7 +56,7 @@ class SpritePreview extends React.Component {
   componentDidMount(){
     let previewContainer = this.refs.previewContainer;
 
-    this.stage = appendPixiContainer(previewContainer);
+    this.stage = pixiLib.appendPixiContainer(previewContainer);
 
     if(this.resourceUrl){
       this.loadSprite();

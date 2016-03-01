@@ -6,7 +6,8 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
-let appendPixiContainer = require('../../common/appendPixiContainer');
+let pixiLib = require('pixi-lib');
+
 let loadResource = require('../../common/loadResource');
 let pixiContainersManager = require('../../common/pixiContainersManager');
 
@@ -29,7 +30,7 @@ class GameView extends React.Component {
   componentDidMount(){
     let gameView = this.refs.gameView;
 
-    this.stage = appendPixiContainer(gameView);
+    this.stage = pixiLib.appendPixiContainer(gameView);
 
     this.refreshStage()
   }
