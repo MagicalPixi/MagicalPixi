@@ -5,10 +5,6 @@ let React = require('react');
 
 let ItemList = require('../../componentsLayout/ItemList');
 
-let SpritePreview = require('../SpritePreview/index');
-let Download = require('../../componentsFunctional/Download');
-let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
-
 class ScenesList extends React.Component {
 
   componentDidMount(){
