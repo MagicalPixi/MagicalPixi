@@ -4,35 +4,35 @@ import * as _ from 'lodash'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as SceneActions from '../actions/scene'
+import * as BasicActions from '../actions/basic'
 
 const T = React.PropTypes;
 
-let SceneList = require('../../components/ScenesList');
+let BasicList = require('../../components/BasicList');
 
 class App extends Component {
 
   render(){
 
-    let {scenes,actions} = this.props;
+    let {basics,actions} = this.props;
 
-    log('scenes:',scenes);
+    log('basic:',basics);
 
     return (
-      <SceneList data={scenes} actions={actions} />
+      <BasicList data={basics} actions={actions} />
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    scenes: state.scenes
+    basics: state.basics
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(SceneActions, dispatch)
+    actions: bindActionCreators(BasicActions, dispatch)
   }
 }
 

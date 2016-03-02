@@ -27,6 +27,11 @@ class AsideBoard extends React.Component {
           </h3>
           <ul className="child-list">
             <li>
+              <a href="#basic" >
+              原始素材
+              </a>
+            </li>
+            <li>
               <a href="#sprite" >
               精灵
               </a>

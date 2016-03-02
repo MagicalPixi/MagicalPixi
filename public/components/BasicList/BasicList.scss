@@ -1,0 +1,21 @@
+@import "../../styles/core/variables.scss";
+
+#basicList {
+
+  .top-container {
+    margin: 0 $margin2 $margin3 $margin2;
+
+  }
+  .title {
+
+    display: inline-block;
+  }
+
+  .add-new {
+    margin-top: 3px;
+    border-radius: 2px;
+
+    float: right;
+  }
+}
+
