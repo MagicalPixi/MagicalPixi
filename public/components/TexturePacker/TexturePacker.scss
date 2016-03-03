@@ -1,4 +1,51 @@
-@import "../../styles/core/variables.scss"; 
- #texturePacker{ 
- }
+@import "../../styles/core/variables.scss";
+
+#texturePacker {
+  background-color: #fff;
+
+  .top {
+    padding: 10px;
+    overflow: hidden;
+
+    h3 {
+      float: left;
+    }
+
+    .operations{
+      float: right;
+
+      button{
+        margin-left: 10px;
+      }
+    }
+
+  }
+
+  .images-box {
+
+    padding: $padding4;
+
+    overflow: hidden;
+
+    .images {
+
+      > li {
+        background-color: #999999;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        width: 120px;
+        height: 189px;
+        float: left;
+      }
+      > li.add-png{
+        background-color: #04BE02;
+      }
+    }
+    .images:after{
+      content: '';
+      clear: both;
+      float: left;
+    }
+  }
+}
 

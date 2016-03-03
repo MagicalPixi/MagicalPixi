@@ -6,6 +6,8 @@ const T = React.PropTypes;
 
 let ItemList = require('../../componentsLayout/ItemList');
 
+let TexturePacker = require('../TexturePacker');
+
 class BasicList extends Component {
 
   componentDidMount(){
@@ -13,6 +15,8 @@ class BasicList extends Component {
   }
 
   newAdd() {
+
+    TexturePacker();
   }
   edit(){
   }
@@ -27,9 +31,9 @@ class BasicList extends Component {
           原始素材
           </h3>
 
-          <a href="edit" >
+          <a href="javascript:void 0" >
             <button onClick={this.newAdd.bind(this)}
-              className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建场景</button>
+              className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建Basic</button>
           </a>
 
         </header>
