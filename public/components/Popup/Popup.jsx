@@ -31,8 +31,6 @@ class Popup extends React.Component {
 
     let top = (parseInt(windowHeight) - parseInt(childStyle.height)) /2;
 
-    console.log(parseInt(windowHeight),parseInt(childStyle.height));
-
     if(top < 0){
       top = 10;
     }
@@ -43,16 +41,20 @@ class Popup extends React.Component {
     top += 'px';
     marginLeft += 'px';
 
-    let newStyle = Object.assign({},oldStyle,{
+    let newStyle = Object.assign({},{
       top,
       marginLeft
-    });
+    },oldStyle);
 
+    if(oldStyle.top !== newStyle.top || oldStyle.marginLeft !== newStyle.marginLeft){
+      this.setState({
+        style:newStyle
+      });
+    }
+  }
 
+  componentDidUpdate(){
 
-    this.setState({
-      style:newStyle
-    });
   }
 
   close(e){

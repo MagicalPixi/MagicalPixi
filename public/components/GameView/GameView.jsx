@@ -30,7 +30,7 @@ class GameView extends React.Component {
   componentDidMount(){
     let gameView = this.refs.gameView;
 
-    this.stage = pixiLib.appendPixiContainer(gameView);
+    this.stage = pixiLib.appendStage(gameView);
 
     this.refreshStage()
   }

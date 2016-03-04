@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 
 import EditText from '../../componentsBasic/EditText'
 
-let Sortable = require('../../libs/sortable');
+import Sortable from '../../componentsFunctional/Sortable'
 
 const T = React.PropTypes;
 
@@ -16,14 +16,14 @@ class CascadeList extends Component {
       currentIndex:0
     }
   }
-  componentDidMount(){
-    new Sortable(this.refs.containers,{
-      onEnd(evt){
-        log('onEnd:',evt);
-        evt.stopPropagation();
-      }
-    })
-  }
+  //componentDidMount(){
+  //  new Sortable(this.refs.containers,{
+  //    onEnd(evt){
+  //      log('onEnd:',evt);
+  //      evt.stopPropagation();
+  //    }
+  //  })
+  //}
 
   selectContainer(index,layoutOne){
     this.props.onSelectContainer(index,layoutOne);
@@ -45,9 +45,18 @@ class CascadeList extends Component {
     let {currentIndex} = this.state;
     let { data } = this.props;
 
+    let option = {
+      onEnd(evt){
+        log('onEnd:',evt);
+        evt.stopPropagation();
+      }
+    };
+
     return (
       <div className="cascade-list">
-        <ul ref="containers" className="layouts">
+
+        <Sortable className="layouts">
+
           {data.map((layoutOne,i)=>{
 
             let { name,children=[] } = layoutOne;
@@ -85,7 +94,7 @@ class CascadeList extends Component {
               </li>
             )
           })}
-        </ul>
+        </Sortable>
       </div>
     )
   }
