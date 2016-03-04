@@ -55,7 +55,7 @@ class SpritePreview extends React.Component {
   componentDidMount(){
     let previewContainer = this.refs.previewContainer;
 
-    this.stage = pixiLib.appendPixiContainer(previewContainer);
+    this.stage = pixiLib.appendStage(previewContainer);
 
     if(this.resourceUrl){
       this.loadSprite();

@@ -23,22 +23,44 @@
 
   .images-box {
 
-    padding: $padding4;
-
-    overflow: hidden;
+    padding: $padding2;
 
     .images {
+      background-color: #e5e5e5;
+      padding: $padding2;
+      overflow: hidden;
 
       > li {
-        background-color: #999999;
+        background-color: #fff;
         margin-right: 20px;
         margin-bottom: 10px;
         width: 120px;
         height: 189px;
         float: left;
+        overflow: hidden;
+
+        position: relative;
+
+        .close{
+          background-color: red;
+          width: 25px;
+          height: 25px;
+
+          display: none;
+
+          position: absolute;
+          right: 0;
+        }
       }
       > li.add-png{
         background-color: #04BE02;
+      }
+
+      > li:hover{
+
+        .close{
+          display: block;
+        }
       }
     }
     .images:after{

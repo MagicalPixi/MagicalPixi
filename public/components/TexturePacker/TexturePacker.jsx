@@ -4,28 +4,50 @@ import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
 const T = React.PropTypes;
 
-let FileUpload = require('../../componentsFunctional/FileUpload');
-
-let Popup = require('../Popup');
+import FileUpload from '../../componentsFunctional/FileUpload'
+import Popup from '../Popup'
+import Sortable from '../../componentsFunctional/Sortable'
 
 class TexturePacker extends Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+
+    this.state = {
+      imgUrls:[]
+    };
   }
 
   addNewImg(url){
+    var {imgUrls} = this.state;
+
+    imgUrls = imgUrls.concat(url);
+
+    this.setState({
+      imgUrls
+    });
 
   }
 
+  remove(index){
+   var {imgUrls} = this.state;
+
+    imgUrls.splice(index,1);
+
+    this.setState({
+      imgUrls
+    })
+  }
+
   render() {
+    var {imgUrls} = this.state;
+
     return (
-      <section id="texturePacker">
+      <div id="texturePacker">
         <header className="top">
           <h3>TexurePacker</h3>
 
           <div className="operations">
-            <FileUpload onUploadCompleted={this.addNewImg.bind(this)}>
+            <FileUpload onUploadCompleted={this.addNewImg.bind(this)} >
               <button className="weui_btn weui_btn_mini weui_btn_primary" >添加</button>
             </FileUpload>
             <button  className="weui_btn weui_btn_mini weui_btn_primary" >保存</button>
@@ -34,14 +56,23 @@ class TexturePacker extends Component {
 
 
         <div className="images-box">
-          <ul className="images">
 
-            <li></li>
-            <li></li>
-          </ul>
+          <Sortable className="images">
+            {imgUrls.map((imgUrl,i)=>{
+
+              var key = `img${i}`;
+
+              return (
+                <li key={key}>
+                  <div className="close" onClick={this.remove.bind(this,i)}></div>
+                  <img width="100%" src={imgUrl} />
+                </li>
+              )
+            })}
+          </Sortable>
         </div>
 
-      </section>
+      </div>
     )
   }
 }
@@ -55,6 +86,7 @@ var TexturePackerFn = React.createFactory(TexturePacker);
 module.exports = function (props) {
 
   return Popup(TexturePackerFn(props),{
-    width:650
+    width:650,
+    top:200
   })
 };
