@@ -7,14 +7,14 @@ class Sortable extends Component {
 
   componentDidMount(){
 
-    new SortableLib(this.refs.ul,this.props.option)
+    new SortableLib(this.refs.sortableUl,this.props.option)
   }
 
   render() {
     var {className,id,children} = this.props;
 
     return (
-      <ul ref="ul" className={className} id={id}>
+      <ul ref="sortableUl" className={className} id={id}>
       {children}
       </ul>
     )

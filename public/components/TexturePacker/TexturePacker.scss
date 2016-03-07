@@ -18,7 +18,6 @@
         margin-left: 10px;
       }
     }
-
   }
 
   .images-box {
@@ -28,6 +27,7 @@
     .images {
       background-color: #e5e5e5;
       padding: $padding2;
+      min-height: 200px;
       overflow: hidden;
 
       > li {
@@ -40,6 +40,10 @@
         overflow: hidden;
 
         position: relative;
+
+        img{
+          width: 100%;
+        }
 
         .close{
           background-color: red;

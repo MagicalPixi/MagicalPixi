@@ -8,6 +8,8 @@ import FileUpload from '../../componentsFunctional/FileUpload'
 import Popup from '../Popup'
 import Sortable from '../../componentsFunctional/Sortable'
 
+import getBase64FromImage from '../../common/getBase64FromImages'
+
 class TexturePacker extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +39,27 @@ class TexturePacker extends Component {
       imgUrls
     })
   }
+  save(){
+    var { imgUrls } = this.state;
+
+    Promise.all(imgUrls.map(url=> {
+      var imgObj = new Image();
+      imgObj.src = url;
+      return imgObj;
+    }).map(imgObj=>{
+      return new Promise(resolve=>{
+        imgObj.onload = ()=>{
+         resolve(imgObj);
+        }
+      })
+    })).then(imgObjs=>{
+
+      var base64 = getBase64FromImage(imgObjs);
+
+      console.log(base64);
+
+    });
+  }
 
   render() {
     var {imgUrls} = this.state;
@@ -50,12 +73,12 @@ class TexturePacker extends Component {
             <FileUpload onUploadCompleted={this.addNewImg.bind(this)} >
               <button className="weui_btn weui_btn_mini weui_btn_primary" >添加</button>
             </FileUpload>
-            <button  className="weui_btn weui_btn_mini weui_btn_primary" >保存</button>
+            <button onClick={this.save.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary" >保存</button>
           </div>
         </header>
 
 
-        <div className="images-box">
+        <div ref="imagesBox" className="images-box">
 
           <Sortable className="images">
             {imgUrls.map((imgUrl,i)=>{
@@ -65,7 +88,7 @@ class TexturePacker extends Component {
               return (
                 <li key={key}>
                   <div className="close" onClick={this.remove.bind(this,i)}></div>
-                  <img width="100%" src={imgUrl} />
+                  <img src={imgUrl} />
                 </li>
               )
             })}
