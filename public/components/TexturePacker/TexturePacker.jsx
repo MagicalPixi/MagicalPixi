@@ -8,7 +8,9 @@ import FileUpload from '../../componentsFunctional/FileUpload'
 import Popup from '../Popup'
 import Sortable from '../../componentsFunctional/Sortable'
 
-import getBase64FromImage from '../../common/getBase64FromImages'
+import wrapperImages from '../../common/wrapperImages'
+import getBase64FromImages from '../../common/getBase64FromImages'
+import getPixiJsonFromImages from '../../common/getPixiJsonFromImages'
 
 class TexturePacker extends Component {
   constructor(props) {
@@ -54,10 +56,13 @@ class TexturePacker extends Component {
       })
     })).then(imgObjs=>{
 
-      var base64 = getBase64FromImage(imgObjs);
+      var wrapperedImages = wrapperImages(imgObjs);
+
+      var base64 = getBase64FromImages(wrapperedImages);
+      var pixiJson = getPixiJsonFromImages(wrapperedImages);
 
       console.log(base64);
-
+      console.log(pixiJson);
     });
   }
 
