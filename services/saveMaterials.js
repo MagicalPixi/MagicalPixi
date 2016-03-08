@@ -31,8 +31,6 @@ var saveImg = function saveImg(dir,file){
 
   dir = dir || userDirDefault;
 
-  console.log(dir,file);
-
   var uploadFileName = file.name;
   var format = uploadFileName.substr(uploadFileName.lastIndexOf('.'));
 

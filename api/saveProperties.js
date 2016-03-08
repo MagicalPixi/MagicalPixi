@@ -39,7 +39,7 @@ module.exports = function (req, res) {
 
   }).catch(function (err) {
     console.log('err',err);
-    res.json({err})
+    res.json({err});
   });
 
 
