@@ -31,7 +31,10 @@ if(process.env.NODE_ENV !== 'product'){
 app.use(favicon(path.resolve(__dirname,'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false,
+  limit:'10000kb'
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
