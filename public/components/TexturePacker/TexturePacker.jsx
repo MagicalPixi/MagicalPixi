@@ -12,6 +12,9 @@ import wrapperImages from '../../common/wrapperImages'
 import getBase64FromImages from '../../common/getBase64FromImages'
 import getPixiJsonFromImages from '../../common/getPixiJsonFromImages'
 
+import API from '../../js/API'
+import ajax from '../../libs/ajax'
+
 class TexturePacker extends Component {
   constructor(props) {
     super(props);
@@ -63,6 +66,13 @@ class TexturePacker extends Component {
 
       console.log(base64);
       console.log(pixiJson);
+
+      ajax(API.saveBasic).post({
+        png:base64,
+        json:pixiJson
+      }).then(function (jsonUrl) {
+
+      });
     });
   }
 
