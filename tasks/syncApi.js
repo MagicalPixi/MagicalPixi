@@ -9,7 +9,6 @@ var outputEnv = path.resolve(__dirname,'../public/js/API.js');
 
 var pre = 'module.exports=';
 
-
 var nodeAPIDir = path.resolve(__dirname,'../api/');
 
 module.exports = function (gulp) {
@@ -24,7 +23,7 @@ module.exports = function (gulp) {
       return init;
     },{});
 
-    var content = pre + JSON.stringify(list,null,2);
+    var content = pre + JSON.stringify(list,null,2) + ';';
 
     fs.writeFileSync(outputEnv,content)
   })
