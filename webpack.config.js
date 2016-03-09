@@ -57,7 +57,8 @@ module.exports = {
     new webpack.DefinePlugin({
       env:{
         isDevelopment:true
-      }
+      },
+      __DEV__:true,
     })
   ],
   devtool: 'source-map'
