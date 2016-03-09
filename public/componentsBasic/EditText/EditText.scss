@@ -15,12 +15,19 @@
     top: 0;
     display: none;
 
+
+    > * {
+      vertical-align: middle;
+      display: block;
+    }
+
     .edit{
       background-image: url(/images/icon/edit_pen.png);
       background-size: cover;
       width: 20px;
       height: 20px;
       display: inline-block;
+
     }
   }
 
