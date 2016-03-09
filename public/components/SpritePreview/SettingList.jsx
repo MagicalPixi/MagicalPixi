@@ -21,7 +21,7 @@ class SettingList extends React.Component {
     let inputDom = this.refs[refKey];
     let checked = inputDom.checked;
 
-    console.log(checkBox,checkBox[checked],checked);
+    log(checkBox,checkBox[checked],checked);
 
     this.props.changeSetting({
       [checkBox[checked]]:checked

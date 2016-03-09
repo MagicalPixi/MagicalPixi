@@ -71,7 +71,7 @@ class FileUpload extends React.Component {
 
   //拖动上传
   drop(e){
-    console.log(e);
+    log(e);
   }
 
   render(){

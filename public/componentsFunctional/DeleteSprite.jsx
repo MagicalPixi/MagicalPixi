@@ -16,7 +16,7 @@ class DeleteSprite extends React.Component {
     }
 
     ajax(API.deleteSprite).get(this.props.data).then(function (r) {
-      console.log(r);
+      log(r);
       setTimeout(function () {
         location.reload();
       },500)
