@@ -16,7 +16,14 @@ class BasicList extends Component {
 
   newAdd() {
 
-    TexturePacker();
+    var close = TexturePacker({
+      onCompleted:(basicObj)=>{
+
+        this.props.actions.basicAdd(basicObj);
+
+        requestAnimationFrame(close);
+      }
+    });
   }
   edit(){
   }
@@ -27,9 +34,7 @@ class BasicList extends Component {
 
         <header className="top-container">
 
-          <h3 className="title" >
-          原始素材
-          </h3>
+          <h3 className="title" >原始素材</h3>
 
           <a href="javascript:void 0" >
             <button onClick={this.newAdd.bind(this)}
@@ -39,15 +44,14 @@ class BasicList extends Component {
         </header>
 
         <ItemList>
-          {this.props.data.map((scene,i)=>{
+          {this.props.data.map((basicObj,i)=>{
 
-            let {_id,basicTitle} = scene;
-
+            let {_id,name} = basicObj;
 
             return (
               <li key={"scene"+i} className="material-one" >
                 <span className="name">
-                  {basicTitle}
+                  {name}
                 </span>
 
                 <a className="operation"
