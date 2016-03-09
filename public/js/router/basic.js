@@ -12,11 +12,14 @@ let BasicList = require('../../components/BasicList');
 
 class App extends Component {
 
+  componentDidMount(){
+
+    this.props.actions.initBasicData();
+  }
+
   render(){
 
     let {basics,actions} = this.props;
-
-    log('basic:',basics);
 
     return (
       <BasicList data={basics} actions={actions} />

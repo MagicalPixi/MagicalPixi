@@ -65,6 +65,7 @@ let myStore = createMyStore(mainReducers,{
 
   initialState:{
     scenes:[],
+    basics:[]
   }
 });
 
