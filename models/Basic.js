@@ -3,4 +3,4 @@
  */
 var Model = require('./bin/NormalModel');
 
-module.exports = Model('Basic');
+module.exports = Model('basic');
