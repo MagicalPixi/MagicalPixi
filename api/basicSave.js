@@ -8,6 +8,7 @@ var savePixiJson = require('../services/savePixiJson');
 
 module.exports = function (req, res) {
 
+  var name = req.body.name;
   var pngBase64 = req.body.png;
   var json = req.body.json;
 
@@ -19,17 +20,26 @@ module.exports = function (req, res) {
 
     console.log('filename:',filename);
 
-    savePixiJson(json).then(function (jsonFilename) {
+    savePixiJson(json).then(function (jsonFilename,jsonUrl) {
 
-      var name = jsonFilename.replace('.json','');
+      var resourceName = jsonFilename.replace('.json','');
 
       console.log('jsonFilename:',jsonFilename);
 
       Basic.insertOne({
         name,
+        resourceName,
+        resourceUrl:jsonUrl
       }).then(function (result) {
 
-        res.json({result});
+        res.json({
+          result:{
+            name,
+            resourceName,
+            resourceUrl:jsonUrl
+          }
+        });
+
       }).catch(function (err3) {
         console.log('Basic.insertOne',err3);
 
