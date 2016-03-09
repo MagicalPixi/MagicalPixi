@@ -12,14 +12,15 @@ import wrapperImages from '../../common/wrapperImages'
 import getBase64FromImages from '../../common/getBase64FromImages'
 import getPixiJsonFromImages from '../../common/getPixiJsonFromImages'
 
-import API from '../../js/API'
-import ajax from '../../libs/ajax'
+import EditText from '../../componentsBasic/EditText'
+
 
 class TexturePacker extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      name:'新建素材名',
       imgUrls:[]
     };
   }
@@ -45,7 +46,11 @@ class TexturePacker extends Component {
     })
   }
   save(){
-    var { imgUrls } = this.state;
+    var { name,imgUrls } = this.state;
+
+    if(imgUrls.length < 1){
+      return;
+    }
 
     Promise.all(imgUrls.map(url=> {
       var imgObj = new Image();
@@ -64,31 +69,44 @@ class TexturePacker extends Component {
       var base64 = getBase64FromImages(wrapperedImages);
       var pixiJson = getPixiJsonFromImages(wrapperedImages);
 
-      console.log(base64);
-      console.log(pixiJson);
-
-      ajax(API.saveBasic).post({
-        png:base64,
-        json:pixiJson
-      }).then(function (jsonUrl) {
-
+      this.props.onCompleted({
+        name,
+        base64,
+        pixiJson
       });
     });
   }
 
+  submitBasicTitle(name){
+    this.setState({
+      name
+    })
+  }
+
   render() {
-    var {imgUrls} = this.state;
+    var {name,imgUrls} = this.state;
+
+    var saveDisabled = imgUrls.length < 1 ? 'weui_btn_disabled':'';
 
     return (
       <div id="texturePacker">
         <header className="top">
-          <h3>TexurePacker</h3>
+          <h3>
+            <EditText
+              style={{
+                width:'7em',
+                minHeight:0,
+              }}
+              onSubmit={this.submitBasicTitle.bind(this)}
+              value={name}
+              />
+          </h3>
 
           <div className="operations">
             <FileUpload onUploadCompleted={this.addNewImg.bind(this)} >
               <button className="weui_btn weui_btn_mini weui_btn_primary" >添加</button>
             </FileUpload>
-            <button onClick={this.save.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary" >保存</button>
+            <button onClick={this.save.bind(this)} className={`weui_btn weui_btn_mini weui_btn_primary ${saveDisabled}`} >保存</button>
           </div>
         </header>
 
@@ -117,6 +135,7 @@ class TexturePacker extends Component {
 
 TexturePacker.propTypes = {
 
+  onCompleted:T.func.isRequired
 };
 
 var TexturePackerFn = React.createFactory(TexturePacker);

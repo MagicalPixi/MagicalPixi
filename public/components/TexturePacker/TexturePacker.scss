@@ -5,10 +5,14 @@
 
   .top {
     padding: 10px;
-    overflow: hidden;
 
     h3 {
+
+      transform: translate(-50%,0);
+
       float: left;
+      position: relative;
+      left: 50%;
     }
 
     .operations{
@@ -17,6 +21,12 @@
       button{
         margin-left: 10px;
       }
+    }
+    
+    &:after{
+      content: '';
+      display: inline-block;
+      clear: left;
     }
   }
 
