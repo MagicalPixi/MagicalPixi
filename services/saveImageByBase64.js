@@ -3,6 +3,8 @@
 var path = require('path');
 var fs = require('fs');
 
+var urlPathPre = '/public/basic/';
+
 var dir = path.resolve(__dirname,'../public/basic/');
 
 var countName = 0;
@@ -49,7 +51,7 @@ module.exports = function (base64,option) {
       if(err){
         throw err
       }
-      resolve(filename);
+      resolve(filename,`${urlPathPre}${filename}`);
     });
   });
 

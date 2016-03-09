@@ -5,6 +5,8 @@ var _ = require('lodash');
 var path = require('path');
 var fs = require('fs');
 
+var urlPathPre = '/public/basic/';
+
 var dir = path.resolve(__dirname,'../public/basic/');
 
 var imageExt = /\.(png|jpg|gif)/;
@@ -30,7 +32,7 @@ module.exports = function (pixiJson) {
       if(err){
         throw err
       }
-      resolve(jsonName);
+      resolve(jsonName,`${urlPathPre}${jsonName}`);
     });
   })
 };
