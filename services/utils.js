@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 function dirExists(dir,cb) {
   fs.exists(dir, function (exists) {
     if(!exists){
