@@ -20,8 +20,8 @@ class TexturePacker extends Component {
     super(props);
 
     this.state = {
-      name:'新建素材名',
-      imgUrls:[]
+      name:props.name,
+      imgUrls:props.imgUrls
     };
   }
 
@@ -72,7 +72,8 @@ class TexturePacker extends Component {
       this.props.onCompleted({
         name,
         base64,
-        pixiJson
+        pixiJson,
+        originImgUrls:imgUrls
       });
     });
   }
@@ -133,9 +134,15 @@ class TexturePacker extends Component {
   }
 }
 
-TexturePacker.propTypes = {
+TexturePacker.defaultProps = {
+  name:'新建素材名',
+  imgUrls:[]
+};
 
-  onCompleted:T.func.isRequired
+TexturePacker.propTypes = {
+  onCompleted:T.func.isRequired,
+  imgUrls:T.array,
+  name:T.string,
 };
 
 var TexturePackerFn = React.createFactory(TexturePacker);
@@ -144,6 +151,5 @@ module.exports = function (props) {
 
   return Popup(TexturePackerFn(props),{
     width:650,
-    top:200
   })
 };

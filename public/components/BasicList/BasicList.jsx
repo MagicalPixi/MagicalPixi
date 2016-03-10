@@ -25,7 +25,19 @@ class BasicList extends Component {
       }
     });
   }
-  edit(){
+  edit(basicObj){
+
+    var close =  TexturePacker({
+      name:basicObj.name,
+      imgUrls:basicObj.originImgUrls || [],
+
+      onCompleted:(basicObj)=>{
+
+        this.props.actions.basicAdd(basicObj);
+
+        requestAnimationFrame(close);
+      }
+    });
   }
 
   render() {
@@ -55,8 +67,8 @@ class BasicList extends Component {
                 </span>
 
                 <a className="operation"
-                  onClick={this.edit.bind(this)}
-                  href='' >编辑</a>
+                  onClick={this.edit.bind(this,basicObj)}
+                  href='javascript:void 0' >编辑</a>
 
               </li>
             )
