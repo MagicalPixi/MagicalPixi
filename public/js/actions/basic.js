@@ -13,7 +13,11 @@ export function initBasicData(){
 
       let basics = data.result;
 
-      basics.originImgUrls = JSON.parse(basics.originImgUrls);
+      basics = basics.map(basic=>{
+        return Object.assign(basic,{
+          originImgUrls:JSON.parse(basic.originImgUrls)
+        });
+      });
 
       dispatch({
         type:BASIC_INIT,

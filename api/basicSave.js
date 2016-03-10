@@ -8,6 +8,7 @@ var savePixiJson = require('../services/savePixiJson');
 
 module.exports = function (req, res) {
 
+  var _id = req.body._id;
   var name = req.body.name;
   var pngBase64 = req.body.png;
   var json = req.body.json;
@@ -36,6 +37,7 @@ module.exports = function (req, res) {
       console.log('jsonFilename:',jsonFilename);
 
       Basic.save({
+        _id,
         name,
         resourceName,
         resourceUrl:jsonUrl,

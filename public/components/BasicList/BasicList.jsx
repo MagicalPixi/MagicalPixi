@@ -31,9 +31,9 @@ class BasicList extends Component {
       name:basicObj.name,
       imgUrls:basicObj.originImgUrls || [],
 
-      onCompleted:(basicObj)=>{
+      onCompleted:(textureBasicObj)=>{
 
-        this.props.actions.basicAdd(basicObj);
+        this.props.actions.basicAdd(Object.assign({},basicObj,textureBasicObj));
 
         requestAnimationFrame(close);
       }
