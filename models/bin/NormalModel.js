@@ -23,7 +23,7 @@ var saveFn = (db) => {
 
   return function (arg) {
 
-    var id = arg.id;
+    var id = arg.id || arg._id;
 
     delete arg.id;
     delete arg._id;
