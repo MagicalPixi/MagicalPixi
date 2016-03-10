@@ -84,6 +84,17 @@ class TexturePacker extends Component {
     })
   }
 
+  sortEnd(evt){
+
+    var {imgUrls} = this.state;
+
+    var {oldIndex,newIndex} = evt;
+
+    var old = imgUrls.splice(oldIndex,1);
+
+    imgUrls.splice(newIndex,0,old[0]);
+  }
+
   render() {
     var {name,imgUrls} = this.state;
 
@@ -114,10 +125,12 @@ class TexturePacker extends Component {
 
         <div ref="imagesBox" className="images-box">
 
-          <Sortable className="images">
+          <Sortable className="images" option={{onEnd:this.sortEnd.bind(this)}}>
             {imgUrls.map((imgUrl,i)=>{
 
-              var key = `img${i}`;
+              var key = `img${imgUrl}`;
+
+              console.log(imgUrl);
 
               return (
                 <li key={key}>
