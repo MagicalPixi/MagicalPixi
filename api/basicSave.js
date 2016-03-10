@@ -11,25 +11,35 @@ module.exports = function (req, res) {
   var name = req.body.name;
   var pngBase64 = req.body.png;
   var json = req.body.json;
+  var originImgUrls = req.body.originImgUrls;
+
+  console.log(originImgUrls);
 
   json = JSON.parse(json);
 
-  saveImageByBase64(pngBase64).then(function (filename) {
+  saveImageByBase64(pngBase64).then(function (pngResult) {
+
+    var filename = pngResult.filename;
+    var pngUrl = pngResult.resourcePngUrl;
 
     json.meta.image = filename;
 
     console.log('filename:',filename);
 
-    savePixiJson(json).then(function (jsonFilename,jsonUrl) {
+    savePixiJson(json).then(function (jsonResult) {
+
+      var jsonFilename = jsonResult.jsonName;
+      var jsonUrl = jsonResult.resourceJsonUrl;
 
       var resourceName = jsonFilename.replace('.json','');
 
       console.log('jsonFilename:',jsonFilename);
 
-      Basic.insertOne({
+      Basic.save({
         name,
         resourceName,
-        resourceUrl:jsonUrl
+        resourceUrl:jsonUrl,
+        originImgUrls
       }).then(function (result) {
 
         res.json({
