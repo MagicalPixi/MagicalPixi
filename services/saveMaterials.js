@@ -6,21 +6,11 @@
  */
 var path = require('path');
 var fs = require('fs');
+var utils = require('./utils');
 
 var imagesDir = 'materials/';
 var userDirDefault = 'admin';
 var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
-
-var dirExists = function (dir,cb) {
-  fs.exists(dir, function (exists) {
-    if(!exists){
-      fs.mkdir(dir, function () {
-        cb && cb();
-      });
-    }
-    cb && cb();
-  });
-};
 
 var saveImg = function saveImg(dir,file){
 
@@ -42,7 +32,6 @@ var saveImg = function saveImg(dir,file){
 
   return new Promise(function(resolve){
 
-    dirExists(finalDir, function () {
 
       var writeStream = fs.createWriteStream(targetFilePath);
       var readStream = fs.createReadStream(file.path);
@@ -58,7 +47,6 @@ var saveImg = function saveImg(dir,file){
       });
 
       readStream.pipe(writeStream);
-    });
   });
 };
 
@@ -66,6 +54,6 @@ saveImg.userDirDefault = userDirDefault;
 saveImg.publicImageDir = '/'+imagesDir;
 
 //自动生成images文件夹，防止error
-dirExists(projectImagesDir);
+utils.dirExists(projectImagesDir);
 
 module.exports = saveImg;

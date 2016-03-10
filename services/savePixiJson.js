@@ -4,12 +4,15 @@ var _ = require('lodash');
 
 var path = require('path');
 var fs = require('fs');
+var utils = require('./utils');
 
 var urlPathPre = '/public/basic/';
 
 var dir = path.resolve(__dirname,'../public/basic/');
 
 var imageExt = /\.(png|jpg|gif)/;
+
+utils.dirExists(dir);
 
 module.exports = function (pixiJson) {
 

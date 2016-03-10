@@ -3,9 +3,12 @@
 var path = require('path');
 var fs = require('fs');
 
+var utils = require('./utils');
+
 var urlPathPre = '/public/basic/';
 
 var dir = path.resolve(__dirname,'../public/basic/');
+
 
 var countName = 0;
 
@@ -26,6 +29,8 @@ var savePngName = function (name,suffix) {
 
   return `${name}_${timeStamp}_${++countName}.${suffix}`;
 };
+
+utils.dirExists(dir);
 
 module.exports = function (base64,option) {
 
