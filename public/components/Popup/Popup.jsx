@@ -17,40 +17,39 @@ class Popup extends React.Component {
 
   componentDidMount(){
 
-    let contentChild = this.refs.content.children[0];
-
-    if(!contentChild){
-      return;
-    }
-    let oldStyle = this.state.style;
-
-    //以下一系列居中运算
-    let windowHeight = window.innerHeight;
-
-    let childStyle = getComputedStyle(contentChild);
-
-    let top = (parseInt(windowHeight) - parseInt(childStyle.height)) /2;
-
-    if(top < 0){
-      top = 10;
-    }
-
-    let marginLeft = -parseInt(oldStyle.width) / 2;
-
-
-    top += 'px';
-    marginLeft += 'px';
-
-    let newStyle = Object.assign({},{
-      top,
-      marginLeft
-    },oldStyle);
-
-    if(oldStyle.top !== newStyle.top || oldStyle.marginLeft !== newStyle.marginLeft){
-      this.setState({
-        style:newStyle
-      });
-    }
+    //let contentChild = this.refs.content.children[0];
+    //
+    //if(!contentChild){
+    //  return;
+    //}
+    //let oldStyle = this.state.style;
+    //
+    ////以下一系列居中运算
+    //let windowHeight = window.innerHeight;
+    //
+    //let childStyle = getComputedStyle(contentChild);
+    //
+    //let top = (parseInt(windowHeight) - parseInt(childStyle.height)) /2;
+    //
+    //if(top < 0){
+    //  top = 10;
+    //}
+    //
+    //let marginLeft = -parseInt(oldStyle.width) / 2;
+    //
+    //
+    //top += 'px';
+    //marginLeft += 'px';
+    //
+    //let newStyle = Object.assign({},{
+    //  top,
+    //},oldStyle);
+    //
+    //if(oldStyle.top !== newStyle.top || oldStyle.marginLeft !== newStyle.marginLeft){
+    //  this.setState({
+    //    style:newStyle
+    //  });
+    //}
   }
 
   componentDidUpdate(){
