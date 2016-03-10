@@ -13,6 +13,8 @@ export function initBasicData(){
 
       let basics = data.result;
 
+      basics.originImgUrls = JSON.parse(basics.originImgUrls);
+
       dispatch({
         type:BASIC_INIT,
         basics
@@ -22,7 +24,7 @@ export function initBasicData(){
 }
 
 /**
- * 新增一个原始材料
+ * 新增一个原始材料,如果有_id,则说明是更新
  *
  * @param basic
  *    name
@@ -34,7 +36,7 @@ export function basicAdd(basic={}){
 
   return (dispatch,getState)=>{
 
-    var basicList = getState().basics;
+    var basicList = getState().basics.filter(basicObj=> basicObj._id !== basic._id);
 
     basic.name = getNoRepeatName(
       basicList.map(basicObj=>basicObj.name),
@@ -42,9 +44,11 @@ export function basicAdd(basic={}){
     );
 
     var param = {
+      _id:basic._id,
       name:basic.name,
       png:basic.base64,
       json:basic.pixiJson,
+      originImgUrls:JSON.stringify(basic.originImgUrls)
     };
 
     if(['name','base64','pixiJson'].every(k=>basic[k])){
@@ -53,7 +57,7 @@ export function basicAdd(basic={}){
         .post(param)
         .then(function (saveResult) {
 
-          var pngUrl = saveResult.resourceUrl.replace('.json','.png');
+          var pngUrl = saveResult.result.resourceUrl.replace('.json','.png');
 
           dispatch({
             type: BASIC_ADD,
