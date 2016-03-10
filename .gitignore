@@ -62,6 +62,13 @@ public/js/API.js
 
 public/basic
 
+*.png
+
+*.json
+
+!bower.json
+!package.json
+
 re.js
 
 npm-debug.log
