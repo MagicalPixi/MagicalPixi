@@ -51,7 +51,10 @@ module.exports = function (base64,option) {
       if(err){
         throw err
       }
-      resolve(filename,`${urlPathPre}${filename}`);
+      resolve({
+        filename,
+        resourcePngUrl:`${urlPathPre}${filename}`
+      });
     });
   });
 

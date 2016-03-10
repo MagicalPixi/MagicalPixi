@@ -32,7 +32,10 @@ module.exports = function (pixiJson) {
       if(err){
         throw err
       }
-      resolve(jsonName,`${urlPathPre}${jsonName}`);
+      resolve({
+        jsonName,
+        resourceJsonUrl:`${urlPathPre}${jsonName}`
+      });
     });
   })
 };
