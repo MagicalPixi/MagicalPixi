@@ -128,9 +128,7 @@ class TexturePacker extends Component {
           <Sortable className="images" option={{onEnd:this.sortEnd.bind(this)}}>
             {imgUrls.map((imgUrl,i)=>{
 
-              var key = `img${imgUrl}`;
-
-              console.log(imgUrl);
+              var key = `img${i}`;
 
               return (
                 <li key={key}>
