@@ -22,7 +22,7 @@ class App extends Component {
     let {basics,actions} = this.props;
 
     return (
-      <BasicList data={basics} actions={actions} />
+      <BasicList data={basics.slice().reverse()} actions={actions} />
     )
   }
 }
