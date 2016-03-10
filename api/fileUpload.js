@@ -15,6 +15,8 @@ module.exports = [multipart(),function(req,res){
 
   var dir = (req.userFlag || saveMaterials.userDirDefault) + '/';
 
+  console.log(req.files.png);
+
   var allP = _.filter([
     json,
     image,
