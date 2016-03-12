@@ -87,7 +87,7 @@ module.exports = function (collectionName,extraProperties) {
   var model = ['insertOne','findOne'].map(function (funName) {
 
     return {
-      [funName]:function (arg) {
+      [funName](arg) {
         return new Promise((resolve)=>{
           db((collection)=>{
 
