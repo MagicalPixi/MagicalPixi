@@ -32,7 +32,7 @@ export function sceneNew(){
 
 export function sceneTitle(title){
 
-  title = title.replace('%','')
+  title = title.replace('%','');
 
   return {
     type:SCENE_TITLE,

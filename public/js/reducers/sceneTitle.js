@@ -1,7 +1,8 @@
 /**
  * Created by zyg on 16/2/22.
  */
-import { SCENE_TITLE } from '../constants/sceneTypes'
+import { SCENE_TITLE,INIT_SCENES } from '../constants/sceneTypes'
+import {INIT_SCENE} from '../constants/gameviewTypes'
 import reducerHandlerBuild from '../../common/reducerHandlerBuild'
 
 const handler = {
@@ -9,6 +10,10 @@ const handler = {
   [SCENE_TITLE](state,{title}){
 
     return title ? title : state;
+  },
+  [INIT_SCENE](state,{sceneTitle}){
+
+    return sceneTitle ? sceneTitle : state;
   }
 };
 

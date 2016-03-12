@@ -102,11 +102,13 @@ export function initViewData(id){
       id
     }).then(data=>{
 
-      let viewData = JSON.parse(data.result.viewData);
+      var sceneTitle = data.result.sceneTitle;
+      var viewData = JSON.parse(data.result.viewData);
 
       dispatch({
         type:INIT_SCENE,
-        viewData
+        viewData,
+        sceneTitle
       })
     })
   }
