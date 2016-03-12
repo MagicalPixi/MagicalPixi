@@ -1,17 +1,16 @@
 /**
  * Created by zyg on 16/1/1.
  */
-
 var fs = require('fs');
 var path = require('path');
-
-var _ = require('lodash');
 
 var apiDir = '../../api/';
 
 var apiList = fs.readdirSync(path.resolve(__dirname,apiDir));
 
-var outputs = _.map(apiList, function (apiOne) {
+var outputs = apiList.filter(function (filename) {
+  return !/^\./.test(filename);
+}).map(function (apiOne) {
 
   return [
     apiOne.replace('.js',''),
