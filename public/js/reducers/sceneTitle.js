@@ -2,7 +2,7 @@
  * Created by zyg on 16/2/22.
  */
 import { SCENE_TITLE,INIT_SCENES } from '../constants/sceneTypes'
-import {INIT_SCENE} from '../constants/gameviewTypes'
+import {INIT_SCENE} from '../constants/gameViewTypes'
 import reducerHandlerBuild from '../../common/reducerHandlerBuild'
 
 const handler = {

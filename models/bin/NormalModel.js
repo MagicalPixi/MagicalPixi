@@ -15,7 +15,7 @@ var insertOne = (collection,arg,resolve) => {
   collection.insertOne(arg, function (err,result) {
     if(err){throw err;}
 
-    resolve(result.result);
+    resolve(result);
   });
 };
 
