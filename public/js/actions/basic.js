@@ -49,6 +49,7 @@ export function basicAdd(basic={}){
 
     var param = {
       _id:basic._id,
+      type:basic.type,
       name:basic.name,
       png:basic.base64,
       json:basic.pixiJson,
@@ -61,12 +62,12 @@ export function basicAdd(basic={}){
         .post(param)
         .then(function (saveResult) {
 
-          var pngUrl = saveResult.result.resourceUrl.replace('.json','.png');
+          var resourceUrl = saveResult.result.resourceUrl;
 
           dispatch({
             type: BASIC_ADD,
             basic: Object.assign({
-              pngUrl
+              resourceUrl
             }, basic)
           });
         });

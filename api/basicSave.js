@@ -9,6 +9,7 @@ var savePixiJson = require('../services/savePixiJson');
 module.exports = function (req, res) {
 
   var _id = req.body._id;
+  var type = req.body.type;
   var name = req.body.name;
   var pngBase64 = req.body.png;
   var json = req.body.json;
@@ -25,44 +26,58 @@ module.exports = function (req, res) {
 
     json.meta.image = filename;
 
-    console.log('filename:',filename);
+    return Promise.race([
+      new Promise(function (resolve) {
+        if(type === 'mc'){
+          savePixiJson(json).then(function (jsonResult) {
 
-    savePixiJson(json).then(function (jsonResult) {
+            var jsonFilename = jsonResult.jsonName;
+            var jsonUrl = jsonResult.resourceJsonUrl;
 
-      var jsonFilename = jsonResult.jsonName;
-      var jsonUrl = jsonResult.resourceJsonUrl;
+            resolve({
+              filename:jsonFilename,
+              resourceUrl:jsonUrl
+            });
+          });
+        }
+      }),
+      new Promise(function(resolve){
+        if(type === 'im'){
+          resolve({
+            filename,
+            resourceUrl:pngUrl
+          });
+        }
+      })
+    ]);
 
-      var resourceName = jsonFilename.replace('.json','');
+  }).then(function (result) {
 
-      console.log('jsonFilename:',jsonFilename);
+    console.log('save pre:',result);
 
-      Basic.save({
-        _id,
-        name,
-        resourceName,
-        resourceUrl:jsonUrl,
-        originImgUrls
-      }).then(function (result) {
+    var resourceUrl = result.resourceUrl;
+    var resourceName = resourceUrl.replace(/\.(json|png)/, '');
 
-        res.json({
-          result:{
-            name,
-            resourceName,
-            resourceUrl:jsonUrl
-          }
-        });
-
-      }).catch(function (err3) {
-        console.log('Basic.insertOne',err3);
-
-        res.json({err3})
-      });
-
-    }).catch(function (err2) {
-      console.log('savePixi',err2);
-
-      res.json({err2})
+    return Basic.save({
+      _id,
+      type,
+      name,
+      resourceName,
+      resourceUrl,
+      originImgUrls
     });
+  }).then(function (result) {
+
+    var savedObj = result.ops[0];
+
+    res.json({
+      result: {
+        name,
+        resourceName:savedObj.name,
+        resourceUrl:savedObj.resourceUrl,
+      }
+    });
+
   }).catch(function (err1) {
     console.log('saveBase64',err1);
 

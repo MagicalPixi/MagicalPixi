@@ -64,16 +64,26 @@ class TexturePacker extends Component {
       })
     })).then(imgObjs=>{
 
-      var wrapperedImages = wrapperImages(imgObjs);
+      var type = ''; //mc精灵,im图片
 
-      var base64 = getBase64FromImages(wrapperedImages);
-      var pixiJson = getPixiJsonFromImages(wrapperedImages);
+      var afterWrapperImages = wrapperImages(imgObjs);
+
+      var base64 = getBase64FromImages(afterWrapperImages);
+
+      var pixiJson = getPixiJsonFromImages(afterWrapperImages);
+
+      if(imgUrls.length > 1){
+        type = 'mc';
+      }else{
+        type = 'im';
+      }
 
       this.props.onCompleted({
+        type,
         name,
         base64,
         pixiJson,
-        originImgUrls:imgUrls
+        originImgUrls:imgUrls,
       });
     });
   }
@@ -147,7 +157,7 @@ class TexturePacker extends Component {
 
 TexturePacker.defaultProps = {
   name:'新建素材名',
-  imgUrls:[]
+  imgUrls:[],
 };
 
 TexturePacker.propTypes = {
