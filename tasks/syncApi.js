@@ -5,7 +5,7 @@ var _ = require('lodash');
 var fs = require('fs');
 var path = require('path');
 
-var outputEnv = path.resolve(__dirname,'../public/js/API.js');
+var outputEnv = path.resolve(__dirname,'../public/libs/API.js');
 
 var pre = 'module.exports=';
 

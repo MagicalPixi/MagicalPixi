@@ -1,0 +1,12 @@
+@import "../../../styles/core/variables";
+
+.flex-box{
+
+  height: 100%;
+  display:flex;
+
+  > * {
+    flex: 1;
+    height: 100%;
+  }
+}

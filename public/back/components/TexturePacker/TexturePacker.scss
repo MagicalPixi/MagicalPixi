@@ -1,0 +1,89 @@
+@import "../../../styles/core/variables.scss";
+
+#texturePacker {
+  background-color: #fff;
+
+  .top {
+    padding: 10px;
+
+    h3 {
+
+      transform: translate(-50%,0);
+
+      float: left;
+      position: relative;
+      left: 50%;
+    }
+
+    .operations{
+      float: right;
+
+      button{
+        margin-left: 10px;
+      }
+    }
+    
+    &:after{
+      content: '';
+      display: inline-block;
+      clear: left;
+    }
+  }
+
+  .images-box {
+
+    padding: $padding2;
+
+    .images {
+      background-color: #e5e5e5;
+      padding: $padding2;
+      min-height: 200px;
+      overflow: hidden;
+
+      > li {
+        background-color: #fff;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        width: 120px;
+        height: 189px;
+        float: left;
+        overflow: hidden;
+
+        position: relative;
+
+        cursor: move;
+
+        img{
+          width: 100%;
+        }
+
+        .close{
+          background-color: red;
+          width: 25px;
+          height: 25px;
+
+          display: none;
+
+          position: absolute;
+          right: 0;
+        }
+      }
+      > li.add-png{
+        background-color: #04BE02;
+      }
+
+      > li:hover{
+
+        .close{
+          display: block;
+        }
+      }
+    }
+    .images:after{
+      content: '';
+      clear: both;
+      float: left;
+    }
+  }
+}
+

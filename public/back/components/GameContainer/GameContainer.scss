@@ -1,0 +1,15 @@
+@import "../../../styles/core/variables";
+
+#gameContainer{
+
+
+  display: flex;
+  flex-direction: column;
+
+  &:before{
+    flex: 1;
+  }
+  &:after{
+    flex: 1;
+  }
+}
