@@ -12,11 +12,11 @@ lowerfirstChar=$(echo $firstChar | tr "[A-Z]" "[a-z]")
 componentName="$upperfirstChar$other"
 componentNameId="$lowerfirstChar$other"
 
-mkdir public/components/$componentName
+mkdir public/back/components/$componentName
 
-indexJSX="public/components/$componentName/index.jsx"
-componentJSX="public/components/$componentName/$componentName.jsx"
-componentSCSS="public/components/$componentName/$componentName.scss"
+indexJSX="public/back/components/$componentName/index.jsx"
+componentJSX="public/back/components/$componentName/$componentName.jsx"
+componentSCSS="public/back/components/$componentName/$componentName.scss"
 
 touch $indexJSX
 touch $componentJSX
@@ -27,12 +27,15 @@ componentTmp="require('./$componentName.scss'); \n\r
 import React,{Component} from 'react' \n
 import ReactDOM from 'react-dom' \n
 const T = React.PropTypes; \n\r
-
+var propTypes = { \n
+}; \n\r
+var defaultProps = { \n
+}; \n\r
 class $componentName extends Component { \n
     constructor(props){ \n
-        super(props) \n
+        super(props); \n
         this.state = {\n\r
-        } \n
+        }; \n
     } \n
     render(){ \n
         return ( \n
@@ -42,12 +45,12 @@ class $componentName extends Component { \n
     } \n
 } \n
 
-$componentName.propTypes = { \n
-}; \n
+$componentName.propTypes = propTypes; \n\r
+$componentName.defaultProps = defaultProps; \n\r
 
 module.exports = $componentName;"
 
-scssTmp="@import \"../../styles/core/variables.scss\"; \n\r
+scssTmp="@import \"../../../styles/core/variables.scss\"; \n\r
 #$componentNameId{ \n\r
 
 }\n
