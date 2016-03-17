@@ -15,6 +15,7 @@ import {routerBuild} from '../../../common/routerBuild'
 
 import defaultRouterComponent from './console'
 
+import buildRouterList from '../../../common/buildRouterList'
 //log(ReactRouter);
 //log(ReactRouter.browserHistory,browserHistory);
 //
@@ -24,19 +25,7 @@ let routerList = [
   <IndexRoute key="route0" component={defaultRouterComponent} />
 ];
 
-routerList = routerList.concat(_.filter(routersLoad.keys(),(key)=>{
-  return !/index\.js$/.test(key);
-}).map((key,i)=>{
-  return {
-    path:key.replace('./','').replace(/\.js|\.jsx$/,''),
-    component:routersLoad(key)
-  }
-}).map(({path,component},i)=>{
-  i += 1;
-  return (
-    <Route key={'route'+i} path={path} component={component} />
-  )
-}));
+routerList = routerList.concat(buildRouterList(routersLoad));
 
 //
 //let history  = createHistory();

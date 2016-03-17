@@ -10,24 +10,15 @@ import { syncHistory, routeReducer } from 'react-router-redux'
 
 import {mainReducers} from '../reducers'
 import {routerBuild,createMyStore} from '../../../common/routerBuild'
+
+import buildRouterList from '../../../common/buildRouterList'
 //
 //log(ReactRouter);
 //log(ReactRouter.browserHistory,browserHistory);
 //
 let routersLoad = require.context('./',false,/\.js|\.jsx$/);
 
-let routerList = _.filter(routersLoad.keys(),(key)=>{
-  return !/index\.js$/.test(key);
-}).map((key,i)=>{
-  return {
-    path:key.replace('./','').replace(/\.js|\.jsx$/,''),
-    component:routersLoad(key)
-  }
-}).map(({path,component},i)=>{
-  return (
-    <Route key={'route'+i} path={path} component={component} />
-  )
-});
+let routerList = buildRouterList(routersLoad);
 //
 //let history  = createHistory();
 //
@@ -65,7 +56,8 @@ let myStore = createMyStore(mainReducers,{
 
   initialState:{
     scenes:[],
-    basics:[]
+    basics:[],
+    materials:[],
   }
 });
 
