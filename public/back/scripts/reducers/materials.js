@@ -4,7 +4,7 @@ import reducerHandlerBuild from '../../../common/reducerHandlerBuild'
 
 var handler = {
   [MATERIAL_LIST](state,action){
-    return action.materials ? state : action.materials.slice();
+    return action.materials ? action.materials.slice() : state;
   }
 };
 

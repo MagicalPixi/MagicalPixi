@@ -12,9 +12,12 @@ export function initMaterialsList() {
 
     ajax(API.materialsList)
       .get({})
-      .then(function (result) {
+      .then(function (returnData) {
 
-        log(result);
+        dispatch({
+          type:MATERIAL_LIST,
+          materials:returnData.result
+        })
 
       });
   }
