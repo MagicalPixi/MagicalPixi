@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Route} from 'react-router'
 
 /**
  * 根据require的context, 建立react-router 路由列表，
