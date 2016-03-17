@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as SceneActions from '../actions/scene'
 
-const T = React.PropTypes;
+import SceneList from '../../components/ScenesList'
 
-let SceneList = require('../../components/ScenesList/index');
+const T = React.PropTypes;
 
 class App extends Component {
 

@@ -1,43 +1,50 @@
 /**
  * Created by zyg on 16/1/20.
  */
-let React = require('react');
+import React,{Component} from 'react'
 
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-let SpritePreview = require('../../components/SpritePreview/index');
-let SpritePreViewF = React.createFactory(SpritePreview);
+import MaterialsList from '../../components/MaterialsList/index'
 
-let MaterialsList = require('../../components/MaterialsList/index');
+import * as MaterialsActions from '../actions/materials'
 
-let API = require('../../../libs/API');
-
-class Sprite extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      materialsList:[]
-    }
-  }
+class App extends Component {
 
   componentDidMount(){
 
-    ajax(API.materialsList).get().then((r)=>{
+    var {actions} = this.props;
 
-      this.setState({
-        materialsList: r.result.reverse()
-      })
-    })
+    actions.initMaterialsList();
   }
 
   render(){
-    let {materialsList} = this.state;
+    let {materials,actions} = this.props;
 
     return (
       <div>
-        <MaterialsList data={materialsList} />
+        <MaterialsList data={materials} actions={actions}/>
       </div>
     )
   }
 }
 
-module.exports = Sprite;
+function mapStateToProps(state) {
+  return {
+    scenes: state.scenes
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(MaterialsActions, dispatch)
+  }
+}
+
+let ConnectApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+module.exports = ConnectApp;
