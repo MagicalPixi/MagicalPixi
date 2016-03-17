@@ -13,7 +13,7 @@ let pixiContainersManager = require('../../../common/pixiContainersManager');
 
 let CascadeList = require('./CascadeList');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../../common/previewConfig');
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../SpritePreview/previewConfig');
 
 class GameView extends React.Component {
 
