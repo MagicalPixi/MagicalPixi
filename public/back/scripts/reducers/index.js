@@ -14,12 +14,12 @@ export const editReducers = {
   consoleTab,
   consoleData,
   sceneTitle,
-  materials,
 };
 
 export const mainReducers = {
   scenes,
-  basics
+  basics,
+  materials,
 };
 
 export const rootReducer = combineReducers(mainReducers);
