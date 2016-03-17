@@ -3,7 +3,7 @@ require('./settingList.scss');
 let PIXI = require('pixi');
 let React = require('react');
 
-let {settingListConfigMap} = require('./../../../common/previewConfig');
+let {settingListConfigMap} = require('./previewConfig');
 
 class SettingList extends React.Component {
 

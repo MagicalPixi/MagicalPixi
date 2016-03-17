@@ -4,7 +4,7 @@
 let PIXI = require('pixi');
 let loadResource = require('./loadResource');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../back/components/SpritePreview/previewConfig');
 
 let removeByIndex = function (array,index) {
   return array.splice(index,1);
