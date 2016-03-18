@@ -50,7 +50,9 @@ var saveFn = (db) => {
                     throw err;
                   }
 
-                  resolve(result.result);
+                  resolve(Object.assign(result,{
+                    ops:[arg]
+                  }));
                 })
 
               } catch (e) {
@@ -70,16 +72,16 @@ var saveFn = (db) => {
       });
     });
   };
-}
+};
 
 var findFn = (db) => (arg) => {
   return new Promise((resolve)=>{
     db(collection=>{
 
-      resolve(collection.find(arg))
-    })
-  })
-}
+      resolve(collection.find(arg));
+    });
+  });
+};
 
 module.exports = function (collectionName,extraProperties) {
   var db = Model.db(collectionName);
