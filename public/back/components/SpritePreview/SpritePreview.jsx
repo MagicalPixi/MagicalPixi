@@ -5,17 +5,20 @@ let PIXI = require('pixi');
 let pixiLib = require('pixi-lib');
 let React = require('react');
 
-let utils = require('../../../common/utils');
-
-let Popup = require('../Popup/index');
+var T = React.PropTypes;
+window.T = T;
+let Popup = require('../Popup');
 
 let FileUpload = require('../../componentsFunctional/FileUpload');
-let SettingList = require('./SettingList');
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
+
+let SettingList = require('./SettingList');
+
+let SelectBasicResource = require('../SelectBasicResource');
 
 let loadResource = require('../../../common/loadResource');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../../../common/previewConfig');
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
 
 let getSpriteTpeByUrl  = (url)=>{
 
@@ -26,13 +29,26 @@ let getSpriteTpeByUrl  = (url)=>{
     im.test(url)?SPRITE_IM:null;
 };
 
+var propTypes = {
+  resources:T.array,
+  id:T.string,
+  resourcesUrl:T.string,
+  type:T.string,
+  properties:T.oneOfType([T.object,T.string]),
+};
+
+
+var defaultProps = {
+  resourceUrl:'',
+  properties:{},
+};
 
 class SpritePreview extends React.Component {
 
   constructor(props){
     super(props);
 
-    let {id,resourceUrl='',type,properties={}} = props;
+    let {id,resourceUrl,type,properties} = props;
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
@@ -150,19 +166,35 @@ class SpritePreview extends React.Component {
     }
   }
 
+  selectBasicResource(basicResourceObj){
+    if(basicResourceObj){
+      this.onUploadCompleted(basicResourceObj.resourceUrl)
+    }
+  }
+
   render(){
-    let {init,spriteType,spriteDisplayObjProperties} = this.state;
+    var {init,spriteType,spriteDisplayObjProperties} = this.state;
+
+    var {resources} = this.props;
 
     return (
       <div id="mpSpritePreviewBox" data-init={init}>
         <h3>精灵</h3>
 
         <div className="container">
-          <FileUpload onUploadCompleted={this.onUploadCompleted.bind(this)}>
-            <div ref="previewContainer" className="preview-container">
+          <div className="preview-container-box" >
 
+            <div className="selectBasicResource">
+              <SelectBasicResource
+                resources={resources}
+                onSelect={this.selectBasicResource.bind(this)}
+              />
             </div>
-          </FileUpload>
+
+            <div ref="previewContainer" className="preview-container">
+            </div>
+
+          </div>
 
           <SettingList spriteType={spriteType} spriteProperties={spriteDisplayObjProperties}
                        changeSetting={this.setPropertyTo.bind(this)} />
@@ -180,11 +212,12 @@ class SpritePreview extends React.Component {
   }
 }
 
-let SpritePreviewFn = React.createFactory(SpritePreview);
+SpritePreview.defaultProps = defaultProps;
+SpritePreview.propTypes = propTypes;
+
+var SpritePreviewFn = React.createFactory(SpritePreview);
 
 module.exports = (props) => {
 
-  return Popup(SpritePreviewFn(props),{
-    width:'650px'
-  });
+  return Popup(SpritePreviewFn(props));
 };
