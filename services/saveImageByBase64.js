@@ -5,7 +5,7 @@ var fs = require('fs');
 
 var utils = require('./utils');
 
-var urlPathPre = '/public/basic/';
+var urlPathPre = '/basic/';
 
 var dir = path.resolve(__dirname,'../public/basic/');
 

@@ -67,7 +67,6 @@ module.exports = function (req, res) {
       originImgUrls
     });
   }).then(function (result) {
-
     var savedObj = result.ops[0];
 
     res.json({
@@ -79,7 +78,7 @@ module.exports = function (req, res) {
     });
 
   }).catch(function (err1) {
-    console.log('saveBase64',err1);
+    console.log('saveBasic',err1);
 
     res.json({err1})
   });
