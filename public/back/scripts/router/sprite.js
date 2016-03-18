@@ -25,13 +25,13 @@ class App extends Component {
   }
 
   render(){
-    let {materials,actions} = this.props;
+    let {materials,basics,actions} = this.props;
 
     log('materials',materials);
 
     return (
       <div>
-        <MaterialsList data={materials} actions={actions}/>
+        <MaterialsList data={materials} basics={basics}  actions={actions}/>
       </div>
     )
   }

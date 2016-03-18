@@ -3,16 +3,33 @@ require('./MaterialsList.scss');
 
 let React = require('react');
 
+const T = React.PropTypes;
+
 let ItemList = require('../../componentsLayout/ItemList');
 
-let SpritePreview = require('../SpritePreview/index');
+let SpritePreview = require('../SpritePreview');
 let Download = require('../../componentsFunctional/Download');
 let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
+
+
+var propTypes = {
+  data:T.array.isRequired,
+  basics:T.array
+};
+
+var defaultProps = {
+  data:[],
+  basics:[],
+};
 
 class MaterialsList extends React.Component {
 
   newMaterial(){
-    SpritePreview();
+    var {basics} = this.props;
+
+    SpritePreview({
+      resources:basics
+    });
   }
 
   edit(_id,resourceUrl,type,properties){
@@ -25,6 +42,9 @@ class MaterialsList extends React.Component {
   }
 
   render(){
+
+    var { data,resources} = this.props;
+
     return (
       <div id="mpMaterialsList" >
         <header className="top-container">
@@ -38,7 +58,7 @@ class MaterialsList extends React.Component {
         </header>
 
         <ItemList>
-          {this.props.data.map((sprite,i)=>{
+          {data.map((sprite,i)=>{
 
             let {_id,name,resourceUrl,type,properties} = sprite;
 
@@ -75,5 +95,8 @@ class MaterialsList extends React.Component {
     )
   }
 }
+
+MaterialsList.defaultProps = defaultProps;
+MaterialsList.propTypes = propTypes;
 
 module.exports = MaterialsList;
