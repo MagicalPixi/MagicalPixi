@@ -1,6 +1,46 @@
 @import "../../../styles/core/variables.scss";
 
- #selectBasicResource{ 
+#selectBasicResource {
+  height: 100%;
+  .resources {
+    padding: 0 6px;
+    height: 100%;
+    overflow-y: scroll;
+    > li{
+      background-color: #fff;
+      margin:8px 1% 0 1%;
+      border-radius: 4px;
+      padding-top: 23%;
+      width: 23%;
 
- }
+      position: relative;
+
+      float: left;
+
+      cursor: pointer;
+
+      img{
+        width: 100%;
+        position: absolute;
+        top: 0;
+      }
+      .name{
+        border-top: 1px solid $grayLight;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 12px;
+        overflow: hidden;
+
+        position: relative;
+      }
+    }
+    &:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+}
 
