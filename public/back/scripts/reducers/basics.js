@@ -1,4 +1,4 @@
-import { BASIC_INIT,BASIC_ADD} from '../constants/basic'
+import { BASIC_INIT,BASIC_ADD} from '../constants/basicTypes'
 import reducerHandlerBuild from '../../../common/reducerHandlerBuild'
 
 const handler = {
