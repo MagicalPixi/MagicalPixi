@@ -4,10 +4,11 @@ import viewData from './viewData'
 import consoleTab from './consoleTab'
 import consoleData from './consoleData'
 import sceneTitle from './sceneTitle'
-import materials from './materials'
 
 import scenes from './scenes'
 import basics from './basics'
+import materials from './materials'
+import players from './players'
 
 export const editReducers = {
   viewData,
@@ -20,6 +21,7 @@ export const mainReducers = {
   scenes,
   basics,
   materials,
+  players,
 };
 
 export const rootReducer = combineReducers(mainReducers);
