@@ -58,6 +58,7 @@ let myStore = createMyStore(mainReducers,{
     scenes:[],
     basics:[],
     materials:[],
+    players:[],
   }
 });
 
