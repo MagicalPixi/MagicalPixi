@@ -49,9 +49,7 @@ class MaterialsList extends React.Component {
       <div id="mpMaterialsList" >
         <header className="top-container">
 
-          <h3 className="title" >
-          精灵列表
-          </h3>
+          <h3 className="title" >精灵列表</h3>
 
           <button onClick={this.newMaterial.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建素材</button>
 
