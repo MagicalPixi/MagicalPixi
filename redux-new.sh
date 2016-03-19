@@ -37,5 +37,5 @@ export default reducerHandlerBuild(handler); "
 
 
 echo -e $actionTmp > $actionJs
-echo -e $constantTmp > $constantTmp
+echo $constantTmp > $constantJs
 echo -e $reducerTmp > $reducerJs

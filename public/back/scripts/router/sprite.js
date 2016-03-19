@@ -6,7 +6,7 @@ import React,{Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import MaterialsList from '../../components/MaterialsList/index'
+import MaterialsList from '../../components/MaterialsList'
 
 import * as MaterialsActions from '../actions/materials'
 import * as BasicActions from '../actions/basic'
