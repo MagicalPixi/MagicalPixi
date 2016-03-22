@@ -1,4 +1,57 @@
-@import "../../../styles/core/variables.scss"; 
- #playerPacker{ 
- }
+@import "../../../styles/core/variables.scss";
+
+#playerPacker {
+  background-color: #fff;
+  padding: $padding4;
+  width: 700px;
+
+  > h3{
+    margin-bottom: $margin2;
+  }
+
+
+  .frames{
+    border-bottom: 1px solid $grayLight;
+    ol{
+      &:after{
+        content:'';
+        display: block;
+        clear: both;
+      }
+      li{
+        background-color: $grayLight;
+        width: 3em;
+        height: 1.5em;
+        line-height: 1.5em;
+        text-align: center;
+        float: left;
+      }
+      li.active{
+        background-color: $themeColor;
+        color: #ffffff;
+      }
+    }
+  }
+
+  .setting-box{
+
+    display: flex;
+  }
+
+  #previewContainer{
+    width: 320px;
+    height: 504px;
+
+    canvas{
+      background-color: #F0F0F0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .operation{
+    background-color: blue;
+    height: 50px;
+  }
+}
 
