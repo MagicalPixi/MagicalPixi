@@ -9,6 +9,7 @@ import { connect } from 'react-redux'
 import PlayerList from '../../components/PlayerList'
 
 import * as PlayerActions from '../actions/player'
+import * as BasicActions from '../actions/basic'
 
 class App extends Component {
 
@@ -23,11 +24,11 @@ class App extends Component {
   }
 
   render(){
-    let {players,actions} = this.props;
+    let {players,basics,actions} = this.props;
 
     return (
       <div>
-        <PlayerList data={players}  actions={actions} />
+        <PlayerList data={players} basics={basics} actions={actions} />
       </div>
     )
   }
@@ -42,7 +43,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(PlayerActions, dispatch),
+    actions: bindActionCreators(
+      Object.assign({},PlayerActions,BasicActions),
+      dispatch
+    ),
   }
 }
 

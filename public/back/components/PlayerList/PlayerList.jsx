@@ -6,6 +6,9 @@ const T = React.PropTypes;
 
 import ItemList from '../../componentsLayout/ItemList'
 
+import Popup from '../Popup'
+import PlayerPacker from '../PlayerPacker'
+
 var propTypes = {};
 
 var defaultProps = {
@@ -18,6 +21,12 @@ class PlayerList extends Component {
     this.state = {};
 
     this.newOne = this.newOne.bind(this);
+  }
+
+  componentDidMount(){
+    var {basics} = this.props;
+
+    Popup(<PlayerPacker basics={basics}></PlayerPacker>)
   }
 
   newOne(){
