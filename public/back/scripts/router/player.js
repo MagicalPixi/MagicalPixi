@@ -20,7 +20,8 @@ class App extends Component {
     //初始化，精灵列表
     actions.initPlayerList();
 
-
+    //初始化，原始素材列表
+    actions.initBasicData();
   }
 
   render(){

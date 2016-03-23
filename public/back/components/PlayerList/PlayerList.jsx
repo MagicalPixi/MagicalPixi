@@ -12,7 +12,7 @@ import PlayerPacker from '../PlayerPacker'
 var propTypes = {};
 
 var defaultProps = {
-  data:[]
+  data:[],
 };
 
 class PlayerList extends Component {
@@ -26,7 +26,15 @@ class PlayerList extends Component {
   componentDidMount(){
     var {basics} = this.props;
 
-    Popup(<PlayerPacker basics={basics}></PlayerPacker>)
+    this.close = Popup(<PlayerPacker basics={basics}></PlayerPacker>)
+  }
+  componentDidUpdate(){
+    var {basics} = this.props;
+
+    if(this.close){
+      this.close();
+    }
+    this.close = Popup(<PlayerPacker basics={basics}></PlayerPacker>)
   }
 
   newOne(){

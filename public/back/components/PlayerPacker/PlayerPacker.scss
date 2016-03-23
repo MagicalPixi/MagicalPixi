@@ -50,8 +50,33 @@
   }
 
   .operation{
-    background-color: blue;
-    height: 50px;
+    flex:1;
+    position: relative;
+
+
+    .setting{
+      display: none;
+    }
+    .resource{
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top:0;
+      left: 0;
+
+      display: none;
+    }
+  }
+  .operation[data-setting="false"]{
+
+    .resource{
+      display: block;
+    }
+  }
+  .operation[data-setting="true"]{
+    .setting{
+      display: block;
+    }
   }
 }
 

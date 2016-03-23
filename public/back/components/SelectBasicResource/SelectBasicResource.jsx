@@ -25,8 +25,6 @@ class SelectBasicResource extends Component {
     var {resources,onSelect} = this.props;
     var index = parseInt(e.currentTarget.getAttribute('data-index'));
 
-    log(resources,index);
-
     onSelect(resources[index]);
   }
 
