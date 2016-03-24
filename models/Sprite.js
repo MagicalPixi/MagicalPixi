@@ -11,8 +11,9 @@ var db = Model.db(collectionName);
 var saveObjBuild = function (args) {
 
   var isLostArg = ['userFlag','type','name','properties','resourceUrl'].some(function (key) {
-    return args[key] !== undefined;
+    return args[key] === undefined;
   });
+
 
   if(isLostArg){
     return false;
