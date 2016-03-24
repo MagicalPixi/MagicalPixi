@@ -8,6 +8,9 @@ import pixiLib from 'pixi-lib'
 
 import Popup from '../Popup'
 
+import SpriteSetting from '../SpriteSetting'
+import {settingListConfigMap,SPRITE_IM,SPRITE_MC} from '../SpriteSetting/previewConfig'
+
 import SelectBasicResource from '../SelectBasicResource'
 
 var propTypes = {
@@ -41,6 +44,7 @@ class PlayerPacker extends Component {
     };
 
     this.selectBasic = this.selectBasic.bind(this);
+    this.spriteSetting = this.spriteSetting.bind(this);
   }
 
   componentDidMount() {
@@ -60,6 +64,9 @@ class PlayerPacker extends Component {
       childSprites,
       onSetting:true,
     });
+  }
+  spriteSetting(newProperties){
+    log(newProperties)
   }
   render() {
     var { basics } = this.props;
@@ -85,11 +92,19 @@ class PlayerPacker extends Component {
           </div>
 
           <div className="operation" data-setting={onSetting}>
-            <div className="setting">
+            <div className="setting-box">
               <p className="select-resource-png">
-                <span className="pre">所选资源：</span>
+                <span className="pre">所选资源:</span>
                 <img src={`${resourceName}.png`} />
               </p>
+
+              <div className="setting">
+                <SpriteSetting
+                  spriteType={SPRITE_MC}
+                  onChangeSetting={this.spriteSetting}
+                />
+              </div>
+
             </div>
             <div className="resource">
               <SelectBasicResource
