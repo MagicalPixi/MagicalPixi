@@ -1,18 +1,18 @@
 @import "../../../styles/core/variables";
 
 .properties-setting {
-  margin-left: $margin2;
-  width: $previewWidth;
-
-  position: absolute;
-  top: 0;
-  right: 0;
+  width: 100%;
+//  margin-left: $margin2;
+//  width: $previewWidth;
+//  position: absolute;
+//  top: 0;
+//  right: 0;
 
   .setting-item-one {
 
     > label {
-      padding-right: $padding2;
-      width: 130px;
+      padding-right: $spriteSettingPrePdr;
+      width: $spriteSettingPreWidth;
 
       white-space: nowrap;
       overflow: hidden;

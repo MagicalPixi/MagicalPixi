@@ -74,6 +74,14 @@
     }
   }
 
+  .sprite-setting-box{
+    margin-left: 10px;
+    width: $previewWidth;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
 
   .operation{
     margin-top: $margin3;
@@ -96,7 +104,7 @@
     display: none;
   }
 
-  .properties-setting{
+  .sprite-setting-box{
     display: block;
   }
 

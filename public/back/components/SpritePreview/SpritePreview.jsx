@@ -199,11 +199,13 @@ class SpritePreview extends React.Component {
 
           </div>
 
-          <SpriteSetting
-            spriteType={spriteType}
-            spriteProperties={spriteDisplayObjProperties}
-            changeSetting={this.setPropertyTo}
-          />
+          <div className="sprite-setting-box">
+            <SpriteSetting
+              spriteType={spriteType}
+              spriteProperties={spriteDisplayObjProperties}
+              onChangeSetting={this.setPropertyTo}
+            />
+          </div>
 
         </div>
 

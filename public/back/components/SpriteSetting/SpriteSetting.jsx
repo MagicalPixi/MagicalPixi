@@ -6,9 +6,10 @@ import {settingListConfigMap,SPRITE_IM,SPRITE_MC} from './previewConfig'
 var propTypes = {
  spriteType:PropTypes.oneOf([SPRITE_IM,SPRITE_MC]),
  spriteProperties:PropTypes.object,
- changeSetting:PropTypes.func.isRequired
+ onChangeSetting:PropTypes.func.isRequired
 };
 var defaultProps = {
+ spriteProperties:{}
 };
 
 class SpriteSetting extends React.Component {
@@ -17,7 +18,7 @@ class SpriteSetting extends React.Component {
   let inputDom = this.refs[refKey];
   let value = inputDom.value;
 
-  this.props.changeSetting({
+  this.props.onChangeSetting({
    [settingKey]:value
   });
  }
