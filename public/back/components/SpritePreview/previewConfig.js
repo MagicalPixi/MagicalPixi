@@ -60,7 +60,7 @@ let settingListConfigMap = ((spriteType)=> {
       checkbox: {
         'true': true,
         'false': false,
-        'default':true
+        'default':true,
       }
     },{
       name: 'play and Stop',
@@ -87,8 +87,6 @@ let settingListConfigMap = ((spriteType)=> {
     if (properties) {
 
       properties = properties.slice();
-
-      log(spriteProperties);
 
       _.map(Object.keys(spriteProperties), (key)=> {
         let defaultPropertyValue = spriteProperties[key];

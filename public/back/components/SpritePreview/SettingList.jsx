@@ -1,12 +1,17 @@
 require('./settingList.scss');
 
-let PIXI = require('pixi');
-let React = require('react');
+import React,{Component,PropTypes} from 'react'
+import {settingListConfigMap,SPRITE_IM,SPRITE_MC} from './previewConfig'
 
-let {settingListConfigMap} = require('./previewConfig');
+var propTypes = {
+  spriteType:PropTypes.oneOf([SPRITE_IM,SPRITE_MC]),
+  spriteProperties:PropTypes.object,
+  changeSetting:PropTypes.func.isRequired
+};
+var defaultProps = {
+};
 
 class SettingList extends React.Component {
-
 
   setting(refKey,settingKey){
     let inputDom = this.refs[refKey];
@@ -17,32 +22,41 @@ class SettingList extends React.Component {
     });
   }
 
-  checkboxSetting(refKey,checkBox){
+  checkboxSetting(refKey,settingKey,checkBox){
     let inputDom = this.refs[refKey];
     let checked = inputDom.checked;
 
-    log(checkBox,checkBox[checked],checked);
+    log(settingKey,checkBox[checked],checked);
+
+    if(!settingKey){
+      //true 对应 play方法，调用play
+      //false 对应 stop方法，调用stop
+      settingKey = checkBox[checkBox];
+    }
+
 
     this.props.changeSetting({
-      [checkBox[checked]]:checked
+      [settingKey]:checked
     });
   }
 
 
   inputBuild(settingOne,i){
-    let checked = false;
 
     let {name,key,checkbox,describe,value} = settingOne;
 
     let refKey = 'setting'+i;
 
-    let inputType = 'text';
-    let onChange = this.setting.bind(this,refKey,key);
+    let checked, inputType,onChange;
 
     if(checkbox){
-      checked = checkbox.default;
       inputType = 'checkbox';
-      onChange = this.checkboxSetting.bind(this,refKey,checkbox);
+      checked = value === undefined ? checkbox.default:!!value;
+      onChange = this.checkboxSetting.bind(this,refKey,key,checkbox);
+    }else{
+      inputType = 'text';
+      checked = false;
+      onChange = this.setting.bind(this,refKey,key);
     }
 
     return (
@@ -56,23 +70,24 @@ class SettingList extends React.Component {
 
     let settingListConfig = settingListConfigMap(spriteType,spriteProperties);
 
-    let settingList = settingListConfig.map((settingOne,i)=>{
-      let {name,key,checkbox,describe} = settingOne;
-
-      return (
-        <p className="setting-item-one" key={'keySetting'+i}>
-          <label htmlFor="name">{name}:</label>
-          {this.inputBuild(settingOne,i)}
-        </p>
-      )
-    });
-
     return (
       <div className="properties-setting">
-        {settingList}
+        {settingListConfig.map((settingOne,i)=>{
+          let {name,key,checkbox,describe} = settingOne;
+
+          return (
+            <p className="setting-item-one" key={'keySetting'+i}>
+              <label htmlFor="name">{name}:</label>
+              {this.inputBuild(settingOne,i)}
+            </p>
+          )
+        })}
       </div>
     );
   }
 }
+
+SettingList.propTypes = propTypes;
+SettingList.defaultProps = defaultProps;
 
 module.exports = SettingList;
