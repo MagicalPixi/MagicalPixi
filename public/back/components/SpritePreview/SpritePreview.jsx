@@ -12,13 +12,13 @@ let Popup = require('../Popup');
 let FileUpload = require('../../componentsFunctional/FileUpload');
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
-let SettingList = require('./SettingList');
+let SpriteSetting = require('../SpriteSetting');
+let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('../SpriteSetting/previewConfig');
 
 let SelectBasicResource = require('../SelectBasicResource');
 
 let loadResource = require('../../../common/loadResource');
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./previewConfig');
 
 let getSpriteTpeByUrl  = (url)=>{
 
@@ -199,7 +199,7 @@ class SpritePreview extends React.Component {
 
           </div>
 
-          <SettingList
+          <SpriteSetting
             spriteType={spriteType}
             spriteProperties={spriteDisplayObjProperties}
             changeSetting={this.setPropertyTo}
