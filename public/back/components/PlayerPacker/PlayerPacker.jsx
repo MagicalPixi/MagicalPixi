@@ -37,7 +37,7 @@ class PlayerPacker extends Component {
     this.state = {
       childSprites: props.childSprites,
       currentIndex: 0,
-      onSetting:false,
+      onSetting:true,
     };
 
     this.selectBasic = this.selectBasic.bind(this);
@@ -63,7 +63,11 @@ class PlayerPacker extends Component {
   }
   render() {
     var { basics } = this.props;
-    var {onSetting} = this.state;
+    var {currentIndex,onSetting,childSprites} = this.state;
+
+    var currentSettingObject = childSprites[currentIndex];
+
+    var { resourceName } = currentSettingObject.sprite;
 
     return (
       <div id="playerPacker">
@@ -82,7 +86,10 @@ class PlayerPacker extends Component {
 
           <div className="operation" data-setting={onSetting}>
             <div className="setting">
-
+              <p className="select-resource-png">
+                <span className="pre">所选资源：</span>
+                <img src={`${resourceName}.png`} />
+              </p>
             </div>
             <div className="resource">
               <SelectBasicResource

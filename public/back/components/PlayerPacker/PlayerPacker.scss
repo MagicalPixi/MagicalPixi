@@ -55,7 +55,18 @@
 
 
     .setting{
+      padding: $padding4;
+
       display: none;
+
+      .select-resource-png{
+        width: 100%;
+
+        img{
+          width: 100px;
+          vertical-align: middle;
+        }
+      }
     }
     .resource{
       width: 100%;

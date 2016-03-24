@@ -196,8 +196,11 @@ class SpritePreview extends React.Component {
 
           </div>
 
-          <SettingList spriteType={spriteType} spriteProperties={spriteDisplayObjProperties}
-                       changeSetting={this.setPropertyTo.bind(this)} />
+          <SettingList
+            spriteType={spriteType}
+            spriteProperties={spriteDisplayObjProperties}
+            changeSetting={this.setPropertyTo.bind(this)}
+          />
 
         </div>
 
