@@ -66,6 +66,11 @@ class SpritePreview extends React.Component {
     this.resourceUrl = resourceUrl;
 
     this.id = id;
+
+    this.setPropertyTo = this.setPropertyTo.bind(this);
+    this.selectBasicResource = this.selectBasicResource.bind(this);
+    this.buildPostParam = this.buildPostParam.bind(this);
+    this.onSavePropertiesCompleted = this.onSavePropertiesCompleted.bind(this);
   }
 
   componentDidMount(){
@@ -122,8 +127,6 @@ class SpritePreview extends React.Component {
   }
 
   setPropertyTo(properties={}){
-
-    log('properties:',properties);
 
     let { spriteDisplayObjProperties:oldProperties} = this.state;
 
@@ -187,7 +190,7 @@ class SpritePreview extends React.Component {
             <div className="selectBasicResource">
               <SelectBasicResource
                 resources={resources}
-                onSelect={this.selectBasicResource.bind(this)}
+                onSelect={this.selectBasicResource}
               />
             </div>
 
@@ -199,13 +202,13 @@ class SpritePreview extends React.Component {
           <SettingList
             spriteType={spriteType}
             spriteProperties={spriteDisplayObjProperties}
-            changeSetting={this.setPropertyTo.bind(this)}
+            changeSetting={this.setPropertyTo}
           />
 
         </div>
 
         <footer className="operation">
-          <SaveProperties getParam={this.buildPostParam.bind(this)} onSavePropertiesCompleted={this.onSavePropertiesCompleted.bind(this)} >
+          <SaveProperties getParam={this.buildPostParam} onSavePropertiesCompleted={this.onSavePropertiesCompleted} >
             <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
           </SaveProperties>
           <button onClick={this.props.close} className="weui_btn weui_btn_mini weui_btn_default">取消</button>
