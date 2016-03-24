@@ -2,7 +2,7 @@ import React from 'react'
 import {Router,Route,browserHistory} from 'react-router'
 import * as _ from 'lodash'
 
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware,compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import createHistory from 'history/lib/createHashHistory'
@@ -27,7 +27,15 @@ export function createMyStore(reducers,{withRouter,initialState}){
     middlewares.push(reduxRouterMiddleware);
   }
 
-  let createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+  //let createStoreWithDev = compose(
+  //  devToolsExtension()
+  //)(createStore);
+  //
+  //let createStoreWithMiddleware = applyMiddleware(...middlewares)(createStoreWithDev);
+  var createStoreWithMiddleware = compose(
+    applyMiddleware(...middlewares),
+    window.devToolsExtension ? devToolsExtension() : _=>_
+  )(createStore);
 
   let store = createStoreWithMiddleware(reducers,initialState);
 
