@@ -2,8 +2,7 @@
  * Created by zyg on 16/2/11.
  */
 let PIXI = require('pixi');
-let loadResource = require('./loadResource');
-
+var pixiLib = require('pixi-lib');
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../back/components/SpriteSetting/previewConfig');
 
 let removeByIndex = function (array,index) {
@@ -33,14 +32,13 @@ module.exports = function containersManager(containers) {
 
           let properties = JSON.parse(materialOne.properties);
 
-          loadResource(materialOne.resourceUrl, function (resource) {
-
-            properties.textures = resource.texture || resource.textures;
-
-            let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
-
+          pixiLib.loadResource(materialOne.resourceUrl,materialOne.type,properties,(spriteDisplayObj)=>{
             container.addChild(spriteDisplayObj);
-          })
+          });
+          //loadResource(materialOne.resourceUrl, function (resource) {
+          //  properties.textures = resource.texture || resource.textures;
+          //  let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
+          //});
         });
 
         return container;

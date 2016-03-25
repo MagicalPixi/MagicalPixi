@@ -6,7 +6,6 @@ let pixiLib = require('pixi-lib');
 let React = require('react');
 
 var T = React.PropTypes;
-window.T = T;
 let Popup = require('../Popup');
 
 let FileUpload = require('../../componentsFunctional/FileUpload');
@@ -16,9 +15,6 @@ let SpriteSetting = require('../SpriteSetting');
 let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('../SpriteSetting/previewConfig');
 
 let SelectBasicResource = require('../SelectBasicResource');
-
-let loadResource = require('../../../common/loadResource');
-
 
 let getSpriteTpeByUrl  = (url)=>{
 
@@ -93,20 +89,32 @@ class SpritePreview extends React.Component {
 
     let spriteType = getSpriteTpeByUrl(resourceUrl);
 
-    loadResource(resourceUrl,  (resource) => {
-      //同时兼容到im和mc
-      spriteDisplayObjProperties.textures = resource.texture || resource.textures;
+    pixiLib.loadResource(resourceUrl, spriteType, spriteDisplayObjProperties,
+      (spriteDisplayObj) => {
+        this.spriteDisplayObj = spriteDisplayObj;
+        this.stage.removeChildren();
+        this.stage.addChild(this.spriteDisplayObj);
 
-      this.spriteDisplayObj = spriteFnMap(spriteType)(spriteDisplayObjProperties);
+        this.setState({
+          spriteType,
+          init: false
+        })
+      });
 
-      this.stage.removeChildren();
-      this.stage.addChild(this.spriteDisplayObj);
-
-      this.setState({
-        spriteType,
-        init:false
-      })
-    });
+    //loadResource(resourceUrl,  (resource) => {
+    //  //同时兼容到im和mc
+    //  spriteDisplayObjProperties.textures = resource.texture || resource.textures;
+    //
+    //  this.spriteDisplayObj = spriteFnMap(spriteType)(spriteDisplayObjProperties);
+    //
+    //  this.stage.removeChildren();
+    //  this.stage.addChild(this.spriteDisplayObj);
+    //
+    //  this.setState({
+    //    spriteType,
+    //    init:false
+    //  });
+    //});
   }
 
   onUploadCompleted(uploadResult){

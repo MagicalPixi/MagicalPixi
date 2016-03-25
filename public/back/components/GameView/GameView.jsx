@@ -8,7 +8,6 @@ let _ = require('lodash');
 
 let pixiLib = require('pixi-lib');
 
-let loadResource = require('../../../common/loadResource');
 let pixiContainersManager = require('../../../common/pixiContainersManager');
 
 let CascadeList = require('./CascadeList');
