@@ -26,10 +26,10 @@ class AsideBoard extends React.Component {
               <a href="#basic" >原始素材</a>
             </li>
             <li>
-              <a href="#sprite" >精灵</a>
+              <a href="#player" >合成素材</a>
             </li>
             <li>
-              <a href="#player" >高级精灵</a>
+              <a href="#sprite" >精灵</a>
             </li>
           </ul>
         </div>
