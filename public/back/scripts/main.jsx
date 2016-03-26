@@ -15,6 +15,9 @@ let AsideBoard = require('../components/AsideBoard/index');
 
 let routerList = require('./router/index');
 
+window.R = React;
+window.RD = ReactDOM;
+
 class Main extends React.Component {
 
   render(){
