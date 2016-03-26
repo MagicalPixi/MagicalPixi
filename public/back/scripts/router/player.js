@@ -37,7 +37,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    materials: state.materials,
+    players: state.players,
     basics:state.basics,
   }
 }
