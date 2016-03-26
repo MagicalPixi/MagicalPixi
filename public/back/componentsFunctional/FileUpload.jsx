@@ -1,13 +1,13 @@
-let React = require('react');
+var React = require('react');
 var ReactDOM = require('react-dom');
-let T = React.PropTypes;
+var T = React.PropTypes;
 
-let _ = require('lodash');
+var _ = require('lodash');
 
-let ajax = require('../../libs/ajax');
+var ajax = require('../../libs/ajax');
 
-let getUploadKeyByExt = function (names) {
-  let regs = [{
+var getUploadKeyByExt = function (names) {
+  var regs = [{
     reg:/\.png$/,
     key:'png'
   },{
@@ -24,9 +24,9 @@ let getUploadKeyByExt = function (names) {
   });
 };
 
-let API = require('../../libs/API');
+var API = require('../../libs/API');
 
-let body = document.querySelector('body');
+var body = document.querySelector('body');
 
 class FileUpload extends React.Component {
 
@@ -43,7 +43,7 @@ class FileUpload extends React.Component {
   }
 
   //click(){
-  //  let inputEle = document.createElement('input');
+  //  var inputEle = document.createElement('input');
   //  inputEle.type = 'file';
   //  inputEle.multiple = true;
   //  inputEle.style.display = 'none';
@@ -52,14 +52,14 @@ class FileUpload extends React.Component {
   //
   //  inputEle.addEventListener('change',(e)=>{
   //
-  //    let fileList = inputEle.files;
+  //    var fileList = inputEle.files;
   //
   //    inputEle.remove();
   //
   //    //ajax上传...
-  //    let fd = new FormData();
+  //    var fd = new FormData();
   //
-  //    let keys = getUploadKeyByExt(_.map(fileList,file=>{
+  //    var keys = getUploadKeyByExt(_.map(fileList,file=>{
   //      return file.name;
   //    }));
   //
@@ -70,9 +70,9 @@ class FileUpload extends React.Component {
   //    });
   //
   //    ajax(API.fileUpload).post(fd).then((r)=>{
-  //      let {url} = r;
+  //      var {url} = r;
   //
-  //      this.props.onUploadCompleted(url);
+  //      this.props.onUploadCompvared(url);
   //    })
   //  });
   //
@@ -83,15 +83,16 @@ class FileUpload extends React.Component {
   //}
 
   change(e){
-
     var inputEle = e.target;
+    var fileList = inputEle.files;
 
-    let fileList = inputEle.files;
-
+    if(fileList.length === 0){
+      return;
+    }
     //ajax上传...
-    let fd = new FormData();
+    var fd = new FormData();
 
-    let keys = getUploadKeyByExt(_.map(fileList, file=> {
+    var keys = getUploadKeyByExt(_.map(fileList, file=> {
       return file.name;
     }));
 
@@ -102,7 +103,7 @@ class FileUpload extends React.Component {
     });
 
     ajax(API.fileUpload).post(fd).then((r)=> {
-      let {url} = r;
+      var {url} = r;
 
       this.props.onUploadCompleted(url);
     });
@@ -118,7 +119,7 @@ class FileUpload extends React.Component {
 
     return (
       <a href="javascript:void 0" style={{position:'relative'}}>
-        <input onChange={this.change.bind(this)} ref="hiddenFileInput" type="file" style={{
+        <input onChange={this.change.bind(this)} ref="hiddenFileInput" type="file" accept="image/png,application/json" style={{
           position:'absolute',
           left:0,
           opacity:0,
