@@ -5,6 +5,13 @@ import ReactDOM from 'react-dom'
 
 const T = React.PropTypes;
 
+var propTypes = {
+  onSubmit:T.func.isRequired,
+  onClick:T.func,
+  value:T.string.isRequired,
+  style:T.object,
+};
+
 class EditText extends Component {
   constructor(props) {
     super(props);
@@ -102,11 +109,6 @@ class EditText extends Component {
   }
 }
 
-EditText.propTypes = {
-  onSubmit:T.func.isRequired,
-  onClick:T.func,
-  value:T.string.isRequired,
-  style:T.object,
-};
+EditText.propTypes = propTypes;
 
 module.exports = EditText;
