@@ -89,7 +89,7 @@ class SpritePreview extends React.Component {
 
     let spriteType = getSpriteTpeByUrl(resourceUrl);
 
-    pixiLib.loadResource(resourceUrl, spriteType, spriteDisplayObjProperties,
+    pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,
       (spriteDisplayObj) => {
         this.spriteDisplayObj = spriteDisplayObj;
         this.stage.removeChildren();
@@ -122,25 +122,13 @@ class SpritePreview extends React.Component {
     this.loadSprite();
   }
 
-  fixProperties(properties,newProperties){
-
-    if(properties.play !== undefined){
-      delete newProperties.stop;
-    }
-    if(properties.stop !== undefined){
-      delete newProperties.play;
-    }
-
-    return newProperties;
-  }
-
   setPropertyTo(properties={}){
 
     let { spriteDisplayObjProperties:oldProperties} = this.state;
 
     let newProperties = Object.assign(oldProperties,properties);
 
-    newProperties = this.fixProperties(properties,newProperties);
+    newProperties = pixiLib.fixSpriteProperties(properties,newProperties);
 
     if(this.spriteDisplayObj){
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);
