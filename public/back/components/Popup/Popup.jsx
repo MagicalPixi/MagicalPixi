@@ -78,7 +78,7 @@ let container = ()=>{
   return document.createElement('div');
 };
 
-module.exports = (reactElements,style={}) => {
+module.exports = (reactElement,style={}) => {
 
   let isRemoved = false;
 
@@ -100,7 +100,7 @@ module.exports = (reactElements,style={}) => {
 
   ReactDOM.render(
     <Popup style={style} close={close}>
-      {React.cloneElement(reactElements,{
+      {React.cloneElement(reactElement,{
         close:close
       })}
     </Popup>,
