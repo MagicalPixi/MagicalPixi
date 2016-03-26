@@ -1,4 +1,5 @@
 let React = require('react');
+var ReactDOM = require('react-dom');
 let T = React.PropTypes;
 
 let _ = require('lodash');
@@ -29,55 +30,101 @@ let body = document.querySelector('body');
 
 class FileUpload extends React.Component {
 
-  click(){
-    let inputEle = document.createElement('input');
-    inputEle.type = 'file';
-    inputEle.multiple = true;
-    inputEle.style.display = 'none';
+  //设定样式
+  componentDidMount(){
+    var fileBtn = this.refs.uploadFileButton;
+    var fileInput = this.refs.hiddenFileInput;
 
-    body.appendChild(inputEle);
+    var fileBtnWidth = `${parseInt(getComputedStyle(fileBtn).width)}px`;
+    var fileBtnHeight = `${parseInt(getComputedStyle(fileBtn).height)}px`;
 
-    inputEle.addEventListener('change',(e)=>{
-
-      let fileList = inputEle.files;
-
-      inputEle.remove();
-
-      //ajax上传...
-      let fd = new FormData();
-
-      let keys = getUploadKeyByExt(_.map(fileList,file=>{
-        return file.name;
-      }));
-
-      _.forEach(fileList,(file,i)=>{
-        if(keys[i]){
-          fd.append(keys[i],file);
-        }
-      });
-
-      ajax(API.fileUpload).post(fd).then((r)=>{
-        let {url} = r;
-
-        this.props.onUploadCompleted(url);
-      })
-    });
-
-    //inputEle.click();
-    setTimeout(function () {
-      inputEle.click();
-    },100);
+    fileInput.style.width = fileBtnWidth;
+    fileInput.style.height = fileBtnHeight;
   }
 
-  //拖动上传
-  drop(e){
-    log(e);
+  //click(){
+  //  let inputEle = document.createElement('input');
+  //  inputEle.type = 'file';
+  //  inputEle.multiple = true;
+  //  inputEle.style.display = 'none';
+  //
+  //  body.appendChild(inputEle);
+  //
+  //  inputEle.addEventListener('change',(e)=>{
+  //
+  //    let fileList = inputEle.files;
+  //
+  //    inputEle.remove();
+  //
+  //    //ajax上传...
+  //    let fd = new FormData();
+  //
+  //    let keys = getUploadKeyByExt(_.map(fileList,file=>{
+  //      return file.name;
+  //    }));
+  //
+  //    _.forEach(fileList,(file,i)=>{
+  //      if(keys[i]){
+  //        fd.append(keys[i],file);
+  //      }
+  //    });
+  //
+  //    ajax(API.fileUpload).post(fd).then((r)=>{
+  //      let {url} = r;
+  //
+  //      this.props.onUploadCompleted(url);
+  //    })
+  //  });
+  //
+  //  //inputEle.click();
+  //  setTimeout(function () {
+  //    inputEle.dispatchEvent(new Event('click'));
+  //  },100);
+  //}
+
+  change(e){
+
+    var inputEle = e.target;
+
+    let fileList = inputEle.files;
+
+    //ajax上传...
+    let fd = new FormData();
+
+    let keys = getUploadKeyByExt(_.map(fileList, file=> {
+      return file.name;
+    }));
+
+    _.forEach(fileList, (file, i)=> {
+      if (keys[i]) {
+        fd.append(keys[i], file);
+      }
+    });
+
+    ajax(API.fileUpload).post(fd).then((r)=> {
+      let {url} = r;
+
+      this.props.onUploadCompleted(url);
+    });
   }
 
   render(){
+
+    var button = this.props.children;
+
+    button = React.cloneElement(button,{
+      ref:'uploadFileButton'
+    });
+
     return (
-      <a href="javascript:void 0" onClick={this.click.bind(this)} onDrop={this.drop.bind(this)}>
-        {this.props.children}
+      <a href="javascript:void 0" style={{position:'relative'}}>
+        <input onChange={this.change.bind(this)} ref="hiddenFileInput" type="file" style={{
+          position:'absolute',
+          left:0,
+          opacity:0,
+          zIndex:1
+        }} />
+        {button}
       </a>
     )
   }
