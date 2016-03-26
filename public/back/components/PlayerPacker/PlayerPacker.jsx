@@ -4,6 +4,8 @@ import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
 const T = React.PropTypes;
 
+import autoBind from 'react-autobind'
+
 import pixiLib from 'pixi-lib'
 
 import Popup from '../Popup'
@@ -13,39 +15,50 @@ import {settingListConfigMap,SPRITE_IM,SPRITE_MC} from '../SpriteSetting/preview
 
 import SelectBasicResource from '../SelectBasicResource'
 
+import EditText from '../../componentsBasic/EditText'
+
 var propTypes = {
-  childSprites:T.array
+  player:T.object,
+  //name:T.string,
+  //childSprites:T.array,
+  basics:T.array.isRequired
 };
 
 var defaultProps = {
-  childSprites:[{
-    sprite: {
-      _id: "56e575a6a48e57f094add877",
-      name: "新建素材名",
-      originImgUrls: [
-        "/materials/admin/boom.png"
-      ],
-      resourceName: "/basic/_1458313928390_1",
-      resourceUrl: "/basic/_1458313928390_1.png",
-      type:"im"
-    },
-    properties: {}
-  }],
-  basics:[]
+  player:{
+    name:'新建合成素材',
+    childSprites:[{
+      basic:{},
+      properties:{}
+    }],
+  }
+  //childSprites:[{
+  //  basic: {
+  //    _id: "56e575a6a48e57f094add877",
+  //    name: "新建素材名",
+  //    originImgUrls: [
+  //      "/materials/admin/boom.png"
+  //    ],
+  //    resourceName: "/basic/_1458313928390_1",
+  //    resourceUrl: "/basic/_1458313928390_1.png",
+  //    type:"im"
+  //  },
+  //  properties: {}
+  //}],
 };
 
 class PlayerPacker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      childSprites: props.childSprites,
+      player:props.player,
+      name:props.player.name,
+      childSprites: props.player.childSprites,
       currentIndex: 0,
-      onSetting:true,
+      onSetting:!!props.player.childSprites[0].basic.name,
     };
 
-    this.selectBasic = this.selectBasic.bind(this);
-    this.spriteSetting = this.spriteSetting.bind(this);
-    this.reSelectBasic = this.reSelectBasic.bind(this);
+    autoBind(this);
   }
 
   componentDidMount() {
@@ -54,18 +67,73 @@ class PlayerPacker extends Component {
     this.stage = pixiLib.appendStage(previewContainer);
   }
 
-  selectBasic(basicObj){
+  //添加一组动作
+  addAction(){
     var {childSprites,currentIndex} = this.state;
 
-    log(basicObj);
+    var childSpritesElement = {
+      basic:{},
+      properties:{},
+    };
+
+    childSprites = childSprites.concat(childSpritesElement);
+
+    currentIndex = childSprites.length - 1;
+
+    this.stage.removeChildren();
+
+    this.setState({
+      childSprites,
+      currentIndex,
+      onSetting:false,
+    });
+  }
+  //选择一个动作(tab)
+  selectAction(e){
+    var {childSprites} = this.state;
+
+    var selectIndex = parseInt(e.target.getAttribute('data-i'));
+
+    var {basic,properties} = childSprites[selectIndex];
+
+    if(basic.resourceUrl) {
+      pixiLib.loadSprite(basic.resourceUrl, basic.type, properties,
+        (spriteObj)=> {
+          pixiLib.setConfig(spriteObj, properties);
+
+          this.spriteDisplayObj = spriteObj;
+
+          this.stage.removeChildren();
+          this.stage.addChild(spriteObj);
+
+          this.setState({
+            currentIndex: selectIndex,
+            onSetting:true
+          });
+        }
+      );
+    }else{
+      this.stage.removeChildren();
+
+      this.setState({
+        currentIndex: selectIndex,
+        onSetting:false
+      });
+    }
+  }
+
+  selectBasic(basic){
+    var {childSprites,currentIndex} = this.state;
 
     childSprites = childSprites.slice();
 
     var currentResource = childSprites[currentIndex];
-    currentResource.sprite = basicObj;
+    currentResource.basic = basic;
 
-    pixiLib.loadResource(basicObj.resourceUrl,basicObj.type,currentResource.properties,
+    pixiLib.loadSprite(basic.resourceUrl,basic.type,currentResource.properties,
       (spriteObj)=>{
+        this.spriteDisplayObj = spriteObj;
+
         this.stage.removeChildren();
         this.stage.addChild(spriteObj);
       }
@@ -77,29 +145,79 @@ class PlayerPacker extends Component {
     });
   }
   spriteSetting(newProperties){
-    log(newProperties)
+    log(newProperties);
+
+    var {childSprites,currentIndex} = this.state;
+
+    childSprites = childSprites.slice();
+
+    var currentResource = childSprites[currentIndex];
+    var oldProperties = currentResource.properties;
+
+    newProperties = Object.assign({},oldProperties,newProperties);
+    newProperties = pixiLib.fixSpriteProperties(oldProperties,newProperties);
+
+    if(this.spriteDisplayObj){
+      pixiLib.setConfig(this.spriteDisplayObj,newProperties);
+    }
+
+    currentResource.properties = newProperties;
+
+    this.setState({
+      childSprites
+    });
   }
   reSelectBasic(){
     this.setState({
       onSetting:false
-    })
+    });
+  }
+  save(){
+    var {player,name,childSprites} = this.state;
+
+    this.props.onPacker(Object.assign({},player,{
+      name,
+      childSprites
+    }));
+    this.props.close();
+  }
+  changeName(name){
+    this.setState({
+      name,
+    });
   }
   render() {
     var { basics } = this.props;
-    var {currentIndex,onSetting,childSprites} = this.state;
+    var {name,currentIndex,onSetting,childSprites} = this.state;
 
     var currentSettingObject = childSprites[currentIndex];
 
-    var { resourceName } = currentSettingObject.sprite;
+    var { resourceName } = currentSettingObject.basic;
 
     return (
       <div id="playerPacker">
-        <h3>高级精灵</h3>
+        <h3>
+          高级精灵
+          <div className="title-box">
+            <EditText
+              onSubmit={this.changeName}
+              value={name}
+            />
+          </div>
+          <button onClick={this.save.bind(this)} className={`save weui_btn weui_btn_mini weui_btn_primary`} >保存</button>
+        </h3>
 
         <header className="frames">
           <ol>
-            <li className="active">1</li>
-            <li>2</li>
+            {childSprites.map((ele,i)=>{
+              var key = `tab${i+1}`;
+              var className = i === currentIndex ? 'active':'';
+
+              return (
+                  <li key={key} onClick={this.selectAction} data-i={i} className={className}>{i+1}</li>
+                )
+            })}
+            <li onClick={this.addAction}>+</li>
           </ol>
         </header>
 
@@ -111,9 +229,9 @@ class PlayerPacker extends Component {
             <div className="setting-box">
               <p className="select-resource-png">
                 <span className="pre">所选资源:</span>
-                <div onClick={this.reSelectBasic} className="basic-resource"
+                <span onClick={this.reSelectBasic} className="basic-resource"
                   style={{backgroundImage:`url(${resourceName}.png)`}} >
-                </div>
+                </span>
               </p>
 
               <div className="setting">

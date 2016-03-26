@@ -7,8 +7,18 @@
 
   > h3{
     margin-bottom: $margin2;
+    position: relative;
   }
-
+  .title-box{
+    width: 150px;
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+  }
+  .save{
+    float: right;
+  }
 
   .frames{
     border-bottom: 1px solid $grayLight;
@@ -20,6 +30,7 @@
       }
       li{
         background-color: $grayLight;
+        border-left: 1px solid $light;
         width: 3em;
         height: 1.5em;
         line-height: 1.5em;
@@ -29,6 +40,9 @@
         cursor: pointer;
 
         float: left;
+      }
+      li:first-child{
+        border-left: none;
       }
       li:hover{
         background-color: $themeHoverColor;
