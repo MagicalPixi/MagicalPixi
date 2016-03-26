@@ -45,6 +45,7 @@ class PlayerPacker extends Component {
 
     this.selectBasic = this.selectBasic.bind(this);
     this.spriteSetting = this.spriteSetting.bind(this);
+    this.reSelectBasic = this.reSelectBasic.bind(this);
   }
 
   componentDidMount() {
@@ -58,15 +59,30 @@ class PlayerPacker extends Component {
 
     log(basicObj);
 
-    childSprites = childSprites.slice()[currentIndex].sprite = basicObj;
+    childSprites = childSprites.slice();
+
+    var currentResource = childSprites[currentIndex];
+    currentResource.sprite = basicObj;
+
+    pixiLib.loadResource(basicObj.resourceUrl,basicObj.type,currentResource.properties,
+      (spriteObj)=>{
+        this.stage.removeChildren();
+        this.stage.addChild(spriteObj);
+      }
+    );
 
     this.setState({
       childSprites,
-      onSetting:true,
+      onSetting:true
     });
   }
   spriteSetting(newProperties){
     log(newProperties)
+  }
+  reSelectBasic(){
+    this.setState({
+      onSetting:false
+    })
   }
   render() {
     var { basics } = this.props;
@@ -95,7 +111,9 @@ class PlayerPacker extends Component {
             <div className="setting-box">
               <p className="select-resource-png">
                 <span className="pre">所选资源:</span>
-                <img src={`${resourceName}.png`} />
+                <div onClick={this.reSelectBasic} className="basic-resource"
+                  style={{backgroundImage:`url(${resourceName}.png)`}} >
+                </div>
               </p>
 
               <div className="setting">

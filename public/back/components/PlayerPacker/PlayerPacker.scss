@@ -24,7 +24,15 @@
         height: 1.5em;
         line-height: 1.5em;
         text-align: center;
+
+        -webkit-user-select: none;
+        cursor: pointer;
+
         float: left;
+      }
+      li:hover{
+        background-color: $themeHoverColor;
+        color: #ffffff;
       }
       li.active{
         background-color: $themeColor;
@@ -69,6 +77,15 @@
           display: inline-block;
         }
 
+        .basic-resource{
+          -webkit-background-size: contain;
+          background-size: contain;
+          width: 100px;
+          height: 100px;
+          vertical-align: middle;
+
+          display: inline-block;
+        }
         img{
           width: 100px;
           vertical-align: middle;
