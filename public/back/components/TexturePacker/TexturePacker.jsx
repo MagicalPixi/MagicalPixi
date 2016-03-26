@@ -14,6 +14,15 @@ import getPixiJsonFromImages from '../../../common/getPixiJsonFromImages'
 
 import EditText from '../../componentsBasic/EditText'
 
+var propTypes = {
+  onCompleted:T.func.isRequired,
+  imgUrls:T.array,
+  name:T.string,
+};
+var defaultProps = {
+  name:'新建素材名',
+  imgUrls:[],
+};
 
 class TexturePacker extends Component {
   constructor(props) {
@@ -155,16 +164,9 @@ class TexturePacker extends Component {
   }
 }
 
-TexturePacker.defaultProps = {
-  name:'新建素材名',
-  imgUrls:[],
-};
+TexturePacker.defaultProps = defaultProps;
 
-TexturePacker.propTypes = {
-  onCompleted:T.func.isRequired,
-  imgUrls:T.array,
-  name:T.string,
-};
+TexturePacker.propTypes = propTypes;
 
 var TexturePackerFn = React.createFactory(TexturePacker);
 
