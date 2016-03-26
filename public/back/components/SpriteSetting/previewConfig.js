@@ -6,8 +6,8 @@
 let pixiLib = require('pixi-lib');
 let _ = require('lodash');
 
-const SPRITE_MC = 'movieClip';
-const SPRITE_IM = 'image';
+const SPRITE_MC = 'mc';
+const SPRITE_IM = 'im';
 
 let settingListConfigMap = ((spriteType)=> {
 
