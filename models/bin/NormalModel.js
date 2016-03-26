@@ -51,7 +51,9 @@ var saveFn = (db) => {
                   }
 
                   resolve(Object.assign(result,{
-                    ops:[arg]
+                    ops:[Object.assign({},arg,{
+                      _id:id
+                    })]
                   }));
                 })
 
