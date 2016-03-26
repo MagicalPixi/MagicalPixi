@@ -27,6 +27,7 @@ componentTmp="require('./$componentName.scss'); \n\r
 import React,{Component} from 'react' \n
 import ReactDOM from 'react-dom' \n
 const T = React.PropTypes; \n\r
+import autoBind from 'react-autobind' \n
 var propTypes = { \n
 }; \n\r
 var defaultProps = { \n
@@ -36,6 +37,7 @@ class $componentName extends Component { \n
         super(props); \n
         this.state = {\n\r
         }; \n
+        autoBind(this);\n
     } \n
     render(){ \n
         return ( \n
