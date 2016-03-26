@@ -87,14 +87,17 @@ module.exports = (reactElement,style={}) => {
 
 
   let close = ()=>{
-    if(!isRemoved){
-      isRemoved = true;
+    requestAnimationFrame(()=> {
 
-      ReactDOM.unmountComponentAtNode(div);
-      requestAnimationFrame(()=>{
-        div.remove();
-      });
-    }
+      if (!isRemoved) {
+        isRemoved = true;
+
+        ReactDOM.unmountComponentAtNode(div);
+        requestAnimationFrame(()=> {
+          div.remove();
+        });
+      }
+    });
   };
 
 
