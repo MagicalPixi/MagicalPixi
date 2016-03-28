@@ -62,11 +62,12 @@ export function basicAdd(basic={}){
         .post(param)
         .then(function (saveResult) {
 
-          var resourceUrl = saveResult.result.resourceUrl;
+          var {resourceUrl,_id} = saveResult.result;
 
           dispatch({
             type: BASIC_ADD,
             basic: Object.assign({
+              _id,
               resourceUrl
             }, basic)
           });

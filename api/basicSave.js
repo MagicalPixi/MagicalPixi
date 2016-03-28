@@ -71,6 +71,7 @@ module.exports = function (req, res) {
 
     res.json({
       result: {
+        _id:savedObj._id,
         name,
         resourceName:savedObj.name,
         resourceUrl:savedObj.resourceUrl,
