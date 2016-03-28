@@ -51,9 +51,9 @@ class PlayerPacker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      player:props.player,
+      player:Object.assign({},props.player),
       name:props.player.name,
-      childSprites: props.player.childSprites,
+      childSprites: props.player.childSprites.slice(),
       currentIndex: 0,
       onSetting:!!props.player.childSprites[0].basic.name,
     };
@@ -65,6 +65,8 @@ class PlayerPacker extends Component {
     var previewContainer = this.refs.previewContainer;
 
     this.stage = pixiLib.appendStage(previewContainer);
+
+    this.selectAction(0)
   }
 
   //添加一组动作
@@ -92,7 +94,7 @@ class PlayerPacker extends Component {
   selectAction(e){
     var {childSprites} = this.state;
 
-    var selectIndex = parseInt(e.target.getAttribute('data-i'));
+    var selectIndex = typeof e === 'number'? e : parseInt(e.target.getAttribute('data-i'));
 
     var {basic,properties} = childSprites[selectIndex];
 
@@ -128,7 +130,11 @@ class PlayerPacker extends Component {
     childSprites = childSprites.slice();
 
     var currentResource = childSprites[currentIndex];
-    currentResource.basic = basic;
+    currentResource = Object.assign({},currentResource,{
+      basic
+    });
+
+    childSprites[currentIndex] = currentResource;
 
     pixiLib.loadSprite(basic.resourceUrl,basic.type,currentResource.properties,
       (spriteObj)=>{
@@ -161,7 +167,11 @@ class PlayerPacker extends Component {
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);
     }
 
-    currentResource.properties = newProperties;
+    currentResource = Object.assign({},currentResource,{
+      properties:newProperties
+    });
+
+    childSprites[currentIndex] = currentResource;
 
     this.setState({
       childSprites
@@ -193,6 +203,8 @@ class PlayerPacker extends Component {
     var currentSettingObject = childSprites[currentIndex];
 
     var { resourceName } = currentSettingObject.basic;
+
+    var { properties } = currentSettingObject;
 
     return (
       <div id="playerPacker">
@@ -237,6 +249,7 @@ class PlayerPacker extends Component {
               <div className="setting">
                 <SpriteSetting
                   spriteType={SPRITE_MC}
+                  spriteProperties={properties}
                   onChangeSetting={this.spriteSetting}
                 />
               </div>

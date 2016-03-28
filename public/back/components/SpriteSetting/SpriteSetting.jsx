@@ -32,15 +32,14 @@ class SpriteSetting extends React.Component {
   if(!settingKey){
    //true 对应 play方法，调用play
    //false 对应 stop方法，调用stop
-   settingKey = checkBox[checkBox];
+   settingKey = checkBox[checked];
   }
 
 
-  this.props.changeSetting({
+  this.props.onChangeSetting({
    [settingKey]:checked
   });
  }
-
 
  inputBuild(settingOne,i){
 
@@ -61,7 +60,7 @@ class SpriteSetting extends React.Component {
   }
 
   return (
-    <input ref={refKey} checked={checked} defaultValue={value} onChange={onChange}
+    <input ref={refKey} checked={checked} value={value} onChange={onChange}
       type={inputType} placeholder={describe} />
   )
  }
