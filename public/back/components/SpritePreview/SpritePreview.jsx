@@ -27,6 +27,7 @@ let getSpriteTpeByUrl  = (url)=>{
 
 var propTypes = {
   resources:T.array,
+  resources2:T.array,
   id:T.string,
   resourcesUrl:T.string,
   type:T.string,
@@ -174,7 +175,7 @@ class SpritePreview extends React.Component {
   render(){
     var {init,spriteType,spriteDisplayObjProperties} = this.state;
 
-    var {resources} = this.props;
+    var {resources,resources2} = this.props;
 
     return (
       <div id="mpSpritePreviewBox" data-init={init}>
@@ -183,12 +184,18 @@ class SpritePreview extends React.Component {
         <div className="container">
           <div className="preview-container-box" >
 
-            <div className="selectBasicResource">
+            <div className="select-resource" data-resource-tab="basic" >
               <SelectBasicResource
                 resources={resources}
                 onSelect={this.selectBasicResource}
-              />
-            </div>
+                />
+              <hr className="line" />
+              <SelectBasicResource
+                resources={resources2}
+                onSelect={this.selectBasicResource}
+                />
+
+          </div>
 
             <div ref="previewContainer" className="preview-container">
             </div>

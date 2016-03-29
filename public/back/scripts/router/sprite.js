@@ -10,6 +10,7 @@ import MaterialsList from '../../components/MaterialsList'
 
 import * as MaterialsActions from '../actions/materials'
 import * as BasicActions from '../actions/basic'
+import * as PlayerActions from '../actions/player'
 
 class App extends Component {
 
@@ -22,16 +23,19 @@ class App extends Component {
 
     //初始化，原始素材列表
     actions.initBasicData();
+
+    //合成素材们
+    actions.initPlayerList();
   }
 
   render(){
-    let {materials,basics,actions} = this.props;
+    let {materials,basics,players,actions} = this.props;
 
     log('materials',materials);
 
     return (
       <div>
-        <MaterialsList data={materials} basics={basics}  actions={actions}/>
+        <MaterialsList data={materials} basics={basics} players={players}  actions={actions}/>
       </div>
     )
   }
@@ -41,12 +45,13 @@ function mapStateToProps(state) {
   return {
     materials: state.materials,
     basics:state.basics,
+    players:state.players
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({},MaterialsActions,BasicActions), dispatch),
+    actions: bindActionCreators(Object.assign({},MaterialsActions,BasicActions,PlayerActions), dispatch),
   }
 }
 

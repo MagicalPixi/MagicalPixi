@@ -28,9 +28,15 @@
     overflow: hidden;
     position: relative;
   }
-  .selectBasicResource{
-    height: 100%;
+
+  .select-resource{
   }
+
+  .line{
+    margin:10px;
+  }
+
+
   .preview-container-box{
     background-color: $grayLight;
     width: $previewWidth;
@@ -100,7 +106,7 @@
   width: $previewWidth * 2 + $padding3 * 2 + 2px + 10px;
   left: 0;
 
-  .selectBasicResource{
+  .select-resource{
     display: none;
   }
 

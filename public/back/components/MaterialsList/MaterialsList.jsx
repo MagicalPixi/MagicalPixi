@@ -25,10 +25,11 @@ var defaultProps = {
 class MaterialsList extends React.Component {
 
   newMaterial(){
-    var {basics} = this.props;
+    var {basics,players} = this.props;
 
     SpritePreview({
-      resources:basics
+      resources:basics,
+      resources2:players
     });
   }
 
