@@ -70,7 +70,7 @@ class TexturePacker extends Component {
         imgObj.onload = ()=>{
          resolve(imgObj);
         }
-      })
+      });
     })).then(imgObjs=>{
 
       var type = ''; //mc精灵,im图片
@@ -81,7 +81,7 @@ class TexturePacker extends Component {
 
       var pixiJson = getPixiJsonFromImages(afterWrapperImages);
 
-      if(imgUrls.length > 1){
+      if(imgObjs.length > 1){
         type = 'mc';
       }else{
         type = 'im';

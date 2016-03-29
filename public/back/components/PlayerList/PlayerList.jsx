@@ -41,14 +41,10 @@ class PlayerList extends Component {
   }
 
   packerCompleted(player){
-    log(player);
-
     this.props.actions.playerAdd(player);
   }
-
   packerEditCompleted(player){
-
-    this.props.actions.playerEdit(player);
+    this.props.actions.playerUpdate(player);
   }
 
   newOne(){
