@@ -1,5 +1,5 @@
 'use strict'
-
+var pixiLibTypes = require('pixi-lib').types;
 var Player = require('../models/Player');
 var saveImageByBase64 = require('../services/saveImageByBase64');
 
@@ -12,6 +12,7 @@ module.exports = function (req, res) {
   var pngBase64 = req.body.base64;
   var json = req.body.pixiJson;
   var childSprites = req.body.childSprites;
+  var actionFrames = req.body.actionFrames;
 
   console.log(childSprites);
   json = JSON.parse(json);
@@ -25,7 +26,7 @@ module.exports = function (req, res) {
 
     return Promise.race([
       new Promise(function (resolve) {
-        if(type === 'mc'){
+        if(type === pixiLibTypes.SPRITE_MC || type === pixiLibTypes.SPRITE_SP){
           savePixiJson(json).then(function (jsonResult) {
 
             var jsonFilename = jsonResult.jsonName;
@@ -39,7 +40,7 @@ module.exports = function (req, res) {
         }
       }),
       new Promise(function(resolve){
-        if(type === 'im'){
+        if(type === pixiLibTypes.SPRITE_IM){
           resolve({
             filename,
             resourceUrl:pngUrl
@@ -57,6 +58,7 @@ module.exports = function (req, res) {
       id,
       name,
       type,
+      actionFrames,
       resourceName,
       resourceUrl,
       childSprites

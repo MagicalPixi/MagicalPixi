@@ -91,7 +91,7 @@
       return object[key] !== undefined && object[key] !== null;
     }).map(function (item) {
       var value = object[item];
-      if($private.isObject(value)){
+      if(typeof value === 'object'){
         value = JSON.stringify(value);
       }
 

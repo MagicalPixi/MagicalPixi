@@ -1,12 +1,14 @@
 import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_EDIT} from '../constants/playerTypes'
 
+import pixiLib from 'pixi-lib'
 import API from '../../../libs/API'
 import ajax from '../../../libs/ajax'
-
+import last from 'lodash/array/last'
 import wrapperImages from '../../../common/wrapperImages'
 import getBase64FromImages from '../../../common/getBase64FromImages'
 import getPixiJsonFromImages from '../../../common/getPixiJsonFromImages'
 
+const {SPRITE_SP,SPRITE_MC,SPRITE_IM} = pixiLib.types;
 
 function loadSpritesImg(childSprites){
   return Promise.all(childSprites.map(spriteOne=>{
@@ -23,28 +25,40 @@ function loadSpritesImg(childSprites){
     });
   }))
 }
+function build(childSprites) {
 
-function build(imgObjs){
-  var type = ''; //mc精灵,im图片
+  var actionFrames = childSprites.map(spriteOne=>{
+    return spriteOne.basic.originImgUrls.length
+  }).reduce((init,next)=>{
+    return init.concat(last(init) + next);
+  },[0]).map(frame => frame-1);
 
-  var afterWrapperImages = wrapperImages(imgObjs);
+  //去0
+  actionFrames.shift();
 
-  var base64 = getBase64FromImages(afterWrapperImages);
+  return function (imgObjs) {
+    var type = ''; //mc精灵,im图片
 
-  var pixiJson = getPixiJsonFromImages(afterWrapperImages);
+    var afterWrapperImages = wrapperImages(imgObjs);
 
-  if(imgObjs.length > 1){
-    type = 'mc';
-  }else{
-    type = 'im';
-  }
-  return new Promise(resolve=>{
-    resolve({
-      type,
-      base64,
-      pixiJson
-    })
-  });
+    var base64 = getBase64FromImages(afterWrapperImages);
+
+    var pixiJson = getPixiJsonFromImages(afterWrapperImages);
+
+    if (imgObjs.length > 1) {
+      type = SPRITE_SP;
+    } else {
+      type = SPRITE_IM;
+    }
+    return new Promise(resolve=> {
+      resolve({
+        type,
+        base64,
+        pixiJson,
+        actionFrames
+      })
+    });
+  };
 }
 
 export function initPlayerList() {
@@ -92,7 +106,7 @@ export function playerAdd(player){
   return (dispatch,getState)=>{
 
     loadSpritesImg(player.childSprites)
-      .then(build)
+      .then(build(player.childSprites))
       .then(buildResult=>{
 
         ajax(API.playerSave).post(Object.assign({
@@ -120,7 +134,7 @@ export function playerUpdate(player){
   return (dispatch,getState)=>{
 
     loadSpritesImg(player.childSprites)
-      .then(build)
+      .then(build(player.childSprites))
       .then(buildResult=>{
 
         ajax(API.playerSave).post(Object.assign({
