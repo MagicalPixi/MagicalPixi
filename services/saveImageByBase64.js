@@ -43,6 +43,8 @@ module.exports = function (base64,option) {
 
   var base64Clean = base64.replace(base64Prefix,'');
 
+  console.log('base64:',typeof base64,base64.length);
+
   var base64Buffer = new Buffer(base64Clean,'base64');
 
   var filename = savePngName();
