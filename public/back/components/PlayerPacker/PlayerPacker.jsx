@@ -150,18 +150,20 @@ class PlayerPacker extends Component {
       onSetting:true
     });
   }
-  spriteSetting(newProperties){
-    log(newProperties);
+  spriteSetting(settingProperties){
+    log(settingProperties);
 
     var {childSprites,currentIndex} = this.state;
 
     childSprites = childSprites.slice();
 
     var currentResource = childSprites[currentIndex];
+
     var oldProperties = currentResource.properties;
 
-    newProperties = Object.assign({},oldProperties,newProperties);
-    newProperties = pixiLib.fixSpriteProperties(oldProperties,newProperties);
+    var newProperties = Object.assign({},oldProperties,settingProperties);
+    newProperties = pixiLib.fixSpriteProperties(settingProperties,newProperties);
+
 
     if(this.spriteDisplayObj){
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);

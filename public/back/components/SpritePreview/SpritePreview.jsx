@@ -126,7 +126,7 @@ class SpritePreview extends React.Component {
 
     let { spriteDisplayObjProperties:oldProperties} = this.state;
 
-    let newProperties = Object.assign(oldProperties,properties);
+    let newProperties = Object.assign({},oldProperties,properties);
 
     newProperties = pixiLib.fixSpriteProperties(properties,newProperties);
 
