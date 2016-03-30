@@ -2,7 +2,7 @@
 require('./MaterialsList.scss');
 
 let React = require('react');
-
+import autoBind from 'react-autobind'
 const T = React.PropTypes;
 
 let ItemList = require('../../componentsLayout/ItemList');
@@ -24,12 +24,24 @@ var defaultProps = {
 
 class MaterialsList extends React.Component {
 
+  constructor(props){
+    super(props);
+    autoBind(this);
+  }
+
+  //保存一个精灵
+  save(spriteObj){
+    log('spriteObj:',spriteObj);
+    this.props.actions.materialSave(spriteObj);
+  }
+
   newMaterial(){
     var {basics,players} = this.props;
 
     SpritePreview({
       resources:basics,
-      resources2:players
+      resources2:players,
+      onSubmit:this.save,
     });
   }
 
@@ -38,7 +50,8 @@ class MaterialsList extends React.Component {
       id:_id,
       resourceUrl,
       type,
-      properties
+      properties,
+      onSubmit:this.save
     });
   }
 

@@ -22,3 +22,18 @@ export function initMaterialsList() {
       });
   }
 }
+
+export function materialSave(spriteObj){
+
+  return (dispatch,getState)=>{
+    ajax(API.saveProperties)
+      .post(spriteObj)
+      .then((r)=>{
+        if(r.result){
+          location.reload();
+        }else{
+          console.log();
+        }
+      });
+  }
+}
