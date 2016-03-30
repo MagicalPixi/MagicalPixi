@@ -13,9 +13,10 @@ module.exports = function (req, res) {
 
   var id = req.body.id;
   var type = req.body.spriteType;
-  var name = req.body.spriteName;
+  var name = req.body.spriteName || req.body.name;
   var resourceUrl = req.body.resourceUrl;
   var properties = req.body.properties;
+  var actionFrames = req.body.actionFrames;
 
   var userFlag = req.session.userFlag;
 
@@ -27,7 +28,8 @@ module.exports = function (req, res) {
     userFlag,
     type,
     name,
-    properties
+    properties,
+    actionFrames
   };
 
   console.log('materialObj:',materialObj);

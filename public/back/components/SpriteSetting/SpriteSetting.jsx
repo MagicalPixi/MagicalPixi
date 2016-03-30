@@ -1,10 +1,13 @@
 require('./SpriteSetting.scss');
 
 import React,{Component,PropTypes} from 'react'
-import {settingListConfigMap,SPRITE_IM,SPRITE_MC} from './previewConfig'
+import {settingListConfigMap} from './previewConfig'
+import pixiLib from 'pixi-lib'
+
+var { SPRITE_IM,SPRITE_MC,SPRITE_SP } = pixiLib.types
 
 var propTypes = {
- spriteType:PropTypes.oneOf([SPRITE_IM,SPRITE_MC]),
+ spriteType:PropTypes.oneOf([SPRITE_IM,SPRITE_MC,SPRITE_SP,'movieClip','image']),
  spriteProperties:PropTypes.object,
  onChangeSetting:PropTypes.func.isRequired
 };

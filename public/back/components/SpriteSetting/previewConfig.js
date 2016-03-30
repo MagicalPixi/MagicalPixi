@@ -6,8 +6,7 @@
 let pixiLib = require('pixi-lib');
 let _ = require('lodash');
 
-const SPRITE_MC = 'mc';
-const SPRITE_IM = 'im';
+var {SPRITE_MC,SPRITE_IM,SPRITE_SP} = pixiLib.types;
 
 let settingListConfigMap = ((spriteType)=> {
 
@@ -70,6 +69,10 @@ let settingListConfigMap = ((spriteType)=> {
       }
     }]
   };
+  config.image = config[SPRITE_IM];
+  config.movieClip = config[SPRITE_MC];
+
+  config[SPRITE_SP] = config[SPRITE_MC];
 
   config = _.map(config, (v, k)=> {
     return {
@@ -99,6 +102,8 @@ let settingListConfigMap = ((spriteType)=> {
         });
 
       });
+    }else{
+      console.error('no properties');
     }
 
 
@@ -111,7 +116,9 @@ let spriteFnMap = (spriteType)=> {
 
   let config = {
     [SPRITE_IM]: pixiLib.getIm,
-    [SPRITE_MC]: pixiLib.getMc
+    [SPRITE_MC]: pixiLib.getMc,
+    ['image']: pixiLib.getIm,
+    ['movieClip']: pixiLib.getMc
   };
 
   if (!spriteType) {

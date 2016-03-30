@@ -14,6 +14,7 @@ module.exports = function (req, res) {
   var childSprites = req.body.childSprites;
   var actionFrames = req.body.actionFrames;
 
+  console.log('type:',type);
   console.log(childSprites);
   json = JSON.parse(json);
 

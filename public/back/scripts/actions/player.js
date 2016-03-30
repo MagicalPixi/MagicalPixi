@@ -68,14 +68,10 @@ export function initPlayerList() {
       if(returnData.result){
 
         var result = returnData.result.map(dataOne=>{
-          return {
+          return Object.assign({},dataOne,{
             id:dataOne._id,
-            name:dataOne.name,
-            type:dataOne.type,
-            resourceName:dataOne.resourceName,
-            resourceUrl:dataOne.resourceUrl,
-            childSprites:JSON.parse(dataOne.childSprites)
-          }
+            childSprites:JSON.parse(dataOne.childSprites),
+          });
         });
 
         dispatch({
@@ -110,7 +106,6 @@ export function playerAdd(player){
       .then(buildResult=>{
 
         ajax(API.playerSave).post(Object.assign({
-          type,
           name:player.name,
           childSprites:JSON.stringify(player.childSprites),
         },buildResult)).then(returnData=>{

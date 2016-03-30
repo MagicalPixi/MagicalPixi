@@ -5,10 +5,11 @@ let PIXI = require('pixi');
 let pixiLib = require('pixi-lib');
 let React = require('react');
 
+import autoBind from 'react-autobind'
+
 var T = React.PropTypes;
 let Popup = require('../Popup');
 
-let FileUpload = require('../../componentsFunctional/FileUpload');
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
 let SpriteSetting = require('../SpriteSetting');
@@ -32,6 +33,7 @@ var propTypes = {
   resourcesUrl:T.string,
   type:T.string,
   properties:T.oneOfType([T.object,T.string]),
+  onSubmit:T.func.isRequired,
 };
 
 
@@ -44,6 +46,7 @@ class SpritePreview extends React.Component {
 
   constructor(props){
     super(props);
+    autoBind(this);
 
     let {id,resourceUrl,type,properties} = props;
 
@@ -76,7 +79,7 @@ class SpritePreview extends React.Component {
     this.stage = pixiLib.appendStage(previewContainer);
 
     if(this.resourceUrl){
-      this.loadSprite();
+      this.loadSprite(this.state.spriteType);
     }
   }
 
@@ -84,22 +87,15 @@ class SpritePreview extends React.Component {
     this.stage.clearRender();
   }
 
-  loadSprite(){
-    let { spriteDisplayObjProperties} = this.state;
+  loadSprite(spriteType){
+    let { spriteDisplayObjProperties } = this.state;
     let resourceUrl = this.resourceUrl;
-
-    let spriteType = getSpriteTpeByUrl(resourceUrl);
 
     pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,
       (spriteDisplayObj) => {
         this.spriteDisplayObj = spriteDisplayObj;
         this.stage.removeChildren();
         this.stage.addChild(this.spriteDisplayObj);
-
-        this.setState({
-          spriteType,
-          init: false
-        })
       });
 
     //loadResource(resourceUrl,  (resource) => {
@@ -116,11 +112,6 @@ class SpritePreview extends React.Component {
     //    init:false
     //  });
     //});
-  }
-
-  onUploadCompleted(uploadResult){
-    this.resourceUrl = uploadResult;
-    this.loadSprite();
   }
 
   setPropertyTo(properties={}){
@@ -142,13 +133,13 @@ class SpritePreview extends React.Component {
 
   buildPostParam(){
 
-    let {spriteType,spriteDisplayObjProperties } = this.state;
+    let {spriteType,spriteDisplayObjProperties,basicResourceObj } = this.state;
 
     let resourceUrl = this.resourceUrl;
 
     let postParam = false;
 
-    postParam = Object.assign({
+    postParam = Object.assign({},basicResourceObj,{
       id: this.id,
       resourceUrl,
       spriteType,
@@ -168,8 +159,24 @@ class SpritePreview extends React.Component {
 
   selectBasicResource(basicResourceObj){
     if(basicResourceObj){
-      this.onUploadCompleted(basicResourceObj.resourceUrl)
+      var {resourceUrl,type} = basicResourceObj;
+      //
+      this.resourceUrl = resourceUrl;
+
+      this.loadSprite(type);
+
+      this.setState({
+        spriteType:type,
+        init:false,
+        basicResourceObj,
+      })
     }
+  }
+
+  submit(){
+    this.props.onSubmit(
+      this.buildPostParam()
+    );
   }
 
   render(){
@@ -213,9 +220,7 @@ class SpritePreview extends React.Component {
         </div>
 
         <footer className="operation">
-          <SaveProperties getParam={this.buildPostParam} onSavePropertiesCompleted={this.onSavePropertiesCompleted} >
-            <button className="weui_btn weui_btn_mini weui_btn_primary">确定</button>
-          </SaveProperties>
+          <button onClick={this.submit} className="weui_btn weui_btn_mini weui_btn_primary" >确定</button>
           <button onClick={this.props.close} className="weui_btn weui_btn_mini weui_btn_default">取消</button>
         </footer>
       </div>

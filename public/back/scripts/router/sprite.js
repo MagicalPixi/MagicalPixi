@@ -31,8 +31,6 @@ class App extends Component {
   render(){
     let {materials,basics,players,actions} = this.props;
 
-    log('materials',materials);
-
     return (
       <div>
         <MaterialsList data={materials} basics={basics} players={players}  actions={actions}/>

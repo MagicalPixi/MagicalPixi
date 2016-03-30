@@ -42,6 +42,6 @@ class SaveProperties extends React.Component {
 SaveProperties.propTypes = {
   getParam:T.func.isRequired,
   onSavePropertiesCompleted:T.func.isRequired,
-}
+};
 
 module.exports = SaveProperties;
