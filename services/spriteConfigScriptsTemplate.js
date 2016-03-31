@@ -5,11 +5,13 @@ var fs = require('fs');
 var ejs = require('ejs');
 var path = require('path');
 
+var pixiLib = require('pixi-lib');
+
+var SPRITE_MC = pixiLib.types.SPRITE_MC;
+var SPRITE_SP = pixiLib.types.SPRITE_SP;
+var SPRITE_IM = pixiLib.types.SPRITE_IM;
+
 var _ = require('lodash');
-
-
-
-var pixiLibName = 'pixi-lib';
 
 var filename = 'sprite.js';
 
@@ -20,45 +22,43 @@ var tempScripts = ejs.compile(fs.readFileSync(tempEjsPath).toString());
 var spriteTypeFn  = function (type) {
   var map = {
     'image':'getIm',
-    'movieClip':'getMc'
+    'movieClip':'getMc',
+    [SPRITE_IM]:'getIm',
+    [SPRITE_MC]:'getMc',
+    [SPRITE_SP]:'getSp',
   };
 
   return map[type];
 };
 
-var temp = function (name,fnStr,properties) {
+var temp = function (name,fnStr,properties,actionFrames) {
 
-  var referenceName = 'lib';
-
-
-  //var tempScriptsStr = `var ${referenceName} = require('${pixiLibName}'); \n` +
-  //  `var mySprite = ${referenceName}.${fnStr}({ \n` +
-  //  `textures:${referenceName}.getTextures('${name}'),\n` +
-  //  propertiesStr +
-  //  `}); \n` +
-  //  `module.exports = mySprite; \n`;
+  var pixiLibName = 'pixi-lib';
+  var referenceName = 'pixiLib';
 
   var tempScriptsStr = tempScripts({
     referenceName,
     pixiLibName,
     name,
     fnStr,
-    properties
+    properties,
+    actionFrames,
   });
 
   return tempScriptsStr;
 };
 
 
-function build(name,spriteType,properties) {
-  var propertiesStr = _.map(Object.keys(properties), function (key) {
-    return "'" + key + "':" + properties[key] + ', \n';
+function build(name,spriteType,properties,actionFrames) {
+  var propertiesStr = Object.keys(properties).map(function (key) {
+    return `"${key}":"${properties[key]}", \n`;
   }).join('');
 
   var spriteScriptsString = temp(
     name,
     spriteTypeFn(spriteType),
-    properties
+    properties,
+    actionFrames
   );
 
   return {

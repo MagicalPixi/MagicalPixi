@@ -11,7 +11,6 @@ var archiverZip = require('../services/archiverDownloadZip');
 
 var MaterialZip = require('../models/MaterialZip');
 
-
 module.exports = function (req, res,next) {
 
   var id = req.query.id;
@@ -24,7 +23,9 @@ module.exports = function (req, res,next) {
       _id:ObjectId(id)
     };
   }else if(name){
-    condition = { name };
+    condition = {
+      name
+    };
   }
 
   console.log('condition:',condition);
@@ -34,26 +35,25 @@ module.exports = function (req, res,next) {
   }
 
   Sprite.findOne(condition).then(function (result) {
+    name = result.name;
+    console.log('sprite:',result);
 
-    if(result){
+    return buildMaterialZipSource(result);
+  }).then(function (sourceObj) {
 
-      buildMaterialZipSource(result).then(function (sourceObj) {
+    console.log('build source done');
 
-        console.log('build source done');
+    return archiverZip(name + '.zip', sourceObj);
+  }).then(function (zipPath) {
+    console.log('archiveZip done:', zipPath);
 
-        archiverZip(result.name+'.zip',sourceObj).then(function (zipPath) {
-
-          console.log('archiveZip done:',zipPath);
-
-          res.download(
-            zipPath,
-            result.name+'.zip'
-          );
-        });
-      });
-    }else{
-      next(new Error('not found by condition:'+JSON.stringify(condition)));
-    }
+    res.download(
+      zipPath,
+      name + '.zip'
+    );
+  },function () {
+    throw new Error('not found by condition:'+JSON.stringify(condition));
+  }).catch(function (e) {
+    next(e);
   });
-
 };

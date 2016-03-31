@@ -37,22 +37,34 @@ var build = function (materialObj) {
 
   var properties = JSON.parse(materialObj.properties);
 
+  var actionFrames = JSON.parse(materialObj.actionFrames);
+
+  console.log('actionFrames:',actionFrames);
+
   var scripts = configScriptsTemplate(
     materialObj.name,
     materialObj.type,
-    properties
+    properties,
+    actionFrames
   );
+
+  console.log('configScript done:',materialObj);
 
   var indexScripts = indexScriptsTemplate();
 
-  var resourceObj = resourceObjBuild(materialObj.resourceUrl);
+  //var resourceObj = resourceObjBuild(materialObj.resourceUrl);
+  //
+  //resourceObj = Object.assign(resourceObj,{
+  //  [configScriptsTemplate.filename]:new Buffer(scripts.text),
+  //  [indexScriptsTemplate.filename]:new Buffer(indexScripts.text)
+  //});
+  var scriptsFileResourceObj = {
+    [configScriptsTemplate.filename]: new Buffer(scripts.text),
+    [indexScriptsTemplate.filename]: new Buffer(indexScripts.text)
+  };
 
-  resourceObj = Object.assign(resourceObj,{
-    [configScriptsTemplate.filename]:new Buffer(scripts.text),
-    [indexScriptsTemplate.filename]:new Buffer(indexScripts.text)
-  });
 
-  return resourceObj;
+  return scriptsFileResourceObj;
 };
 
 /**
@@ -61,36 +73,30 @@ var build = function (materialObj) {
  *  materialObj.name 必须有
  *  一个素材对象，同mongo的存储对象。
  */
-module.exports = function (materialObj) {
+module.exports = function buildMaterialZipSource(materialObj) {
   var name = materialObj.name;
-
-  
   
   var isAllRequired = ['name','type','resourceUrl','properties'].every(function (key) {
     return materialObj[key];
   });
 
-  return new Promise(function (resolve) {
+  materialObj.actionFrames = materialObj.actionFrames || '[]';
+
+  return new Promise(function (resolve,reject) {
     if(!name){
       throw new Error('materialObj must have "name" ');
     }
-    var result;
-
     console.log('isAllRequired:',isAllRequired);
 
     if(isAllRequired){
-      result = build(materialObj);
 
-      resolve(result);
+      var scriptsFiles = build(materialObj);
+
+      var resourceObj = resourceObjBuild(materialObj.resourceUrl);
+
+      resolve(Object.assign({},scriptsFiles,resourceObj));
     }else{
-      Sprite.findOne(materialObj).then(function (r) {
-
-        if(r){
-          result = build(r);
-
-          resolve(result)
-        }
-      })
+      reject(false);
     }
   })
 };
