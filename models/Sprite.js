@@ -59,7 +59,6 @@ module.exports = {
       db((collection)=>{
 
         console.log('args.id:',args.id);
-        console.log('buildArgs :',buildArgs);
 
         if(args.id){
 
