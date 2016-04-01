@@ -45,14 +45,11 @@ class MaterialsList extends React.Component {
     });
   }
 
-  edit(_id,resourceUrl,type,properties){
-    SpritePreview({
-      id:_id,
-      resourceUrl,
-      type,
-      properties,
-      onSubmit:this.save
-    });
+  edit(sprite){
+    SpritePreview(Object.assign({
+      onSubmit:this.save,
+      sprite,
+    },sprite));
   }
 
   render(){
@@ -82,7 +79,7 @@ class MaterialsList extends React.Component {
             return (
               <li key={"material"+i} >
                 <span>
-                  {sprite.name}
+                  {name}
                 </span>
 
                 <span className="operation delete">
@@ -91,7 +88,7 @@ class MaterialsList extends React.Component {
                   </DeleteSprite>
                 </span>
 
-                <a className="operation" onClick={this.edit.bind(this,_id,resourceUrl,type,properties)} href="javascript:void 0">编辑</a>
+                <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
 
                 <span className="operation" href="javascript:void 0">
                   <Download query={queryForm} >

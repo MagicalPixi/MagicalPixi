@@ -29,7 +29,9 @@ let getSpriteTpeByUrl  = (url)=>{
 var propTypes = {
   resources:T.array,
   resources2:T.array,
+  sprite:T.object,
   id:T.string,
+  _id:T.string,
   resourcesUrl:T.string,
   type:T.string,
   properties:T.oneOfType([T.object,T.string]),
@@ -48,7 +50,7 @@ class SpritePreview extends React.Component {
     super(props);
     autoBind(this);
 
-    let {id,resourceUrl,type,properties} = props;
+    let {id,_id,resourceUrl,type,properties,sprite} = props;
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
@@ -58,14 +60,15 @@ class SpritePreview extends React.Component {
       init:!resourceUrl,
       spriteType:type,
       spriteDisplayObjProperties:Object.assign({
-      },properties)
+      },properties),
+      originSprite:sprite,
     };
 
     this.spriteDisplayObj = {};
 
     this.resourceUrl = resourceUrl;
 
-    this.id = id;
+    this.id = id || _id;
 
     this.setPropertyTo = this.setPropertyTo.bind(this);
     this.selectBasicResource = this.selectBasicResource.bind(this);
@@ -133,13 +136,13 @@ class SpritePreview extends React.Component {
 
   buildPostParam(){
 
-    let {spriteType,spriteDisplayObjProperties,basicResourceObj } = this.state;
+    let {spriteType,spriteDisplayObjProperties,basicResourceObj,originSprite } = this.state;
 
     let resourceUrl = this.resourceUrl;
 
     let postParam = false;
 
-    postParam = Object.assign({},basicResourceObj,{
+    postParam = Object.assign({},basicResourceObj,originSprite,{
       id: this.id,
       resourceUrl,
       spriteType,
