@@ -1,4 +1,7 @@
-var mySprite = require('./<%= spriteFilename %>');
+var mySpriteFn = require('./<%= spriteFilename %>');
+var mySprite = mySpriteFn();
+
 mySprite.render = function () {
 }
+
 module.exports = mySprite;

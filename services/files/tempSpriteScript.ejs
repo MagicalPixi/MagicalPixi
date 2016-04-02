@@ -28,18 +28,8 @@ var args = [{
 
 <% } %>
 
-var mySprite = <%=  referenceName %>.<%=  fnStr %>.apply(<%=  referenceName %>,args);
+module.exports = function spriteFn(){
+  var mySprite = <%=  referenceName %>.<%=  fnStr %>.apply(<%=  referenceName %>,args);
 
-
-<% if(actionFrames){ %>
-
-  <% actionFrames.map(function(frame,i){  %>
-
-mySprite.playAction<%= i %> = mySprite.playAction.bind(mySprite,<%= i %>);
-
-  <% }); %>
-
-<% } %>
-
-
-module.exports = mySprite;
+  return mySprite;
+}
