@@ -32,7 +32,7 @@ module.exports = function containersManager(containers) {
 
           let properties = JSON.parse(materialOne.properties);
 
-          pixiLib.loadResource(materialOne.resourceUrl,materialOne.type,properties,(spriteDisplayObj)=>{
+          pixiLib.loadSprite(materialOne.resourceUrl,materialOne.type,properties,(spriteDisplayObj)=>{
             container.addChild(spriteDisplayObj);
           });
           //loadResource(materialOne.resourceUrl, function (resource) {

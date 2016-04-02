@@ -116,7 +116,7 @@ class GameView extends React.Component {
     let { data } = this.props;
 
     return (
-      <div id="gameView" ref="gameView"
+      <div id="gameView"
         onDrop={this.addSprite.bind(this)}
         onDragOver={this.dragOver.bind(this)} >
 
@@ -132,6 +132,10 @@ class GameView extends React.Component {
             +
           </button>
         </div>
+
+        <div ref="gameView">
+        </div>
+
       </div>
     )
   }
