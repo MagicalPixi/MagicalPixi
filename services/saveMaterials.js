@@ -12,6 +12,14 @@ var imagesDir = 'materials/';
 var userDirDefault = 'admin';
 var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
 
+/**
+ *
+ * @param dir 要存图片的目录，会有一个默认文件夹提供
+ * @param file file对象，包含所上传的图片的信息集合
+ *   name:上传的文件名
+ *   path:缓存的文件完整路径
+ * @returns {Promise}
+ */
 var saveImg = function saveImg(dir,file){
 
   if(typeof file === 'undefined'){
@@ -44,6 +52,8 @@ var saveImg = function saveImg(dir,file){
       readStream.on('end',function(err){
         console.log('file 处理完成,耗时:',(+new Date()) - st);
         resolve(finalFileName);
+
+        fs.unlink(file.path);
       });
 
       readStream.pipe(writeStream);
