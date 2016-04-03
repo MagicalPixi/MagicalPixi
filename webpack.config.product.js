@@ -9,10 +9,10 @@ base.output.publicPath = '';
 
 base.entry = {
   index: [
-    path.resolve(__dirname, './public/js/main.jsx')
+    path.resolve(__dirname, './public/back/scripts/main.jsx')
   ],
   edit: [
-    path.resolve(__dirname, './public/js/edit.jsx'),
+    path.resolve(__dirname, './public/back/scripts/edit.jsx'),
   ]
 },
 
