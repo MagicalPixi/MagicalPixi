@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactRouter,{Router,Route,browserHistory} from 'react-router'
+import ReactRouter,{Router,Route,IndexRoute,browserHistory} from 'react-router'
 import * as _ from 'lodash'
 
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -12,46 +12,18 @@ import {mainReducers} from '../reducers'
 import {routerBuild,createMyStore} from '../../../common/routerBuild'
 
 import buildRouterList from '../../../common/buildRouterList'
-//
-//log(ReactRouter);
-//log(ReactRouter.browserHistory,browserHistory);
-//
-let routersLoad = require.context('./',false,/\.js|\.jsx$/);
 
-let routerList = buildRouterList(routersLoad);
-//
-//let history  = createHistory();
-//
-//let reducer = combineReducers(Object.assign({}, reducers, {
-//  routing: routeReducer
-//}));
-//
-//// Sync dispatched route actions to the history
-//let reduxRouterMiddleware = syncHistory(history);
-//
-//let createStoreWithMiddleware = applyMiddleware(
-//  thunk,
-//  reduxRouterMiddleware
-//)(createStore)
-//
-//let store = createStoreWithMiddleware(reducer);
-//
-//// Required for replaying actions from devtools to work
-//reduxRouterMiddleware.listenForReplays(store)
-//
-//module.exports = (
-//  <Provider store={store} >
-//    <Router history={browserHistory}>
-//      <route path='/'>
-//        {routerList}
-//      </route>
-//    </Router>
-//  </Provider>
-//);
+import defaultRouterComponent from './scene'
 
-//let RouterElement = routerBuild(routerList,reducers);
+var routerList = [
+  <IndexRoute key="route0" component={defaultRouterComponent} />
+];
 
-let myStore = createMyStore(mainReducers,{
+var routersLoad = require.context('./',false,/\.js|\.jsx$/);
+
+routerList = routerList.concat(buildRouterList(routersLoad));
+
+var myStore = createMyStore(mainReducers,{
   withRouter:true,
 
   initialState:{

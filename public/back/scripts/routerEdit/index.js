@@ -2,8 +2,6 @@ import React from 'react'
 import ReactRouter,{Router,IndexRoute,Route,browserHistory} from 'react-router'
 import * as _ from 'lodash'
 
-//<IndexRoute component={DefaultComponent} />
-
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
