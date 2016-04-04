@@ -8,7 +8,6 @@ let React = require('react');
 import autoBind from 'react-autobind'
 
 var T = React.PropTypes;
-let Popup = require('../Popup');
 
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
@@ -234,9 +233,4 @@ class SpritePreview extends React.Component {
 SpritePreview.defaultProps = defaultProps;
 SpritePreview.propTypes = propTypes;
 
-var SpritePreviewFn = React.createFactory(SpritePreview);
-
-module.exports = (props) => {
-
-  return Popup(SpritePreviewFn(props));
-};
+module.exports = SpritePreview;
