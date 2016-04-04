@@ -15,6 +15,8 @@ let GameView = require('../components/GameView/index');
 let GameViewActions = require('./actions/gameView');
 let SceneActions = require('./actions/scene');
 
+import SelectResource from '../components/SelectResource'
+
 let EditOperations = require('../components/EditOperations');
 let ConsolePanel = require('../components/ConsolePanel');
 let SceneTitle = require('../components/SceneTitle');
@@ -67,16 +69,16 @@ class Edit extends React.Component {
     return (
       <div>
         <Navbar mode="left" >
-
-
           <SceneTitle actions={actions} title={sceneTitle} />
 
           <EditOperations store={editStore} />
-
-
-
         </Navbar>
-        <FixedBox top="66">
+
+        <div className="resource-tabs">
+          <SelectResource></SelectResource>
+        </div>
+
+        <FixedBox top="127">
 
           <FlexBox childrenWidth={[undefined,600]}>
             <GameContainer>
