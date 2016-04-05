@@ -1,2 +1,12 @@
+@import "core/variables";
+
 @import "all/fonts";
 @import "all/index";
+
+body{
+  min-height: 680px;
+}
+
+.resource-tabs{
+  border-bottom: 1px solid $macGray;
+}

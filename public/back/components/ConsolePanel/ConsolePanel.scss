@@ -49,13 +49,8 @@
         @include active;
       }
     }
-    .operations[data-state="action"]{
-      li:nth-child(2){
-        @include active;
-      }
-    }
     .operations[data-state="music"]{
-      li:nth-child(3){
+      li:nth-child(2){
         @include active;
       }
     }
