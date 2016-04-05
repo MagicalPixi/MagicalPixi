@@ -14,6 +14,7 @@ let GameContainer = require('../components/GameContainer/index');
 let GameView = require('../components/GameView/index');
 let GameViewActions = require('./actions/gameView');
 let SceneActions = require('./actions/scene');
+import * as ConsoleActions from './actions/console'
 
 import SelectResource from '../components/SelectResource'
 
@@ -59,12 +60,14 @@ class Edit extends React.Component {
     if(sceneId){
       this.props.actions.initViewData(sceneId);
     }
+
+    this.props.actions.queryData();
   }
 
   render(){
     log('EDIT:',this.props);
 
-    let {viewData,sceneTitle,actions} = this.props;
+    let {viewData,sceneTitle,consoleData,actions} = this.props;
 
     return (
       <div>
@@ -75,7 +78,7 @@ class Edit extends React.Component {
         </Navbar>
 
         <div className="resource-tabs">
-          <SelectResource></SelectResource>
+          <SelectResource spriteResource={consoleData}></SelectResource>
         </div>
 
         <FixedBox top="127">
@@ -97,13 +100,19 @@ class Edit extends React.Component {
 function mapStateToProps(state) {
   return {
     viewData: state.viewData,
-    sceneTitle: state.sceneTitle
+    sceneTitle: state.sceneTitle,
+    consoleData:state.consoleData,
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({},GameViewActions,SceneActions), dispatch)
+    actions: bindActionCreators(Object.assign(
+      {},
+      GameViewActions,
+      SceneActions,
+      ConsoleActions
+    ),dispatch)
   }
 }
 
