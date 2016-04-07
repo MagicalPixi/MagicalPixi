@@ -27,6 +27,7 @@
   .container{
     overflow: hidden;
     position: relative;
+    height: 504px;
   }
 
   .select-resource{
@@ -118,5 +119,14 @@
     canvas{
       display: block;
     }
+  }
+}
+
+#mpSpritePreviewBox[data-close-preview=true]{
+
+  width: $previewWidth * 1 + $padding3 * 2 + 2px;
+
+  .preview-container-box{
+    display: none;
   }
 }

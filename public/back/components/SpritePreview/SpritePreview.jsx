@@ -35,12 +35,14 @@ var propTypes = {
   type:T.string,
   properties:T.oneOfType([T.object,T.string]),
   onSubmit:T.func.isRequired,
+  closePreview:T.bool
 };
 
 
 var defaultProps = {
   resourceUrl:'',
   properties:{},
+  closePreview:false,
 };
 
 class SpritePreview extends React.Component {
@@ -49,7 +51,7 @@ class SpritePreview extends React.Component {
     super(props);
     autoBind(this);
 
-    let {id,_id,resourceUrl,type,properties,sprite} = props;
+    let {id,_id,resourceUrl,type,properties,sprite,closePreview} = props;
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
@@ -61,6 +63,7 @@ class SpritePreview extends React.Component {
       spriteDisplayObjProperties:Object.assign({
       },properties),
       originSprite:sprite,
+      closePreview:!!closePreview
     };
 
     this.spriteDisplayObj = {};
@@ -182,12 +185,12 @@ class SpritePreview extends React.Component {
   }
 
   render(){
-    var {init,spriteType,spriteDisplayObjProperties} = this.state;
+    var {init,spriteType,spriteDisplayObjProperties,closePreview} = this.state;
 
     var {resources,resources2} = this.props;
 
     return (
-      <div id="mpSpritePreviewBox" data-init={init}>
+      <div id="mpSpritePreviewBox" data-init={init} data-close-preview={closePreview} >
         <h3>精灵</h3>
 
         <div className="container">
