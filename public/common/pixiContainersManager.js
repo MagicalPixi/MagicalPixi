@@ -11,6 +11,8 @@ let removeByIndex = function (array,index) {
 
 module.exports = function containersManager(containers) {
 
+  var clickOnSprite = _=>_;
+
   return {
     getContainers(){
       return containers;
@@ -18,7 +20,7 @@ module.exports = function containersManager(containers) {
     //翻译成pixiContainers
     getPixiContainers(){
 
-      let pixiContainers = containers.map(function ({name,children}) {
+      let pixiContainers = containers.map(({name,children}) => {
         let container = new PIXI.Container();
         container.name = name;
 
@@ -26,19 +28,23 @@ module.exports = function containersManager(containers) {
           container,
           children
         }
-      }).map(function ({container,children}) {
+      }).map(({container,children},containerIndex)=>{
 
-        children.map(function (materialOne) {
+        children.map((materialOne,spriteIndex)=>{
 
           let properties = JSON.parse(materialOne.properties);
 
           pixiLib.loadSprite(materialOne.resourceUrl,materialOne.type,properties,(spriteDisplayObj)=>{
             container.addChild(spriteDisplayObj);
+
+            spriteDisplayObj.interactive = true;
+            spriteDisplayObj.on('mousedown',(e)=>{
+
+              console.log('mousedown',e);
+
+              clickOnSprite(materialOne,containerIndex,spriteIndex);
+            });
           });
-          //loadResource(materialOne.resourceUrl, function (resource) {
-          //  properties.textures = resource.texture || resource.textures;
-          //  let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
-          //});
         });
 
         return container;
@@ -66,13 +72,6 @@ module.exports = function containersManager(containers) {
 
       return this;
     },
-    containerTop(index){
-      let topContainer = containers.splice(index,1);
-
-      containers = topContainer.concat(containers);
-
-      return this;
-    },
 
     childTop(containerIndex,childIndex){
       let container = containers[containerIndex];
@@ -83,5 +82,8 @@ module.exports = function containersManager(containers) {
 
       return this;
     },
+    onClick(cb){
+      clickOnSprite = cb;
+    }
   }
 };
