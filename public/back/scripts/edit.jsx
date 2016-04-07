@@ -12,8 +12,8 @@ let Navbar = require('../components/Navbar/index');
 let GameContainer = require('../components/GameContainer/index');
 
 let GameView = require('../components/GameView/index');
-let GameViewActions = require('./actions/gameView');
-let SceneActions = require('./actions/scene');
+import * as GameViewActions from './actions/gameView'
+import * as SceneActions from './actions/scene'
 import * as ConsoleActions from './actions/console'
 
 import SelectResource from '../components/SelectResource'
@@ -33,6 +33,9 @@ let {createRouterList} = require('./routerEdit/index');
 
 //let initialContainer = new PIXI.Container();
 //initialContainer.name = '初始';
+
+window.R = React;
+window.RD = ReactDOM;
 
 let editStore = createMyStore(editReducers,{
   withRouter:true,
@@ -102,6 +105,7 @@ function mapStateToProps(state) {
     viewData: state.viewData,
     sceneTitle: state.sceneTitle,
     consoleData:state.consoleData,
+    editSceneSprite:state.editSceneSprite,
   }
 }
 

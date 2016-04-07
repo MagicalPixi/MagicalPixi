@@ -3,7 +3,7 @@
  */
 import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
-  CHILD_REMOVE,INIT_SCENE} from '../constants/gameViewTypes'
+  CHILD_REMOVE,CHILD_EDIT,INIT_SCENE} from '../constants/gameViewTypes'
 
 
 import API from '../../../libs/API'
@@ -62,19 +62,21 @@ export function containerRename(index,newName){
   }
 }
 
-export function containerTop(topIndex = 0){
-
-  return {
-    type:CONTAINER_TOP,
-    topIndex
-  }
-}
-
 export function childRemove(containerIndex,childIndex){
   return {
     type:CHILD_REMOVE,
     containerIndex,
     childIndex
+  }
+}
+
+export function childEdit(sprite,containerIndex,childIndex){
+
+  return {
+    type:CHILD_EDIT,
+    sprite,
+    containerIndex,
+    childIndex,
   }
 }
 
@@ -113,3 +115,4 @@ export function initViewData(id){
     })
   }
 }
+
