@@ -21,7 +21,8 @@ var propTypes = {
   player:T.object,
   //name:T.string,
   //childSprites:T.array,
-  basics:T.array.isRequired
+  basics:T.array.isRequired,
+  onPacker:T.func.isRequired,
 };
 
 var defaultProps = {
