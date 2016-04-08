@@ -33,6 +33,7 @@ var propTypes = {
   _id:T.string,
   resourcesUrl:T.string,
   type:T.string,
+  actionFrames:T.oneOfType([T.array,T.string]),
   properties:T.oneOfType([T.object,T.string]),
   onSubmit:T.func.isRequired,
   closePreview:T.bool
@@ -51,10 +52,14 @@ class SpritePreview extends React.Component {
     super(props);
     autoBind(this);
 
-    let {id,_id,resourceUrl,type,properties,sprite,closePreview} = props;
+    let {id,_id,resourceUrl,type,properties,sprite,actionFrames,closePreview} = props;
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
+    }
+
+    if(typeof actionFrames === 'string'){
+      actionFrames = JSON.parse(actionFrames);
     }
 
     this.state = {
@@ -63,6 +68,7 @@ class SpritePreview extends React.Component {
       spriteDisplayObjProperties:Object.assign({
       },properties),
       originSprite:sprite,
+      actionFrames,
       closePreview:!!closePreview
     };
 
@@ -93,10 +99,10 @@ class SpritePreview extends React.Component {
   }
 
   loadSprite(spriteType){
-    let { spriteDisplayObjProperties } = this.state;
+    let { spriteDisplayObjProperties ,actionFrames} = this.state;
     let resourceUrl = this.resourceUrl;
 
-    pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,
+    pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,actionFrames,
       (spriteDisplayObj) => {
         this.spriteDisplayObj = spriteDisplayObj;
         this.stage.removeChildren();
@@ -126,6 +132,8 @@ class SpritePreview extends React.Component {
     let newProperties = Object.assign({},oldProperties,properties);
 
     newProperties = pixiLib.fixSpriteProperties(properties,newProperties);
+
+    log(newProperties);
 
     if(this.spriteDisplayObj){
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);
@@ -185,7 +193,7 @@ class SpritePreview extends React.Component {
   }
 
   render(){
-    var {init,spriteType,spriteDisplayObjProperties,closePreview} = this.state;
+    var {init,spriteType,spriteDisplayObjProperties,actionFrames,closePreview} = this.state;
 
     var {resources,resources2} = this.props;
 
@@ -217,6 +225,7 @@ class SpritePreview extends React.Component {
           <div className="sprite-setting-box">
             <SpriteSetting
               spriteType={spriteType}
+              actionFrames={actionFrames}
               spriteProperties={spriteDisplayObjProperties}
               onChangeSetting={this.setPropertyTo}
             />
