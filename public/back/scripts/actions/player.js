@@ -13,6 +13,9 @@ const {SPRITE_SP,SPRITE_MC,SPRITE_IM} = pixiLib.types;
 function loadSpritesImg(childSprites){
   return Promise.all(childSprites.map(spriteOne=>{
     return spriteOne.basic.originImgUrls
+  }).map(urls=>{
+    urls = urls.concat(last(urls));    //这里加了一张，下面要加1
+    return urls;
   }).reduce((pre,next)=>pre.concat(next),[]).map(url=>{
     var imgObj = new Image();
     imgObj.src = url;
@@ -28,7 +31,7 @@ function loadSpritesImg(childSprites){
 function build(childSprites) {
 
   var actionFrames = childSprites.map(spriteOne=>{
-    return spriteOne.basic.originImgUrls.length
+    return spriteOne.basic.originImgUrls.length + 1  //因为上面加一张
   }).reduce((init,next)=>{
     return init.concat(last(init) + next);
   },[0]).map(frame => frame-1);
@@ -85,46 +88,14 @@ export function initPlayerList() {
 
 /**
  *
- * @param childSprites [{
+ * @param player [{
  *   basic:{basic原始素材对象},
  *   properties:{属性}
  * }]
  * @returns {Function}
  */
-export function playerAdd(player){
 
-  if(player.name &&
-    player.childSprites &&
-    !player.childSprites.every(({basic,properties})=>basic&&properties)){
-    throw new Error('不合法的childSprites');
-  }
-
-  return (dispatch,getState)=>{
-
-    loadSpritesImg(player.childSprites)
-      .then(build(player.childSprites))
-      .then(buildResult=>{
-
-        ajax(API.playerSave).post(Object.assign({
-          name:player.name,
-          childSprites:JSON.stringify(player.childSprites),
-        },buildResult)).then(returnData=>{
-
-          if(returnData.result){
-
-            dispatch({
-              type:PLAYER_ADD,
-              player:Object.assign({},player,returnData.result,{
-                id:returnData.result._id,
-              })
-            });
-          }
-        });
-      });
-  }
-}
-
-export function playerUpdate(player){
+export function playerSave(player){
 
   return (dispatch,getState)=>{
 
@@ -141,7 +112,7 @@ export function playerUpdate(player){
           if(returnData.result){
 
             dispatch({
-              type:PLAYER_EDIT,
+              type: player.id ? PLAYER_EDIT : PLAYER_ADD,
               player:Object.assign({},player,returnData.result)
             });
           }
