@@ -7,7 +7,7 @@ const T = React.PropTypes;
 
 let ItemList = require('../../componentsLayout/ItemList');
 
-let SpritePreview = require('../SpritePreview');
+import SpritePreviewPopup from '../../componentsFunctional/SpritePreviewPopup'
 let Download = require('../../componentsFunctional/Download');
 let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
 
@@ -38,7 +38,7 @@ class MaterialsList extends React.Component {
   newMaterial(){
     var {basics,players} = this.props;
 
-    SpritePreview({
+    SpritePreviewPopup({
       resources:basics,
       resources2:players,
       onSubmit:this.save,
@@ -46,7 +46,7 @@ class MaterialsList extends React.Component {
   }
 
   edit(sprite){
-    SpritePreview(Object.assign({
+    SpritePreviewPopup(Object.assign({
       onSubmit:this.save,
       sprite,
     },sprite));

@@ -6,6 +6,8 @@ let React = require('react');
 let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
+import autoBind from 'react-autobind'
+
 let pixiLib = require('pixi-lib');
 
 let pixiContainersManager = require('../../../common/pixiContainersManager');
@@ -51,7 +53,12 @@ class GameView extends React.Component {
 
     log('data:',data);
 
-    let pixiContainers = pixiContainersManager(data).getPixiContainers();
+    var manager = pixiContainersManager(data);
+    let pixiContainers = manager.getPixiContainers();
+
+    manager.onClick((spriteObj,containerIndex,spriteIndex)=>{
+      this.props.actions.childEdit(spriteObj,containerIndex,spriteIndex);
+    });
 
     pixiContainers.forEach((container) => {
 
@@ -84,22 +91,6 @@ class GameView extends React.Component {
       materialOne,
       currentLayoutIndex
     );
-
-    //loadResource(materialOne.resourceUrl,(resource)=>{
-    //
-    //  properties.textures = resource.texture || resource.textures;
-    //
-    //  //let spriteDisplayObj = spriteFnMap(materialOne.type)(properties);
-    //
-    //  this.props.actions.addSpriteToScene(
-    //    materialOne,
-    //    currentLayoutIndex
-    //  );
-    //
-    //  //this.forceUpdate();
-    //  this.refreshStage();
-    //});
-
   }
 
   dragOver(e){

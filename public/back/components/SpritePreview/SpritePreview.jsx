@@ -8,7 +8,6 @@ let React = require('react');
 import autoBind from 'react-autobind'
 
 var T = React.PropTypes;
-let Popup = require('../Popup');
 
 let SaveProperties = require('../../componentsFunctional/SaveProperties');
 
@@ -34,14 +33,17 @@ var propTypes = {
   _id:T.string,
   resourcesUrl:T.string,
   type:T.string,
+  actionFrames:T.oneOfType([T.array,T.string]),
   properties:T.oneOfType([T.object,T.string]),
   onSubmit:T.func.isRequired,
+  closePreview:T.bool
 };
 
 
 var defaultProps = {
   resourceUrl:'',
   properties:{},
+  closePreview:false,
 };
 
 class SpritePreview extends React.Component {
@@ -50,10 +52,14 @@ class SpritePreview extends React.Component {
     super(props);
     autoBind(this);
 
-    let {id,_id,resourceUrl,type,properties,sprite} = props;
+    let {id,_id,resourceUrl,type,properties,sprite,actionFrames,closePreview} = props;
 
     if(typeof properties === 'string'){
       properties = JSON.parse(properties);
+    }
+
+    if(typeof actionFrames === 'string'){
+      actionFrames = JSON.parse(actionFrames);
     }
 
     this.state = {
@@ -62,6 +68,8 @@ class SpritePreview extends React.Component {
       spriteDisplayObjProperties:Object.assign({
       },properties),
       originSprite:sprite,
+      actionFrames,
+      closePreview:!!closePreview
     };
 
     this.spriteDisplayObj = {};
@@ -91,10 +99,10 @@ class SpritePreview extends React.Component {
   }
 
   loadSprite(spriteType){
-    let { spriteDisplayObjProperties } = this.state;
+    let { spriteDisplayObjProperties ,actionFrames} = this.state;
     let resourceUrl = this.resourceUrl;
 
-    pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,
+    pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,actionFrames,
       (spriteDisplayObj) => {
         this.spriteDisplayObj = spriteDisplayObj;
         this.stage.removeChildren();
@@ -124,6 +132,8 @@ class SpritePreview extends React.Component {
     let newProperties = Object.assign({},oldProperties,properties);
 
     newProperties = pixiLib.fixSpriteProperties(properties,newProperties);
+
+    log(newProperties);
 
     if(this.spriteDisplayObj){
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);
@@ -183,12 +193,12 @@ class SpritePreview extends React.Component {
   }
 
   render(){
-    var {init,spriteType,spriteDisplayObjProperties} = this.state;
+    var {init,spriteType,spriteDisplayObjProperties,actionFrames,closePreview} = this.state;
 
     var {resources,resources2} = this.props;
 
     return (
-      <div id="mpSpritePreviewBox" data-init={init}>
+      <div id="mpSpritePreviewBox" data-init={init} data-close-preview={closePreview} >
         <h3>精灵</h3>
 
         <div className="container">
@@ -215,6 +225,7 @@ class SpritePreview extends React.Component {
           <div className="sprite-setting-box">
             <SpriteSetting
               spriteType={spriteType}
+              actionFrames={actionFrames}
               spriteProperties={spriteDisplayObjProperties}
               onChangeSetting={this.setPropertyTo}
             />
@@ -234,9 +245,4 @@ class SpritePreview extends React.Component {
 SpritePreview.defaultProps = defaultProps;
 SpritePreview.propTypes = propTypes;
 
-var SpritePreviewFn = React.createFactory(SpritePreview);
-
-module.exports = (props) => {
-
-  return Popup(SpritePreviewFn(props));
-};
+module.exports = SpritePreview;

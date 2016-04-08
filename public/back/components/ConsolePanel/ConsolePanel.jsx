@@ -7,47 +7,49 @@ let _ = require('lodash');
 
 let FloatItems = require('../FloatItems/index');
 
+import SpritePreview from '../SpritePreview'
+
+var propTypes = {
+  editData:T.object
+};
+
 class ConsolePanel extends React.Component {
 
   constructor(props){
     super(props);
 
     this.state = {
-      list:[]
-    }
+    };
 
     log('Console Panel:',props);
   }
 
   componentDidMount(){
-    let {consoleTab} = this.props;
-
-    this.props.actions.queryData(consoleTab);
   }
 
-  changeHeader(headerState){
-    this.props.actions.switchTab(headerState);
+  editDone(){
+
   }
 
   render(){
-    let {consoleTab,consoleData} = this.props;
+    var {consoleData} = this.props;
 
-    log(this.props);
+    var editSceneSprite = consoleData ? consoleData.sprite : null;
+
 
     return (
       <div id="consolePanel">
-        <header>
-          <ul data-state={consoleTab} className="operations " >
-            <li onClick={this.changeHeader.bind(this,'material') } >精灵</li>
-            <li onClick={this.changeHeader.bind(this,'music') } >音乐</li>
-          </ul>
-        </header>
-        <div className="contents">
-          <FloatItems
-            title="精灵"
-            data={consoleData}
-          />
-        </div>
+      {!editSceneSprite?'':
+        <SpritePreview
+          sprite = {editSceneSprite}
+          resourceUrl = {editSceneSprite.resourceUrl}
+          properties={editSceneSprite.properties}
+          type={editSceneSprite.type}
+          onSubmit={this.editDone}
+          closePreview={true}
+         />
+        }
+
       </div>
     )
   }

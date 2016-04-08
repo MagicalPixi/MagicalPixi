@@ -15,4 +15,9 @@ export const CONTAINER_TOP = 'CONTAINER_TOP';
 
 export const CHILD_REMOVE = 'CHILD_REMOVE';
 
+export const CHILD_EDIT = 'CHILD_EDIT';
+
+export const CHILD_EDIT_DONE = 'CHILD_EDIT_DONE';
+
 export const INIT_SCENE = 'INIT_SCENE';
+

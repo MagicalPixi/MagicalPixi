@@ -41,10 +41,7 @@ class PlayerList extends Component {
   }
 
   packerCompleted(player){
-    this.props.actions.playerAdd(player);
-  }
-  packerEditCompleted(player){
-    this.props.actions.playerUpdate(player);
+    this.props.actions.playerSave(player);
   }
 
   newOne(){
@@ -65,7 +62,7 @@ class PlayerList extends Component {
     this.close = Popup(
       <PlayerPacker
         player={selectPlayer}
-        onPacker={this.packerEditCompleted}
+        onPacker={this.packerCompleted}
         basics={basics}
         />
     )

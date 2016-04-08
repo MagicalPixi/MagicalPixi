@@ -4,6 +4,7 @@ import viewData from './viewData'
 import consoleTab from './consoleTab'
 import consoleData from './consoleData'
 import sceneTitle from './sceneTitle'
+import editSceneSprite from './editSceneSprite.js'
 
 import scenes from './scenes'
 import basics from './basics'
@@ -15,6 +16,7 @@ export const editReducers = {
   consoleTab,
   consoleData,
   sceneTitle,
+  editSceneSprite,
 };
 
 export const mainReducers = {

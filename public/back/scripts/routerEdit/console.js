@@ -21,10 +21,10 @@ class App extends Component {
 
   render(){
 
-    let {consoleTab,consoleData,actions} = this.props;
+    let {editSceneSprite,actions} = this.props;
 
     return (
-      <ConsolePanel consoleTab={consoleTab} consoleData={consoleData} actions={actions} />
+      <ConsolePanel consoleData={editSceneSprite} actions={actions} />
     )
   }
 }
@@ -32,7 +32,8 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     consoleData: state.consoleData,
-    consoleTab:state.consoleTab
+    consoleTab:state.consoleTab,
+    editSceneSprite:state.editSceneSprite,
   }
 }
 

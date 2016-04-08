@@ -82,8 +82,19 @@ let settingListConfigMap = ((spriteType)=> {
     return Object.assign(init, next);
   }, {});
 
+  function appendPlayAction(actionFrames){
+    return actionFrames.map((frame,i)=>{
+      return {
+        name:`playAction${i}`,
+        checkbox:{
+          true:`playAction${i}`,
+          false:`stop`
+        }
+      }
+    })
+  }
 
-  return (spriteType, spriteProperties)=> {
+  return (spriteType, spriteProperties,actionFrames)=> {
 
     let properties = config[spriteType];
 
@@ -100,8 +111,10 @@ let settingListConfigMap = ((spriteType)=> {
           }
           return propertyObj;
         });
-
       });
+
+      properties = properties.concat(appendPlayAction(actionFrames));
+
     }else{
       console.error('no properties');
     }
