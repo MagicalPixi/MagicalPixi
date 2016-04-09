@@ -3,7 +3,7 @@
  */
 import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
-  CHILD_REMOVE,CHILD_EDIT,INIT_SCENE} from '../constants/gameViewTypes'
+  CHILD_REMOVE,CHILD_EDIT,CHILD_EDIT_TYPES,INIT_SCENE} from '../constants/gameViewTypes'
 
 
 import API from '../../../libs/API'
@@ -75,6 +75,16 @@ export function childEdit(sprite,containerIndex,childIndex){
   return {
     type:CHILD_EDIT,
     sprite,
+    containerIndex,
+    childIndex,
+  }
+}
+
+export function childEditProperties(newProperties,containerIndex,childIndex){
+
+  return {
+    type:CHILD_EDIT_TYPES,
+    properties:newProperties,
     containerIndex,
     childIndex,
   }

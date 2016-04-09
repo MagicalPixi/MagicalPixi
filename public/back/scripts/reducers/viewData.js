@@ -1,6 +1,6 @@
 import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
-  CHILD_REMOVE,INIT_SCENE} from '../constants/gameViewTypes'
+  CHILD_REMOVE,INIT_SCENE,CHILD_EDIT_TYPES} from '../constants/gameViewTypes'
 
 import containersManager from '../../../common/pixiContainersManager'
 
@@ -56,6 +56,20 @@ let handler = {
   [INIT_SCENE](state,action){
 
     return action.viewData;
+  },
+  [CHILD_EDIT_TYPES](state,{properties,containerIndex,childIndex}){
+
+    var viewData = state.slice();
+
+    var spriteObj = viewData[containerIndex].children[childIndex];
+
+    spriteObj = Object.assign({},spriteObj,{
+      properties
+    });
+
+    viewData[containerIndex].children[childIndex] = spriteObj;
+
+    return viewData;
   }
 };
 

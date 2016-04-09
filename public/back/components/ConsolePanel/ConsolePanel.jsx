@@ -5,9 +5,11 @@ let T = React.PropTypes;
 let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
-let FloatItems = require('../FloatItems/index');
+import autobind from 'react-autobind'
 
+import pixiLib from 'pixi-lib'
 import SpritePreview from '../SpritePreview'
+import SpriteSetting from '../SpriteSetting'
 
 var propTypes = {
   editData:T.object
@@ -18,17 +20,28 @@ class ConsolePanel extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-    };
+    this.state = {};
 
-    log('Console Panel:',props);
+    autobind(this);
   }
 
   componentDidMount(){
   }
 
-  editDone(){
+  editDone(settingProp){
+    log(settingProp);
 
+    var {consoleData,actions} = this.props;
+
+    var {sprite,containerIndex,childIndex,} = consoleData;
+
+    var properties = sprite.properties;
+
+    var newProperties = Object.assign({},properties,settingProp);
+
+    newProperties = pixiLib.fixSpriteProperties(settingProp,newProperties);
+
+    actions.childEditProperties(newProperties,containerIndex,childIndex);
   }
 
   render(){
@@ -36,17 +49,14 @@ class ConsolePanel extends React.Component {
 
     var editSceneSprite = consoleData ? consoleData.sprite : null;
 
-
     return (
       <div id="consolePanel">
       {!editSceneSprite?'':
-        <SpritePreview
-          sprite = {editSceneSprite}
-          resourceUrl = {editSceneSprite.resourceUrl}
-          properties={editSceneSprite.properties}
-          type={editSceneSprite.type}
-          onSubmit={this.editDone}
-          closePreview={true}
+        <SpriteSetting
+          actionFrames={editSceneSprite.actionFrames}
+          spriteProperties={editSceneSprite.properties}
+          spriteType={editSceneSprite.type}
+          onChangeSetting={this.editDone}
          />
         }
 

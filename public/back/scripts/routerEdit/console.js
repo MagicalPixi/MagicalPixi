@@ -10,6 +10,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import * as ConsoleActions from '../actions/console'
+import * as GameViewActions from '../actions/gameView'
 
 let ConsolePanel = require('../../components/ConsolePanel/index');
 
@@ -39,7 +40,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(ConsoleActions, dispatch)
+    actions: bindActionCreators(Object.assign({},ConsoleActions,GameViewActions), dispatch)
   }
 }
 
