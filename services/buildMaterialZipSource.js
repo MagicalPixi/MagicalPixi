@@ -10,18 +10,20 @@ var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
 var resourceObjBuild = function (name,resourceUrl) {
   var resourceArr = [resourceUrl];
 
-  if(resourceUrl.indexOf('.json') !== -1){
-    var p = path.parse(resourceUrl);
+  var p = path.parse(resourceUrl);
+
+  if(p.ext === '.json'){
+    var resourceName = p.name;
     var dir = p.dir;
 
     resourceArr.push(
-      path.resolve(dir,name + '.png')
+      path.resolve(dir,resourceName + '.png')
     );
   }
 
   return resourceArr.map(function (url) {
     return [
-      path.parse(url).base,
+      name+path.parse(url).ext,
       path.join(__dirname,'../public',url)
     ]
   }).reduce(function (init, next) {
