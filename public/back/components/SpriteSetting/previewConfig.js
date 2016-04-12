@@ -83,6 +83,9 @@ let settingListConfigMap = ((spriteType)=> {
   }, {});
 
   function appendPlayAction(actionFrames){
+    if(!actionFrames){
+      actionFrames = [];
+    }
     return actionFrames.map((frame,i)=>{
       return {
         name:`playAction${i}`,
