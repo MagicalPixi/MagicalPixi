@@ -40,7 +40,7 @@ module.exports = function (targetZip,source) {
 
     archiver.pipe(output);
 
-    _.map(Object.keys(source), function (filename) {
+    Object.keys(source).map(function (filename) {
       var src = source[filename];
 
       //文件路径

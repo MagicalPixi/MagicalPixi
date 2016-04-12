@@ -35,9 +35,15 @@ var build = function (materialObj) {
 
   var name = materialObj.name;
 
-  var properties = JSON.parse(materialObj.properties);
+  var properties = materialObj.properties;
+  if(typeof properties === 'string'){
+    properties = JSON.parse(properties);
+  }
 
-  var actionFrames = JSON.parse(materialObj.actionFrames);
+  var actionFrames = materialObj.actionFrames;
+  if(typeof actionFrames === 'string') {
+    actionFrames = JSON.parse(actionFrames);
+  }
 
   console.log('actionFrames:',actionFrames);
 
@@ -47,8 +53,6 @@ var build = function (materialObj) {
     properties,
     actionFrames
   );
-
-  console.log('configScript done:',materialObj);
 
   var indexScripts = indexScriptsTemplate();
 
@@ -68,9 +72,12 @@ var build = function (materialObj) {
 };
 
 /**
- *
  * @param materialObj
- *  materialObj.name 必须有
+ *  name,
+ *  type,
+ *  resourceUrl,
+ *  properties,
+ *  actionFrames 动作帧数组，默认[]，只有SPRITE_SP类型的精灵有
  *  一个素材对象，同mongo的存储对象。
  */
 module.exports = function buildMaterialZipSource(materialObj) {
