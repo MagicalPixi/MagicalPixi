@@ -7,12 +7,11 @@ var Sprite = require('../models/Sprite');
 var configScriptsTemplate = require('./spriteConfigScriptsTemplate');
 var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
 
-var resourceObjBuild = function (resourceUrl) {
+var resourceObjBuild = function (name,resourceUrl) {
   var resourceArr = [resourceUrl];
 
   if(resourceUrl.indexOf('.json') !== -1){
     var p = path.parse(resourceUrl);
-    var name = p.name;
     var dir = p.dir;
 
     resourceArr.push(
@@ -99,7 +98,7 @@ module.exports = function buildMaterialZipSource(materialObj) {
 
       var scriptsFiles = build(materialObj);
 
-      var resourceObj = resourceObjBuild(materialObj.resourceUrl);
+      var resourceObj = resourceObjBuild(materialObj.name,materialObj.resourceUrl);
 
       resolve(Object.assign({},scriptsFiles,resourceObj));
     }else{
