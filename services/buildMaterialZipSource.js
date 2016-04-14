@@ -1,6 +1,7 @@
 /**
  * Created by zyg on 16/1/16.
  */
+var fs = require('fs');
 var path = require('path');
 var Sprite = require('../models/Sprite');
 
@@ -8,28 +9,25 @@ var configScriptsTemplate = require('./spriteConfigScriptsTemplate');
 var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
 
 var resourceObjBuild = function (name,resourceUrl) {
-  var resourceArr = [resourceUrl];
+  var resourceObj = {};
 
   var p = path.parse(resourceUrl);
 
-  if(p.ext === '.json'){
-    var resourceName = p.name;
-    var dir = p.dir;
+  //加入png
+  resourceObj[`${name}.png`] = path.resolve(__dirname,'../public',`.${p.dir}`,`${p.name}.png`);
 
-    resourceArr.push(
-      path.resolve(dir,resourceName + '.png')
-    );
+  if(p.ext === '.json'){
+
+    var jsonObj = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../public',`.${p.dir}`,`${p.name}.json`)).toString());
+
+    jsonObj.meta.image = `${name}.png`;
+
+    resourceObj[`${name}.json`] = new Buffer(JSON.stringify(jsonObj));
   }
 
-  return resourceArr.map(function (url) {
-    return [
-      name+path.parse(url).ext,
-      path.join(__dirname,'../public',url)
-    ]
-  }).reduce(function (init, next) {
-    init[next[0]] = next[1];
-    return init;
-  },{})
+  console.log('resourceObj:',resourceObj);
+
+  return resourceObj;
 };
 
 var build = function (materialObj) {

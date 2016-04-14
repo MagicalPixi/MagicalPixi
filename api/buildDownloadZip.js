@@ -51,8 +51,6 @@ module.exports = function (req, res,next) {
       zipPath,
       name + '.zip'
     );
-  },function () {
-    throw new Error('not found by condition:'+JSON.stringify(condition));
   }).catch(function (e) {
     next(e);
   });
