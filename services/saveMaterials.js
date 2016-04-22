@@ -12,6 +12,8 @@ var imagesDir = 'materials/';
 var userDirDefault = 'admin';
 var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
 
+//防止重名的计数器
+var count = Date.now();
 /**
  *
  * @param dir 要存图片的目录，会有一个默认文件夹提供
@@ -20,6 +22,7 @@ var projectImagesDir = path.resolve(__dirname,'../public/',imagesDir);
  *   path:缓存的文件完整路径
  * @returns {Promise}
  */
+
 var saveImg = function saveImg(dir,file){
 
   if(typeof file === 'undefined'){
@@ -32,9 +35,9 @@ var saveImg = function saveImg(dir,file){
   var uploadFileName = file.name;
   var format = uploadFileName.substr(uploadFileName.lastIndexOf('.'));
 
-  var finalFileName = Date.now() + uploadFileName;//filename + timeStamp;
+  var finalFileName = uploadFileName;//filename + timeStamp;
 
-  var finalDir = path.resolve(projectImagesDir,dir);
+  var finalDir = (count++)+path.resolve(projectImagesDir,dir);
 
   var targetFilePath = path.resolve(finalDir,finalFileName);
 
