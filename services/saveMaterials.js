@@ -35,9 +35,9 @@ var saveImg = function saveImg(dir,file){
   var uploadFileName = file.name;
   var format = uploadFileName.substr(uploadFileName.lastIndexOf('.'));
 
-  var finalFileName = uploadFileName;//filename + timeStamp;
+  var finalFileName = (count++)+uploadFileName;//filename + timeStamp;
 
-  var finalDir = (count++)+path.resolve(projectImagesDir,dir);
+  var finalDir = path.resolve(projectImagesDir,dir);
 
   var targetFilePath = path.resolve(finalDir,finalFileName);
 
