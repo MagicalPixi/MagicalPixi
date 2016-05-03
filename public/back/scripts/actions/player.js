@@ -1,4 +1,4 @@
-import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_EDIT} from '../constants/playerTypes'
+import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_DELETE,PLAYER_EDIT} from '../constants/playerTypes'
 
 import pixiLib from 'pixi-lib'
 import API from '../../../libs/API'
@@ -117,6 +117,26 @@ export function playerSave(player){
             });
           }
         });
+      });
+  }
+}
+
+export function playerDelete(_id){
+  return (dispatch)=>{
+
+    ajax(API.playerDelete)
+      .post({
+        _id
+      })
+      .then(returnData=>{
+        if(returnData.result){
+          dispatch({
+            type:PLAYER_DELETE,
+            _id
+          });
+        }else{
+          alert('删除失败');
+        }
       });
   }
 }

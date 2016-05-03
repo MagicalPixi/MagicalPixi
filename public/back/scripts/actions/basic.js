@@ -1,4 +1,4 @@
-import {BASIC_INIT,BASIC_ADD} from '../constants/basicTypes'
+import {BASIC_INIT,BASIC_ADD,BASIC_DELETE} from '../constants/basicTypes'
 
 import API from '../../../libs/API'
 import ajax from '../../../libs/ajax'
@@ -76,4 +76,28 @@ export function basicAdd(basic={}){
       console.error('name,base64,pixiJson 3缺1');
     }
   };
+}
+/**
+ * 根据 id删除一个basic素材
+ * @param _id
+ * @returns {Function}
+ */
+export function basicDelete(_id){
+
+  return (dispatch)=>{
+    ajax(API.basicDelete)
+      .post({
+        _id
+      })
+      .then((returnData)=>{
+        if(returnData.result){
+         dispatch({
+           type:BASIC_DELETE,
+           _id
+         });
+        }else{
+          alert('删除失败');
+        }
+      });
+  }
 }

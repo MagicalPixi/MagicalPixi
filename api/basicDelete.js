@@ -1,5 +1,5 @@
 'use strict'
-
+var ObjectId = require('mongodb').ObjectID;
 var Basic = require('../models/Basic');
 
 module.exports = function (req,res,next) {
@@ -9,7 +9,9 @@ module.exports = function (req,res,next) {
 
   var query;
   if(_id){
-    query = {_id};
+    query = {
+      _id:ObjectId(_id)
+    };
   }else if(name){
     query = {name}
   }
@@ -18,17 +20,14 @@ module.exports = function (req,res,next) {
     return next(new Error('basicDelete has no _id or name'));
   }
 
-  Basic.deleteOne(query).then(function (findCursor) {
+  Basic.deleteOne(query).then(function (basics) {
 
-    findCursor.toArray(function (err, basics) {
-
-      if(err){
-        res.json({err});
-      }else{
-        res.json({
-          result:basics
-        });
-      }
+    res.json({
+      result: basics
     });
+
+  }).catch(err=>{
+    console.log('basicDelete:',err);
+    res.json({err});
   });
 };

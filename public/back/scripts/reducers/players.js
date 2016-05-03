@@ -1,4 +1,4 @@
-import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_EDIT} from '../constants/playerTypes'
+import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_EDIT,PLAYER_DELETE} from '../constants/playerTypes'
 
 import reducerHandlerBuild from '../../../common/reducerHandlerBuild'
 
@@ -16,6 +16,9 @@ const handler = {
     return state.map((player)=>{
       return player.id === action.player.id ? action.player : player
     });
+  },
+  [PLAYER_DELETE](state,{_id}){
+    return state.filter(playerObj=> playerObj._id !== _id);
   }
 };
 

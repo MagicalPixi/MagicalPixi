@@ -19,6 +19,10 @@
       .operation {
         margin-right: $margin2;
         float: right;
+
+        &.delete{
+          color: $dangerColor;
+        }
       }
     }
   }

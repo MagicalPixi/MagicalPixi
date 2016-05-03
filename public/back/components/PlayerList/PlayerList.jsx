@@ -68,6 +68,17 @@ class PlayerList extends Component {
     )
   }
 
+  remove(e){
+    var selectIndex = parseInt(e.target.getAttribute('data-i'));
+    var {basics,data} = this.props;
+
+    var selectPlayer = data[selectIndex];
+
+    if(confirm(`删除${selectPlayer.name}?`)){
+      this.props.actions.playerDelete(selectPlayer._id);
+    }
+  }
+
   render() {
 
     var {data} = this.props;
@@ -89,18 +100,13 @@ class PlayerList extends Component {
               <li key={"player"+i} >
                 <span>{name}</span>
 
-                <span className="operation delete">
+                <a className="operation delete" data-i={i} onClick={this.remove}>
                   删除
-                </span>
+                </a>
 
                 <a className="operation" data-i={i} onClick={this.edit} href="javascript:void 0">
                   编辑
                 </a>
-
-                <span className="operation" href="javascript:void 0">
-                  下载
-                </span>
-
               </li>
             )
           })}

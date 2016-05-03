@@ -39,6 +39,11 @@ class BasicList extends Component {
       }
     });
   }
+  remove(basicObj){
+    if(confirm(`删除${basicObj.name}?`)){
+      this.props.actions.basicDelete(basicObj._id);
+    }
+  }
 
   render() {
     return (
@@ -65,6 +70,12 @@ class BasicList extends Component {
                 <span className="name">
                   {name}
                 </span>
+
+
+
+                <a className="operation delete"
+                  onClick={this.remove.bind(this,basicObj)}
+                  href='javascript:void 0' >删除</a>
 
                 <a className="operation"
                   onClick={this.edit.bind(this,basicObj)}

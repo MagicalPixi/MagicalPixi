@@ -1,5 +1,5 @@
 'use strict'
-
+var ObjectId = require('mongodb').ObjectID;
 var Player = require('../models/Player');
 
 module.exports = function (req,res) {
@@ -9,22 +9,21 @@ module.exports = function (req,res) {
 
   var query;
   if(_id){
-    query = {_id};
+    query = {
+      _id:ObjectId(_id)
+    };
   }else if(name){
     query = {name}
   }
 
-  Player.deleteOne(query).then(function (findCursor) {
+  Player.deleteOne(query).then(function (players) {
 
-    findCursor.toArray(function (err, players) {
-
-      if(err){
-        res.json({err});
-      }else{
-        res.json({
-          result:players
-        });
-      }
+    res.json({
+      result: players
     });
+
+  }).catch(err=>{
+    console.log(err);
+    res.json({err});
   });
 };
