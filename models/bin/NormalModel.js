@@ -88,7 +88,7 @@ var findFn = (db) => (arg) => {
 module.exports = function (collectionName,extraProperties) {
   var db = Model.db(collectionName);
 
-  var model = ['insertOne','findOne'].map(function (funName) {
+  var model = ['insertOne','findOne','deleteOne'].map(function (funName) {
 
     return {
       [funName](arg) {
