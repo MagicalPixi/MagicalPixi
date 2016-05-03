@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-function dirExists(dir,cb) {
+function mkdirIfNotExists(dir,cb) {
   fs.exists(dir, function (exists) {
     if(!exists){
       fs.mkdir(dir, function () {
@@ -12,5 +12,5 @@ function dirExists(dir,cb) {
 };
 
 module.exports = {
-  dirExists
+  mkdirIfNotExists
 };

@@ -67,6 +67,6 @@ saveImg.userDirDefault = userDirDefault;
 saveImg.publicImageDir = '/'+imagesDir;
 
 //自动生成images文件夹，防止error
-utils.dirExists(projectImagesDir);
+utils.mkdirIfNotExists(projectImagesDir);
 
 module.exports = saveImg;

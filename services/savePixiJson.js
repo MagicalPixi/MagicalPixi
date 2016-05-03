@@ -12,7 +12,7 @@ var dir = path.resolve(__dirname,'../public/basic/');
 
 var imageExt = /\.(png|jpg|gif)/;
 
-utils.dirExists(dir);
+utils.mkdirIfNotExists(dir);
 
 module.exports = function (pixiJson) {
 

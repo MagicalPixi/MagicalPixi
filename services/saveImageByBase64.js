@@ -30,7 +30,7 @@ var savePngName = function (name,suffix) {
   return `${name}_${timeStamp}_${++countName}.${suffix}`;
 };
 
-utils.dirExists(dir);
+utils.mkdirIfNotExists(dir);
 
 module.exports = function (base64,option) {
 
