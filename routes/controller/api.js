@@ -10,11 +10,29 @@ var apiList = fs.readdirSync(path.resolve(__dirname,apiDir));
 
 var outputs = apiList.filter(function (filename) {
   return !/^\./.test(filename);
-}).map(function (apiOne) {
+}).map(apiOne=>{
+
+  var apiPath = path.resolve(__dirname,apiDir,apiOne);
+
+  if(fs.lstatSync(apiPath).isDirectory()){
+    return fs.readdirSync(apiPath).map(function (dirApi) {
+      return  [dirApi,require(path.join(apiPath,dirApi))];
+    }).map(function (fn) {
+      fn[1].name = fn[0].replace('.js','');
+      fn[1].method = apiOne;
+      return fn[1];
+    });
+  }else{
+    return require(apiPath);
+  }
+
+}).reduce((pre,next)=>{
+  return pre.concat(next);
+},[]).map(function (fn) {
 
   return [
-    apiOne.replace('.js',''),
-    require(path.resolve(__dirname,apiDir,apiOne))
+    fn.name,
+    fn
   ]
 }).reduce(function (initial,next) {
   initial[next[0]] = next[1];
