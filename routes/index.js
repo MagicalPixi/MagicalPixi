@@ -41,6 +41,9 @@ var loadController = {
     var route = "/" + controllerName;
     [].concat(controller)
       .forEach(function (fn) {
+
+        console.log(route);
+
         router.get(route, fn);
         router.post(route, fn);
       });

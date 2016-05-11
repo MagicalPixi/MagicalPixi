@@ -18,11 +18,14 @@ var outputs = apiList.filter(function (filename) {
     return fs.readdirSync(apiPath).map(function (dirApi) {
       return  [dirApi,require(path.join(apiPath,dirApi))];
     }).map(function (fn) {
-      fn[1].name = fn[0].replace('.js','');
+      fn[1].apiName = fn[0].replace('.js','');
       fn[1].method = apiOne;
       return fn[1];
     });
   }else{
+    var apiFn = require(apiPath);
+    apiFn.apiName = apiOne.replace('.js','');
+
     return require(apiPath);
   }
 
@@ -31,7 +34,7 @@ var outputs = apiList.filter(function (filename) {
 },[]).map(function (fn) {
 
   return [
-    fn.name,
+    fn.apiName,
     fn
   ]
 }).reduce(function (initial,next) {
