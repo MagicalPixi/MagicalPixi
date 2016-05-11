@@ -27,7 +27,7 @@
   .container{
     height: 504px;
     position: relative;
-    overflow-y: scroll;
+    overflow: hidden;
   }
 
   .select-resource{
@@ -46,12 +46,20 @@
 
     position: relative;
     z-index: 1;
+
+    #selectBasicResource{
+      height: 48%;
+    }
+  }
+  .select-resource{
+    height: 100%;
   }
   .preview-container{
     background-color: $grayLight;
     width: 100%;
     height: 100%;
 
+    display: none;
 //    position: relative;
 //    z-index: 1;
 //
@@ -116,6 +124,7 @@
   }
 
   .preview-container{
+    display: block;
     canvas{
       display: block;
     }
