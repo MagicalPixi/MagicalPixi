@@ -25,9 +25,9 @@
   }
 
   .container{
-    overflow: hidden;
-    position: relative;
     height: 504px;
+    position: relative;
+    overflow-y: scroll;
   }
 
   .select-resource{
