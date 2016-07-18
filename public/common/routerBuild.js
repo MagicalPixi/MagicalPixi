@@ -25,6 +25,8 @@ export function createMyStore(reducers,{withRouter,initialState}){
     }));
 
     middlewares.push(reduxRouterMiddleware);
+  }else{
+    reducers = combineReducers(reducers)
   }
 
   //let createStoreWithDev = compose(
