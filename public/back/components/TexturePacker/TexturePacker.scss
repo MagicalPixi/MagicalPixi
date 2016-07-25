@@ -55,8 +55,9 @@
 
         cursor: move;
 
-        img{
+        .preview-img{
           width: 100%;
+          height: 100%;
         }
 
         .close{
@@ -78,6 +79,35 @@
 
         .close{
           display: block;
+        }
+      }
+
+      .basic-operations{
+        background-color: #f0f0f0;
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        left:0;
+        bottom:0;
+
+        font-size: 12px;
+
+        > p{
+          display: flex;
+        }
+
+        .resize-input{
+          box-sizing: border-box;
+          padding:2px 5px;
+          width: 60%;
+          outline:none;
+        }
+        .resize-btn{
+          color: $grayDeep;
+
+          flex: 1;
+          width: 20px;
+          display: inline-block;
         }
       }
     }

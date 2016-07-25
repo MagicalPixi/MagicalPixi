@@ -74,3 +74,5 @@ public/basic
 re.js
 
 npm-debug.log
+
+__test/

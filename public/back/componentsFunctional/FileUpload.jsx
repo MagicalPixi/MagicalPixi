@@ -42,71 +42,46 @@ class FileUpload extends React.Component {
     fileInput.style.height = fileBtnHeight;
   }
 
-  //click(){
-  //  var inputEle = document.createElement('input');
-  //  inputEle.type = 'file';
-  //  inputEle.multiple = true;
-  //  inputEle.style.display = 'none';
-  //
-  //  body.appendChild(inputEle);
-  //
-  //  inputEle.addEventListener('change',(e)=>{
-  //
-  //    var fileList = inputEle.files;
-  //
-  //    inputEle.remove();
-  //
-  //    //ajax上传...
-  //    var fd = new FormData();
-  //
-  //    var keys = getUploadKeyByExt(_.map(fileList,file=>{
-  //      return file.name;
-  //    }));
-  //
-  //    _.forEach(fileList,(file,i)=>{
-  //      if(keys[i]){
-  //        fd.append(keys[i],file);
-  //      }
-  //    });
-  //
-  //    ajax(API.fileUpload).post(fd).then((r)=>{
-  //      var {url} = r;
-  //
-  //      this.props.onUploadCompvared(url);
-  //    })
-  //  });
-  //
-  //  //inputEle.click();
-  //  setTimeout(function () {
-  //    inputEle.dispatchEvent(new Event('click'));
-  //  },100);
-  //}
-
   change(e){
+    var {upload} = this.props;
+
     var inputEle = e.target;
     var fileList = inputEle.files;
 
     if(fileList.length === 0){
       return;
     }
-    //ajax上传...
-    var fd = new FormData();
 
-    var keys = getUploadKeyByExt(_.map(fileList, file=> {
-      return file.name;
-    }));
+    if(upload) {
+      //ajax上传...
+      var fd = new FormData();
 
-    _.forEach(fileList, (file, i)=> {
-      if (keys[i]) {
-        fd.append(keys[i], file);
+      var keys = getUploadKeyByExt(_.map(fileList, file=> {
+        return file.name;
+      }));
+
+
+      _.forEach(fileList, (file, i)=> {
+        if (keys[i]) {
+          fd.append(keys[i], file);
+        }
+      });
+
+
+      ajax(API.fileUpload).post(fd).then((r)=> {
+        var {url} = r;
+
+        this.props.onUploadCompleted(url);
+      });
+    }else{
+
+      var reader = new FileReader()
+      reader.readAsDataURL(fileList[0])
+      reader.onload = ()=>{
+        this.props.onUploadCompleted(reader.result)
       }
-    });
-
-    ajax(API.fileUpload).post(fd).then((r)=> {
-      var {url} = r;
-
-      this.props.onUploadCompleted(url);
-    });
+    }
+    
   }
 
   render(){
@@ -131,8 +106,13 @@ class FileUpload extends React.Component {
   }
 }
 
+FileUpload.defaultProps = {
+  upload:true, // 默认会触发上传,false返回一个fileReader对象
+}
+
 FileUpload.propTypes = {
-  onUploadCompleted:T.func.isRequired
+  onUploadCompleted:T.func.isRequired,
+  upload:T.bool
 };
 
 module.exports = FileUpload;
