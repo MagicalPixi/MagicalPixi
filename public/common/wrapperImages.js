@@ -7,7 +7,7 @@ var _ = require('lodash');
  * 目前是一次性的认作横排，@TODO 优化排列，合理利用空间
  *
  * @param images
- *  [Image,Image....] 数组
+ *  [canvas or Image,canvas|Image ...] 数组
  */
 module.exports = function (images) {
 

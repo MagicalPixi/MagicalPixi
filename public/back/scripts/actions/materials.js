@@ -25,6 +25,9 @@ export function initMaterialsList() {
 
 export function materialSave(spriteObj){
 
+  //防止多余信息
+  delete spriteObj.properties.textures
+
   return (dispatch,getState)=>{
     ajax(API.saveProperties)
       .post(spriteObj)

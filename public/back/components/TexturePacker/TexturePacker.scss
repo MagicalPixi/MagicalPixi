@@ -57,7 +57,6 @@
 
         .preview-img{
           width: 100%;
-          height: 100%;
         }
 
         .close{
@@ -85,7 +84,6 @@
       .basic-operations{
         background-color: #f0f0f0;
         width: 100%;
-        height: 100px;
         position: absolute;
         left:0;
         bottom:0;
@@ -99,7 +97,7 @@
         .resize-input{
           box-sizing: border-box;
           padding:2px 5px;
-          width: 60%;
+          width: 30%;
           outline:none;
         }
         .resize-btn{
