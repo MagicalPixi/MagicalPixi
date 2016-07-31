@@ -3,7 +3,7 @@ import {INIT_PLAYER_LIST,PLAYER_ADD,PLAYER_DELETE,PLAYER_EDIT} from '../constant
 import pixiLib from 'pixi-lib'
 import API from '../../../libs/API'
 import ajax from '../../../libs/ajax'
-import last from 'lodash/array/last'
+import _ from 'lodash'
 import wrapperImages from '../../../common/wrapperImages'
 import getBase64FromImages from '../../../common/getBase64FromImages'
 import getPixiJsonFromImages from '../../../common/getPixiJsonFromImages'
@@ -12,9 +12,11 @@ const {SPRITE_SP,SPRITE_MC,SPRITE_IM} = pixiLib.types;
 
 function loadSpritesImg(childSprites){
   return Promise.all(childSprites.map(spriteOne=>{
-    return spriteOne.basic.originImgUrls
+    return spriteOne.basic.originImgUrls.map((urlObj)=>{
+      return _.isString(urlObj) ? urlObj : urlObj.url
+    })
   }).map(urls=>{
-    urls = urls.concat(last(urls));    //这里加了一张，下面要加1
+    urls = urls.concat(_.last(urls));    //这里加了一张，下面要加1
     return urls;
   }).reduce((pre,next)=>pre.concat(next),[]).map(url=>{
     var imgObj = new Image();
@@ -33,7 +35,7 @@ function build(childSprites) {
   var actionFrames = childSprites.map(spriteOne=>{
     return spriteOne.basic.originImgUrls.length + 1  //因为上面加一张
   }).reduce((init,next)=>{
-    return init.concat(last(init) + next);
+    return init.concat(_.last(init) + next);
   },[0]).map(frame => frame-1);
 
   //去0
@@ -98,6 +100,11 @@ export function initPlayerList() {
 export function playerSave(player){
 
   return (dispatch,getState)=>{
+
+    player.childSprites = player.childSprites.map(obj=>{
+      delete obj.properties.textures
+      return obj;
+    })
 
     loadSpritesImg(player.childSprites)
       .then(build(player.childSprites))
