@@ -92,7 +92,7 @@ export function initPlayerList() {
  *
  * @param player [{
  *   basic:{basic原始素材对象},
- *   properties:{属性}
+ *   properties:{属性}  必须去除 texture 否则无法JSON.stringify
  * }]
  * @returns {Function}
  */
