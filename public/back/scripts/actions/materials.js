@@ -16,7 +16,8 @@ export function initMaterialsList() {
 
         dispatch({
           type:MATERIAL_LIST,
-          materials:returnData.result
+          materials:returnData.result,
+          
         })
 
       });
