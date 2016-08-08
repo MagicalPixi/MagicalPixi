@@ -150,7 +150,9 @@ class TexturePacker extends Component {
   remove(index){
    var {imgUrlObjs} = this.state;
 
-    imgUrlObjs = imgUrlObjs.splice(index,1).slice();
+    imgUrlObjs.splice(index,1)
+
+    imgUrlObjs = imgUrlObjs.slice();
 
     this.setState({
       imgUrlObjs
@@ -226,13 +228,13 @@ class TexturePacker extends Component {
 
   sortEnd(evt){
 
-    var {imgUrls} = this.state;
+    var {imgUrlObjs} = this.state;
 
     var {oldIndex,newIndex} = evt;
 
-    var old = imgUrls.splice(oldIndex,1);
+    var old = imgUrlObjs.splice(oldIndex,1);
 
-    imgUrls.splice(newIndex,0,old[0]);
+    imgUrlObjs.splice(newIndex,0,old[0]);
   }
 
   resizeSubmit(refKey,index){
@@ -348,7 +350,7 @@ class TexturePacker extends Component {
                   <div className="basic-operations">
                     <p>
                       <input className="resize-input" type="text" ref={refKey} defaultValue={resize} placeholder="放大倍数" id={key} />
-                      <input className="resize-input" type="text" value={resize} placeholder="放大倍数" id={key} />
+                      <input className="resize-input" type="text" value={resize} readOnly placeholder="放大倍数" id={key} />
                       <button className="resize-btn" onClick={this.resizeSubmit.bind(this,refKey,i)}>确定</button>
                     </p>
                   </div>
