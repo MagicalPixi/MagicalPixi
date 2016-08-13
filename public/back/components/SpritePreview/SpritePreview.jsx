@@ -102,6 +102,8 @@ class SpritePreview extends React.Component {
     let { spriteDisplayObjProperties ,actionFrames} = this.state;
     let resourceUrl = this.resourceUrl;
 
+    spriteDisplayObjProperties = Object.assign({},spriteDisplayObjProperties);
+
     pixiLib.loadSprite(resourceUrl, spriteType, spriteDisplayObjProperties,actionFrames,
       (spriteDisplayObj) => {
         this.spriteDisplayObj = spriteDisplayObj;
