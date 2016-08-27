@@ -318,6 +318,7 @@ class TexturePacker extends Component {
               }}
               onSubmit={this.submitBasicTitle.bind(this)}
               value={name}
+              defaultValue="新建素材名"
               />
           </h3>
 

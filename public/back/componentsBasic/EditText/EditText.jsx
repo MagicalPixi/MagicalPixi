@@ -9,6 +9,7 @@ var propTypes = {
   onSubmit:T.func.isRequired,
   onClick:T.func,
   value:T.string.isRequired,
+  defaultValue:T.string,
   style:T.object,
 };
 
@@ -77,14 +78,14 @@ class EditText extends Component {
   render() {
     let {editState,value} = this.state;
 
-    let {style} = this.props;
+    let {style,defaultValue} = this.props;
 
     let inputValue = value.replace(/\([\d]+\)/g,'');
 
     return (
       <div data-state={editState} onClick={this.intoEditState.bind(this)} style={style} className="edit-text">
 
-        <span className="text">{this.state.value}</span>
+        <span className="text">{value ? value : defaultValue}</span>
 
         <p className="operations">
           <span  className="edit"></span>
