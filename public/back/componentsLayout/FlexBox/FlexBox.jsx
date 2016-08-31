@@ -6,6 +6,14 @@ let ReactDOM = require('react-dom');
 let _ = require('lodash');
 
 
+var propTypes = {
+  childrenWidth:T.array,
+}
+
+var defaultProps = {
+  childrenWidth:[],
+}
+
 class FlexBox extends React.Component {
 
   constructor(props){
@@ -13,7 +21,6 @@ class FlexBox extends React.Component {
     this.state = {
       width:props.childrenWidth
     }
-
   }
 
   componentDidMount(){
@@ -29,8 +36,6 @@ class FlexBox extends React.Component {
       }
     })
   }
-
-
 
 
   render(){
@@ -50,5 +55,8 @@ class FlexBox extends React.Component {
     )
   }
 }
+
+FlexBox.propTypes = propTypes;
+FlexBox.defaultProps = defaultProps;
 
 module.exports = FlexBox;
