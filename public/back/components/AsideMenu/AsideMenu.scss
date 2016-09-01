@@ -1,0 +1,44 @@
+@import "../../../styles/core/variables.scss";
+
+#asideMenu {
+  padding: 0 20px;
+
+  .menu-list {
+
+    > li {
+      box-sizing: border-box;
+      padding: 8px;
+      width: 100%;
+
+      color: $greyDeep;
+
+      -webkit-user-select: none;
+
+      position: relative;
+
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        background-color: $greyLight;
+        width: 4px;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+    > li[data-state="true"]{
+
+      color: $themeColor;
+
+      &:after{
+        background-color: $themeColor;
+      }
+    }
+    > li:hover{
+      background-color: $greyLight;
+    }
+  }
+}
+
