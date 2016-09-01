@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import FlexBox from '../../componentsLayout/FlexBox'
+import AsideMenu from '../../components/AsideMenu'
 import MaterialsList from '../../components/MaterialsList'
 
 import * as MaterialsActions from '../actions/materials'
@@ -34,9 +35,7 @@ class App extends Component {
 
     return (
       <div>
-        <FlexBox>
           <MaterialsList data={materials} basics={basics} players={players}  actions={actions}/>
-        </FlexBox>
       </div>
     )
   }
