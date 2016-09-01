@@ -33,6 +33,8 @@ class FlexBox extends React.Component {
 
       if(theDOM){
         theDOM.style.width = width[refI] + 'px';
+        theDOM.style.minWidth = width[refI] + 'px';
+        theDOM.style.maxWidth = width[refI] + 'px';
       }
     })
   }
