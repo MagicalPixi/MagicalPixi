@@ -7,11 +7,13 @@ const T = React.PropTypes;
 import autoBind from 'react-autobind'
 
 var propTypes = {
-  menuItems:T.array
+  menuItems:T.array,
+  onClickTab:T.func,
 };
 
 var defaultProps = {
-  menuItems:[]
+  menuItems:[],
+  onClickTab:_=>_,
 };
 
 class AsideMenu extends Component {
@@ -21,19 +23,27 @@ class AsideMenu extends Component {
     autoBind(this);
   }
 
+  clickOnList(e){
+    var {menuItems,onClickTab} = this.props;
+
+    var index = e.target.dataset.index;
+
+    onClickTab(menuItems[index]);
+  }
+
   render() {
 
-    let {menuItems} = this.props;
+    var {menuItems} = this.props;
 
     return (
       <div id="asideMenu">
-        <ul className="menu-list">
+        <ul className="menu-list" onClick={this.clickOnList}>
           {menuItems.map((menuObj, i)=> {
 
             var {name,active} = menuObj;
 
             return (
-              <li data-state={active}>
+              <li data-state={active} data-index={i}>
                 {name}
               </li>
             )

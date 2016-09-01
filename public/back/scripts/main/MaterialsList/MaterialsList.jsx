@@ -4,14 +4,14 @@ let React = require('react');
 import autoBind from 'react-autobind'
 const T = React.PropTypes;
 
-let ItemList = require('../../componentsLayout/ItemList');
+let ItemList = require('../../../componentsLayout/ItemList');
 
-import SpritePreviewPopup from '../../componentsFunctional/SpritePreviewPopup'
-let Download = require('../../componentsFunctional/Download');
-let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
+import SpritePreviewPopup from '../../../componentsFunctional/SpritePreviewPopup'
+let Download = require('../../../componentsFunctional/Download');
+let DeleteSprite = require('../../../componentsFunctional/DeleteSprite');
 
-import FlexBox from '../../componentsLayout/FlexBox'
-import AsideMenu from '../../components/AsideMenu'
+import FlexBox from '../../../componentsLayout/FlexBox'
+import AsideMenu from '../../../components/AsideMenu'
 
 var propTypes = {
   data: T.array.isRequired,
@@ -53,6 +53,10 @@ class MaterialsList extends React.Component {
     }, sprite));
   }
 
+  clickOnMenu(tabObj){
+    log(tabObj);
+  }
+
   render() {
 
     var {data, resources} = this.props;
@@ -78,7 +82,12 @@ class MaterialsList extends React.Component {
         </header>
 
         <FlexBox childrenWidth={[150,undefined]}>
-          <AsideMenu menuItems={menu}></AsideMenu>
+          <AsideMenu
+            menuItems={menu}
+            onClickTab={this.clickOnMenu}
+            >
+
+          </AsideMenu>
 
           <ItemList>
             {data.map((sprite, i)=> {

@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 import FlexBox from '../../componentsLayout/FlexBox'
 import AsideMenu from '../../components/AsideMenu'
-import MaterialsList from '../../components/MaterialsList'
+import MaterialsList from '../main/MaterialsList'
 
 import * as MaterialsActions from '../actions/materials'
 import * as BasicActions from '../actions/basic'
