@@ -1,4 +1,3 @@
-
 require('./MaterialsList.scss');
 
 let React = require('react');
@@ -11,73 +10,88 @@ import SpritePreviewPopup from '../../componentsFunctional/SpritePreviewPopup'
 let Download = require('../../componentsFunctional/Download');
 let DeleteSprite = require('../../componentsFunctional/DeleteSprite');
 
+import FlexBox from '../../componentsLayout/FlexBox'
+import AsideMenu from '../../components/AsideMenu'
 
 var propTypes = {
-  data:T.array.isRequired,
-  basics:T.array
+  data: T.array.isRequired,
+  basics: T.array
 };
 
 var defaultProps = {
-  data:[],
-  basics:[],
+  data: [],
+  basics: [],
 };
 
 class MaterialsList extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     autoBind(this);
   }
 
   //保存一个精灵
-  save(spriteObj){
-    log('spriteObj:',spriteObj);
+  save(spriteObj) {
+    log('spriteObj:', spriteObj);
     this.props.actions.materialSave(spriteObj);
   }
 
-  newMaterial(){
-    var {basics,players} = this.props;
+  newMaterial() {
+    var {basics, players} = this.props;
 
     SpritePreviewPopup({
-      resources:basics,
-      resources2:players,
-      onSubmit:this.save,
+      resources: basics,
+      resources2: players,
+      onSubmit: this.save,
     });
   }
 
-  edit(sprite){
+  edit(sprite) {
     SpritePreviewPopup(Object.assign({
-      onSubmit:this.save,
+      onSubmit: this.save,
       sprite,
-    },sprite));
+    }, sprite));
   }
 
-  render(){
+  render() {
 
-    var { data,resources} = this.props;
+    var {data, resources} = this.props;
+
+
+    let menu = [{
+      name: '分类1',
+      active:true,
+    }, {
+      name: '分类2'
+    }];
 
     return (
-      <div id="mpMaterialsList" >
+      <div id="mpMaterialsList">
         <header className="top-container">
 
-          <h3 className="title" >精灵列表</h3>
+          <h3 className="title">精灵列表</h3>
 
-          <button onClick={this.newMaterial.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">+&nbsp;新建素材</button>
+          <button onClick={this.newMaterial.bind(this)} className="weui_btn weui_btn_mini weui_btn_primary add-new">
+            +&nbsp;新建素材
+          </button>
 
         </header>
 
-        <ItemList>
-          {data.map((sprite,i)=>{
+        <FlexBox childrenWidth={[150,undefined]}>
+          <AsideMenu menuItems={menu}></AsideMenu>
 
-            let {_id,name,resourceUrl,type,properties} = sprite;
+          <ItemList>
+            {data.map((sprite, i)=> {
 
-            let queryForm = {
-              name,
-              id:_id
-            };
+              let {_id, name, resourceUrl, type, properties} = sprite;
 
-            return (
-              <li key={"material"+i} >
+              let queryForm = {
+                name,
+                id: _id
+              };
+
+              return (
+                <li key={"material"+i}>
                 <span>
                   {name}
                 </span>
@@ -88,18 +102,19 @@ class MaterialsList extends React.Component {
                   </DeleteSprite>
                 </span>
 
-                <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
+                  <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
 
                 <span className="operation" href="javascript:void 0">
-                  <Download query={queryForm} >
+                  <Download query={queryForm}>
                   下载
                   </Download>
                 </span>
 
-              </li>
-            )
-          })}
-        </ItemList>
+                </li>
+              )
+            })}
+          </ItemList>
+        </FlexBox>
       </div>
     )
   }
