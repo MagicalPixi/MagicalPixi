@@ -17,6 +17,7 @@ module.exports = function (req, res) {
   var resourceUrl = req.body.resourceUrl;
   var properties = req.body.properties;
   var actionFrames = req.body.actionFrames;
+  var directory = req.body.directory;
 
   var userFlag = req.session.userFlag;
 
@@ -29,7 +30,8 @@ module.exports = function (req, res) {
     type,
     name,
     properties,
-    actionFrames
+    actionFrames,
+    directory
   };
 
   console.log('materialObj:',materialObj);
