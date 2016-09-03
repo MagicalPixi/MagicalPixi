@@ -6,3 +6,5 @@ export const MATERIAL_LIST = 'MATERIAL_LIST';
 export const ADD_MATERIAL = 'ADD_MATERIAL';
 
 export const DEL_MATERIAL = 'DEL_MATERIAL';
+
+export const MATERIAL_TAB_SELECT = 'MATERIAL_TAB_SELECT';

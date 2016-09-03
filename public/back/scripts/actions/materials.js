@@ -1,7 +1,7 @@
 /**
  * Created by zyg on 16/3/16.
  */
-import {MATERIAL_LIST} from '../constants/materialsTypes'
+import {MATERIAL_LIST,MATERIAL_TAB_SELECT} from '../constants/materialsTypes'
 
 import ajax from '../../../libs/ajax'
 import API from '../../../libs/API'
@@ -17,9 +17,7 @@ export function initMaterialsList() {
         dispatch({
           type:MATERIAL_LIST,
           materials:returnData.result,
-          
-        })
-
+        });
       });
   }
 }
@@ -39,5 +37,13 @@ export function materialSave(spriteObj){
           console.log();
         }
       });
+  }
+}
+
+export function materialTabSelect(tabName) {
+
+  return {
+    type:MATERIAL_TAB_SELECT,
+    tabName,
   }
 }
