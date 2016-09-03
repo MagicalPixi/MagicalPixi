@@ -4,7 +4,7 @@ import {MATERIAL_LIST,
 
 import reducerHandlerBuild from '../../../common/reducerHandlerBuild'
 
-var initDirectoryName = '未命名';
+var initDirectoryName = '未分类';
 
 function inactiveDirectoies(state) {
   Object.keys(state).map(directory=>{
