@@ -1,7 +1,9 @@
 /**
  * Created by zyg on 16/3/16.
  */
-import {MATERIAL_LIST,MATERIAL_TAB_SELECT} from '../constants/materialsTypes'
+import {MATERIAL_LIST,
+  MATERIAL_TAB_SELECT,
+  MATERIAL_NEW_TAB} from '../constants/materialsTypes'
 
 import ajax from '../../../libs/ajax'
 import API from '../../../libs/API'
@@ -44,6 +46,14 @@ export function materialTabSelect(tabName) {
 
   return {
     type:MATERIAL_TAB_SELECT,
+    tabName,
+  }
+}
+
+export function materialNewTab(tabName) {
+
+  return {
+    type:MATERIAL_NEW_TAB,
     tabName,
   }
 }

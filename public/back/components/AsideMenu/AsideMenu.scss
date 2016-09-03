@@ -5,39 +5,57 @@
 
   .menu-list {
 
-    > li {
-      box-sizing: border-box;
-      padding: 8px;
-      width: 100%;
+    > {
+      li {
+        box-sizing: border-box;
+        padding: 8px;
+        width: 100%;
 
-      color: $greyDeep;
+        color: $greyDeep;
 
-      -webkit-user-select: none;
+        -webkit-user-select: none;
 
-      position: relative;
+        position: relative;
 
-      cursor: pointer;
+        cursor: pointer;
 
-      &:after {
-        content: '';
+        &:after {
+          content: '';
+          background-color: $greyLight;
+          width: 4px;
+          height: 100%;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+      li[data-state="true"] {
+
+        color: $themeColor;
+
+        &:after {
+          background-color: $themeColor;
+        }
+      }
+      li:hover {
         background-color: $greyLight;
-        width: 4px;
-        height: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
       }
-    }
-    > li[data-state="true"]{
 
-      color: $themeColor;
-
-      &:after{
+      .add {
         background-color: $themeColor;
+        margin-top: 8px;
+        padding: 4px 0;
+        color: #ffffff;
+        font-size: 16px;
+        text-align: center;
+
+        &:after {
+          display: none;
+        }
       }
-    }
-    > li:hover{
-      background-color: $greyLight;
+      .add:hover{
+        background-color: $themeHoverColor;
+      }
     }
   }
 }

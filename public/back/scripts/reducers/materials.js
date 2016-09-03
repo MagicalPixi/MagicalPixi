@@ -1,8 +1,18 @@
-import {MATERIAL_LIST,MATERIAL_TAB_SELECT} from '../constants/materialsTypes'
+import {MATERIAL_LIST,
+  MATERIAL_TAB_SELECT,
+  MATERIAL_NEW_TAB} from '../constants/materialsTypes'
 
 import reducerHandlerBuild from '../../../common/reducerHandlerBuild'
 
 var initDirectoryName = '未命名';
+
+function inactiveDirectoies(state) {
+  Object.keys(state).map(directory=>{
+
+    state[directory].active = false;
+  })
+  return state;
+}
 
 var handler = {
   [MATERIAL_LIST](state,action){
@@ -41,16 +51,27 @@ var handler = {
   },
   [MATERIAL_TAB_SELECT](state,{tabName}){
 
-    Object.keys(state).map(directory=>{
 
-      state[directory].active = false;
-    })
+    state = inactiveDirectoies(state);
 
     var newState = Object.assign({},state,{
 
       [tabName]:{
         active:true,
         list:state[tabName].list
+      }
+    });
+
+    return newState;
+  },
+  [MATERIAL_NEW_TAB](state,{tabName}){
+    state = inactiveDirectoies(state);
+
+    var newState = Object.assign({},state,{
+
+      [tabName]:{
+        active:true,
+        list:[]
       }
     });
 

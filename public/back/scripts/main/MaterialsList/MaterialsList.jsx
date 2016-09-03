@@ -29,7 +29,7 @@ function findDirectoryName(materials) {
     if(materials[directory].active){
       targetDirectory = directory
     }
-  })
+  });
 
   return targetDirectory;
 }
@@ -80,6 +80,11 @@ class MaterialsList extends React.Component {
     this.props.actions.materialTabSelect(tabObj.name)
   }
 
+  addNewDirectory(name){
+    
+    this.props.actions.materialNewTab(name);
+  }
+  
   render() {
 
     var {data, resources} = this.props;
@@ -124,6 +129,7 @@ class MaterialsList extends React.Component {
           <AsideMenu
             menuItems={menu}
             onClickTab={this.clickOnMenu}
+            onAddTab={this.addNewDirectory}
             >
 
           </AsideMenu>

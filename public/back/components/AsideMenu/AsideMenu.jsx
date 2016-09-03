@@ -8,12 +8,16 @@ import autoBind from 'react-autobind'
 
 var propTypes = {
   menuItems:T.array,
+  showAdd:T.bool,
   onClickTab:T.func,
+  onAddTab:T.func,
 };
 
 var defaultProps = {
   menuItems:[],
   onClickTab:_=>_,
+  onAddTab:_=>_,
+  showAdd:true,
 };
 
 class AsideMenu extends Component {
@@ -31,9 +35,16 @@ class AsideMenu extends Component {
     onClickTab(menuItems[index]);
   }
 
+  add(){
+    var name = prompt('分类名');
+    if(name){
+      this.props.onAddTab(name);
+    }
+  }
+
   render() {
 
-    var {menuItems} = this.props;
+    var {showAdd,menuItems} = this.props;
 
     return (
       <div id="asideMenu">
@@ -48,6 +59,11 @@ class AsideMenu extends Component {
               </li>
             )
           })}
+
+          {showAdd?
+            <li className="add" onClick={this.add}>+</li>:''
+          }
+
         </ul>
       </div>
     )

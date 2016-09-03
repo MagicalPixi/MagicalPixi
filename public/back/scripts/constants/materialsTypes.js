@@ -8,3 +8,5 @@ export const ADD_MATERIAL = 'ADD_MATERIAL';
 export const DEL_MATERIAL = 'DEL_MATERIAL';
 
 export const MATERIAL_TAB_SELECT = 'MATERIAL_TAB_SELECT';
+
+export const MATERIAL_NEW_TAB = 'MATERIAL_NEW_TAB';
