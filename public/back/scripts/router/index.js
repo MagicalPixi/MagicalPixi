@@ -29,7 +29,7 @@ var myStore = createMyStore(mainReducers,{
   initialState:{
     scenes:[],
     basics:[],
-    materials:[],
+    materials:{},
     players:[],
   }
 });

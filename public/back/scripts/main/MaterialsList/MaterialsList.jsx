@@ -14,14 +14,25 @@ import FlexBox from '../../../componentsLayout/FlexBox'
 import AsideMenu from '../../../components/AsideMenu'
 
 var propTypes = {
-  data: T.array.isRequired,
+  data: T.object.isRequired,
   basics: T.array
 };
 
 var defaultProps = {
-  data: [],
   basics: [],
 };
+
+function findDirectoryName(materials) {
+  var targetDirectory = '';
+
+  Object.keys(materials).map(directory=>{
+    if(materials[directory].active){
+      targetDirectory = directory
+    }
+  })
+
+  return targetDirectory;
+}
 
 class MaterialsList extends React.Component {
 
@@ -32,12 +43,23 @@ class MaterialsList extends React.Component {
 
   //保存一个精灵
   save(spriteObj) {
-    log('spriteObj:', spriteObj);
+    var {data} = this.props;
+
+    var directory = findDirectoryName(data);
+
+
+    spriteObj = Object.assign({},spriteObj,{
+      directory,
+    });
+
+    log('directory:', directory);
+    log('sprite:',spriteObj);
+
     this.props.actions.materialSave(spriteObj);
   }
 
   newMaterial() {
-    var {basics, players} = this.props;
+    var {data,basics, players} = this.props;
 
     SpritePreviewPopup({
       resources: basics,
@@ -54,7 +76,8 @@ class MaterialsList extends React.Component {
   }
 
   clickOnMenu(tabObj){
-    log(tabObj);
+
+    this.props.actions.materialTabSelect(tabObj.name)
   }
 
   render() {
@@ -62,12 +85,28 @@ class MaterialsList extends React.Component {
     var {data, resources} = this.props;
 
 
-    let menu = [{
-      name: '分类1',
-      active:true,
-    }, {
-      name: '分类2'
-    }];
+    var activeDirectoryName = '',
+      menu = [],
+      dataList = [];
+
+    if(data && Object.keys(data).length > 0) {
+      menu = Object.keys(data).map(directoryName=> {
+
+        var active = data[directoryName].active;
+
+        if (active) {
+          activeDirectoryName = directoryName;
+        }
+
+        return {
+          name: directoryName,
+          active,
+        }
+      });
+
+      dataList = data[activeDirectoryName].list.slice();
+    }
+
 
     return (
       <div id="mpMaterialsList">
@@ -90,7 +129,7 @@ class MaterialsList extends React.Component {
           </AsideMenu>
 
           <ItemList>
-            {data.map((sprite, i)=> {
+            {dataList.map((sprite, i)=> {
 
               let {_id, name, resourceUrl, type, properties} = sprite;
 
