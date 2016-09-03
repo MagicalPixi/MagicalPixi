@@ -135,8 +135,6 @@ class SpritePreview extends React.Component {
 
     newProperties = pixiLib.fixSpriteProperties(properties,newProperties);
 
-    log(newProperties);
-
     if(this.spriteDisplayObj){
       pixiLib.setConfig(this.spriteDisplayObj,newProperties);
     }
