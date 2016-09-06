@@ -25,8 +25,8 @@ var defaultProps = {
 function findDirectoryName(materials) {
   var targetDirectory = '';
 
-  Object.keys(materials).map(directory=>{
-    if(materials[directory].active){
+  Object.keys(materials).map(directory=> {
+    if (materials[directory].active) {
       targetDirectory = directory
     }
   });
@@ -48,18 +48,18 @@ class MaterialsList extends React.Component {
     var directory = findDirectoryName(data);
 
 
-    spriteObj = Object.assign({},spriteObj,{
+    spriteObj = Object.assign({}, spriteObj, {
       directory,
     });
 
     log('directory:', directory);
-    log('sprite:',spriteObj);
+    log('sprite:', spriteObj);
 
     this.props.actions.materialSave(spriteObj);
   }
 
   newMaterial() {
-    var {data,basics, players} = this.props;
+    var {data, basics, players} = this.props;
 
     SpritePreviewPopup({
       resources: basics,
@@ -75,16 +75,25 @@ class MaterialsList extends React.Component {
     }, sprite));
   }
 
-  clickOnMenu(tabObj){
+  clickOnMenu(tabObj) {
 
     this.props.actions.materialTabSelect(tabObj.name)
   }
 
-  addNewDirectory(name){
-    
+  addNewDirectory(name) {
+
     this.props.actions.materialNewTab(name);
   }
-  
+
+
+  onMoveTo(id,e){
+
+    console.log(e.currentTarget,e.currentTarget.value);
+    
+    this.props.actions.materialMoveToTab(id,e.currentTarget.value);
+  }
+
+
   render() {
 
     var {data, resources} = this.props;
@@ -94,7 +103,7 @@ class MaterialsList extends React.Component {
       menu = [],
       dataList = [];
 
-    if(data && Object.keys(data).length > 0) {
+    if (data && Object.keys(data).length > 0) {
       menu = Object.keys(data).map(directoryName=> {
 
         var active = data[directoryName].active;
@@ -130,7 +139,7 @@ class MaterialsList extends React.Component {
             menuItems={menu}
             onClickTab={this.clickOnMenu}
             onAddTab={this.addNewDirectory}
-            >
+          >
 
           </AsideMenu>
 
@@ -156,7 +165,8 @@ class MaterialsList extends React.Component {
                   </DeleteSprite>
                 </span>
 
-                  <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
+                <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
+
 
                 <span className="operation" href="javascript:void 0">
                   <Download query={queryForm}>
@@ -164,6 +174,23 @@ class MaterialsList extends React.Component {
                   </Download>
                 </span>
 
+
+                <span className="operation">
+                  <select onChange={this.onMoveTo.bind(this,_id)}>
+                    {menu.map((menuOne)=> {
+
+                        var {name, active} = menuOne;
+
+
+                        var optionEle = active ? <option value={name} selected>{name}</option> :
+                          <option value={name}>{name}</option>;
+
+                        return optionEle
+                      }
+                    )}
+                  </select>
+                </span>
+                  
                 </li>
               )
             })}

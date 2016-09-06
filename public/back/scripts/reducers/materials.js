@@ -10,12 +10,32 @@ function inactiveDirectoies(state) {
   Object.keys(state).map(directory=>{
 
     state[directory].active = false;
-  })
+  });
+
   return state;
 }
 
+
+function findActiveTabName(state) {
+
+  var tabName = initDirectoryName;
+
+  Object.keys(state).map(directory=>{
+
+    if(state[directory] && state[directory].active){
+      tabName = directory;
+    }
+  });
+
+  return tabName;
+}
+
+
 var handler = {
   [MATERIAL_LIST](state,action){
+
+    var activeTabName = findActiveTabName(state);
+
 
     var materialsMap = action.materials.map(materialObj=>{
       var obj = Object.assign({},materialObj);
@@ -28,7 +48,7 @@ var handler = {
 
       if(!init[next.directory]){
         init[next.directory] = {
-          active:false,
+          active: next.directory === activeTabName,
           list:[]
         };
       }
@@ -40,8 +60,6 @@ var handler = {
     },{
       [initDirectoryName]:null,
     });
-
-    materialsMap[initDirectoryName].active = true;
 
     if(!materialsMap[initDirectoryName]){
       delete materialsMap[initDirectoryName];

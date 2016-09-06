@@ -8,13 +8,21 @@ import {MATERIAL_LIST,
 import ajax from '../../../libs/ajax'
 import API from '../../../libs/API'
 
+
+function getMaterialList(){
+
+  return new Promise((resolve)=>{
+
+    ajax(API.materialsList)
+      .get({}).then(resolve);
+  })
+}
+
 export function initMaterialsList() {
 
   return (dispatch)=> {
 
-    ajax(API.materialsList)
-      .get({})
-      .then(function (returnData) {
+    getMaterialList().then(function (returnData) {
 
         dispatch({
           type:MATERIAL_LIST,
@@ -55,5 +63,33 @@ export function materialNewTab(tabName) {
   return {
     type:MATERIAL_NEW_TAB,
     tabName,
+  }
+}
+
+export function materialMoveToTab(id,tabName) {
+
+  return (dispatch)=>{
+
+    new Promise((resolve)=>{
+
+      ajax(API.moveSprite).post({
+        id,
+        toDirectory:tabName
+      }).then(resolve)
+
+    }).then(function (returnData) {
+      if(returnData.success){
+
+        return getMaterialList();
+      }else{
+        throw new Error('move to tab fail');
+      }
+    }).then(function (returnData) {
+
+      dispatch({
+        type:MATERIAL_LIST,
+        materials:returnData.result,
+      });
+    });
   }
 }

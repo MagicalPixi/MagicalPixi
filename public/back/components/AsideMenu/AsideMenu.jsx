@@ -53,7 +53,7 @@ class AsideMenu extends Component {
 
             var {name,active} = menuObj;
 
-            var key=`${name}-${i}`
+            var key=`${name}-${i}`;
 
             return (
               <li key={key} data-state={active} data-index={i}>

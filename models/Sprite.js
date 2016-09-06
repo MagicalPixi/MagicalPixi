@@ -10,7 +10,12 @@ var db = Model.db(collectionName);
 
 var saveObjBuild = function (args) {
 
-  var isLostArg = ['userFlag','type','name','properties','resourceUrl'].some(function (key) {
+  var isLostArg = ['userFlag',
+    'type',
+    'name',
+    'properties',
+    'resourceUrl'
+  ].some(function (key) {
     return args[key] === undefined;
   });
 
@@ -47,13 +52,19 @@ module.exports = {
    * args.resourceUrl 资源所在位置
    * @returns {Promise}
    */
-  save(args){
+  save(args,forceUpdate){
 
     return new Promise((resolve)=>{
 
-      var buildArgs = saveObjBuild(args);
-      if(!buildArgs){
-        throw new Error('lost arg');
+
+      var buildArgs = args;
+
+      if(!forceUpdate){
+
+        buildArgs = saveObjBuild(args);
+        if(!buildArgs){
+          throw new Error('lost arg');
+        }
       }
 
       db((collection)=>{
