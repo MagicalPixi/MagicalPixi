@@ -86,11 +86,11 @@ class MaterialsList extends React.Component {
   }
 
 
-  onMoveTo(id,e){
+  onMoveTo(id, e) {
 
-    console.log(e.currentTarget,e.currentTarget.value);
-    
-    this.props.actions.materialMoveToTab(id,e.currentTarget.value);
+    console.log(e.currentTarget, e.currentTarget.value);
+
+    this.props.actions.materialMoveToTab(id, e.currentTarget.value);
   }
 
 
@@ -153,8 +153,10 @@ class MaterialsList extends React.Component {
                 id: _id
               };
 
+              var liKey = `${_id}_material_${i}`;
+
               return (
-                <li key={"material"+i}>
+                <li key={liKey}>
                 <span>
                   {name}
                 </span>
@@ -165,7 +167,7 @@ class MaterialsList extends React.Component {
                   </DeleteSprite>
                 </span>
 
-                <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
+                  <a className="operation" onClick={this.edit.bind(this,sprite)} href="javascript:void 0">编辑</a>
 
 
                 <span className="operation" href="javascript:void 0">
@@ -177,10 +179,11 @@ class MaterialsList extends React.Component {
 
                 <span className="operation">
                   <select onChange={this.onMoveTo.bind(this,_id)}>
-                    {menu.map((menuOne)=> {
 
-                        var {name, active} = menuOne;
+                    {menu.map((menuOne,i)=> {
 
+                      var {name, active} = menuOne;
+                      var key = `${_id}${i}`;
 
                         var optionEle = active ? <option value={name} selected>{name}</option> :
                           <option value={name}>{name}</option>;
@@ -190,7 +193,7 @@ class MaterialsList extends React.Component {
                     )}
                   </select>
                 </span>
-                  
+
                 </li>
               )
             })}
