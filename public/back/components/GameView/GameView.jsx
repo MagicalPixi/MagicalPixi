@@ -10,11 +10,20 @@ import autoBind from 'react-autobind'
 
 let pixiLib = require('pixi-lib');
 
-let pixiContainersManager = require('../../../common/pixiContainersManager');
+import pixiContainersManager from '../../../common/pixiContainersManager'
 
-let CascadeList = require('./CascadeList');
+import CascadeList from './CascadeList'
 
-let {SPRITE_IM,SPRITE_MC,spriteFnMap} = require('./../SpriteSetting/previewConfig');
+import ToolsBar from  '../ToolsBar'
+
+
+var toolsStyle = ()=>{
+  return {
+    position:'absolute',
+    top:0,
+    left:0,
+  }
+}
 
 class GameView extends React.Component {
 
@@ -26,6 +35,9 @@ class GameView extends React.Component {
     };
 
     log('GameView:',props);
+
+    autoBind(this);
+
   }
 
   componentDidMount(){
@@ -103,15 +115,46 @@ class GameView extends React.Component {
    })
   }
 
+  clickTools(target){
+    log(target)
+
+    var x = 0,
+      y = 0,
+      r = 0;
+    if(!this.rotated){
+      x = 320
+      y = 502
+      r = Math.PI/2
+    }
+
+
+    this.stage.pivot = new PIXI.Point(y, x)
+    this.stage.x = x
+    this.stage.y = y
+    this.stage.rotation = r
+
+    this.rotated = !this.rotated;
+  }
+
   render(){
     let { data } = this.props;
-
+    
+    var s = toolsStyle();
+    
     return (
       <div id="gameView"
         onDrop={this.addSprite.bind(this)}
         onDragOver={this.dragOver.bind(this)} >
 
+
+        <ToolsBar
+          style={s}
+          onClickItem={this.clickTools}>
+
+        </ToolsBar>
+
         <div className="layouts-box">
+
           <CascadeList
             data={data}
             onSelectContainer={this.selectContainer.bind(this)}
@@ -124,7 +167,7 @@ class GameView extends React.Component {
           </button>
         </div>
 
-        <div ref="gameView">
+        <div className="game" ref="gameView">
         </div>
 
       </div>

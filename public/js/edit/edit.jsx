@@ -9,7 +9,7 @@ let { Provider,connect } = require('react-redux')
 
 import Navbar from '../../back/components/Navbar/index'
 
-import GameContainer from '../../back/components/GameContainer/index'
+import GameContainer from '../layout/GameContainer/index'
 
 import GameView from '../../back/components/GameView/index'
 import * as GameViewActions from '../../back/scripts/actions/gameView'
@@ -84,6 +84,7 @@ class Edit extends React.Component {
         <FixedBox top="127">
 
           <FlexBox childrenWidth={[undefined,600]}>
+            
             <GameContainer>
               <GameView actions={actions} data={viewData}/>
             </GameContainer>
