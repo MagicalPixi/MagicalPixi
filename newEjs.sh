@@ -7,22 +7,23 @@ then
 
 echo "del"
 
-rm "./views/$name.ejs"
+    rm "./views/$name.ejs"
 
-rm "public/back/scripts/router$name/index.js"
-rm -r "public/back/scripts/router$name"
+    rm -r "public/js/$name"
 
+    rm -r "public/js/$name/router"
+    rm "public/js/$name/router/index.js"
 
-rm "public/back/scripts/$name.jsx"
+    rm "public/js/$name/$name.jsx"
 
 else
 
-touch "./views/$name.ejs"
+    touch "./views/$name.ejs"
 
-mkdir "public/back/scripts/router$name"
-touch "public/back/scripts/router$name/index.js"
+    mkdir "public/js/$name"
 
+    mkdir "public/js/$name/router"
+    touch "public/js/$name/router/index.js"
 
-touch "public/back/scripts/$name.jsx"
-
+    touch "public/js/$name/$name.jsx"
 fi
