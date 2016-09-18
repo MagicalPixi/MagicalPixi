@@ -6,13 +6,11 @@ import React,{Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import FlexBox from '../../componentsLayout/FlexBox'
-import AsideMenu from '../../components/AsideMenu'
-import MaterialsList from '../main/MaterialsList'
+import MaterialsList from '../../layout/MaterialsList'
 
-import * as MaterialsActions from '../actions/materials'
-import * as BasicActions from '../actions/basic'
-import * as PlayerActions from '../actions/player'
+import * as MaterialsActions from '../../../back/scripts/actions/materials'
+import * as BasicActions from '../../../back/scripts/actions/basic'
+import * as PlayerActions from '../../../back/scripts/actions/player'
 
 class App extends Component {
 

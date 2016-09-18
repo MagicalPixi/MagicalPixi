@@ -6,10 +6,10 @@ import React,{Component} from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import PlayerList from '../../components/PlayerList'
+import PlayerList from '../../../back/components/PlayerList'
 
-import * as PlayerActions from '../actions/player'
-import * as BasicActions from '../actions/basic'
+import * as PlayerActions from '../../../back/scripts/actions/player'
+import * as BasicActions from '../../../back/scripts/actions/basic'
 
 class App extends Component {
 

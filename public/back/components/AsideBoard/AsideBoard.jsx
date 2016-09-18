@@ -9,11 +9,11 @@ class AsideBoard extends React.Component {
       <div id="asideBoard">
         <div className="function-one scene">
           <h3 className="title" >
-            <i className="icon"></i>场景
+            <i className="icon"></i>组合
           </h3>
           <ul className="child-list">
             <li>
-              <a href='#scene'>基本场景</a>
+              <a href='#scene'>组合素材</a>
             </li>
           </ul>
         </div>

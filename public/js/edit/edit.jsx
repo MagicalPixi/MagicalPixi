@@ -7,32 +7,29 @@ let { bindActionCreators } = require('redux')
 
 let { Provider,connect } = require('react-redux')
 
-let Navbar = require('../components/Navbar/index');
+import Navbar from '../../back/components/Navbar/index'
 
-let GameContainer = require('../components/GameContainer/index');
+import GameContainer from '../../back/components/GameContainer/index'
 
-let GameView = require('../components/GameView/index');
-import * as GameViewActions from './actions/gameView'
-import * as SceneActions from './actions/scene'
-import * as ConsoleActions from './actions/console'
+import GameView from '../../back/components/GameView/index'
+import * as GameViewActions from '../../back/scripts/actions/gameView'
+import * as SceneActions from '../../back/scripts/actions/scene'
+import * as ConsoleActions from '../../back/scripts/actions/console'
 
-import SelectResource from '../components/SelectResource'
+import SelectResource from '../../back/components/SelectResource'
 
-let EditOperations = require('../components/EditOperations');
-let ConsolePanel = require('../components/ConsolePanel');
-let SceneTitle = require('../components/SceneTitle');
+import EditOperations from '../../back/components/EditOperations/'
+import ConsolePanel from '../../back/components/ConsolePanel/'
+import SceneTitle from '../../back/components/SceneTitle/'
 
-let FixedBox = require('../componentsLayout/FixedBox');
-let FlexBox = require('../componentsLayout/FlexBox');
+import FixedBox from '../../back/componentsLayout/FixedBox/'
+import FlexBox from '../../back/componentsLayout/FlexBox/'
 
-let {createMyStore} = require('../../common/routerBuild');
-let getParamsFromUrl = require('../../common/getParamFromUrl');
-let {editReducers} = require('./reducers/index');
+import {createMyStore} from '../../common/routerBuild'
+import getParamsFromUrl from '../../common/getParamFromUrl'
+import {editReducers} from '../../back/scripts/reducers/'
 
-let {createRouterList} = require('./routerEdit/index');
-
-//let initialContainer = new PIXI.Container();
-//initialContainer.name = '初始';
+import {createRouterList} from './router/'
 
 window.R = React;
 window.RD = ReactDOM;

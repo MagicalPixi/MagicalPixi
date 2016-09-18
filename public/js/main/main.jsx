@@ -7,13 +7,13 @@ require('../../common/utils');
 let ReactDOM = require('react-dom');
 let React = require('react');
 
-let Navbar = require('../components/Navbar/index');
+import Navbar from '../../back/components/Navbar/index'
 
-let ContentsBox = require('../componentsLayout/ContentsBox/index');
+import ContentsBox from '../../back/componentsLayout/ContentsBox/index'
 
-let AsideBoard = require('../components/AsideBoard/index');
+import AsideBoard from '../../back/components/AsideBoard/index'
 
-let routerList = require('./router/index');
+import routerList from './router/'
 
 window.R = React;
 window.RD = ReactDOM;
