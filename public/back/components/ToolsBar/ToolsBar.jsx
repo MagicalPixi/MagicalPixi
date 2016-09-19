@@ -16,26 +16,35 @@ var defaultProps = {};
 class ToolsBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      item1Clicked:false,
+    };
     autoBind(this);
   }
 
   clickItem(e){
     var target = e.target;
 
+    this.setState({
+      item1Clicked:!this.state.item1Clicked
+    });
+
     this.props.onClickItem(target);
-    
     
   }
 
   render() {
     
     var { style } = this.props;
-    
+
+    var {item1Clicked} = this.state;
+
+    var item1Text = item1Clicked ? '横屏' : '竖屏';
+
     return (
       <div id="toolsBar" style={style}>
         <ul onClick={this.clickItem}>
-          <li>旋转</li>
+          <li>{item1Text}</li>
         </ul>
       </div>
     )
