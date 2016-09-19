@@ -7,29 +7,55 @@ const T = React.PropTypes;
 
 import { saveViewData } from '../../scripts/actions/gameView'
 
+
+
+import autoBind from 'react-autobind'
+
+
 class EditOperations extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    autoBind(this);
   }
 
   saveScene(){
-    let currentState = this.props.store.getState();
 
-    saveViewData()(null,this.props.store.getState);
+    this.props.onSave();
+  }
+
+  output(){
+
+    var {disabledOutput} = this.props;
+
+    if(!disabledOutput){
+      this.props.onOutput();
+    }
   }
 
   render() {
+
+    var {disabledOutput} = this.props;
+
+    var downClassName = 'weui_btn weui_btn_mini ' + (disabledOutput ? 'weui_btn_disabled' : 'weui_btn_default')
+
     return (
       <div id="editOperations">
-        <button onClick={this.saveScene.bind(this)} className="weui_btn weui_btn_mini weui_btn_default">保存</button>
+        <button onClick={this.output} className={downClassName}>下载</button>
+        <button onClick={this.saveScene} className="weui_btn weui_btn_mini weui_btn_default ">保存</button>
       </div>
     )
   }
 }
 
+EditOperations.defaultProps = {
+  disabledOutput:true,
+}
+
 EditOperations.propTypes = {
-  store:T.object.isRequired
+  onSave:T.func,
+  onOutput:T.func,
+  disabledOutput:T.bool,
 };
 
 module.exports = EditOperations;

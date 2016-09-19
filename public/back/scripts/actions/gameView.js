@@ -106,6 +106,17 @@ export function saveViewData(){
   }
 }
 
+export function outputViewData() {
+
+  return (_,getState)=>{
+    var {sceneTitle} = getState();
+
+    if(sceneTitle){
+      window.open(`/api/sceneOutput?title=${sceneTitle}`);
+    }
+  }
+}
+
 export function initViewData(id){
 
   return (dispatch,getState)=>{

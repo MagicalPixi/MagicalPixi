@@ -31,8 +31,12 @@ import {editReducers} from '../../back/scripts/reducers/'
 
 import {createRouterList} from './router/'
 
+import autoBind from 'react-autobind'
+
 window.R = React;
 window.RD = ReactDOM;
+
+const initSceneTitle = '新建场景名'
 
 let editStore = createMyStore(editReducers,{
   withRouter:true,
@@ -43,7 +47,7 @@ let editStore = createMyStore(editReducers,{
         children:[]
       }
     ],
-    sceneTitle:'新建场景名',
+    sceneTitle:initSceneTitle,
     consoleTab:'material',
     consoleData:[]
   }
@@ -52,6 +56,11 @@ let editStore = createMyStore(editReducers,{
 let routerList = createRouterList(editStore);
 
 class Edit extends React.Component {
+  constructor(props){
+    super(props)
+
+    autoBind(this)
+  }
 
   componentDidMount(){
 
@@ -64,17 +73,33 @@ class Edit extends React.Component {
     this.props.actions.queryData();
   }
 
+  saveScene(){
+    
+    this.props.actions.saveViewData();
+  }
+
+  output(){
+    
+    this.props.actions.outputViewData();
+  }
+  
   render(){
     log('EDIT:',this.props);
 
-    let {viewData,sceneTitle,consoleData,actions} = this.props;
+    var {viewData,sceneTitle,consoleData,actions} = this.props;
+
+    var disabledOutput = sceneTitle === initSceneTitle
 
     return (
       <div>
         <Navbar mode="left" >
           <SceneTitle actions={actions} title={sceneTitle} />
 
-          <EditOperations store={editStore} />
+          <EditOperations 
+            onSave={this.saveScene}
+            onOutput={this.output}
+            disabledOutput={disabledOutput}
+            />
         </Navbar>
 
         <div className="resource-tabs">
