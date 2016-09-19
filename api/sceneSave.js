@@ -21,7 +21,7 @@ module.exports = function (req,res) {
     console.log('save result:',result);
 
     res.json({
-      result
+      result:result.ops[0]._id
     })
   }).catch(function (err) {
     console.log(err)

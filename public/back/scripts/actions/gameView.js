@@ -5,6 +5,7 @@ import { ADD_SPRITE,REMOVE_SPRITE,EDIT_SPRITE,
   CONTAINER_ADD,CONTAINER_RENAME,CONTAINER_TOP,
   CHILD_REMOVE,CHILD_EDIT,CHILD_EDIT_TYPES,INIT_SCENE} from '../constants/gameViewTypes'
 
+import {SCENE_ID} from '../constants/sceneIdTypes'
 
 import API from '../../../libs/API'
 import ajax from '../../../libs/ajax'
@@ -53,7 +54,7 @@ export function containerAdd(){
 
 export function containerRename(index,newName){
 
-  newName = newName.replace(this.state.value.replace(/\([\d]+\)/g,''),'')
+  newName = newName.replace(/\([\d]+\)/g,'');
 
   return {
     type:CONTAINER_RENAME,
@@ -94,14 +95,23 @@ export function saveViewData(){
 
   return (dispatch,getState) => {
 
-    var {viewData,sceneTitle} = getState();
+    var {viewData,sceneId,sceneTitle} = getState();
+    
+    if(!sceneId){
+      sceneId = getParamFromUrl().id
+    }
 
     ajax(API.sceneSave).post({
-      id:getParamFromUrl().id,
+      id:sceneId,
       sceneTitle,
       viewData:JSON.stringify(viewData)
     }).then(r=>{
-      log('save r:',r);
+
+
+      dispatch({
+        type:SCENE_ID,
+        id:r.result,
+      })
     })
   }
 }

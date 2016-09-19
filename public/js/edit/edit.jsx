@@ -36,7 +36,7 @@ import autoBind from 'react-autobind'
 window.R = React;
 window.RD = ReactDOM;
 
-const initSceneTitle = '新建场景名'
+const initSceneTitle = '新建场景名';
 
 let editStore = createMyStore(editReducers,{
   withRouter:true,
@@ -86,9 +86,9 @@ class Edit extends React.Component {
   render(){
     log('EDIT:',this.props);
 
-    var {viewData,sceneTitle,consoleData,actions} = this.props;
+    var {viewData,sceneId,sceneTitle,consoleData,actions} = this.props;
 
-    var disabledOutput = sceneTitle === initSceneTitle
+    var disabledOutput = !sceneId;
 
     return (
       <div>
@@ -129,6 +129,7 @@ function mapStateToProps(state) {
     sceneTitle: state.sceneTitle,
     consoleData:state.consoleData,
     editSceneSprite:state.editSceneSprite,
+    sceneId:state.sceneId,
   }
 }
 
