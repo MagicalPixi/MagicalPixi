@@ -1,38 +1,45 @@
 var <%= referenceName %> = require('<%=  pixiLibName %>');
 
-var args = [{
+var argsFn = function (){
 
-  textures:<%=  referenceName %>.getTextures('<%=  name %>'),
+  var args = [{
 
-  <% for(var k in properties){  %>
+    textures:<%=  referenceName %>.getTextures('<%=  name %>'),
 
-    <% if(properties[k] || properties[k] === 0){ %>
+    <% for(var k in properties){  %>
 
-    "<%= k %>" : <% if(isNaN(Number(properties[k]))){  %> "<%= properties[k] %>" <% }else{ %> <%= Number(properties[k]) %> <% } %>,
+      <% if(properties[k] || properties[k] === 0){ %>
+
+      "<%= k %>" : <% if(isNaN(Number(properties[k]))){  %> "<%= properties[k] %>" <% }else{ %> <%= Number(properties[k]) %> <% } %>,
+
+      <% } %>
 
     <% } %>
+  }]
+
+  <% if(actionFrames){ %>
+
+    args.push([
+
+      <% actionFrames.map(function(frame){  %>
+
+        <%= frame %>,
+
+      <% }); %>
+    ]);
 
   <% } %>
-}]
 
-<% if(actionFrames){ %>
-
-  args.push([
-
-    <% actionFrames.map(function(frame){  %>
-
-      <%= frame %>,
-
-    <% }); %>
-  ]);
-
-<% } %>
+  return arg;
+}
 
 module.exports = function spriteFn(arg){
 
   if(!arg){
      arg = {}
   }
+
+  var args = argsFn();
 
   for(var k in arg){
    args[0][k] = arg[k]
