@@ -18,3 +18,12 @@ A website tool  for creating html5 game with pixi.js
 启动
 
 > npm start
+
+
+TODO
+
+1.提交页.
+2.转存至CDN.
+
+
+3.游戏工具 -> a.组合精灵  (b.场景)  c.脚本+素材做一个元素.

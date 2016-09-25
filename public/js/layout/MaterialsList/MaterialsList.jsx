@@ -4,14 +4,14 @@ let React = require('react');
 import autoBind from 'react-autobind'
 const T = React.PropTypes;
 
-let ItemList = require('../../../componentsLayout/ItemList');
+import ItemList from '../../../back/componentsLayout/ItemList'
 
-import SpritePreviewPopup from '../../../componentsFunctional/SpritePreviewPopup'
-let Download = require('../../../componentsFunctional/Download');
-let DeleteSprite = require('../../../componentsFunctional/DeleteSprite');
+import SpritePreviewPopup from '../../../back/componentsFunctional/SpritePreviewPopup'
+import Download from '../../../back/componentsFunctional/Download'
+import DeleteSprite from '../../../back/componentsFunctional/DeleteSprite'
 
-import FlexBox from '../../../componentsLayout/FlexBox'
-import AsideMenu from '../../../components/AsideMenu'
+import FlexBox from '../../../back/componentsLayout/FlexBox'
+import AsideMenu from '../../../back/components/AsideMenu'
 
 var propTypes = {
   data: T.object.isRequired,

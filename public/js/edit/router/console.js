@@ -9,10 +9,10 @@ import * as _ from 'lodash'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as ConsoleActions from '../actions/console'
-import * as GameViewActions from '../actions/gameView'
+import * as ConsoleActions from '../../../back/scripts/actions/console'
+import * as GameViewActions from '../../../back/scripts/actions/gameView'
 
-let ConsolePanel = require('../../components/ConsolePanel/index');
+import ConsolePanel from '../../../back/components/ConsolePanel/index'
 
 class App extends Component {
 

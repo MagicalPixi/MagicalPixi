@@ -19,11 +19,11 @@ module.exports = {
   entry: {
     index: [
       'webpack-hot-middleware/client',
-      path.resolve(__dirname, './public/back/scripts/main.jsx')
+      path.resolve(__dirname, './public/js/main/main.jsx')
     ],
     edit: [
       'webpack-hot-middleware/client',
-      path.resolve(__dirname, './public/back/scripts/edit.jsx'),
+      path.resolve(__dirname, './public/js/edit/edit.jsx'),
     ]
   },
   output: {

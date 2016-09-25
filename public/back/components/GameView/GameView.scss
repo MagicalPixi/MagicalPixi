@@ -4,11 +4,13 @@ $viewWidth:320px;
 
 $layoutWidth:120px;
 
+$toolWidth:40px;
+
 #gameView{
   //background-color: $bgGray;
   background-color: #fff;
   margin: auto;
-  width: $viewWidth + $layoutWidth + $padding2;
+  width: $viewWidth + $layoutWidth + $padding2 + $toolWidth;
   height: 502px;
 
   position: relative;
@@ -24,12 +26,16 @@ $layoutWidth:120px;
     padding: 0 0 5px $padding2;
 
     position: absolute;
-    left: $viewWidth + 1px;
+    right: 1px;
     top: -1px;
 
 
     .add-layout{
       width: 100%;
     }
+  }
+
+  .game{
+    margin-left: $toolWidth;
   }
 }

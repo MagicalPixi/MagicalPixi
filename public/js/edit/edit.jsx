@@ -7,35 +7,36 @@ let { bindActionCreators } = require('redux')
 
 let { Provider,connect } = require('react-redux')
 
-let Navbar = require('../components/Navbar/index');
+import Navbar from '../../back/components/Navbar/index'
 
-let GameContainer = require('../components/GameContainer/index');
+import GameContainer from '../layout/GameContainer/index'
 
-let GameView = require('../components/GameView/index');
-import * as GameViewActions from './actions/gameView'
-import * as SceneActions from './actions/scene'
-import * as ConsoleActions from './actions/console'
+import GameView from '../../back/components/GameView/index'
+import * as GameViewActions from '../../back/scripts/actions/gameView'
+import * as SceneActions from '../../back/scripts/actions/scene'
+import * as ConsoleActions from '../../back/scripts/actions/console'
 
-import SelectResource from '../components/SelectResource'
+import SelectResource from '../../back/components/SelectResource'
 
-let EditOperations = require('../components/EditOperations');
-let ConsolePanel = require('../components/ConsolePanel');
-let SceneTitle = require('../components/SceneTitle');
+import EditOperations from '../../back/components/EditOperations/'
+import ConsolePanel from '../../back/components/ConsolePanel/'
+import SceneTitle from '../../back/components/SceneTitle/'
 
-let FixedBox = require('../componentsLayout/FixedBox');
-let FlexBox = require('../componentsLayout/FlexBox');
+import FixedBox from '../../back/componentsLayout/FixedBox/'
+import FlexBox from '../../back/componentsLayout/FlexBox/'
 
-let {createMyStore} = require('../../common/routerBuild');
-let getParamsFromUrl = require('../../common/getParamFromUrl');
-let {editReducers} = require('./reducers/index');
+import {createMyStore} from '../../common/routerBuild'
+import getParamsFromUrl from '../../common/getParamFromUrl'
+import {editReducers} from '../../back/scripts/reducers/'
 
-let {createRouterList} = require('./routerEdit/index');
+import {createRouterList} from './router/'
 
-//let initialContainer = new PIXI.Container();
-//initialContainer.name = '初始';
+import autoBind from 'react-autobind'
 
 window.R = React;
 window.RD = ReactDOM;
+
+const initSceneTitle = '新建场景名';
 
 let editStore = createMyStore(editReducers,{
   withRouter:true,
@@ -46,7 +47,7 @@ let editStore = createMyStore(editReducers,{
         children:[]
       }
     ],
-    sceneTitle:'新建场景名',
+    sceneTitle:initSceneTitle,
     consoleTab:'material',
     consoleData:[]
   }
@@ -55,6 +56,11 @@ let editStore = createMyStore(editReducers,{
 let routerList = createRouterList(editStore);
 
 class Edit extends React.Component {
+  constructor(props){
+    super(props)
+
+    autoBind(this)
+  }
 
   componentDidMount(){
 
@@ -67,17 +73,33 @@ class Edit extends React.Component {
     this.props.actions.queryData();
   }
 
+  saveScene(){
+    
+    this.props.actions.saveViewData();
+  }
+
+  output(){
+    
+    this.props.actions.outputViewData();
+  }
+  
   render(){
     log('EDIT:',this.props);
 
-    let {viewData,sceneTitle,consoleData,actions} = this.props;
+    var {viewData,sceneId,sceneTitle,consoleData,actions} = this.props;
+
+    var disabledOutput = !sceneId;
 
     return (
       <div>
         <Navbar mode="left" >
           <SceneTitle actions={actions} title={sceneTitle} />
 
-          <EditOperations store={editStore} />
+          <EditOperations 
+            onSave={this.saveScene}
+            onOutput={this.output}
+            disabledOutput={disabledOutput}
+            />
         </Navbar>
 
         <div className="resource-tabs">
@@ -87,6 +109,7 @@ class Edit extends React.Component {
         <FixedBox top="127">
 
           <FlexBox childrenWidth={[undefined,600]}>
+            
             <GameContainer>
               <GameView actions={actions} data={viewData}/>
             </GameContainer>
@@ -106,6 +129,7 @@ function mapStateToProps(state) {
     sceneTitle: state.sceneTitle,
     consoleData:state.consoleData,
     editSceneSprite:state.editSceneSprite,
+    sceneId:state.sceneId,
   }
 }
 
