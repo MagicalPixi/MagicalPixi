@@ -28,9 +28,9 @@ class Navbar extends React.Component {
           <nav style={style} >
             <a href="/index/index#scene">
               <img src="/images/mp_logo.png" height="100%" />
-              <h1>
+              <p>
                 MagicalPixi
-              </h1>
+              </p>
             </a>
           </nav>
 

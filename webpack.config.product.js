@@ -13,6 +13,9 @@ base.entry = {
   ],
   edit: [
     path.resolve(__dirname, './public/js/edit/edit.jsx'),
+  ],
+  game_create: [
+    path.resolve(__dirname, './public/js/game/create/index.jsx'),
   ]
 },
 

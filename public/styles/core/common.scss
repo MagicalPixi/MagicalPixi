@@ -1,0 +1,117 @@
+@mixin gradient-mask {
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+@mixin gradient-mask-blue {
+  background: -webkit-linear-gradient(top, rgb(16, 67, 84), rgb(10, 21, 61));
+  background: -o-linear-gradient(bottom, rgb(16, 67, 84), rgb(10, 21, 61));
+  background: -moz-linear-gradient(bottom, rgb(16, 67, 84), rgb(10, 21, 61));
+  background: linear-gradient(to bottom, rgb(16, 67, 84), rgb(10, 21, 61));
+}
+
+@mixin background-size-cover {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+@mixin card {
+  margin-bottom: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+@mixin justify-content($value: center) {
+  -webkit-justify-content: $value;
+  -moz-justify-content: $value;
+  -ms-justify-content: $value;
+  -o-justify-content: $value;
+  justify-content: $value;
+}
+
+@mixin flex-basis($length: 100px) {
+  -webkit-flex-basis: $length;
+  -moz-flex-basis: $length;
+  -ms-flex-basis: $length;
+  -o-flex-basis: $length;
+  flex-basis: $length;
+}
+
+@mixin flex-grow($value: 1) {
+  -webkit-flex-grow: $value;
+  -moz-flex-grow: $value;
+  -ms-flex-grow: $value;
+  -o-flex-grow: $value;
+  flex-grow: $value;
+}
+
+@mixin flex-wrap($wrap: wrap) {
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  -o-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+
+@mixin align-items($value: center) {
+  -webkit-box-align: $value;
+  -webkit-flex-align: $value;
+  -ms-flex-align: $value;
+  -webkit-align-items: $value;
+  align-items: $value;
+}
+
+@mixin flex-direction($direction: row) {
+  -webkit-flex-direction: $direction;
+  -moz-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  -o-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+@mixin flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+@mixin gray {
+  background-color: #F9F9F9;
+}
+
+@mixin shadow {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+@mixin radius($value: 5px) {
+  -moz-border-radius: $value;
+  -webkit-border-radius: $value;
+  border-radius: $value;
+}
+
+@mixin rotate($value: 20deg) {
+  -ms-transform: rotate($value);
+  -webkit-transform: rotate($value);
+  transform: rotate($value);
+}
+
+@mixin preserve-3d {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+

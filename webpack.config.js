@@ -24,6 +24,10 @@ module.exports = {
     edit: [
       'webpack-hot-middleware/client',
       path.resolve(__dirname, './public/js/edit/edit.jsx'),
+    ],
+    game_create: [
+      'webpack-hot-middleware/client',
+      path.resolve(__dirname, './public/js/game/create/index.jsx'),
     ]
   },
   output: {
