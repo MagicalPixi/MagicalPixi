@@ -1,0 +1,18 @@
+@import "../../../styles/core/variables.scss";
+@import "../../../styles/core/common.scss";
+.game_create_input { 
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @include flex;
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  .input_title {
+    width: 20%;
+  }
+  .textfield {
+    width: 70%;
+  }
+}
+

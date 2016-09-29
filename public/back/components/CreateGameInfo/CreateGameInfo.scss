@@ -1,0 +1,32 @@
+@import "../../../styles/core/variables.scss";
+@import "../../../styles/core/common.scss";
+
+#createGameInfo { 
+  font-family: helvetica-light;
+  width: 100%;
+  @include flex;
+  @include justify-content(center);
+  .container {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    max-width: 920px;
+    min-width: 600px;
+    width: 80%;
+    @include flex;
+    @include flex-direction(column);
+    background-color: #f7f7f7;
+    .submit_button {
+      margin-left: 65%;
+      background-color: #FF8F8F;
+      height: 30px;
+      width: 70px;
+      border-style: solid;
+      border-width: 0;
+      @include radius(5px);
+      color: white;
+    }
+  }
+}
+
+
