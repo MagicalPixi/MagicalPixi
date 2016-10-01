@@ -27,3 +27,9 @@ TODO
 
 
 3.游戏工具 -> a.组合精灵  (b.场景)  c.脚本+素材做一个元素.
+
+###Game
+
+create game /game/create
+
+
