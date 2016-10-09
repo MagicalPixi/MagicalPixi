@@ -3,3 +3,19 @@
   src://url('../fonts/artTitle.ttf') format('truetype'),
   url('/fonts/artTitle.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'iconfont';
+  src:url('../fonts/iconfont.ttf') format('truetype');
+}
+
+.icon-basic{
+  text-decoration: none;
+  font-style: normal;
+}
+
+.material-icon:before{
+  font-family:'iconfont';
+  content:'\e602';
+  @extend .icon-basic;
+}

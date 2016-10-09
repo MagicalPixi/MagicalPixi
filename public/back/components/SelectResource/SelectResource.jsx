@@ -59,7 +59,7 @@ class SelectResource extends Component {
         <ul className="tabs">
 
           <li data-index="0" onClick={this.select} >
-            <img src="/images/example.jpg" />
+            <i className="material-icon icon"></i>
           </li>
 
         </ul>
