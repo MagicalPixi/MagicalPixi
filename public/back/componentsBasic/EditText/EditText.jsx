@@ -2,6 +2,7 @@ require('./EditText.scss');
 
 import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
+import autoBind from 'react-autobind'
 
 const T = React.PropTypes;
 
@@ -20,6 +21,7 @@ class EditText extends Component {
       editState:'normal',
       value:props.value
     }
+    autoBind(this);
   }
 
   componentWillReceiveProps(nextProps){
@@ -75,6 +77,11 @@ class EditText extends Component {
     })
   }
 
+  clickOn(){
+
+    this.props.onClick && this.props.onClick();
+  }
+
   render() {
     let {editState,value} = this.state;
 
@@ -83,23 +90,23 @@ class EditText extends Component {
     let inputValue = value.replace(/\([\d]+\)/g,'');
 
     return (
-      <div data-state={editState} onClick={this.intoEditState.bind(this)} style={style} className="edit-text">
+      <div data-state={editState} onClick={this.clickOn} style={style} className="edit-text">
 
         <span className="text">{value ? value : defaultValue}</span>
 
         <p className="operations">
-          <span  className="edit"></span>
+          <span onClick={this.intoEditState} className="edit"></span>
         </p>
 
         <div className="edit-box">
-          <input ref="input" onChange={this.onChange.bind(this)} className="name" value={inputValue} />
+          <input ref="input" onChange={this.onChange} className="name" value={inputValue} />
 
           <p className="action-buttons" >
-            <button onClick={this.submit.bind(this)}
+            <button onClick={this.submit}
               className="weui_btn weui_btn_mini weui_btn_primary" >
               确定
             </button>
-            <button onClick={this.cancel.bind(this)}
+            <button onClick={this.cancel}
               className="weui_btn weui_btn_mini weui_btn_default" >
               取消
             </button>

@@ -11,10 +11,12 @@ import Navbar from '../../back/components/Navbar/index'
 
 import GameContainer from '../layout/GameContainer/index'
 
-import GameView from '../../back/components/GameView/index'
+import CascadeList from '../../back/components/CascadeList'
+import GameView from '../../back/components/GameView'
 import * as GameViewActions from '../../back/scripts/actions/gameView'
 import * as SceneActions from '../../back/scripts/actions/scene'
 import * as ConsoleActions from '../../back/scripts/actions/console'
+import * as gameViewLayoutIndexActions from '../../back/scripts/actions/gameViewLayoutIndex'
 
 import SelectResource from '../../back/components/SelectResource'
 
@@ -53,7 +55,7 @@ let editStore = createMyStore(editReducers,{
   }
 });
 
-let routerList = createRouterList(editStore);
+//let routerList = createRouterList(editStore);
 
 class Edit extends React.Component {
   constructor(props){
@@ -86,7 +88,11 @@ class Edit extends React.Component {
   render(){
     log('EDIT:',this.props);
 
-    var {viewData,sceneId,sceneTitle,consoleData,actions} = this.props;
+    var {viewData,
+      sceneId,
+      sceneTitle,consoleData,editSceneSprite,
+      gameViewLayoutIndex,
+      actions} = this.props;
 
     var disabledOutput = !sceneId;
 
@@ -107,14 +113,26 @@ class Edit extends React.Component {
         </div>
 
         <FixedBox top="127">
+          <FlexBox childrenWidth={[150,undefined,600]}>
 
-          <FlexBox childrenWidth={[undefined,600]}>
-            
+            <CascadeList
+              currentLayoutIndex={gameViewLayoutIndex}
+              data={viewData}
+              onSelectContainer={actions.layoutIndexChange}
+              onChangeContainerName={actions.containerRename}
+              onChildRemove={actions.childRemove}
+              onAddLayout={actions.containerAdd}
+            />
+
             <GameContainer>
-              <GameView actions={actions} data={viewData}/>
+              <GameView
+                currentLayoutIndex={gameViewLayoutIndex}
+                actions={actions}
+                data={viewData}/>
             </GameContainer>
 
-            {routerList}
+            <ConsolePanel consoleData={editSceneSprite} actions={actions} />
+            
           </FlexBox>
         </FixedBox>
       </div>
@@ -130,6 +148,7 @@ function mapStateToProps(state) {
     consoleData:state.consoleData,
     editSceneSprite:state.editSceneSprite,
     sceneId:state.sceneId,
+    gameViewLayoutIndex:state.gameViewLayoutIndex
   }
 }
 
@@ -139,7 +158,8 @@ function mapDispatchToProps(dispatch) {
       {},
       GameViewActions,
       SceneActions,
-      ConsoleActions
+      ConsoleActions,
+      gameViewLayoutIndexActions
     ),dispatch)
   }
 }

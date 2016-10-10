@@ -1,10 +1,10 @@
 @import "../../../styles/core/variables.scss";
 
-.cascade-list{
+.cascade-list {
 
-  .layouts{
+  .layouts {
 
-    > li{
+    > li {
       padding: 5px 5px 5px 0;
       position: relative;
 
@@ -19,13 +19,13 @@
 
           position: relative;
 
-          .operations{
+          .operations {
             position: absolute;
             top: 0;
             right: 0;
 
             display: none;
-            .delete{
+            .delete {
               background-image: url(/images/icon/delete.png);
               background-size: cover;
               width: 14px;
@@ -34,44 +34,38 @@
             }
           }
         }
-        > li:hover{
-          .operations{
+        > li:hover {
+          .operations {
             display: block;
           }
         }
 
-        > li[data-selected="true"]{
+        > li[data-selected="true"] {
           background-color: $bgGray;
         }
       }
     }
-    > li{
-      &:hover{
+    > li {
+      &:hover {
         color: $themeHoverColor;
       }
 
-      &[data-selected="true"]{
+      &[data-selected="true"] {
         color: $themeColor;
-//        background-color: $themeColor;
-//        padding-left: $padding1;
-//        color: #ffffff;
-//
-//        position: relative;
-//        left: -$padding1;
 
-        .children{
+        .children {
           display: block;
         }
       }
 
-      &:last-child{
+      &:last-child {
         border: none;
       }
-      
+
     }
   }
 
-  .add-layout{
+  .add-layout {
     width: 100%;
   }
 }

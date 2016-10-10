@@ -1,21 +1,26 @@
 require('./CascadeList.scss');
 
-import React,{Component} from 'react'
+import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
 import EditText from '../../componentsBasic/EditText'
 
 import Sortable from '../../componentsFunctional/Sortable'
 
+import autoBind from 'react-autobind'
+
 const T = React.PropTypes;
+
 
 class CascadeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentIndex:0
     }
+
+    autoBind(this)
   }
+
   //componentDidMount(){
   //  new Sortable(this.refs.containers,{
   //    onEnd(evt){
@@ -25,29 +30,29 @@ class CascadeList extends Component {
   //  })
   //}
 
-  selectContainer(index,layoutOne){
-    this.props.onSelectContainer(index,layoutOne);
-    this.setState({
-      currentIndex:index
-    })
+  selectContainer(index, layoutOne) {
+    this.props.onSelectContainer(index, layoutOne);
   }
 
-  changeContainerName(index,containerName=''){
+  changeContainerName(index, containerName = '') {
 
-    this.props.onChangeContainerName(index,containerName);
+    this.props.onChangeContainerName(index, containerName);
   }
 
-  removeChild(containerIndex,childIndex){
-    this.props.onRemoveChild(containerIndex,childIndex);
+  removeChild(containerIndex, childIndex) {
+    this.props.onRemoveChild(containerIndex, childIndex);
+  }
+
+  addLayout(){
+    this.props.onAddLayout();
   }
 
   render() {
-    let {currentIndex} = this.state;
-    let { data } = this.props;
+    let {data,currentLayoutIndex} = this.props;
 
     let option = {
       onEnd(evt){
-        log('onEnd:',evt);
+        log('onEnd:', evt);
         evt.stopPropagation();
       }
     };
@@ -57,12 +62,12 @@ class CascadeList extends Component {
 
         <Sortable className="layouts">
 
-          {data.map((layoutOne,i)=>{
+          {data.map((layoutOne, i)=> {
 
-            let { name,children=[] } = layoutOne;
+            let {name, children=[]} = layoutOne;
             let key = `layout${i}`;
 
-            let selected = currentIndex === i;
+            let selected = (currentLayoutIndex === i);
 
             name = `${name}(${children.length})`;
 
@@ -71,17 +76,17 @@ class CascadeList extends Component {
                 <EditText
                   onClick={this.selectContainer.bind(this,i,layoutOne)}
                   onSubmit={this.changeContainerName.bind(this,i)}
-                  value={name} />
+                  value={name}/>
 
                 <ol className="children">
-                  {children.map((sprite,ii)=>{
+                  {children.map((sprite, ii)=> {
 
-                    let { name } =  sprite;
+                    let {name} =  sprite;
 
                     let childKey = `children${ii}`;
 
                     return (
-                      <li key={childKey} >
+                      <li key={childKey}>
                         {name}
                         <p className="operations">
                           <span onClick={this.props.onChildRemove.bind(null,i,ii)} className="delete">
@@ -95,15 +100,25 @@ class CascadeList extends Component {
             )
           })}
         </Sortable>
+
+
+
+        <button onClick={this.addLayout}
+                className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
+          +
+        </button>
+
       </div>
     )
   }
 }
 
 CascadeList.propTypes = {
-  onSelectContainer:T.func.isRequired,
-  onChildRemove:T.func.isRequired,
-  onChangeContainerName:T.func.isRequired
+  onSelectContainer: T.func.isRequired,
+  onChildRemove: T.func.isRequired,
+  onChangeContainerName: T.func.isRequired,
+  onAddLayout:T.func.isRequired,
+  currentLayoutIndex:T.number.isRequired,
 };
 
 module.exports = CascadeList;

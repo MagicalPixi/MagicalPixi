@@ -12,8 +12,6 @@ let pixiLib = require('pixi-lib');
 
 import pixiContainersManager from '../../../common/pixiContainersManager'
 
-import CascadeList from './CascadeList'
-
 import ToolsBar from  '../ToolsBar'
 
 
@@ -31,10 +29,7 @@ class GameView extends React.Component {
     super(props);
 
     this.state = {
-      currentLayoutIndex:0,
     };
-
-    log('GameView:',props);
 
     autoBind(this);
 
@@ -78,11 +73,6 @@ class GameView extends React.Component {
     })
   }
 
-  addLayout(){
-
-    this.props.actions.containerAdd();
-  }
-
   removeLayout(){
 
   }
@@ -97,7 +87,7 @@ class GameView extends React.Component {
 
     //let properties = JSON.parse(materialOne.properties);
 
-    let {currentLayoutIndex} = this.state;
+    let {currentLayoutIndex} = this.props;
 
     this.props.actions.addSpriteToScene(
       materialOne,
@@ -107,12 +97,6 @@ class GameView extends React.Component {
 
   dragOver(e){
     e.preventDefault();
-  }
-
-  selectContainer(newLayoutIndex,selectedContainer){
-   this.setState({
-     currentLayoutIndex:newLayoutIndex
-   })
   }
 
   clickTools(target){
@@ -152,20 +136,6 @@ class GameView extends React.Component {
           onClickItem={this.clickTools}>
 
         </ToolsBar>
-
-        <div className="layouts-box">
-
-          <CascadeList
-            data={data}
-            onSelectContainer={this.selectContainer.bind(this)}
-            onChangeContainerName={this.props.actions.containerRename}
-            onChildRemove={this.props.actions.childRemove} />
-
-          <button onClick={this.addLayout.bind(this)}
-            className="add-layout weui_btn weui_btn_mini weui_btn_primary" >
-            +
-          </button>
-        </div>
 
         <div className="game" ref="gameView">
         </div>
