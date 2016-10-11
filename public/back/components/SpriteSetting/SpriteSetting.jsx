@@ -71,17 +71,19 @@ class SpriteSetting extends React.Component {
   }
 
   render() {
-    let {spriteType,spriteProperties,actionFrames } = this.props;
+    var {spriteType,spriteProperties,actionFrames } = this.props;
 
-    let settingListConfig = settingListConfigMap(spriteType, spriteProperties,actionFrames);
+    var settingListConfig = settingListConfigMap(spriteType, spriteProperties,actionFrames);
 
     return (
       <div className="properties-setting">
         {settingListConfig.map((settingOne, i)=> {
-          let {name,key,checkbox,describe} = settingOne;
+          var {name,key,checkbox,describe} = settingOne;
+
+          var key = `${spriteProperties.spriteName}-keySetting${i}`
 
           return (
-            <p className="setting-item-one" key={'keySetting' + i}>
+            <p className="setting-item-one" key={key}>
               <label htmlFor="name">{name}:</label>
               {this.inputBuild(settingOne, i)}
             </p>

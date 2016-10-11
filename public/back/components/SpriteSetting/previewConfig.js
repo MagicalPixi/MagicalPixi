@@ -8,7 +8,23 @@ let _ = require('lodash');
 
 var {SPRITE_MC,SPRITE_IM,SPRITE_SP} = pixiLib.types;
 
-let settingListConfigMap = ((spriteType)=> {
+
+function appendPlayAction(actionFrames){
+  if(!actionFrames){
+    actionFrames = [];
+  }
+  return actionFrames.map((frame,i)=>{
+    return {
+      name:`playAction${i}`,
+      checkbox:{
+        true:`playAction${i}`,
+        false:`stop`
+      }
+    }
+  })
+}
+
+function configInputStructor() {
 
   let basic = [
     {
@@ -82,31 +98,19 @@ let settingListConfigMap = ((spriteType)=> {
     return Object.assign(init, next);
   }, {});
 
-  function appendPlayAction(actionFrames){
-    if(!actionFrames){
-      actionFrames = [];
-    }
-    return actionFrames.map((frame,i)=>{
-      return {
-        name:`playAction${i}`,
-        checkbox:{
-          true:`playAction${i}`,
-          false:`stop`
-        }
-      }
-    })
-  }
+  return config
+}
 
-  return (spriteType, spriteProperties,actionFrames)=> {
+function settingListConfigMap(spriteType, spriteProperties,actionFrames){
 
-    let properties = config[spriteType];
+    var properties = configInputStructor()[spriteType];
 
     if (properties) {
 
       properties = properties.slice();
 
       _.map(Object.keys(spriteProperties), (key)=> {
-        let defaultPropertyValue = spriteProperties[key];
+        var defaultPropertyValue = spriteProperties[key];
 
         properties = properties.map((propertyObj)=> {
           if (propertyObj.key === key) {
@@ -124,11 +128,11 @@ let settingListConfigMap = ((spriteType)=> {
 
 
     return properties || [];
-  }
-})();
+
+}
 
 
-let spriteFnMap = (spriteType)=> {
+function spriteFnMap(spriteType) {
 
   let config = {
     [SPRITE_IM]: pixiLib.getIm,
