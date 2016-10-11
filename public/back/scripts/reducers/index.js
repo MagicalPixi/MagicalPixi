@@ -6,6 +6,7 @@ import consoleData from './consoleData'
 import sceneTitle from './sceneTitle'
 import editSceneSprite from './editSceneSprite'
 import gameViewLayoutIndex from './gameViewLayoutIndex'
+import stageRotation90 from './stageRotation90'
 
 import scenes from './scenes'
 import basics from './basics'
@@ -13,12 +14,13 @@ import materials from './materials'
 import players from './players'
 
 export const editReducers = {
-  gameViewLayoutIndex,
   viewData,
   consoleTab,
   consoleData,
   sceneTitle,
   editSceneSprite,
+  gameViewLayoutIndex,
+  stageRotation90
 };
 
 export const mainReducers = {
