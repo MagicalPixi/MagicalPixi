@@ -37,5 +37,9 @@ export default reducerHandlerBuild(handler); "
 
 
 echo -e $actionTmp > $actionJs
+echo "generate $actionJs"
 echo $constantTmp > $constantJs
+echo "generate $constantJs"
 echo -e $reducerTmp > $reducerJs
+echo "generate $reducerJs"
+

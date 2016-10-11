@@ -59,5 +59,8 @@ scssTmp="@import \"../../../styles/core/variables.scss\"; \n\r
 "
 
 echo $indexTmp > $indexJSX
+echo "generate $indexJSX"
 echo -e $componentTmp > $componentJSX
+echo "generate $componentJSX"
 echo -e $scssTmp > $componentSCSS
+echo "generate $componentSCSS"
