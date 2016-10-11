@@ -51,7 +51,8 @@ let editStore = createMyStore(editReducers,{
     ],
     sceneTitle:initSceneTitle,
     consoleTab:'material',
-    consoleData:[]
+    consoleData:[],
+    stageRotation90:true,
   }
 });
 
