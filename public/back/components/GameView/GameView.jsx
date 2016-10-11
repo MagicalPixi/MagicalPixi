@@ -100,7 +100,6 @@ class GameView extends React.Component {
   }
 
   clickTools(target){
-    log(target)
 
     var x = 0,
       y = 0,

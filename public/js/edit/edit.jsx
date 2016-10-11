@@ -113,7 +113,7 @@ class Edit extends React.Component {
         </div>
 
         <FixedBox top="127">
-          <FlexBox childrenWidth={[150,undefined,600]}>
+          <FlexBox childrenWidth={[120,undefined,600]}>
 
             <CascadeList
               currentLayoutIndex={gameViewLayoutIndex}

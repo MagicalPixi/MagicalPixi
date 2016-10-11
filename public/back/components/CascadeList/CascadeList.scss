@@ -2,7 +2,12 @@
 
 .cascade-list {
 
+  box-sizing: border-box;
+  border-right:$greyLight 1px solid;
+  padding:$padding2;
+
   .layouts {
+    height: 100%;
 
     > li {
       padding: 5px 5px 5px 0;
@@ -67,5 +72,6 @@
 
   .add-layout {
     width: 100%;
+    transform: translate(0,-100%);
   }
 }
