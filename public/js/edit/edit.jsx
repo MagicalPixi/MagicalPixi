@@ -17,8 +17,11 @@ import * as GameViewActions from '../../back/scripts/actions/gameView'
 import * as SceneActions from '../../back/scripts/actions/scene'
 import * as ConsoleActions from '../../back/scripts/actions/console'
 import * as gameViewLayoutIndexActions from '../../back/scripts/actions/gameViewLayoutIndex'
+import * as stageRotation90Actions from '../../back/scripts/actions/stageRotation90'
 
 import SelectResource from '../../back/components/SelectResource'
+
+import RotateButton from '../../back/components/RotateButton'
 
 import EditOperations from '../../back/components/EditOperations/'
 import ConsolePanel from '../../back/components/ConsolePanel/'
@@ -93,6 +96,7 @@ class Edit extends React.Component {
       sceneId,
       sceneTitle,consoleData,editSceneSprite,
       gameViewLayoutIndex,
+      stageRotation90,
       actions} = this.props;
 
     var disabledOutput = !sceneId;
@@ -110,7 +114,19 @@ class Edit extends React.Component {
         </Navbar>
 
         <div className="resource-tabs">
-          <SelectResource spriteResource={consoleData}></SelectResource>
+          <FlexBox childrenWidth={[undefined,100]}>
+            <SelectResource spriteResource={consoleData}></SelectResource>
+
+            <div className="top-tools">
+
+              <RotateButton
+                onClick={actions.rotateGame}
+                rotate={stageRotation90}
+                />
+              
+            </div>
+
+          </FlexBox>
         </div>
 
         <FixedBox top="127">
@@ -149,7 +165,8 @@ function mapStateToProps(state) {
     consoleData:state.consoleData,
     editSceneSprite:state.editSceneSprite,
     sceneId:state.sceneId,
-    gameViewLayoutIndex:state.gameViewLayoutIndex
+    gameViewLayoutIndex:state.gameViewLayoutIndex,
+    stageRotation90:state.stageRotation90,
   }
 }
 
@@ -160,7 +177,8 @@ function mapDispatchToProps(dispatch) {
       GameViewActions,
       SceneActions,
       ConsoleActions,
-      gameViewLayoutIndexActions
+      gameViewLayoutIndexActions,
+      stageRotation90Actions
     ),dispatch)
   }
 }

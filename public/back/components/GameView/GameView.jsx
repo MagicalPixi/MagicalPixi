@@ -129,11 +129,7 @@ class GameView extends React.Component {
         onDragOver={this.dragOver} >
 
 
-        <ToolsBar
-          style={s}
-          onClickItem={this.clickTools}>
 
-        </ToolsBar>
 
         <div className="game" ref="gameView">
         </div>
