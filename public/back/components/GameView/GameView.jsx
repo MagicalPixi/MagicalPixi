@@ -120,14 +120,13 @@ class GameView extends React.Component {
   }
 
   render(){
-    let { data } = this.props;
     
     var s = toolsStyle();
     
     return (
       <div id="gameView"
-        onDrop={this.addSprite.bind(this)}
-        onDragOver={this.dragOver.bind(this)} >
+        onDrop={this.addSprite}
+        onDragOver={this.dragOver} >
 
 
         <ToolsBar
