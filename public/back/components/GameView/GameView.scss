@@ -10,7 +10,7 @@ $toolWidth:40px;
   //background-color: $bgGray;
   background-color: #fff;
   margin: auto;
-  width: $viewWidth + $layoutWidth + $padding2 + $toolWidth;
+  //width: $viewWidth + $layoutWidth + $padding2 + $toolWidth;
   height: 502px;
 
   position: relative;
@@ -32,6 +32,6 @@ $toolWidth:40px;
   }
 
   .game{
-    margin-left: $toolWidth;
+    //margin-left: $toolWidth;
   }
 }
