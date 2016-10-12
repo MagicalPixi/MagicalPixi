@@ -8,4 +8,4 @@ const handler = {
   }
 };
 
-export default reducerHandlerBuild(handler);
+export default reducerHandlerBuild(handler,null);
