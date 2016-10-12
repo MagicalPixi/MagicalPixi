@@ -97,9 +97,9 @@ export function saveViewData(){
 
     var {viewData,sceneId,sceneTitle} = getState();
     
-    if(!sceneId){
-      sceneId = getParamFromUrl().id
-    }
+    // if(!sceneId){
+    //   sceneId = getParamFromUrl().id
+    // }
 
     ajax(API.sceneSave).post({
       id:sceneId,

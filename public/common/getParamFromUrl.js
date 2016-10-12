@@ -11,7 +11,7 @@ module.exports = function () {
       [next[0]]:next[1]
     })
 
-  },{})
+  },{});
 
   return params;
 };
