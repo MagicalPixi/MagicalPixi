@@ -2,12 +2,12 @@
 
 #consolePanel {
 
-//  background-color: blue;
+  box-sizing: border-box;
   border-left: 1px solid $grayDeep;
   width: 600px;
 
+  padding:$padding2;
+
   flex: none;
-
-
 
 }

@@ -134,7 +134,7 @@ function settingListConfigMap(spriteType, spriteProperties,actionFrames){
 
 function spriteFnMap(spriteType) {
 
-  let config = {
+  var config = {
     [SPRITE_IM]: pixiLib.getIm,
     [SPRITE_MC]: pixiLib.getMc,
     ['image']: pixiLib.getIm,
