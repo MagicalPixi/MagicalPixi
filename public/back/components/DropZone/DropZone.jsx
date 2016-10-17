@@ -17,10 +17,10 @@ const supportMultiple = (typeof document !== 'undefined' && document && document
  onDrop(event) {
    var files = event.dataTransfer ? event.dataTransfer.files : event.target.files
    if (!this.props.multiple && files.length > 1) {
-     setReject(true)
+     this.setReject(true)
      return;
    } else {
-     setReject(false)
+     this.setReject(false)
      if (this.props.onDrop) {
        this.props.onDrop(files, this)
      }

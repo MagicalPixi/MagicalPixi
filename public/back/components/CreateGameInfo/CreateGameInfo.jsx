@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 import autoBind from 'react-autobind'
 var axios = require('axios')
 import DropZone from '../DropZone'
+import RectImage from '../RectImage'
 const T = React.PropTypes;
 var propTypes = {
 }
@@ -15,6 +16,7 @@ class  CreateGamInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
+      icon: ""
     }
     autoBind(this);
   }
@@ -31,7 +33,8 @@ class  CreateGamInfo extends Component {
     data.append('file', file)
     axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
       dropzone.setLoading(false)
-      console.log(value.data)
+      this.setState({icon: value.data.url})
+      console.log(value.data.url)
     }).catch(reason => {
       dropzone.setLoading(false)
       console.log(reason.response.data)
@@ -53,6 +56,7 @@ class  CreateGamInfo extends Component {
               <p className="title">游戏图标</p>
               <DropZone onDrop={this.onDrop}></DropZone>
             </div>
+            <RectImage width="150" height="150" src={this.state.icon} />
             <GameCreateInput onChange={this.handleChange} name="游戏描述" id="game_desc"></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="是否需要用户信息" id="game_auth" ></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="积分类型" id="game_score_type"></GameCreateInput>
