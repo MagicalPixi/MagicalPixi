@@ -3,7 +3,7 @@ import GameCreateInput from '../GameCreateInput'
 import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
 import autoBind from 'react-autobind'
-import ajax from '../../../libs/ajax'
+var axios = require('axios')
 import DropZone from '../DropZone'
 const T = React.PropTypes;
 var propTypes = {
@@ -23,7 +23,19 @@ class  CreateGamInfo extends Component {
 
   }
 
-  onDrop(files) {
+  onDrop(files, dropzone) {
+    dropzone.setLoading(true)
+    var file = files[0]
+    var FormData = require('form-data')
+    var data = new FormData()
+    data.append('file', file)
+    axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
+      dropzone.setLoading(false)
+      console.log(value.data)
+    }).catch(reason => {
+      dropzone.setLoading(false)
+      console.log(reason.response.data)
+    })
     console.log(files)
   }
 

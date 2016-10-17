@@ -10,29 +10,33 @@ const supportMultiple = (typeof document !== 'undefined' && document && document
  constructor(props){
    super(props);
      this.state = {
-      isReject: true,      isLoading: false     };
+      isReject: false,      isLoading: false     };
    autoBind(this);
  }
 
  onDrop(event) {
    var files = event.dataTransfer ? event.dataTransfer.files : event.target.files
    if (!this.props.multiple && files.length > 1) {
-     this.state.isReject = true
+     setReject(true)
      return;
    } else {
-     this.state.isReject = false
+     setReject(false)
      if (this.props.onDrop) {
-       this.props.onDrop(files)
+       this.props.onDrop(files, this)
      }
    }
  }
 
  setReject(isreject) {
-   this.state.isReject = isreject
+   this.setState({
+     isReject: isreject
+   })
  }
 
  setLoading(isloading) {
-   this.state.isLoading = isloading
+   this.setState({
+     isLoading: isloading
+   })
  }
 
  getText() {
