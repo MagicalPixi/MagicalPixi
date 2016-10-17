@@ -6,10 +6,10 @@ var webpackDevPort = require('../../webpack.config').webpackDevPort;
 
 module.exports = {
   create: function(req, res){
-    res.render('game/create',{
+    res.render('game',{
       env:env,
-      webpackDevPort:webpackDevPort
+      webpackDevPort:webpackDevPort,
+      name: 'game_create'
     });
   },
 };
-

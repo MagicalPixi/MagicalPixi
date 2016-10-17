@@ -1,18 +1,28 @@
 @import "../../../styles/core/variables.scss";
 @import "../../../styles/core/common.scss";
-.game_create_input { 
-  width: 80%;
-  margin-left: 10%;
+.game_create_input {
   margin-top: 10px;
   margin-bottom: 10px;
   @include flex;
-  @include flex-direction(row);
-  @include justify-content(space-between);
+  @include flex-direction(column);
   .input_title {
-    width: 20%;
+    color: #7b7b7b;
+    margin-bottom: 10px;
+    width: 100%;
   }
-  .textfield {
-    width: 70%;
+  .input_container {
+    font-size: 14px;
+    height: 30px;
+    width: 100%;
+    .textfield {
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: 14px;
+      height: 100%;
+      width: 100%;
+      @include radius(5px);
+      border: 0.5px solid;
+      border-color: #dedede;
+    }
   }
 }
-
