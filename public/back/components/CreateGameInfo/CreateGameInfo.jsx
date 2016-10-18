@@ -6,17 +6,22 @@ import autoBind from 'react-autobind'
 var axios = require('axios')
 import DropZone from '../DropZone'
 import RectImage from '../RectImage'
+
 const T = React.PropTypes;
+
 var propTypes = {
 }
 var defaultProps = {
 }
 
+const ICON_UPLOADER_ID = 'icon_uploader_id'
+const JS_UPLOADER_ID = 'js_uploader_id'
+
 class  CreateGamInfo extends Component {
   constructor(props){
     super(props);
     this.state = {
-      icon: ""
+      icon: "",
     }
     autoBind(this);
   }
@@ -25,25 +30,46 @@ class  CreateGamInfo extends Component {
 
   }
 
-  onDrop(files, dropzone) {
+  onDrop(files, dropzone, id) {
     dropzone.setLoading(true)
     var file = files[0]
     var FormData = require('form-data')
     var data = new FormData()
+    console.log(file)
     data.append('file', file)
     axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
       dropzone.setLoading(false)
-      this.setState({icon: value.data.url})
+      console.log(id)
+      if (id == ICON_UPLOADER_ID) {
+        handleIconImage(value.data.url)
+      }
       console.log(value.data.url)
     }).catch(reason => {
       dropzone.setLoading(false)
+      dropzone.setReject(true)
       console.log(reason.response.data)
     })
-    console.log(files)
+  }
+
+  handleIconImage(url) {
+    this.setState({icon: url})
   }
 
   handleChange(event) {
     this.state[event.id] = event.text
+  }
+
+  renderIconArea() {
+    if (this.state.icon != "") {
+      return (
+        <div className="icon_container">
+          <RectImage width="150" height="150" src={this.state.icon} />
+          <DropZone id={ICON_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
+        </div>
+      )
+    } else {
+      return <DropZone id={ICON_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
+    }
   }
 
   render(){
@@ -54,15 +80,14 @@ class  CreateGamInfo extends Component {
             <GameCreateInput onChange={this.handleChange} name="游戏名称" id="game_name"></GameCreateInput>
             <div className="drop_container">
               <p className="title">游戏图标</p>
-              <DropZone onDrop={this.onDrop}></DropZone>
+              {this.renderIconArea()}
             </div>
-            <RectImage width="150" height="150" src={this.state.icon} />
             <GameCreateInput onChange={this.handleChange} name="游戏描述" id="game_desc"></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="是否需要用户信息" id="game_auth" ></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="积分类型" id="game_score_type"></GameCreateInput>
             <div className="drop_container">
               <p className="title">Javascript</p>
-              <DropZone onDrop={this.onDrop}></DropZone>
+              <DropZone id={JS_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
             </div>
           </div>
           <button onClick={this.submit} className="submit_button">提交</button>

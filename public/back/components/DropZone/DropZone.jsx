@@ -3,15 +3,14 @@ require('./DropZone.scss');
 import ReactDOM from 'react-dom'
 const T = React.PropTypes;
 import autoBind from 'react-autobind'var defaultProps = {
-  multiple: false
+  multiple: false,
 };
 
 const supportMultiple = (typeof document !== 'undefined' && document && document.createElement) ? 'multiple' in document.createElement('input') : trueconst uploadText = '拖拽或者点击上传'const rejectText = '文件过多或者上传失败'const loadingText = '上传文件中...'class DropZone extends Component {
  constructor(props){
    super(props);
      this.state = {
-      isReject: false,      isLoading: false     };
-   autoBind(this);
+      isReject: false,      isLoading: false,     };   autoBind(this);
  }
 
  onDrop(event) {
@@ -22,7 +21,7 @@ const supportMultiple = (typeof document !== 'undefined' && document && document
    } else {
      this.setReject(false)
      if (this.props.onDrop) {
-       this.props.onDrop(files, this)
+       this.props.onDrop(files, this, this.props.id)
      }
    }
  }
@@ -60,10 +59,10 @@ const supportMultiple = (typeof document !== 'undefined' && document && document
    }
 
    return (
-     <div className="dropZone">
+     <div id={this.props.id} className="dropZone">
        <input className="file_input"
          {...inputAttributes}
-      />
+        />
       <div className="mask" style={maskStyle}></div>
       <p className="content_text" style={textStyle}>{this.getText()}</p>
      </div>

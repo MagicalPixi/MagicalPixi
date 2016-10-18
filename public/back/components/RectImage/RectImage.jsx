@@ -22,6 +22,7 @@ require('./RectImage.scss');
     }
     return (
       <div className="rectImage" style={style}>
+
       </div>
     )
   }

@@ -26,6 +26,11 @@
           margin-bottom: 10px;
           width: 100%;
         }
+        .icon_container {
+          width: 100%;
+          @include flex;
+          @include flex-direction(row);
+        }
       }
     }
     .submit_button {
