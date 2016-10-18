@@ -5,36 +5,28 @@ var fs = require('fs');
 var ejs = require('ejs');
 var path = require('path');
 
-var pixiLib = require('pixi-lib');
-
-var SPRITE_MC = pixiLib.types.SPRITE_MC;
-var SPRITE_SP = pixiLib.types.SPRITE_SP;
-var SPRITE_IM = pixiLib.types.SPRITE_IM;
+var utils = require('../utils');
 
 var _ = require('lodash');
 
 var filename = 'sprite.js';
 
-var tempEjsPath = path.resolve(__dirname,'./files/tempSpriteScript.ejs');
+var tempEjsPath = path.resolve(__dirname,'../files/tempSpriteScript.ejs');
 
-var tempScripts = ejs.compile(fs.readFileSync(tempEjsPath).toString());
-
-var spriteTypeFn  = function (type) {
-  var map = {
-    'image':'getIm',
-    'movieClip':'getMc',
-    [SPRITE_IM]:'getIm',
-    [SPRITE_MC]:'getMc',
-    [SPRITE_SP]:'getSp',
-  };
-
-  return map[type];
-};
+var tempScripts = ejs.compile(fs.readFileSync(tempEjsPath).toString(),{
+  escape(str){
+    return str;
+  }
+});
 
 var temp = function (name,fnStr,properties,actionFrames) {
 
   var pixiLibName = 'pixi-lib';
   var referenceName = 'pixiLib';
+  
+  if(typeof properties === 'string'){
+    throw new Error('properties is a string');
+  }
 
   var tempScriptsStr = tempScripts({
     referenceName,
@@ -50,13 +42,12 @@ var temp = function (name,fnStr,properties,actionFrames) {
 
 
 function build(name,spriteType,properties,actionFrames) {
-  var propertiesStr = Object.keys(properties).map(function (key) {
-    return `"${key}":"${properties[key]}", \n`;
-  }).join('');
+
+  console.log('properties:',typeof properties,properties);
 
   var spriteScriptsString = temp(
     name,
-    spriteTypeFn(spriteType),
+    utils.spriteTypeFn(spriteType),
     properties,
     actionFrames
   );

@@ -128,9 +128,6 @@ class GameView extends React.Component {
         onDrop={this.addSprite}
         onDragOver={this.dragOver} >
 
-
-
-
         <div className="game" ref="gameView">
         </div>
 

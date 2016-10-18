@@ -5,8 +5,8 @@ var fs = require('fs');
 var path = require('path');
 var Sprite = require('../models/Sprite');
 
-var configScriptsTemplate = require('./spriteConfigScriptsTemplate');
-var indexScriptsTemplate = require('./spriteIndexScriptsTemplate');
+var configScriptsTemplate = require('./template/spriteConfigScriptsTemplate');
+var indexScriptsTemplate = require('./template/spriteIndexScriptsTemplate');
 
 var resourceObjBuild = function (name,resourceUrl) {
   var resourceObj = {};

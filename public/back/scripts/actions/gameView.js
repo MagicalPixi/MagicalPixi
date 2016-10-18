@@ -119,10 +119,19 @@ export function saveViewData(){
 export function outputViewData() {
 
   return (_,getState)=>{
-    var {sceneTitle} = getState();
+    var {sceneTitle,sceneId} = getState();
 
-    if(sceneTitle){
-      window.open(`/api/sceneOutput?title=${sceneTitle}`);
+    if(sceneTitle && sceneId){
+      
+      ajax(API.sceneOutput).get({
+        id:sceneId
+      }).then(returnData=>{
+
+        console.log(returnData);
+      });
+      
+    }else{
+      alert('要先保存游戏再发布');
     }
   }
 }
