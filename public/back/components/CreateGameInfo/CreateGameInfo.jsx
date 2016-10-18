@@ -89,7 +89,6 @@ class  CreateGamInfo extends Component {
               <p className="title">是否需要用户信息</p>
               <Radio items={items}/>
             </div>
-            <GameCreateInput onChange={this.handleChange} name="是否需要用户信息" id="game_auth" ></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="积分类型" id="game_score_type"></GameCreateInput>
             <div className="drop_container">
               <p className="title">Javascript</p>
