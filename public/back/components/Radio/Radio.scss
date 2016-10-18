@@ -1,0 +1,18 @@
+@import "../../../styles/core/variables.scss";
+@import "../../../styles/core/common.scss";.mp_radio {
+  font-family: helvetica-light;
+  @include flex;
+  @include flex-direction(row);
+  .mp_radio_item {
+    color: #7b7b7b;
+    height: 20px;
+    @include flex;
+    @include flex-direction(row);
+    @include align-items(center);
+    margin-right: 20px;
+    img {
+      height: 60%;
+      margin-right: 15px;
+    }
+  }
+}

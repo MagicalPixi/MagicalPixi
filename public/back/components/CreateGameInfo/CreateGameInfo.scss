@@ -6,6 +6,11 @@
   width: 100%;
   @include flex;
   @include justify-content(center);
+  .title {
+    color: #7b7b7b;
+    margin-bottom: 10px;
+    width: 100%;
+  }
   .container {
     margin-top: 20px;
     padding-bottom: 10px;
@@ -21,11 +26,6 @@
       width: 80%;
       .drop_container {
         width: 100%;
-        .title {
-          color: #7b7b7b;
-          margin-bottom: 10px;
-          width: 100%;
-        }
         .icon_container {
           width: 100%;
           @include flex;

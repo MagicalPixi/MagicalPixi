@@ -6,6 +6,7 @@ import autoBind from 'react-autobind'
 var axios = require('axios')
 import DropZone from '../DropZone'
 import RectImage from '../RectImage'
+import Radio from '../Radio'
 
 const T = React.PropTypes;
 
@@ -73,6 +74,7 @@ class  CreateGamInfo extends Component {
   }
 
   render(){
+    let items = [{value: true, content:"需要"}, {value: false, content: "不需要"}]
     return (
       <div id="createGameInfo">
         <div className="container">
@@ -83,6 +85,10 @@ class  CreateGamInfo extends Component {
               {this.renderIconArea()}
             </div>
             <GameCreateInput onChange={this.handleChange} name="游戏描述" id="game_desc"></GameCreateInput>
+            <div className="auth_container">
+              <p className="title">是否需要用户信息</p>
+              <Radio items={items}/>
+            </div>
             <GameCreateInput onChange={this.handleChange} name="是否需要用户信息" id="game_auth" ></GameCreateInput>
             <GameCreateInput onChange={this.handleChange} name="积分类型" id="game_score_type"></GameCreateInput>
             <div className="drop_container">
