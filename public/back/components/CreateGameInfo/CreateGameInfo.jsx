@@ -17,18 +17,45 @@ var defaultProps = {
 
 const ICON_UPLOADER_ID = 'icon_uploader_id'
 const JS_UPLOADER_ID = 'js_uploader_id'
+const AUTH_AUDIO_NAME = 'auth_audio_name'
+const SCORE_TYPE_AUDIO_NAME = 'score_type_audio_name'
 
 class  CreateGamInfo extends Component {
   constructor(props){
     super(props);
+    this.auth = false
+    this.scoreType = 1
+    this.desc = ""
+    this.name = ""
     this.state = {
       icon: "",
+      js: "",
+      jsName:"",
     }
     autoBind(this);
   }
 
   submit() {
-
+    var data = {
+      name: this.name,
+      desc: this.desc,
+      icon: this.state.icon,
+      auth: this.auth,
+      js: this.state.js,
+      scoreType: this.scoreType
+    }
+    axios.post('http://db.magicalpixi.com/api/game', data).then(value => {
+      console.log(value.data)
+    }).catch(reason => {
+      console.log(reason.response.data)
+    })
+  }
+  onSelect(value, name) {
+    if (name == SCORE_TYPE_AUDIO_NAME) {
+      this.scoreType = value
+    } else {
+      this.auth = value
+    }
   }
 
   onDrop(files, dropzone, id) {
@@ -37,23 +64,30 @@ class  CreateGamInfo extends Component {
     var FormData = require('form-data')
     var data = new FormData()
     console.log(file)
+    if (id == JS_UPLOADER_ID) this.jsName = file.name
     data.append('file', file)
     axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
       dropzone.setLoading(false)
       console.log(id)
       if (id == ICON_UPLOADER_ID) {
-        handleIconImage(value.data.url)
+        this.handleIconImage(value.data.url)
+      } else {
+        this.handleJSUpload(value.data.url)
       }
       console.log(value.data.url)
     }).catch(reason => {
       dropzone.setLoading(false)
       dropzone.setReject(true)
-      console.log(reason.response.data)
+      console.log(reason)
     })
   }
 
   handleIconImage(url) {
     this.setState({icon: url})
+  }
+
+  handleJSUpload(url) {
+    this.setState({js: url})
   }
 
   handleChange(event) {
@@ -63,7 +97,7 @@ class  CreateGamInfo extends Component {
   renderIconArea() {
     if (this.state.icon != "") {
       return (
-        <div className="icon_container">
+        <div className="upload_container">
           <RectImage width="150" height="150" src={this.state.icon} />
           <DropZone id={ICON_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
         </div>
@@ -73,8 +107,26 @@ class  CreateGamInfo extends Component {
     }
   }
 
+  renderJSArea() {
+    let icon = 'http://qiniu.magicalpixi.com/icon/js.png'
+    if (this.state.js != "") {
+      return (
+        <div className="upload_container">
+          <div className="js_file_container">
+            <img src={icon}></img>
+            <p>{this.jsName}</p>
+          </div>
+          <DropZone id={JS_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
+        </div>
+      )
+    } else {
+      return <DropZone id={JS_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
+    }
+  }
+
   render(){
-    let items = [{value: true, content:"需要"}, {value: false, content: "不需要"}]
+    let auths = [{value: true, content:"需要"}, {value: false, content: "不需要"}]
+    let types = [{value: 1, content:"分数"}, {value: 2, content:"时间"}]
     return (
       <div id="createGameInfo">
         <div className="container">
@@ -85,14 +137,17 @@ class  CreateGamInfo extends Component {
               {this.renderIconArea()}
             </div>
             <GameCreateInput onChange={this.handleChange} name="游戏描述" id="game_desc"></GameCreateInput>
-            <div className="auth_container">
+            <div className="audio_container">
               <p className="title">是否需要用户信息</p>
-              <Radio items={items}/>
+              <Radio items={auths} selected={this.auth} onSelect={this.onSelect} name={AUTH_AUDIO_NAME} />
             </div>
-            <GameCreateInput onChange={this.handleChange} name="积分类型" id="game_score_type"></GameCreateInput>
+            <div className="audio_container">
+              <p className="title">积分类型</p>
+              <Radio items={types} selected={this.scoreType} onSelect={this.onSelect} name={SCORE_TYPE_AUDIO_NAME}/>
+            </div>
             <div className="drop_container">
               <p className="title">Javascript</p>
-              <DropZone id={JS_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
+              {this.renderJSArea()}
             </div>
           </div>
           <button onClick={this.submit} className="submit_button">提交</button>

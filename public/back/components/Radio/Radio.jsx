@@ -13,11 +13,14 @@ var propTypes = {
   constructor(props){
     super(props);
     this.state = {
-      selected: ''    };
+      selected: this.props.selected    };
     autoBind(this);
   }
 
   select(value) {
+    if (this.props.onSelect) {
+      this.props.onSelect(value, this.props.name)
+    }
     this.setState({
       selected: value
     })

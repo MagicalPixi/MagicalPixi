@@ -26,11 +26,28 @@
       width: 80%;
       .drop_container {
         width: 100%;
-        .icon_container {
+        .upload_container {
           width: 100%;
           @include flex;
           @include flex-direction(row);
+          .js_file_container {
+            width: 150px;
+            height: 150px;
+            @include flex;
+            @include flex-direction(column);
+            @include align-items(center);
+            img {
+              height: 100px;
+            }
+            p {
+              margin-top: 10px;
+              font-size: 15px;
+            }
+          }
         }
+      }
+      .audio_container {
+        margin-bottom: 10px;
       }
     }
     .submit_button {
