@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var favicon = require('serve-favicon');
 
 var routes = require('./routes/index');
+var db_routes = require('./routes/db')
 
 var app = express();
 
@@ -56,6 +57,7 @@ app.use(function (req,res,next) {
 });
 
 app.use('/', routes);
+app.use('/db', db_routes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

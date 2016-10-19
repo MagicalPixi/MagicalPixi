@@ -24,6 +24,7 @@ const DESC_INPUT_ID = 'desc'
 
 class  CreateGamInfo extends Component {
   constructor(props){
+    console.log('env.BROWSER_ENV', env.BROWSER_ENV)
     super(props);
     this.data = {
       auth: false,
@@ -42,7 +43,7 @@ class  CreateGamInfo extends Component {
   submit() {
     var data = Object.assign(this.data, this.state)
     console.log(data)
-    var create = require('../../../../requests/game').create
+    var create = require('../../../../services/requests').game.create
     create(data, true).then(value => {
       console.log(value.data)
     }).catch(reason => {

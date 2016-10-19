@@ -62,10 +62,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       env:{
-        isDevelopment:true
+        isDevelopment:true,
+        BROWSER_ENV: true
       },
-      __DEV__:true,
-      BROWSER_ENV: true
+      __DEV__:true
     })
   ],
   devtool: 'source-map'
