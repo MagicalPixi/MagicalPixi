@@ -1,0 +1,52 @@
+var pixiLib = require('pixi-lib');
+
+var render = pixiLib.createRender(document.body);
+
+var loader = pixiLib.createLoader({
+    publicPath:'http://o8c60jr2y.bkt.clouddn.com/'
+});
+
+var stage = new PIXI.Container();
+stage.pivot = new PIXI.Point(502, 320);
+stage.x = 320;
+stage.y = 502;
+
+
+var <%= moduleVariablesName %> = {};
+var moduleAlias = <%= moduleVariablesName %>;
+
+var loading = pixiLib.loading.mpLoading();
+
+var loadingEle = loading.el();
+loadingEle.style.transformOrigin = 'top'
+loadingEle.style.transform = 'rotate(90deg)';
+loadingEle.style.webkitTransformOrigin = 'top'
+loadingEle.style.webkitTransform = 'rotate(90deg)';
+
+document.body.appendChild(loadingEle);
+
+loading.startLoading();
+
+{sceneSpritesScripts}
+
+//精灵代码
+loader.add(jsonResource, 'json')
+.add(pngResource, 'png')
+.load(function () {
+    //业务代码
+
+    render(stage);
+
+    Object.keys(moduleAlias).map(function(layoutKey){
+
+        var layoutContainer = moduleAlias[layoutKey];
+
+        var containerOne = new PIXI.Container();
+
+        layoutContainer.forEach(function(fn){
+            containerOne.addChild(fn());
+        });
+        stage.addChild(layoutContainer);
+    });
+});
+

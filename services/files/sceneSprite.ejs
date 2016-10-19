@@ -1,0 +1,32 @@
+//<%= name %>
+
+(function(module){
+
+  var pixiLib= require('pixi-lib');
+
+  var container = [];
+
+  //模拟
+  var moduleExports = {
+    exports:{
+
+    }
+  }
+
+
+  <% sprites.forEach(function(spriteScripts){ %>
+
+      (function(module){
+
+        <%= spriteScripts %>
+
+      })(moduleExports);
+
+
+  <% });  %>
+
+  module.<%= name %> = Object.keys(moduleExports.exports).map(function(key){
+    return moduleExports.exports[key]
+  });
+
+}(<%= moduleVariablesName %>));

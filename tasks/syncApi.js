@@ -14,6 +14,8 @@ var nodeAPIDir = path.resolve(__dirname,'../api/');
 module.exports = function (gulp) {
   
   gulp.task('syncAPI', function () {
+
+
     var list = _.filter(fs.readdirSync(nodeAPIDir), function (name) {
       return /\.js$/.test(name);
     }).map(function (name) {

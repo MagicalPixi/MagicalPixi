@@ -5,12 +5,9 @@ import ReactDOM from 'react-dom'
 
 const T = React.PropTypes;
 
-import { saveViewData } from '../../scripts/actions/gameView'
-
-
-
 import autoBind from 'react-autobind'
 
+import Button from '../../componentsBasic/Button'
 
 class EditOperations extends Component {
   constructor(props) {
@@ -37,12 +34,16 @@ class EditOperations extends Component {
 
     var {disabledOutput} = this.props;
 
-    var downClassName = 'weui_btn weui_btn_mini ' + (disabledOutput ? 'weui_btn_disabled' : 'weui_btn_default')
+    var buttonType = disabledOutput ? 'disabled' : 'default';
 
     return (
       <div id="editOperations">
-        <button onClick={this.output} className={downClassName}>下载</button>
-        <button onClick={this.saveScene} className="weui_btn weui_btn_mini weui_btn_default ">保存</button>
+        <Button onClick={this.output} type={buttonType}>
+          发布
+        </Button>
+        <Button onClick={this.saveScene}>
+          保存
+        </Button>
       </div>
     )
   }
