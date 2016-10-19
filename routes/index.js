@@ -25,6 +25,7 @@ var loadController = {
         var route = "/" + controllerName + "/" + routerName;
         [].concat(controller)
           .forEach(function (fn) {
+            console.log('load route:',route);
             if(fn.method){
               router[fn.method](route,fn);
             }else{
@@ -42,7 +43,7 @@ var loadController = {
     [].concat(controller)
       .forEach(function (fn) {
 
-        console.log(route);
+        console.log('load route:',route);
 
         router.get(route, fn);
         router.post(route, fn);
