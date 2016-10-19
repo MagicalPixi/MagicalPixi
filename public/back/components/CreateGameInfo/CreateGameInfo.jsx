@@ -15,46 +15,46 @@ var propTypes = {
 var defaultProps = {
 }
 
-const ICON_UPLOADER_ID = 'icon_uploader_id'
-const JS_UPLOADER_ID = 'js_uploader_id'
-const AUTH_AUDIO_NAME = 'auth_audio_name'
-const SCORE_TYPE_AUDIO_NAME = 'score_type_audio_name'
+const ICON_UPLOADER_ID = 'icon'
+const JS_UPLOADER_ID = 'js'
+const AUTH_AUDIO_NAME = 'auth'
+const SCORE_TYPE_AUDIO_NAME = 'scoreType'
+const NAME_INPUT_ID = 'name'
+const DESC_INPUT_ID = 'desc'
 
 class  CreateGamInfo extends Component {
   constructor(props){
     super(props);
-    this.auth = false
-    this.scoreType = 1
-    this.desc = ""
-    this.name = ""
+    this.data = {
+      auth: false,
+      scoreType: 0,
+      desc: '',
+      name: '',
+      jsName:'',
+    }
     this.state = {
       icon: "",
       js: "",
-      jsName:"",
     }
     autoBind(this);
   }
 
   submit() {
-    var data = {
-      name: this.name,
-      desc: this.desc,
-      icon: this.state.icon,
-      auth: this.auth,
-      js: this.state.js,
-      scoreType: this.scoreType
-    }
-    axios.post('http://db.magicalpixi.com/api/game', data).then(value => {
+    var data = Object.assign(this.data, this.state)
+    console.log(data)
+    var create = require('../../../../requests/game').create
+    create(data, true).then(value => {
       console.log(value.data)
     }).catch(reason => {
       console.log(reason.response.data)
     })
   }
+
   onSelect(value, name) {
     if (name == SCORE_TYPE_AUDIO_NAME) {
-      this.scoreType = value
+      this.data.scoreType = value
     } else {
-      this.auth = value
+      this.data.auth = value
     }
   }
 
@@ -64,7 +64,7 @@ class  CreateGamInfo extends Component {
     var FormData = require('form-data')
     var data = new FormData()
     console.log(file)
-    if (id == JS_UPLOADER_ID) this.jsName = file.name
+    if (id == JS_UPLOADER_ID) this.data.jsName = file.name
     data.append('file', file)
     axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
       dropzone.setLoading(false)
@@ -91,7 +91,7 @@ class  CreateGamInfo extends Component {
   }
 
   handleChange(event) {
-    this.state[event.id] = event.text
+    this.data[event.id] = event.text
   }
 
   renderIconArea() {
@@ -114,7 +114,7 @@ class  CreateGamInfo extends Component {
         <div className="upload_container">
           <div className="js_file_container">
             <img src={icon}></img>
-            <p>{this.jsName}</p>
+            <p>{this.data.jsName}</p>
           </div>
           <DropZone id={JS_UPLOADER_ID} onDrop={this.onDrop}></DropZone>
         </div>
@@ -126,24 +126,24 @@ class  CreateGamInfo extends Component {
 
   render(){
     let auths = [{value: true, content:"需要"}, {value: false, content: "不需要"}]
-    let types = [{value: 1, content:"分数"}, {value: 2, content:"时间"}]
+    let types = [{value: 0, content:"分数"}, {value: 1, content:"时间"}]
     return (
       <div id="createGameInfo">
         <div className="container">
           <div className="inputs_container">
-            <GameCreateInput onChange={this.handleChange} name="游戏名称" id="game_name"></GameCreateInput>
+            <GameCreateInput onChange={this.handleChange} name="游戏名称" id={NAME_INPUT_ID}></GameCreateInput>
             <div className="drop_container">
               <p className="title">游戏图标</p>
               {this.renderIconArea()}
             </div>
-            <GameCreateInput onChange={this.handleChange} name="游戏描述" id="game_desc"></GameCreateInput>
+            <GameCreateInput onChange={this.handleChange} name="游戏描述" id={DESC_INPUT_ID}></GameCreateInput>
             <div className="audio_container">
               <p className="title">是否需要用户信息</p>
-              <Radio items={auths} selected={this.auth} onSelect={this.onSelect} name={AUTH_AUDIO_NAME} />
+              <Radio items={auths} selected={this.data.auth} onSelect={this.onSelect} name={AUTH_AUDIO_NAME} />
             </div>
             <div className="audio_container">
               <p className="title">积分类型</p>
-              <Radio items={types} selected={this.scoreType} onSelect={this.onSelect} name={SCORE_TYPE_AUDIO_NAME}/>
+              <Radio items={types} selected={this.data.scoreType} onSelect={this.onSelect} name={SCORE_TYPE_AUDIO_NAME}/>
             </div>
             <div className="drop_container">
               <p className="title">Javascript</p>

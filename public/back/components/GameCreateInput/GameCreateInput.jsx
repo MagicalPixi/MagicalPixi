@@ -14,15 +14,11 @@ var defaultProps = {
 class GameCreateInput extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      value: ''
-    }
     autoBind(this);
   }
 
   handleChangeEvent(event) {
     var text = event.target.value
-    this.setState({value: text})
     this.props.onChange({id: this.props.id, text: text})
   }
 
@@ -33,7 +29,7 @@ class GameCreateInput extends Component {
           {this.props.name}
         </p>
         <div className="input_container">
-          <input id={this.props.id} type="text" className="textfield" value={this.state.value} onChange={this.handleChangeEvent} />
+          <input id={this.props.id} type="text" className="textfield" onChange={this.handleChangeEvent} />
         </div>
       </div>
     )
