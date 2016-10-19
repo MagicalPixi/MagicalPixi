@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+//全局
+
+global.env = {};
+
 /**
  * Module dependencies.
  */
@@ -90,21 +94,4 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
   console.log('listen on:',addr.port);
-
-  runGulp();
-}
-
-/**
- * 启动打包相关
- */
-
-function runGulp(){
-  var env = app.get('env');
-  gulpfile.start('syncAPI');
-
-  if( env === 'development'){
-  }
-  if( env === 'product'){
-    //gulpfile.start('product');
-  }
 }

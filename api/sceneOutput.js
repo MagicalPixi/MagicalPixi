@@ -8,6 +8,7 @@ var fs = require('fs')
 
 var stageTempBuild = require('../services/template/stageTempBuild');
 
+var saveJsContent = require('../services/dbServer/saveJsContent')
 
 module.exports = function (req,res) {
 
@@ -21,20 +22,23 @@ module.exports = function (req,res) {
 
     var s = stageTempBuild(sceneData);
 
-    //@TEST
-    fs.writeFileSync('test.js',s.text);
+    return saveJsContent({
+      content:s.text,
+    },{
+      name:'test'
+    });
 
 
+  }).then(res=>{
 
+    console.log(res.data);
 
+    res.json({
+      result:res.data
+    })
 
   }).catch(e=>{
 
-    console.log('Scene.findOne:',e);
-  });
-
-
-  res.json({
-    fuck:'fuck'
+    console.log('sceneOutput:',e);
   });
 };
