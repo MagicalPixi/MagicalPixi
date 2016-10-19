@@ -2,7 +2,7 @@
 
 //全局
 
-global.env = {};
+global.env = process.env;
 
 /**
  * Module dependencies.
