@@ -1,5 +1,7 @@
+var db = process.env.BROWSER_ENV ? 'http://db.magicalpixi.com' : ''
+
 var domin = {
-  db: 'http://db.magicalpixi.com'
+  db: db
 }
 
 var path = {

@@ -65,6 +65,7 @@ module.exports = {
         isDevelopment:true
       },
       __DEV__:true,
+      BROWSER_ENV: true
     })
   ],
   devtool: 'source-map'

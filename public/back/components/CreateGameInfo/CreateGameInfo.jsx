@@ -61,7 +61,6 @@ class  CreateGamInfo extends Component {
   onDrop(files, dropzone, id) {
     dropzone.setLoading(true)
     var file = files[0]
-    var FormData = require('form-data')
     var data = new FormData()
     console.log(file)
     if (id == JS_UPLOADER_ID) this.data.jsName = file.name

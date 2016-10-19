@@ -23,7 +23,8 @@ base.entry = {
 base.plugins = [
   new webpack.DefinePlugin({
     env: {
-      isDevelopment:false
+      isDevelopment:false,
+      BROWSER_ENV: true
     }
   }),
   new webpack.optimize.UglifyJsPlugin({
