@@ -50,17 +50,24 @@
         margin-bottom: 10px;
       }
     }
-    .submit_button {
-      margin-left: 65%;
-      background-color: #FF8F8F;
-      height: 30px;
-      width: 70px;
-      border-style: solid;
-      border-width: 0;
-      @include radius(5px);
-      font-family: helvetica-light;
-      font-size: 15px;
-      color: white;
+    .bottom_button_area {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      @include flex;
+      @include justify-content(flex-end);
+      width: 100%;
+      .submit_button {
+        margin-right: 10%;
+        background-color: #FF8F8F;
+        height: 30px;
+        width: 70px;
+        border-style: solid;
+        border-width: 0;
+        @include radius(5px);
+        font-family: helvetica-light;
+        font-size: 15px;
+        color: white;
+      }
     }
   }
 }

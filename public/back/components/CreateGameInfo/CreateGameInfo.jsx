@@ -150,7 +150,9 @@ class  CreateGamInfo extends Component {
               {this.renderJSArea()}
             </div>
           </div>
-          <button onClick={this.submit} className="submit_button">提交</button>
+          <div className="bottom_button_area">
+            <button onClick={this.submit} className="submit_button">提交</button>
+          </div>
         </div>
       </div>
     )
