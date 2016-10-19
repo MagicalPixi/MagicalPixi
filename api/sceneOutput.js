@@ -8,11 +8,10 @@ var fs = require('fs')
 
 var stageTempBuild = require('../services/template/stageTempBuild');
 
+
 module.exports = function (req,res) {
 
   var id = req.query.id;
-
-  console.log('output id:',id);
 
   Scene.findOne({
     _id:ObjectId(id)
@@ -24,6 +23,9 @@ module.exports = function (req,res) {
 
     //@TEST
     fs.writeFileSync('test.js',s.text);
+
+
+
 
 
   }).catch(e=>{

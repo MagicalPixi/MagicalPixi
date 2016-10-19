@@ -37,6 +37,7 @@
     "react-router-redux": "^2.1.0",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3",
+    "request": "^2.75.0",
     "serve-favicon": "~2.2.1",
     "string-template": "^1.0.0"
   },

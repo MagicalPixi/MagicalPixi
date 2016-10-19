@@ -77,3 +77,5 @@ re.js
 npm-debug.log
 
 __test/
+
+test.js
