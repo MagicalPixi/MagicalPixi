@@ -28,7 +28,14 @@ function spriteTypeFn(type) {
   return map[type];
 };
 
+var encode = (text) => {
+  var key = 'magical_pixi_'
+  var crypto = require('crypto');
+  return crypto.createHash('md5').update(text + key).digest('hex');
+}
+
 module.exports = {
   mkdirIfNotExists,
   spriteTypeFn,
+  encode
 };
