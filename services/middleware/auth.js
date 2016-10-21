@@ -51,7 +51,7 @@ module.exports = (config) => {
       if (cookie[KEY]) params.authId = cookie[KEY]
       if (cookie.auth) params.auth = cookie.auth
       if (cookie.expire_time) params.expire_time = cookies.expire_time
-      params.redirectTo = encodeURIComponent('http://www.localhost:2333' + req.originalUrl)
+      params.redirectTo = encodeURIComponent('http://localhost:2333' + req.originalUrl)
       // params.redirectTo = encodeURIComponent(`${PROTOCOL}://${req.hostname}${req.originalUrl}`)
       var url = addQuery(config.authServer, params)
       res.redirect(url)

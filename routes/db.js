@@ -2,6 +2,15 @@ var express = require('express')
 var router = express.Router()
 var requests = require('../services/requests')
 
+var broseHeader = (req) => {
+  var authId = req.cookies['magicalpixi-authId']
+  var auth = req.cookies.auth
+  var expire_time = req.cookies.expire_time
+  return {
+    authId, auth, expire_time
+  }
+}
+
 Object.keys(requests).map(key => {
   return requests[key]
 }).forEach(model => {
@@ -9,7 +18,8 @@ Object.keys(requests).map(key => {
   var name = model.name
   var names = pluralize.plural(name)
   router.get('/' + names, (req, res, next) => {
-    model.getAll().then(value => {
+    console.log(broseHeader(req))
+    model.getAll(broseHeader(req)).then(value => {
       res.json({result: value.data})
     }).catch(reason => {
       console.log(reason)
@@ -17,7 +27,7 @@ Object.keys(requests).map(key => {
     })
   })
   router.get('/' + name, (req, res, next) => {
-    model.get(req.query).then(value => {
+    model.get(req.query, broseHeader(req)).then(value => {
       res.json({result: value.data})
     }).catch(reason => {
       console.log(reason)
@@ -25,7 +35,8 @@ Object.keys(requests).map(key => {
     })
   })
   router.post('/' + name, (req, res, next) => {
-    model.create(req.body).then(value => {
+    var header = broseHeader(req)
+    model.create(req.body, broseHeader(req)).then(value => {
       res.json({result: value.data})
     }).catch(reason => {
       console.log(reason)

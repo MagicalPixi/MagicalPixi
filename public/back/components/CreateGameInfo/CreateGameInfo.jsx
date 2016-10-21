@@ -44,7 +44,7 @@ class  CreateGamInfo extends Component {
     var data = Object.assign(this.data, this.state)
     console.log(data)
     var create = require('../../../../services/requests').game.create
-    create(data, true).then(value => {
+    create(data).then(value => {
       console.log(value.data)
     }).catch(reason => {
       console.log(reason.response.data)
