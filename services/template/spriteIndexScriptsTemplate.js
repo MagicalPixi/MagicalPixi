@@ -12,7 +12,7 @@ var filename = 'index.js';
 
 var configFilename = require('./spriteConfigScriptsTemplate').filename;
 
-var tempEjsPath = path.resolve(__dirname,'../files/tempIndexScript.ejs');
+var tempEjsPath = path.resolve(__dirname,'./files/tempIndexScript.ejs');
 
 var tempIndex = ejs.compile(fs.readFileSync(tempEjsPath).toString(),{
   escape(str){

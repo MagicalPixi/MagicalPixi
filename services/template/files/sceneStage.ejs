@@ -1,5 +1,3 @@
-var pixiLib = require('pixi-lib');
-
 var render = pixiLib.createRender(document.body);
 
 var loader = pixiLib.createLoader({
@@ -10,7 +8,6 @@ var stage = new PIXI.Container();
 stage.pivot = new PIXI.Point(502, 320);
 stage.x = 320;
 stage.y = 502;
-
 
 var <%= moduleVariablesName %> = {};
 var moduleAlias = <%= moduleVariablesName %>;
@@ -25,13 +22,17 @@ loadingEle.style.webkitTransform = 'rotate(90deg)';
 
 document.body.appendChild(loadingEle);
 
-loading.startLoading();
+loading.startLoading(function(){
+    loadingEle.remove();
+});
 
-{sceneSpritesScripts}
+<%- sceneSpritesScripts %>
+
+var addResource =  <%- resources %>
 
 //精灵代码
-loader.add(jsonResource, 'json')
-.add(pngResource, 'png')
+loader.add(addResource.json, 'json')
+.add(addResource.png, 'png')
 .load(function () {
     //业务代码
 
@@ -39,14 +40,14 @@ loader.add(jsonResource, 'json')
 
     Object.keys(moduleAlias).map(function(layoutKey){
 
-        var layoutContainer = moduleAlias[layoutKey];
+        var layoutParent = moduleAlias[layoutKey];
 
         var containerOne = new PIXI.Container();
 
-        layoutContainer.forEach(function(fn){
+        layoutParent.forEach(function(fn){
             containerOne.addChild(fn());
         });
-        stage.addChild(layoutContainer);
+        stage.addChild(containerOne);
     });
 });
 

@@ -35,7 +35,7 @@ class  CreateGamInfo extends Component {
     }
     this.state = {
       icon: "",
-      js: "",
+      js: 1,
     }
     autoBind(this);
   }

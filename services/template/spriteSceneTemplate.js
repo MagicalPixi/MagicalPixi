@@ -13,16 +13,12 @@ var utils =  require('../utils');
 
 var pixiLib = require('pixi-lib');
 
-const SPRITE_MC = pixiLib.types.SPRITE_MC;
-const SPRITE_SP = pixiLib.types.SPRITE_SP;
-const SPRITE_IM = pixiLib.types.SPRITE_IM;
-
 //变量集合变量名字
 var moduleVariablesName = 'moduleSprites';
 //文件名
 var filename = 'sceneSprite.js';
 
-var tempEjsPath = path.resolve(__dirname,'../files/sceneSprite.ejs');
+var tempEjsPath = path.resolve(__dirname,'./files/sceneSprite.ejs');
 
 var tempScripts = ejs.compile(fs.readFileSync(tempEjsPath).toString(),{
   escape(str){

@@ -1,6 +1,6 @@
 var jsFileRegExp = /\.js$/
 var files = ['game.js']
-var Request = require('../basic/baseRequest')
+var Request = require('./baseRequest')
 var requests = {}
 
 files.filter(file => {
@@ -10,6 +10,9 @@ files.filter(file => {
 }).forEach(model => {
   var currentmodel = require('./' + model)
   currentmodel.name = currentmodel.name || model
+
+  console.log(currentmodel);
+
   var request = Request(currentmodel)
   requests[model] = request
 })

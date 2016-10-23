@@ -11,7 +11,7 @@ var _ = require('lodash');
 
 var filename = 'sprite.js';
 
-var tempEjsPath = path.resolve(__dirname,'../files/tempSpriteScript.ejs');
+var tempEjsPath = path.resolve(__dirname,'./files/tempSpriteScript.ejs');
 
 var tempScripts = ejs.compile(fs.readFileSync(tempEjsPath).toString(),{
   escape(str){
