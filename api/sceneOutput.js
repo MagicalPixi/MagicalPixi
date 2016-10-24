@@ -10,6 +10,8 @@ var stageTempBuild = require('../services/template/stageTempBuild');
 
 var saveJsContent = require('../services/dbServer/saveJsContent')
 
+var requests = require('../services/requests');
+
 module.exports = function (req,res) {
 
   var id = req.query.id;
@@ -23,18 +25,29 @@ module.exports = function (req,res) {
     var s = stageTempBuild(sceneData);
 
     return saveJsContent({
+      name:'test.js',
       content:s.text,
-    },{
-      name:'test'
     });
 
 
-  }).then(res=>{
+  }).then(saveRes=>{
+    /**
+     * data { url:'xxx' }
+     */
+    console.log(saveRes.data);
 
-    console.log(res.data);
+    return requests.game.create({
+      js:saveRes.data.url
+    });
+
+
+  }).then(createRes=>{
+
+    console.log(createRes.data)
 
     res.json({
-      result:res.data
+      data:createRes
+        .data
     })
 
   }).catch(e=>{
