@@ -34,7 +34,7 @@ router.post('/:scheme/:name', (req, res, next) => {
   var common = require('mp_common')
   var header
   if (header = checkCookie(req)) {
-    var request = common.request(config.dbserver.domain)(req.params.scheme. req.params.name)
+    var request = common.request(config.dbserver.domain)(req.params.scheme, req.params.name)
     request.create(req.body, header).then(value => {
       res.json({result: value.data})
     }).catch(reason => {

@@ -60,19 +60,16 @@ class  CreateGamInfo extends Component {
   onDrop(files, dropzone, id) {
     dropzone.setLoading(true)
     var file = files[0]
-    var data = new FormData()
     console.log(file)
     if (id == JS_UPLOADER_ID) this.data.jsName = file.name
-    data.append('file', file)
-    axios.post('http://db.magicalpixi.com/upload?name=' + file.name, data).then(value => {
+    require('../../../../services/mprequest').upload(file.name, file).then(value => {
       dropzone.setLoading(false)
-      console.log(id)
       if (id == ICON_UPLOADER_ID) {
         this.handleIconImage(value.data.url)
       } else {
         this.handleJSUpload(value.data.url)
       }
-      console.log(value.data.url)
+      console.log(value.data)
     }).catch(reason => {
       dropzone.setLoading(false)
       dropzone.setReject(true)
