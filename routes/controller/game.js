@@ -3,8 +3,9 @@
  */
 var env = process.env.NODE_ENV;
 var webpackDevPort = require('../../webpack.config').webpackDevPort;
+var config = require('../../config')
 var auth = require('../../services/middleware').auth({
-  authServer: 'http://localhost:8999'
+  authServer: config.loginserver.domin
 })
 module.exports = {
   create: [auth, function(req, res){

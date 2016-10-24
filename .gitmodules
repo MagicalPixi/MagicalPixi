@@ -1,0 +1,3 @@
+[submodule "config"]
+	path = config
+	url = git@gitlab.com:magical-pixi/config.git

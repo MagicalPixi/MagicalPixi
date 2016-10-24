@@ -1,39 +1,23 @@
-var encode = require('../utils').encode
-const KEY = 'magicalpixi-authId'
-const PROTOCOL = 'http'
-
-var defaultConfig = (config) => {
-  var defautls = {
-    authServer: '',
-    cookieExpires: 2 * 3600 * 1000
-  }
-  var final = Object.assign({}, defautls, config);
-  if (!final.authServer) {
-    throw 'no auth server'
-  }
-  return final;
-}
-
-var addQuery = (url, params) => {
-  if (!/\?/.test(url)) {
-    url += '?'
-  }
-  var paramStr = Object.keys(params).map((k)=> {
-    return `${k}=${params[k]}`;
-  }).join('&');
-  return url + encodeURI(paramStr)
+var generateAuthParam = (cookies) => {
+  var common = require('mp_common')
+  var statics = common.statics
+  var params = {}
+  if (cookies[statics.auth_id]) cookies[statics.auth_id]= cookies[statics.auth_id]
+  if (cookies[statics.user_id]) cookies[statics.user_id] = cookies[statics.user_id]
+  if (cookies[statics.auth]) cookies[statics.auth] = cookies[statics.auth]
+  if (cookies[statics.expire_time]) cookies[statics.expire_time] = cookies[statics.expire_time]
+  return params
 }
 
 var handleCookies = (req, res) => {
-  var authId = req.query.authId || req.cookies[KEY]
-  var auth = req.query.auth || req.cookies.auth
-  var expire_time = req.query.expire_time || req.cookies.expire_time
-  var current = new Date().getTime()
-  console.log(encode(authId + expire_time), auth)
-  if (encode(authId + expire_time) == auth && expire_time > current) {
-    res.cookie(KEY, authId)
-    res.cookie('auth', auth)
-    res.cookie('expire_time', expire_time)
+  var common = require('mp_common')
+  var statics = common.statics
+  var cookies = Object.assign(req.cookies, req.query)
+  if (common.auth.check(cookies)) {
+    res.cookie(statics.auth_id, cookies[statics.auth_id])
+    res.cookie(statics.user_id, cookies[statics.user_id])
+    res.cookie(statics.auth, cookies[statics.auth])
+    res.cookie(statics.expire_time, cookies[statics.expire_time])
     return true
   } else {
     return false
@@ -41,19 +25,16 @@ var handleCookies = (req, res) => {
 }
 
 module.exports = (config) => {
-  config = defaultConfig(config)
   return (req, res, next) => {
     if (handleCookies(req, res)) {
       next()
     } else {
-      var cookie = req.cookies
-      var params = {}
-      if (cookie[KEY]) params.authId = cookie[KEY]
-      if (cookie.auth) params.auth = cookie.auth
-      if (cookie.expire_time) params.expire_time = cookies.expire_time
-      params.redirectTo = encodeURIComponent('http://localhost:2333' + req.originalUrl)
-      // params.redirectTo = encodeURIComponent(`${PROTOCOL}://${req.hostname}${req.originalUrl}`)
-      var url = addQuery(config.authServer, params)
+      var config = require('../../config/')
+      var common = require('mp_common')
+      var cookies = Object.assign(req.cookies, req.query)
+      var params = generateAuthParam(cookies)
+      params.redirectTo = encodeURIComponent(config.backserver.local + req.originalUrl)
+      var url = common.StringUtil.addQuery(config.loginserver.domain, params)
       res.redirect(url)
     }
   }

@@ -26,6 +26,7 @@
     "lodash": "^3.10.1",
     "mongodb": "^2.1.4",
     "morgan": "~1.5.3",
+    "mp_common": "^1.5.0",
     "pixi-lib": "^1.21.1",
     "pluralize": "^3.0.0",
     "pubsub-js": "^1.5.3",

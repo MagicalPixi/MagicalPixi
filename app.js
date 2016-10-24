@@ -10,6 +10,8 @@ var routes = require('./routes/index');
 var db_routes = require('./routes/db')
 
 var app = express();
+var config = require('./config')
+require('mp_common').create({key: config.common.encode})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
