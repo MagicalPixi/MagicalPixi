@@ -6,6 +6,10 @@ var upload = (name, value, content = false) => {
   var header
   if (!env.BROWSER_ENV) {
     header = common.header.server(config.common.server_key)
+  } else {
+    var Cookie = require('js-cookie')
+    var statics = common.statics
+    header = common.header.browser(Cookie.get(statics.user_id), Cookie.get(statics.auth_id), Cookie.get(statics.auth), Cookie.get(statics.expire_time))
   }
   var path = content ? '/upload/content' : '/upload'
   var url = config.dbserver.domain + path
