@@ -8,7 +8,7 @@ var fs = require('fs')
 
 var stageTempBuild = require('../services/template/stageTempBuild');
 
-var saveJsContent = require('../services/dbServer/saveJsContent')
+var uploadContent = require('../services/dbServer/uploadContent')
 
 var requests = require('../services/requests');
 
@@ -24,7 +24,7 @@ module.exports = function (req,res) {
 
     var s = stageTempBuild(sceneData);
 
-    return saveJsContent({
+    return uploadContent({
       name:'test.js',
       content:s.text,
     });

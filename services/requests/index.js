@@ -15,6 +15,6 @@ files.filter(file => {
 
   var request = Request(currentmodel)
   requests[model] = request
-})
+});
 
-module.exports = requests
+module.exports = requests;

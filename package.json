@@ -6,6 +6,7 @@
     "start": "NODE_ENV=product node ./bin/www",
     "test": "NODE_ENV=debug node ./bin/www",
     "build": "NODE_ENV=product webpack --progress --display-error-details --config webpack.config.product.js"
+    "build-pro": "NODE_ENV=product webpack --progress --display-error-details --config webpack.config.product.js"
   },
   "engines": {
     "node": "5.x.x",
