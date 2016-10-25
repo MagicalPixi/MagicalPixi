@@ -1,8 +1,10 @@
 
+var axios = require('axios')
+var common = require('mp_common')
+var config = require('../config')
+var pluralize = require('pluralize')
+
 var upload = (name, value, content = false) => {
-  var axios = require('axios')
-  var common = require('mp_common')
-  var config = require('../config')
   var header
   if (!env.BROWSER_ENV) {
     header = common.header.server(config.common.server_key)
@@ -27,10 +29,6 @@ var upload = (name, value, content = false) => {
 
 
 var dbrequest = (scheme, name) => {
-  var axios = require('axios')
-  var pluralize = require('pluralize')
-  var common = require('mp_common')
-  var config = require('../config')
   var domain = env.BROWSER_ENV ? '/db' : config.dbserver.domain
   var header
   if (!env.BROWSER_ENV) {

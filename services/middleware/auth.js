@@ -1,5 +1,7 @@
+var config = require('../../config/')
+var common = require('mp_common')
+
 var generateAuthParam = (cookies) => {
-  var common = require('mp_common')
   var statics = common.statics
   var params = {}
   if (cookies[statics.auth_id]) cookies[statics.auth_id]= cookies[statics.auth_id]
@@ -10,7 +12,6 @@ var generateAuthParam = (cookies) => {
 }
 
 var handleCookies = (req, res) => {
-  var common = require('mp_common')
   var statics = common.statics
   var cookies = Object.assign(req.cookies, req.query)
   if (common.auth.check(cookies)) {
@@ -29,8 +30,6 @@ module.exports = (config) => {
     if (handleCookies(req, res)) {
       next()
     } else {
-      var config = require('../../config/')
-      var common = require('mp_common')
       var cookies = Object.assign(req.cookies, req.query)
       var params = generateAuthParam(cookies)
       params.redirectTo = encodeURIComponent(config.backserver.local + req.originalUrl)
