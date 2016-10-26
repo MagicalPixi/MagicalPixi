@@ -1,4 +1,4 @@
-var config = require('../../config/')
+var config = require('../../config')
 var common = require('mp_common')
 
 var generateAuthParam = (cookies) => {
@@ -25,14 +25,14 @@ var handleCookies = (req, res) => {
   }
 }
 
-module.exports = (config) => {
+module.exports = () => {
   return (req, res, next) => {
     if (handleCookies(req, res)) {
       next()
     } else {
       var cookies = Object.assign(req.cookies, req.query)
       var params = generateAuthParam(cookies)
-      params.redirectTo = encodeURIComponent(config.backserver.local + req.originalUrl)
+      params.redirectTo = encodeURIComponent(config.backserver.domain + req.originalUrl)
       var url = common.StringUtil.addQuery(config.loginserver.domain, params)
       res.redirect(url)
     }
