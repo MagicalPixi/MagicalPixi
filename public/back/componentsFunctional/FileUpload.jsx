@@ -67,12 +67,17 @@ class FileUpload extends React.Component {
         }
       });
 
-
       ajax(API.fileUpload).post(fd).then((r)=> {
         var {url} = r;
 
         this.props.onUploadCompleted(url);
       });
+
+      // ajax(`http://localhost:6770/upload`).post(fd).then((r)=> {
+      //   var {url} = r;
+      //
+      //   this.props.onUploadCompleted(url);
+      // });
     }else{
 
       var reader = new FileReader()

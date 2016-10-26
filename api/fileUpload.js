@@ -7,6 +7,8 @@ var multipart = require('connect-multiparty');
 
 var saveMaterials = require('../services/saveMaterials');
 
+var postFile = require('../services/postFile');
+
 var _ = require('lodash');
 
 module.exports = [multipart(),function(req,res){
@@ -16,6 +18,13 @@ module.exports = [multipart(),function(req,res){
   var dir = (req.userFlag || saveMaterials.userDirDefault) + '/';
 
   console.log(req.files.png);
+
+  //---
+  // try{
+  //   postFile(req.files.png.name,req.files.png.path);
+  // }catch (e){
+  //   console.error(e);
+  // }
 
   var allP = _.filter([
     json,
