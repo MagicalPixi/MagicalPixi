@@ -1,4 +1,6 @@
 require('./CreateGameInfo.scss');
+import {statics} from 'mp_common'
+import Cookie from 'js-cookie'
 import GameCreateInput from '../GameCreateInput'
 import React,{Component} from 'react'
 import ReactDOM from 'react-dom'
@@ -34,13 +36,14 @@ class  CreateGamInfo extends Component {
     }
     this.state = {
       icon: "",
-      js: 1,
+      js: '',
     }
     autoBind(this);
   }
 
   submit() {
     var data = Object.assign(this.data, this.state)
+    data.owner = Cookie.get(statics.user_id)
     var create = require('../../../../services/mprequest').dbrequest('api', 'game').create
     create(data).then(value => {
       console.log(value.data)
@@ -83,6 +86,7 @@ class  CreateGamInfo extends Component {
 
   handleJSUpload(url) {
     this.setState({js: url})
+    console.log(url)
   }
 
   handleChange(event) {

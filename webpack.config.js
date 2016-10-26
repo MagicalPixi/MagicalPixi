@@ -28,6 +28,10 @@ module.exports = {
     game_create: [
       'webpack-hot-middleware/client',
       path.resolve(__dirname, './public/js/game/create/index.jsx'),
+    ],
+    game_my: [
+      'webpack-hot-middleware/client',
+      path.resolve(__dirname, './public/js/game/my/index.jsx'),
     ]
   },
   output: {

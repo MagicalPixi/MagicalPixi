@@ -15,4 +15,11 @@ module.exports = {
       name: 'game_create'
     });
   }],
+  my: [auth, function(req, res){
+    res.render('game',{
+      env:env,
+      webpackDevPort:webpackDevPort,
+      name: 'game_my'
+    });
+  }],
 };
