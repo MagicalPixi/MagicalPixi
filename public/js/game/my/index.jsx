@@ -11,6 +11,10 @@ class MyGames extends React.Component {
     return (
       <div>
         <Navbar />
+        <div className="title_bar">
+          <p className="my_games_title">我的游戏</p>
+          <a className="new_game_button" href='/game/create'>创建游戏</a>
+        </div>
         <MyGameList />
       </div>
     )

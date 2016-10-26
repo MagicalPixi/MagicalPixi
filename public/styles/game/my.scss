@@ -1,4 +1,38 @@
+@import "../core/common.scss";
+
 body {
   margin: 0px;
   font-family: helvetica-light;
+}
+
+.title_bar {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  @include flex;
+  @include flex-direction(row);
+  @include justify-content(space-between);
+  @include align-items(center);
+  .my_games_title {
+    font-size: 20px;
+    color: #b3b3b3;
+  }
+  .new_game_button {
+    font-family: helvetica-light;
+    background: #fff;
+    font-size: 16px;
+    color: #1abc9c;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    @include radius(13px);
+    text-decoration: none;
+    border: solid 1px;
+  }
+  .new_game_button:hover {
+    background: #1abc9c;
+    color: #fff;
+  }
 }
