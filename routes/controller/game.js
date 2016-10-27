@@ -7,6 +7,10 @@ var config = require('../../config')
 var middleware = require('../../services/middleware')
 var statics = require('mp_common').statics
 module.exports = {
+  [':id']: [middleware.game.getOne, function(req, res) {
+    var game = req.custom.game
+
+  }],
   create: function(req, res){
     res.render('game/create',{
       env:env,
