@@ -11,6 +11,7 @@ var db_routes = require('./routes/db')
 
 var app = express();
 var config = require('./config')
+var custom = require('./services/middleware').custom
 require('mp_common').create({key: config.common.encode})
 var auth = require('./services/middleware').auth()
 
@@ -58,7 +59,7 @@ app.use(function (req,res,next) {
 
   next();
 });
-
+app.use(custom)
 app.use('/', [auth, routes]);
 app.use('/db', db_routes)
 

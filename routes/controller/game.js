@@ -4,19 +4,30 @@
 var env = process.env.NODE_ENV;
 var webpackDevPort = require('../../webpack.config').webpackDevPort;
 var config = require('../../config')
+var middleware = require('../../services/middleware')
+var statics = require('mp_common').statics
 module.exports = {
   create: function(req, res){
-    res.render('game',{
+    res.render('game/create',{
       env:env,
       webpackDevPort:webpackDevPort,
-      name: 'game_create'
+      edit: false,
     });
   },
-  my: function(req, res){
-    res.render('game',{
+  ['create/:id']: [middleware.game.getOne, function(req, res) {
+    var game = req.custom.game
+    game.owner = {id: game.owner.id, username: game.owner.username}
+    res.render('game/create',{
       env:env,
       webpackDevPort:webpackDevPort,
-      name: 'game_my'
+      edit: true,
+      game: game
+    });
+  }],
+  my: function(req, res){
+    res.render('game/my',{
+      env:env,
+      webpackDevPort:webpackDevPort,
     });
   },
 };

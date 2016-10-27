@@ -4,7 +4,7 @@ var common = require('mp_common')
 var config = require('../config')
 var pluralize = require('pluralize')
 
-var upload = (name, value, content = false) => {
+var upload = (name, value, content) => {
   var header
   if (!env.BROWSER_ENV) {
     header = common.header.server(config.common.server_key)
@@ -37,16 +37,16 @@ var dbrequest = (scheme, name) => {
   return {
     get: (query) => {
       var url = domain + '/' + scheme + '/' + name
-      return axios.get(url, {params: query, header: header})
+      return axios.get(url, {params: query, headers: header})
     },
     getAll: () => {
       var names = pluralize.plural(name)
       var url = domain + '/' + scheme + '/' + names
-      return axios.get(url, {header: header})
+      return axios.get(url, {headers: header})
     },
     create: (data) => {
       var url = domain + '/' + scheme + '/' + name
-      return axios.post(url, data, {header: header})
+      return axios.post(url, data, {headers: header})
     }
   }
 }

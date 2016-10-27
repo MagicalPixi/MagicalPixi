@@ -15,6 +15,11 @@
 <div id="topContainer">
 
 </div>
+<% if (edit) { %>
+<script type="text/javascript">
+  window.game = JSON.parse('<%- JSON.stringify(game) %>')
+</script>
+<% } %>
 </body>
 
 <% if(env==='product'){%>
@@ -27,5 +32,5 @@
 <script src="/bower_components/react/react-dom.min.js"></script>
 <% } %>
 
-<script src="/dist/<%- name %>.js"></script>
+<script src="/dist/game_create.js"></script>
 </html>
