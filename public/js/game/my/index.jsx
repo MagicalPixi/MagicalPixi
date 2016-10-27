@@ -17,7 +17,7 @@ class MyGames extends React.Component {
     this.state = {
       games: []
     }
-    autoBind(this);
+      autoBind(this);
   }
 
   componentDidMount() {
@@ -35,6 +35,10 @@ class MyGames extends React.Component {
     })
   }
 
+  removeGame(game) {
+
+  }
+
   render(){
     return (
       <div>
@@ -43,7 +47,7 @@ class MyGames extends React.Component {
           <p className="my_games_title">我的游戏</p>
           <a className="new_game_button" href='/game/create'>创建游戏</a>
         </div>
-        <GameList games={this.state.games} />
+        <GameList games={this.state.games} delete={this.removeGame} />
       </div>
     )
   }

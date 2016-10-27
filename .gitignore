@@ -79,3 +79,5 @@ npm-debug.log
 __test/
 
 test.js
+
+.DS_Store

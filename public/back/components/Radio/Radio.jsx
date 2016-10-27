@@ -28,7 +28,6 @@ var propTypes = {
 
   render(){
     let children = this.props.items.map((item, index) => {
-      console.log(item.value == this.state.selected)
       return <RadioItem value={item.value} onClick={this.select} index={index} selected={item.value == this.state.selected} content={item.content}/>
     })
     return (

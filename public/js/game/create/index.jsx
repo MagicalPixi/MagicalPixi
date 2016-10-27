@@ -45,9 +45,9 @@ class CreateGame extends React.Component {
 
   onSelect(value, name) {
     if (name == SCORE_TYPE_AUDIO_NAME) {
-      this.data.scoreType = value
+      this.state.game.scoreType = value
     } else {
-      this.data.auth = value
+      this.state.game.auth = value
     }
   }
 
@@ -55,7 +55,7 @@ class CreateGame extends React.Component {
     dropzone.setLoading(true)
     var file = files[0]
     console.log(file)
-    if (id == JS_UPLOADER_ID) this.data.jsName = file.name
+    if (id == JS_UPLOADER_ID) this.state.game.jsName = file.name
     require('../../../../services/mprequest').upload(file.name, file).then(value => {
       dropzone.setLoading(false)
       id == ICON_UPLOADER_ID ? this.state.game.cover = value.data.url : this.state.game.javascrpt = value.data.url
@@ -88,7 +88,7 @@ class CreateGame extends React.Component {
 
   renderJSArea() {
     let icon = 'http://qiniu.magicalpixi.com/icon/js.png'
-    if (this.state.js != "") {
+    if (this.state.game.javascrpt != "") {
       return (
         <div className="upload_container">
           <div className="js_file_container">
