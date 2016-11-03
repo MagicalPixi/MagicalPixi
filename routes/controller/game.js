@@ -7,9 +7,12 @@ var config = require('../../config')
 var middleware = require('../../services/middleware')
 var statics = require('mp_common').statics
 module.exports = {
-  [':id']: [middleware.game.getOne, function(req, res) {
+  'info/:id': [middleware.game.getOne, function(req, res) {
     var game = req.custom.game
-
+    res.render('game/index', {
+      env: env,
+      webpackDevPort: webpackDevPort,
+    })
   }],
   create: function(req, res){
     res.render('game/create',{
@@ -18,7 +21,7 @@ module.exports = {
       edit: false,
     });
   },
-  ['create/:id']: [middleware.game.getOne, function(req, res) {
+  'create/:id': [middleware.game.getOne, function(req, res) {
     var game = req.custom.game
     game.owner = {id: game.owner.id, username: game.owner.username}
     res.render('game/create',{

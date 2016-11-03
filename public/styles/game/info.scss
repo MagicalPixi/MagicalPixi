@@ -1,0 +1,28 @@
+
+@import "../core/common.scss";
+
+body {
+  margin: 0px;
+  font-family: helvetica-light;
+}
+
+.game_info_container {
+  @include flex;
+  @include flex-direction(column);
+  @include align-items(center);
+  margin-top: 40px;
+  margin-left: 5%;
+  width: 90%;
+  .game_cover {
+    height: 150px;
+    width: 150px;
+    background-image: url("http://qiniu.magicalpixi.com/21/d51f9e9e782447000179.jpg");
+    @include radius;
+    @include background-size-cover;
+  }
+  .game_name {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #6e6e6e;
+  }
+}

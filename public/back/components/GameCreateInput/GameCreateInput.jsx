@@ -29,7 +29,7 @@ class GameCreateInput extends Component {
           {this.props.name}
         </p>
         <div className="input_container">
-          <input id={this.props.id} type="text" className="textfield" onChange={this.handleChangeEvent} />
+          <input id={this.props.id} type="text" className="textfield" onChange={this.handleChangeEvent} value={this.props.value} />
         </div>
       </div>
     )
